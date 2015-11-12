@@ -25,6 +25,17 @@ int main() {
 
 	//err: name1 = "Norman";
 
+	//name1[0] = 'N';
 
 	printf("%s\n",name1);
+
+	printf("%s\n",name2);
+
+
+	int *ptr;				指针类型为int*		指针所指向的类型int
+	char *ptr;				指针类型为char*		指针所指向的类型char
+
+	int **ptr;				指针类型为int **	指针所指向的类型int*
+	int (*ptr)[3];			指针类型为int(*)[3]	指针所指向的类型int()[3]
+	int* (*ptr)[4];			指针类型为int*(*)[4] 指针所指向的类型是int*()[4]
 }
