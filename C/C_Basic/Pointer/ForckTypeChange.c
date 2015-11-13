@@ -29,8 +29,8 @@ int main() {
 	int n[] = {3,2,1,4,5};
 	printf("%d\n",*n);
 	int i;
-	char h = 'A';
+	int *pn = n;
 	for(i=0;i<5;i++) {
-		printf("%c\n",&h);
+		printf("%d\n",*pn++);
 	}
 }
