@@ -9,7 +9,6 @@
 	问题:
 		1.将字符串数组用指针拷贝到另一个字符串指针
 		2.指定长度的拷贝
-		3.用指针实现两个字符串的比较
 
 	分析:
 		1.读取*ps
@@ -72,16 +71,6 @@ int main() {
 		printf("\n");
 	}
 */
-
-	char j[] = "3455112";
-	char k[] = "3482912";
-	char* pj = j;
-	char* pk = k;
-
-	while(*pj) {
-		printf("%c",*pj);
-		pj++;
-	}
 
 	printf("%s\n",pd);
 	printf("%s\n",d);
