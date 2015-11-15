@@ -42,6 +42,7 @@ int main() {
 	//printf("%s\n",*s);
 	int i,j;
 	char *tmp;
+	char *next;
 	for(i=1;i<6;i++) {
 		//printf("%p\n",s[i]);
 		//printf("%p\n",s[i+1]);
@@ -53,6 +54,15 @@ int main() {
 				tmp = s[j];
 				s[j] = s[j+1];
 				s[j+1] = tmp;
+			} else if(*s[j] == *s[j+1]) {
+				next = s[j+1];
+				while(*s[j]) {
+					if(*s[j] > *s[j+1]){
+						printf("aa\n");
+					}
+					*s[j+1]++;
+					*s[j]++;
+				}
 			}
 		}
 		//printf("\n");
