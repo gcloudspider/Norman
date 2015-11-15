@@ -45,17 +45,17 @@ int main() {
 	for(i=1;i<6;i++) {
 		//printf("%p\n",s[i]);
 		//printf("%p\n",s[i+1]);
-		for(j=0;j<6-i;j++) {
-			if(*s[j] >*s[j+1]) {
+		//printf("first and second memory address:\n");
+		for(j=0;j<6-i;j++ ) {
+			//printf("%c\n",*s[j]);
+			//printf("%c\n",*s[j+1]);
+			if(*s[j] > *s[j+1]) {
 				tmp = s[j];
 				s[j] = s[j+1];
 				s[j+1] = tmp;
-			} else if(*s[j] = *s[j+1]) {
-			
 			}
 		}
-
-		printf("\n");
+		//printf("\n");
 	}
 
 	for(i=0;i<6;i++) {
