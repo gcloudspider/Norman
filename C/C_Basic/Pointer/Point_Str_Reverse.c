@@ -21,23 +21,23 @@ int main() {
 	printf("Str:%s\n",str);
 	char *pStr = str;
 	char tmp;
-
+	int i=0,j=0;
 	//printf("before Reverse Str:%p\t%c\n",pStr,*pStr);
 
-	while(*pStr)
+	while(*pStr) {
+		j++;
 		*pStr++;
+	}
 
-	char* pstar = str;
 	printf ("Reverse Str:%p\t%c\n",pStr,*--pStr);
 	
-	while(*pstar) {
-		printf("Before Exchange:%c\n",*pstar);
-		tmp = *pstar;
-		*pstar = *pStr;
+	while(i<j) {
+		printf("Before Exchange:%c\n",*pStr);
+		tmp = str[i];
+		str[i] = *pStr;
 		*pStr = tmp;
-		printf("After Exchange:%c\n",*pstar);
+		printf("After Exchange:%c\n",*pStr);
 		*pStr--;
-		*pstar++;
 	}
 
 	printf("Finished Exchange:%s\n",str);
