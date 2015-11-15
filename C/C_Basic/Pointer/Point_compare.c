@@ -25,9 +25,9 @@
 #include <stdio.h>
 
 int main() {
-	char first[] = "abcdef";
-	char second[] = "absdef";
-	
+	char first[] = "ckeiwl";
+	char second[] = "acbieic";
+
 	char *pf = first;
 	char *ps = second;
 
