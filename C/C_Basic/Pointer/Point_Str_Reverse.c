@@ -5,7 +5,7 @@
 分析:
 	1.移动到字符串最后位置(指针)
 	2.向前移动得到每一个值赋值给变量tmp
-	3.将
+	3.
 归纳:
 
 总结:
@@ -33,6 +33,7 @@ int main() {
 	
 	while(i<j) {
 		printf("Before Exchange:%c\n",*pStr);
+		printf("%p\n",pStr);
 		tmp = str[i];
 		str[i] = *pStr;
 		*pStr = tmp;
