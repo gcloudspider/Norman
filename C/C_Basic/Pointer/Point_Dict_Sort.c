@@ -36,40 +36,39 @@ int main() {
 		"words","books","colors","students",
 		"apples","car"
 	};
-
-	//printf("%p\n",s);
-	//printf("%p\n",*s);
-	//printf("%s\n",*s);
+	
 	int i,j;
-	char *tmp;
-	char *next;
-	for(i=1;i<6;i++) {
-		//printf("%p\n",s[i]);
-		//printf("%p\n",s[i+1]);
-		//printf("first and second memory address:\n");
-		for(j=0;j<6-i;j++ ) {
-			//printf("%c\n",*s[j]);
-			//printf("%c\n",*s[j+1]);
-			if(*s[j] > *s[j+1]) {
+	char *s1,*s2,*tmp;
+	printf("s=%p\n",s);
+	printf("sizeof(s)=%d\n",sizeof(s));
+	printf("sizeof(s[0])%d\n",sizeof(s[0]));
+
+	int len = sizeof(s)/sizeof(s[0]);
+
+	for(i=0;i<len;i++) {
+		printf("s[%d]=\"%s\"\t%p\n",i,s[i],s[i]);
+	}
+
+	printf("Sorting...\n\n");
+
+	for(i=0;i<len;i++) {
+		for(j=0;j<len-i-1;j++) {
+			//printf("%p\n",s[j]);
+			s1=s[j];
+			s2=s[j+1];
+			while(*s1&&*s1==*s2) {
+				s1++;s2++;
+			}
+			if(*s1>*s2) {
 				tmp = s[j];
 				s[j] = s[j+1];
 				s[j+1] = tmp;
-			} else if(*s[j] == *s[j+1]) {
-				next = s[j+1];
-				while(*s[j]) {
-					if(*s[j] > *s[j+1]){
-						printf("aa\n");
-					}
-					*s[j+1]++;
-					*s[j]++;
-				}
 			}
 		}
-		//printf("\n");
 	}
-
-	for(i=0;i<6;i++) {
-		printf("%s\n",s[i]);
+	
+	for(i=0;i<len;i++) {
+		printf("s[%d]=\"%s\"\t%p\n",i,s[i],s[i]);
 	}
 	return 0;
 }
