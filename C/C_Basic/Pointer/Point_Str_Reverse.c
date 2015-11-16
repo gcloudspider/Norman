@@ -40,7 +40,7 @@ int main() {
 		printf("After Exchange:%c\n",*pStr);
 		*pStr--;
 	}
-
+	
 	printf("Finished Exchange:%s\n",str);
 	
 	return 0;

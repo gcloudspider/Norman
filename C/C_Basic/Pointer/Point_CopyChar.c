@@ -71,7 +71,9 @@ int main() {
 		printf("\n");
 	}
 */
-
+	/*if(len>0)
+		while(len-- && (*pd++=*ps++));		//更简洁
+	*/
 	printf("%s\n",pd);
 	printf("%s\n",d);
 	

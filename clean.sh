@@ -7,7 +7,7 @@
 CURRPATH=`pwd`
 
 #需要排除删除的文件后缀
-EXCUSESUFFIX='.h .cpp .c .sh .md .txt'
+EXCLUDESUFFIX='h cpp c sh md txt dia'
 
 cd $CURRPATH 2>/dev/null
 
@@ -18,17 +18,39 @@ then
 fi
 
 echo "Are you Realdy Delete $CURRPATH Dir temp file.... "
+getFileList() {
+	filelist=`ls 2>/dev/null`
+}
 
-filelist=`ls 2>/dev/null`
-#echo "Current List Info:$filelist"
-for file in $filelist
-	do
-		echo "Loading ${file}......"
-		if [ -d $file ];
-		then
-			echo "Checking $file Dir"
-			echo "Dir $file cleaning......"
-		else
-			echo "checking $file in excuseSuffix list"
-		fi
-done
+putFileList() {
+	for file in $filelist
+		do
+			echo $CURRPATH
+			isDir "$file"
+		done
+}
+
+isFileInExclude() {
+	for suffix in $EXCLUDESUFFIX
+		do
+			echo $suffix $1
+		done
+}
+
+isDir() {
+	if [ -d "$1" ];
+	then
+		echo "$1 is Dir...."
+		getFileList $1
+		putFileList
+	else 
+		echo "$1 is file...."
+		#isFileInExclude ${file##*.}
+	fi
+}
+
+#get "Current List Info:$filelist"
+getFileList $CURRPATH
+
+putFileList
+
