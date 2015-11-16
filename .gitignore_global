@@ -20,4 +20,8 @@
 *.sql
 *.sqlite
 
-
+#Compiled targert#
+####################
+ArrayDynaic
+ArrayDynaicPrint2Max
+ArrayFindPublicMax
