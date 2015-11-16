@@ -20,8 +20,31 @@
 *.sql
 *.sqlite
 
-#Compiled targert#
+#Libraries#
 ####################
-ArrayDynaic
-ArrayDynaicPrint2Max
-ArrayFindPublicMax
+*.lib
+*.a
+*.la
+*.lo
+#Shared object
+###################
+*.dll
+*.so
+*.so.*
+*.dylib
+
+#Object files#
+##################
+*.o
+*.ko
+*.obj
+*.elf
+
+#Executables
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+
