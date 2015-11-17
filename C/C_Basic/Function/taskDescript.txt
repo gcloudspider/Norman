@@ -20,9 +20,9 @@
 
 7.实现函数strncat()			OK
 
-8.实现函数字符串逆序 char* strrev(char *s);		
+8.实现函数字符串逆序 char* strrev(char *s);		OK
 
-9.实现函数	char* strnrev(char *s,int n)
+9.实现函数	char* strnrev(char *s,int n)		
 
 10.实现函数atoi
 
