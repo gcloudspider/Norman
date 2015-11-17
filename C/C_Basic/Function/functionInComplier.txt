@@ -1,9 +1,9 @@
 
 /*
 
-main	| 0xff00: int m = 10
+main	| 0xff00: int _main_m = 10
 ---------------------------------
-get		| 0xfefc: int a = m
+get		| 0xfefc: int _get_:a = _get_t:m
 		|
 		| a++; a--;
 		|
