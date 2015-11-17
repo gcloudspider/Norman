@@ -36,17 +36,23 @@ void printfmn(int *m,int *n,int len) {
 	int i;
 	printf("m=");
 	for(i=0;i<len;i++) {
-		printf("%d",*m++);
+		printf("%d ",*m++);
 	}
 	printf("\n");
 
 	printf("n=");
 	for(i=0;i<len;i++) {
-		printf("%d",*n++);
+		printf("%d ",*n++);
 	}
 	printf("\n");
 }
 
+
+int* getmax(int a,int b) {					
+	int c;
+	c = a>b?a:b;
+	return &c;
+}
 
 int main() {
 	int a = 10,b = 20;
@@ -74,6 +80,8 @@ int main() {
 	
 	printf("After Exchange:\n");
 	printfmn(m,n,len);
+
+	printf("%d\n",*getmax(a,b));
 
 	return 0;
 }

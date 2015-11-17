@@ -17,7 +17,7 @@ echo "Checking Coding......"
 
 echo "Add Code to Local git  repository"
 
-sudo git add .
+sudo git add --all .
 
 sudo git commit -a -m "Merge code"
 

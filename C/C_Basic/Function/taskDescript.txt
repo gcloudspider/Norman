@@ -1,0 +1,47 @@
+###########################################
+##
+##Create Data:2015-11-17
+##Author:Norman
+##Descript:Task
+##
+##########################################
+
+1.实现函数交换两个数组		OK
+
+2.实现函数strcpy()			OK
+
+3.实现函数strncpy()			OK
+
+4.实现函数strcat()			OK 
+
+5.实现函数strcmp()			OK
+
+6.实现函数strncmp()			OK
+
+7.实现函数strncat()			OK
+
+8.实现函数字符串逆序 char* strrev(char *s);		
+
+9.实现函数	char* strnrev(char *s,int n)
+
+10.实现函数atoi
+
+11.实现函数strlen
+
+12.实现函数strchr
+
+13.实现函数strrchr
+
+14.实现函数strstr
+
+15.实现函数memcpy
+
+16.实现函数memset
+
+17.实现函数memcmp
+
+18.实现函数memchr
+
+19.实现函数memmove
+
+20.实现函数itoa
