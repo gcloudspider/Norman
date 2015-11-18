@@ -13,3 +13,6 @@ get		| 0xfefc: int _get_:a = _get_t:m
 1.调用函数:实参与形参实际是两个内存地址。
 2.将实参的值复制到形参上.
 
+
+生成汇编文件:
+	gcc -o function_nature.s fuction_nature.c -S	//生成汇编文件

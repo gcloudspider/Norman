@@ -19,6 +19,8 @@ void dec2bin(int n) {
 	}
 	
 	printf("%s n=%p\n",__func__,&n);
+	//void (*pd)() = dec2bin;
+	//printf("%s %p\n",__func__,pd);
 
 	dec2bin(n/2);
 	printf("%d",n%2);
@@ -31,6 +33,9 @@ int main() {
 	printf("1+2+....+n=%d\n",get_sum(n));
 	
 	printf("%s n=%p\n",__func__,&n);
+	void (*pd)() = dec2bin;
+	printf("%s %p\n",__func__,pd);
+
 	dec2bin(n);
 	printf("\n");
 	return 0;
