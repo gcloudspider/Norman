@@ -25,4 +25,4 @@ sudo git add --all .
 
 sudo git commit -a -m "clean up code"
 
-sudo git push
+sudo git push origin

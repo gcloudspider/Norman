@@ -1,0 +1,20 @@
+##############################################
+##
+##
+##Create date:2015-11-18
+##Author:Norman
+##Description  function library
+##
+#############################################
+
+
+动态库:
+	1.生成.o文件
+	2.gcc -shared -fPIC -o libadd.so add.o
+	3.gcc -o main **.c **.c -L ../lib -ladd
+	4.ldd main 查看依赖
+		
+静态库:
+	1.gcc -c add.c
+	2.ar cr libstaticadd.a	add.o
+	3.gcc -o main main.c test.* -static -L../lib -lstaticadd
