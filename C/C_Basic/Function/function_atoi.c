@@ -41,12 +41,12 @@ int main(){
 	char str3[] = "-123sa";				//负数
 	char str4[] = " 356ab";				//前面空格
 	char str5[] = "2'\0'8";				//遇到\0
-	printf("C Libary atoi str=%d\n",atoi(str));
-	printf("C Libary atoi str1=%d\n",atoi(str1));
-	printf("C Libary atoi str2=%d\n",atoi(str2));
-	printf("C Libary atoi str3=%d\n",atoi(str3));
-	printf("C Libary atoi str4=%d\n",atoi(str4));
-	printf("C Libary atoi str5=%d\n",atoi(str5));
+	printf("After C Libary atoi str=%d\n",atoi(str));
+	printf("After C Libary atoi str1=%d\n",atoi(str1));
+	printf("After C Libary atoi str2=%d\n",atoi(str2));
+	printf("After C Libary atoi str3=%d\n",atoi(str3));
+	printf("After C Libary atoi str4=%d\n",atoi(str4));
+	printf("After C Libary atoi str5=%d\n",atoi(str5));
 
 	printf("Before atoi:%s\n",str);
 
