@@ -20,30 +20,30 @@
 
 7.实现函数strncat()			OK
 
-8.实现函数char* strrev(char *s);		OK
+8.实现函数strrev()			OK
 
-9.实现函数char* strnrev(char *s,int n)	OK		
+9.实现函数strnrev()			OK		
 
-10.实现函数atoi
+10.实现函数atoi()
 
-11.实现函数strlen
+11.实现函数strlen()			OK
 
-12.实现函数strchr
+12.实现函数strchr()			OK
 
-13.实现函数strrchr
+13.实现函数strrchr()		OK
 
-14.实现函数strstr
+14.实现函数strstr()
 
-15.实现函数memcpy
+15.实现函数memcpy()
 
-16.实现函数memset
+16.实现函数memset()
 
-17.实现函数memcmp
+17.实现函数memcmp()
 
-18.实现函数memchr
+18.实现函数memchr()
 
-19.实现函数memmove
+19.实现函数memmove()
 
-20.实现函数itoa
+20.实现函数itoa()
 
-21.递归实现一个整数的阶乘计算
+21.递归实现一个整数的阶乘计算			OK
