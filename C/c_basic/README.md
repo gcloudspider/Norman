@@ -12,19 +12,19 @@
 
 
 目录:
-./Array
+./array
 	数组
 
-./String
+./string
 	字符串
 
-./Pointer
+./pointer
 	指针
 
-./Function
+./function
 	函数
 
-./StackHeap
+./stackheap
 	1.堆:
 		堆是负责保存对象(数据),堆用作保存信息而非保存执行路径
 
