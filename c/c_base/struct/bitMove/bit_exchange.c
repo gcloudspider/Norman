@@ -9,16 +9,24 @@ int main() {
 	printf("Before exchange a Bin=");
 	decToBin(a,2);
 	printf("\n");
-	
-	b=(a/16)+(a%16)*16;
+/*		
+	int h16 = a& 0xffff0000;
+	int l16 = a& 0x0000ffff;
+
+	h16 = h16 >> 16;
+	l16 = l16 << 16;
+
+	a = h16 | l16;
+*/
+	a = a<<16 | a>>16;
 	
 	//c=rcol(a,4);
 	//int x = 0x56781234;
 
 	printf("After exchange a Bin=");
-	decToBin(b,2);
+	decToBin(a,2);
 	printf("\n");
 	
-	printf("0x%x\n",b);
+	printf("0x%x\n",a);
 	return 0;
 }

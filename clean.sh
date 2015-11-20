@@ -7,7 +7,7 @@
 CURRPATH=`pwd`
 
 #需要排除删除的文件后缀
-EXCLUDESUFFIX='h cpp c sh md txt dia'
+EXCLUDESUFFIX='*.h *.cpp *.c *.sh *.md *.txt *.dia'
 
 cd $CURRPATH 2>/dev/null
 
