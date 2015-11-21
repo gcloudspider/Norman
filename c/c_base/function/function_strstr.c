@@ -18,29 +18,28 @@
 	3.s一直后移!
 
 总结:
+    
+    1.循环src
+    2.循环dst 判断dst是否等于src 等于继续循环遍历直到不等于
 
 */
 char* my_strstr(const char* src,const char *dst) {
 	
-	char* p = (char*)src;
-	char* q = (char*)dst;
-	
-	printf("before:%p\n",p);
-	printf("before:%p\n",src);
-	printf("before:%p\n",dst);
+    if(*src == '0') {
+       if(*dst) return (char*)NULL;
+        return (char*)src;
+    }
 
-	while(*p) {
-		
-		if(!(*p-*q)) {
-			*q++;
-		}
-	
-		*p++;
-		printf("moving:%p\t%c\n",p,*p);
-		printf("After:%p\t%c\n",src,*src);
-	}
-
-	return NULL;
+    while(*src){
+        int i=0;
+        while(1) {
+            if(dst[i]==0) return (char*)src;
+            if(dst[i]!=src[i])break;
+            i++;
+        }
+        *src++;
+    }
+    return (char*) NULL;
 
 }
 

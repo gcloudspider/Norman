@@ -24,7 +24,7 @@
 
 9.实现函数strnrev()			OK		
 
-10.实现函数atoi()
+10.实现函数atoi()           OK
 
 11.实现函数strlen()			OK
 
@@ -32,7 +32,7 @@
 
 13.实现函数strrchr()		OK
 
-14.实现函数strstr()
+14.实现函数strstr()         OK
 
 15.实现函数memcpy()
 
