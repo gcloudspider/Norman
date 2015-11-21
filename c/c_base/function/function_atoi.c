@@ -29,8 +29,33 @@
 */
 
 int my_atoi(const char* str) {
-	
-	return 0;
+	int IsInter =1;
+    int RetInt = 0;
+
+
+    if(str == NULL) {
+        return -1;
+    }
+
+    if(*str == ' ') {
+        *str++;
+    }
+
+    if(*str == '-') {
+        IsInter = -1;
+    }
+
+    if(*str == '-' || *str == '+') {
+        *str++;
+    }
+
+    while(*str >= '0' && *str <= '9') {
+        RetInt = RetInt*10+*str-'0';
+        *str++;
+    }
+    RetInt = IsInter * RetInt;
+
+	return RetInt;
 }
 
 
@@ -48,8 +73,8 @@ int main(){
 	printf("After C Libary atoi str4=%d\n",atoi(str4));
 	printf("After C Libary atoi str5=%d\n",atoi(str5));
 
-	printf("Before atoi:%s\n",str);
+	printf("Before atoi:%s\n",str3);
 
-	printf("After atoi:%d\n",my_atoi(str));
+	printf("After atoi:%d\n",my_atoi(str3));
 	return 0;
 }
