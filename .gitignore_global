@@ -48,4 +48,8 @@
 *.x86_64
 *.hex
 
+#Dir
 project/
+
+#files
+tags

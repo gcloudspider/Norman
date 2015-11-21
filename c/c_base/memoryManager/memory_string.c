@@ -46,24 +46,29 @@ char* str_left_ring(char*s,int left) {
 char* str_right_ring(char*s ,int right) {
 	printf("%s\n",s);
 	char tmp;
+    char *pn;
 	char *ps = s;
 	int i,j,k=0;
 
+    //printf("%s\n",ps);
 	while(*ps) {
 		k++;
 		*ps++;
 	}
 	*ps--;
 
+    //printf("%s\n",ps);
+
 	for(i=0;i<right;i++) {
-		tmp = *ps;
+        pn=ps;
+		tmp = *pn;
 		j=0;
-		while(j<k-1 && *ps) {
-			*ps = *(ps-1);
-			*ps--;
+		while(j<k-1 && *pn) {
+			*pn = *(pn-1);
+			*pn--;
 			j++;
 		}
-		*ps = tmp;
+		*pn = tmp;
 	}
 
 	return s;
