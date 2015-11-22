@@ -196,11 +196,11 @@ imap <C-t> <C-q><TAB>
 imap <C-j> <ESC>
 " 选中状态下 Ctrl+c 复制
 "map <C-v> "*pa
-imap <C-v> <Esc>"*pa
-imap <C-a> <Esc>^
-imap <C-e> <Esc>$
-vmap <C-c> "+y
-set mouse=v
+"imap <C-v> <Esc>"*pa
+"imap <C-a> <Esc>^
+"imap <C-e> <Esc>$
+"vmap <C-c> "+y
+"set mouse=v
 "set clipboard=unnamed
 "去空行  
 nnoremap <F2> :g/^\s*$/d<CR> 
