@@ -41,7 +41,7 @@ color ron     " 设置背景主题
 "color torte     " 设置背景主题  
 "set guifont=Courier_New:h10:cANSI   " 设置字体  
 "autocmd InsertLeave * se nocul  " 用浅色高亮当前行  
-autocmd InsertEnter * se cul    " 用浅色高亮当前行  
+"autocmd InsertEnter * se cul    " 用浅色高亮当前行  
 "set ruler           " 显示标尺  
 set showcmd         " 输入的命令显示出来，看的清楚些  
 "set whichwrap+=<,>,h,l   " 允许backspace和光标键跨越行边界(不建议)  
@@ -93,7 +93,8 @@ set iskeyword+=_,$,@,%,#,-
 " 字符间插入的像素行数目
 
 "markdown配置
-au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn}   set filetype=mkd
+au BufRead,BufNewFile *.{mdown,mkd,mkdn,markdown,mdwn}   set filetype=mkd
+au BufRead,BufNewFile *.{md}   set filetype=readme
 au BufRead,BufNewFile *.{go}   set filetype=go
 au BufRead,BufNewFile *.{js}   set filetype=javascript
 "rkdown to HTML  
@@ -127,9 +128,16 @@ func SetTitle()
         call setline(1,"#!/usr/bin/env ruby")
         call append(line("."),"# encoding: utf-8")
 	    call append(line(".")+1, "")
-    
+    elseif &filetype == 'readme'
+        call setline(1,"###################################################")
+        call append(line("."),"## Create Date:".strftime("%c"))
+        call append(line(".")+1,"##")
+        call append(line(".")+2,"##Author:Norman")
+        call append(line(".")+3,"##")
+        call append(line(".")+4,"##Description: ")
+        call append(line(".")+5,"###################################################")
 "    elseif &filetype == 'mkd'
-"        call setline(1,"<head><meta charset=\"UTF-8\"></head>")
+"       call setline(1,"<head><meta charset=\"UTF-8\"></head>")
 	else 
 		call setline(1, "/*########################################################") 
 		call append(line("."), "##File Name: ".expand("%")) 
