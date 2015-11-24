@@ -32,32 +32,34 @@ typedef struct student {
 
 int main() {
     STU* head= NULL,*Tail=NULL;
-    STU *pn,*pm;
+    STU *pn;
     char ch;
 
-    pn = malloc(sizeof(STU));
-    if(pn == NULL) {
-        printf("malloc error!\n");
-        return -1;
-    }
-
-    
     while(1) {
-        //1.申请内存
-        //2.初始化pn
-        //head->pn
-        //pn->next -> 下一个pn指针
-        
-        Tail = pn;
-
-        pm = malloc(si zeof(STU));
-        if(pm == NULL) {
+        pn = malloc(sizeof(STU));
+        if(pn == NULL) {
             printf("malloc error!\n");
             return -1;
         }
-        Tail->next = pm;
-        Tail=pm;
-        
+
+        scanf("%d%s%d%d",
+              &pn->stu_num,
+              pn->stu_name,
+              &pn->stu_age,
+              &pn->stu_score
+             );
+        while((ch=getchar())!= '\n');
+        if(head == NULL) {
+            head = pn;
+        } else {
+            if(Tail->next == NULL) {
+                Tail->next = pn;
+            }
+        }
+
+        pn->next = NULL;
+        Tail=pn;
+
         printf("is continue? please input yes or no(Y/N):\n");
 clear_method:
         ch = getchar();
