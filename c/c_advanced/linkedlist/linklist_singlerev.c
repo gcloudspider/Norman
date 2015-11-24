@@ -57,7 +57,7 @@ int main() {
         pn->next = NULL;
         tail=pn;
 
-        printf("Is continue? please input yes or no(Y/N):\n");
+        printf("Is continue? please input yes/enter or no(Y(enter)/N) : ");
 clear_enter:
         ch=getchar();
         if(ch=='n'||ch=='N') {
@@ -72,10 +72,8 @@ clear_enter:
     //2.逆序链表
     p = head;
     q=head->next;
-    //q=head->next->next;
-    //t = NULL;
 
-    while(p != NULL) {
+    while(q != NULL) {
         t = q->next;
         q->next = p;
         p=q;
@@ -91,7 +89,7 @@ clear_enter:
     pn = head;
     printf("num\tname\tage\tscore\n");
     while(pn) {
-        printf("%d%s%d%d\n",pn->stu_num,pn->stu_name,pn->stu_age,pn->stu_score);
+        printf("%d\t%s\t%d\t%d\n",pn->stu_num,pn->stu_name,pn->stu_age,pn->stu_score);
         pn = pn->next;
     }
 

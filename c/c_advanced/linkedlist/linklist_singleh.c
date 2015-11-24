@@ -68,7 +68,7 @@ int main() {
         pn->next = head;
         head = pn;
 
-        printf("Is continue ? please input yes/no(Y/N):\n");
+        printf("Is continue ? please input yes/no(Y/N): ");
 clear_enter:
         ch = getchar();
         if(ch == 'n' || ch =='N'){

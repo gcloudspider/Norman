@@ -60,7 +60,7 @@ int main() {
         pn->next = NULL;
         Tail=pn;
 
-        printf("is continue? please input yes or no(Y/N):\n");
+        printf("is continue? please input yes or no(Y/N): ");
 clear_method:
         ch = getchar();
         if(ch == 'n' || ch=='N') {

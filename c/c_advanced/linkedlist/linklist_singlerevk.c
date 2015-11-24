@@ -46,11 +46,11 @@ int main() {
              &pn->stu_score
              );
         /*
-        pn->next=head;
+        pn->next=head;          //头插法:注意插入链表数据是倒序
         head = pn;
         */
 
-        if(head == NULL) {
+        if(head == NULL) {      //尾插法:数据位于链表是正序
             head = pn;
         } else {
             if(tail->next == NULL) {
