@@ -81,7 +81,16 @@ clear_enter:
     }
     head->next = NULL;
     head = p;
-
+/*
+    STU *p = head,*new_head=NULL;       //使用头插法创建新的链表
+    while(head) {
+        p=head;
+        head=head->next;
+        p->next=new_head;
+        new_head=p;
+    }
+    head=new_head;
+*/
 
 
 
