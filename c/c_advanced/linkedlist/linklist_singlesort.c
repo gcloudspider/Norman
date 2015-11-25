@@ -101,33 +101,38 @@ STU* search_max_link_list(STU **head) {
     return max;
 }
 
-int del_link_list_node(STU **head,STU* max) {
-   //将max从链表中断开
-    STU* p=*head;
-    STU* new_head = NULL;
+STU* del_link_list_node(STU **head,STU* new_head,STU* max) {
+    STU* p,*q;
 
-    while(head) {
-        p=*head;
-        (*head) = (*head)->next;
-        if(*head == max) {
-            (*head)->next = NULL;
-        }
-        p->next = new_head;
-        new_head = p;
+    p = *head,q = *head;
+    while(p) {
+        if(p == max) break;
+        q=p;
+        p = p->next;
     }
-    return 0;
-}
+    
+    //将max从链表中断开
+    if(p) {
+        if(p==*head) {
+            (*head) = (*head)->next;
+        } else {
+            q->next=p->next;
+        }   
+    }
 
-STU* insert_link_list(STU* max) {
-    STU* new_head = NULL;
-    max->next = new_head;
-    new_head = max;
+    p->next = new_head;
+    new_head = p;
+    //printf("new_head=%p",new_head);
     return new_head;
 }
 
 void sort_link_list(STU **head) {
     STU *max,*p,*q,*new_head = NULL;
     while(head) {
+        if(*head == NULL) break;
+
+        max=search_max_link_list(&*head);
+        /*
         p = *head;
         max = *head;
         while(p) {
@@ -135,23 +140,28 @@ void sort_link_list(STU **head) {
                 max= p;
             }
             p = p->next;
-        }
+        }*/
+        new_head=del_link_list_node(&*head,new_head,max);
+        //TODO: 封装进一步优化 删除和重组分开
+        /*
         p =*head;q = *head;
         while(p) {
             if(p == max) break;
             q = p;
             p = p->next;
         }
+        
         if(p) {
-            if(p==*head)
+            if(p==*head) {
                 (*head) = (*head)->next;
-            else
+            } else {
                 q->next=p->next;
-        }else
+            }   
+        } else
             break;
         p->next = new_head;
         new_head = p;
-
+        */
     }
     *head = new_head;
     return ;
