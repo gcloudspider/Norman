@@ -32,7 +32,7 @@ typedef struct student{
 
 
 STU* create_link_list() {
-    STU* pn;
+    STU* pn,*head=NULL;
     char ch;
     
     while(1) {
@@ -65,7 +65,7 @@ clear_enter:
     return head;
 }
 
-void show_link_list() {
+void show_link_list(STU *head) {
 
     STU *pn;
     pn=head;
@@ -83,14 +83,14 @@ void show_link_list() {
 }
 
 
-int insert_link_list(STU* pn) {
+int insert_link_list(STU *head,STU* pn) {
     if(pn == NULL) return -1;
     pn->next = head;
     head = pn;
     return 0;
 }
 
-void release_link_list() {
+void release_link_list(STU* head) {
     STU *pn;
 
     while(head) {
@@ -101,7 +101,7 @@ void release_link_list() {
     return ;
 }
 
-STU* search_link_list() {
+STU* search_link_list(STU *head) {
     STU* pn;
     pn=head;
     STU* pm;
@@ -117,7 +117,7 @@ STU* search_link_list() {
     return pm;
 }
 
-print_max_score(int score) {
+void print_max_score(STU *head,int score) {
     STU* pn;
     pn = head;
 
@@ -135,8 +135,8 @@ print_max_score(int score) {
 }
 
 int main() {
-
-    create_link_list();
+    STU *head;
+    head = create_link_list();
 
     printf("insert link list:\n");
     STU* pn;
@@ -152,18 +152,18 @@ int main() {
          &pn->stu_score
          );
 
-    insert_link_list(pn);
+    insert_link_list(head,pn);
 
-    show_link_list();
+    show_link_list(head);
     
     printf("search score max user info\n");
 
     STU* pm;
-    pm=search_link_list();
+    pm=search_link_list(head);
 
-    print_max_score(pm->stu_score);
+    print_max_score(head,pm->stu_score);
 
-    release_link_list();
+    release_link_list(head);
 
     return 0;
 }
