@@ -157,66 +157,50 @@ STU* search_max_double_link_list(STU **head) {
 }
 
 void sort_double_link_list(STU **head) {
-    STU *pn,*max=*head;
+    STU *pn,*max;
     STU *new_head = NULL;
     printf("head=%p",*head);
 
     while(head) {
+        max = *head;
         pn = *head;
         while(pn) {
             //查找最大节点
-            if(pn->stu_num > max->stu_num) break;
+            if(pn->stu_num > max->stu_num) {
+                max = pn;
+                break;
+            }
             pn = pn->next;
         }
-        printf("search max=%p\n",pn);
+        printf("search max=%p\n",max);
 
-        if(pn) {
+        if(max) {
             //是否new_head第一个
-            if(new_head) {
-                //最大是head
-                if(pn == *head) {
-                    pn->next->pre = NULL;
-                    *head = pn->next;
-                    pn->next = new_head;
-                    new_head->pre = pn;
+            if(max == *head) {
+                if(max->next) {
+                    max->next->pre = NULL;
+                    *head = max->next;
+                    max->next = new_head;
+                    new_head = max;
                 } else {
-                    if(pn->next) {
-                        pn->next->pre = pn->pre;
-                        pn->pre->next = pn->next;
-                        pn->pre = NULL;
-                        pn->next = new_head;
-                        new_head->pre = pn;
-                    } else {
-                        pn->pre->next = NULL;
-                        pn->pre = NULL;
-                        pn->next = new_head;
-                        new_head->pre = pn;
-                    }
+                    
                 }
             } else {
-                //最大的是否是第一个
-                if(pn == *head) {
-                    pn->next->pre = NULL;
-                    *head = pn->next;
-                    new_head = pn;
-                    pn->next = NULL;
-                    pn = *head;
+                if(max->next) {
+                    max->next->pre = max->pre;
+                    max->pre->next = max->next;
+                    max->pre = NULL;
+                    max->next = new_head;
+                    new_head = max;
                 } else {
-                    //最大的是否是最后一个
-                    if(pn->next) {
-                        pn->pre= NULL;
-                        pn->pre->next = NULL;
-                        new_head = pn;
-                    } else {
-                        //最大的是中间的
-                        pn->pre->next = pn->next;
-                        pn->next->pre = pn->pre;
-                        pn->pre = NULL;
-                        pn->next = NULL;
-                        new_head = pn;
-                    }
+                    max->pre->next = NULL;
+                    max->pre = NULL;
+                    max->next = new_head;
+                    new_head = max;
                 }
             }
+        } else {
+            break;
         }   
     }
     *head = new_head;
@@ -251,6 +235,8 @@ int main() {
     //排序双向链表
     printf("sort double link list\n");
     sort_double_link_list(&head);
+
+    print_double_link_list(&head);
 
     return 0;
 }
