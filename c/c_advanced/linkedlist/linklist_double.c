@@ -152,14 +152,10 @@ void reveser_double_link_list(STU **head) {
     return;
 }
 
-STU* search_max_double_link_list(STU **head) {
-    
-}
-
 void sort_double_link_list(STU **head) {
     STU *pn,*max;
     STU *new_head = NULL;
-    printf("head=%p",*head);
+    printf("head=%p\n",*head);
 
     while(head) {
         max = *head;
@@ -172,32 +168,67 @@ void sort_double_link_list(STU **head) {
             }
             pn = pn->next;
         }
-        printf("search max=%p\n",max);
+        //printf("search max=%p\tstu_num=%d\n",max,max->stu_num);
 
         if(max) {
-            //是否new_head第一个
-            if(max == *head) {
-                if(max->next) {
-                    max->next->pre = NULL;
-                    *head = max->next;
-                    max->next = new_head;
-                    new_head = max;
+            //是否new_head 是否为空
+            if(new_head) {
+                if(max == *head) {
+                    if(max->next) {     //是第一个但head链表还有节点
+                        max->next->pre= NULL;
+                        *head = max->next;
+                        max->next = new_head;
+                        new_head->pre = max;
+                        new_head = max;
+                    } else {            //head中最后一个
+                        max->next = new_head;
+                        new_head->pre = max;
+                        new_head = max;
+                        *head = NULL;
+                    }
                 } else {
-                    
+                    if(max->next) {
+                        max->pre->next = max->next;
+                        max->next->pre = max->pre;
+                        max->next = new_head;
+                        new_head->pre = max;
+                        max->pre = NULL;
+                        new_head = max;
+                    } else {        //new_head有节点,head有节点max 是最后一个
+                        max->pre->next = NULL;
+                        max->next = new_head;
+                        max->pre = NULL;
+                        new_head->pre = max;
+                        new_head = max;
+                    }
                 }
             } else {
-                if(max->next) {
-                    max->next->pre = max->pre;
-                    max->pre->next = max->next;
-                    max->pre = NULL;
-                    max->next = new_head;
-                    new_head = max;
+                //判断将添加max 为head 第一个
+                if(max == *head) {
+                    //判断将添加max 为head 最后一个
+                    if(max->next) {
+                        max->next->pre = NULL;
+                        *head = max->next;
+                        max->next = NULL;
+                        new_head = max;
+                    } else {
+                        *head = NULL;
+                        new_head=max;
+                    }
                 } else {
-                    max->pre->next = NULL;
-                    max->pre = NULL;
-                    max->next = new_head;
-                    new_head = max;
-                }
+                    //判断是否为最后一个
+                    if(max->next){
+                        max->pre->next = max->next;
+                        max->next->pre = max->pre;
+                        max->next = NULL;
+                        max->pre = NULL;
+                        new_head = max;
+                    } else {
+                        max->pre->next = NULL;
+                        max->pre = NULL;
+                        new_head = max;
+                    }
+                }   
             }
         } else {
             break;
