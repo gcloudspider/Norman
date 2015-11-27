@@ -18,27 +18,45 @@
 
 void quick_sort_algorithm(int m[],int left,int right) {
     int key = left++;       //先赋值后++ so:key=m[0]
-    int i=left,j=right;     //i=m[1] j=m[7]
-    printf("key=%d\ti=%d\tj=%d\tleft=%d\tright=%d\n",key,i,j,left,right);
+    int i=left,j=right,tmp;     //i=m[1] j=m[7]
+    //printf("key=%d\ti=%d\tj=%d\tleft=%d\tright=%d\n",key,i,j,left,right);
 
     if(left>right) return;  //只有一个元素,无需排序
 
+    int k;
+
     while(i<=j) {
-        while(m[i]<=m[key] && i<right) {    
+        while(m[i]<=m[key] && i<=right) {    
             //从左向右遍历查找比第一个小定下i最大的位置
             i++;
         }
-        while(m[j]>m[key] && j>left) {
+        while(m[j]>=m[key] && j>=left) {
             //从右向左遍历查找比最后一个小定下j的位置
             j--;
         }
 
         if(i<j) {
-            
+            tmp=m[i];
+            m[i] = m[j];
+            m[j] = tmp;
         }
+        
+        for(k=0;k<8;k++) {
+            printf("%d ",m[k]);
+        }
+        getchar();
     }
+    tmp = m[key];
+    m[key] = m[j];
+    m[j] = tmp;
 
+    for(k=0;k<8;k++) {
+        printf("%d ",m[k]);
+    }
+    getchar();
 
+    quick_sort_algorithm(m,--left,j-1);
+    quick_sort_algorithm(m,j+1,right);
 }
 
 int main() {
