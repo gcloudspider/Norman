@@ -13,11 +13,15 @@ src
    源代码目录
 
    src/View/         视图层
+
    src/Controller/   控制层
+
    src/Model/        模块层
+
    src/DataManager/  数据管理层
 
 utils
    基础定义头文件
+
 test
    代码片段测试 
