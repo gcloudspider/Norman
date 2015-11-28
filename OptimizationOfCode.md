@@ -6,10 +6,10 @@
 ##Description: Optimization of Code
 ###################################################
 
-1.阿姆达尔定律:
-              TIMEold                 1
-    Speedup = ------- = ---------------------------------
-              TIMEnew   (1-FUNCcost)+FUNCcost/FUNCspeedup
+1.阿姆达尔定律:<br />
+              TIMEold                 1                  <br />
+    Speedup = ------- = ---------------------------------<br />
+              TIMEnew   (1-FUNCcost)+FUNCcost/FUNCspeedup<br />
 
 2.代码先保证正确,然后再考虑优化
 
