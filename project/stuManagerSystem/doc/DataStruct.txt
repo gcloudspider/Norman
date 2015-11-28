@@ -5,32 +5,32 @@ struct score {
 	int math; 								//数学
 	int english; 							//英语
 	int c_lang;								//C
-	int java;									//java
-	int c++;									//C++
+	int java;								//java
+	int c++;								//C++
 };
 
 //学生结构体
 struct student {
-	int  id; 										//学号
-	char name[64];						//姓名
-	int age;									//年龄
-	int sex; 									//性别
-	char telnum							//电话号码
+	int  id; 								//学号
+	char name[64];						    //姓名
+	int age;								//年龄
+	int sex; 								//性别
+	char telnum							    //电话号码
 	char QQ[20]; 							//QQ号
-	char passwd[32]; 					//密码
-	int classid; 								//班级
-	struct Score * score; 			//分数
+	char passwd[32]; 					    //密码
+	int classid; 							//班级
+	struct Score * score; 			        //分数
 };
 
 //教师结构体
 struct teacher {
-	int id; 									//教师的ID
-	char name[64];					//教师姓名
+	int id; 								//教师的ID
+	char name[64];					        //教师姓名
 	int age;								//教师年龄
 	int sex; 								//教师性别
-	int class_no; 						//教师所教班级
+	int class_no; 						    //教师所教班级
 	int lession;	 						//课目
-	char passwd[32]; 				//密码
+	char passwd[32]; 				        //密码
 };
 
 // 科目
