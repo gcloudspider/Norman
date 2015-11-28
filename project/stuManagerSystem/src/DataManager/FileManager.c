@@ -68,7 +68,7 @@ int ReadStudentDataToLinkList(STU **head) {
 }
 
 
-//打印双向链表
+//打印学生双向链表
 void PrintStudentDoubleLinkList(STU **head) {
     STU* pn;
     pn = *head;
@@ -83,6 +83,73 @@ void PrintStudentDoubleLinkList(STU **head) {
               pn->QQ,
               pn->passwd,
               pn->classid
+              );   
+        pn = pn->next;
+    }
+    return;
+}
+
+//从文件读数据写入双向链表
+int ReadTeacherDataToLinkList(TEA **head) {
+    FILE* fp;
+    size_t ret;
+    TEA* tea,*p;
+
+    fp = fopen(TEA_FILE_STORAGE_NAME,"r+");
+    if(fp == NULL) {
+        perror("while fopen():");
+        return -1;
+    }
+    
+    while(feof(fp)==0) {
+        tea = malloc(sizeof(STU));
+        if(tea == NULL) {
+            printf("malloc error!\n");
+            return -1;
+        }
+
+        fscanf(fp,"%d\t%s\t%d\t%d\t%d\t%d\t%s\n",
+              &tea->id,
+               tea->name,
+              &tea->age,
+              &tea->sex,
+              &tea->class_no,
+              &tea->lession,
+              tea->passwd
+              );
+
+        if(*head) {
+            tea->next = NULL;
+            tea->pre=p;
+            p->next = tea;
+        } else {
+            tea->next = *head;
+            tea->pre = *head;
+            *head = tea;
+        }
+        p = tea;
+    }
+
+    fclose(fp);
+
+    return 0;
+}
+
+
+//打印教师双向链表
+void PrintTeacherDoubleLinkList(TEA **head) {
+    TEA* pn;
+    pn = *head;
+    printf("num\tname\tage\tsex\tclass_no\tlession\tpasswd\n");
+    while(pn) {
+        printf("%d\t%s\t%d\t%d\t%d\t%d\t%s\n",
+              pn->id,
+              pn->name,
+              pn->age,
+              pn->sex,
+              pn->class_no,
+              pn->lession,
+              pn->passwd
               );   
         pn = pn->next;
     }

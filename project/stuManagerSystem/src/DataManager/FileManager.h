@@ -22,9 +22,10 @@
 int ReadStudentDataToLinkList(STU **head);
 void WriteDataToStudentFile();
 
-void ReadTeacherDataToLinkList();
+int ReadTeacherDataToLinkList(TEA **head);
 void WriteDataToTeacherFile();
 
 void PrintStudentDoubleLinkList(STU **head);
+void PrintTeacherDoubleLinkList(TEA **head);
 
 #endif

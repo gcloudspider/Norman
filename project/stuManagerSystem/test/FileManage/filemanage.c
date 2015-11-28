@@ -19,10 +19,12 @@
 #include "../../src/utils/DataStruct.h"
 
 int main() {
-    STU* head = NULL;
-    
-    ReadStudentDataToLinkList(&head);
-    PrintStudentDoubleLinkList(&head);
+    STU* head_student = NULL;
+    TEA* head_teacher = NULL;
+    ReadStudentDataToLinkList(&head_student);
+    PrintStudentDoubleLinkList(&head_student);
 
+    ReadTeacherDataToLinkList(&head_teacher);
+    PrintTeacherDoubleLinkList(&head_teacher);
     return 0;
 }
