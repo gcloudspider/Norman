@@ -20,10 +20,10 @@
 #include <stdio.h>
 
 int ReadStudentDataToLinkList(STU **head);
-void WriteDataToStudentFile();
+int WriteDataToStudentFile(STU **head);
 
 int ReadTeacherDataToLinkList(TEA **head);
-void WriteDataToTeacherFile();
+int WriteDataToTeacherFile(TEA **head);
 
 void PrintStudentDoubleLinkList(STU **head);
 void PrintTeacherDoubleLinkList(TEA **head);

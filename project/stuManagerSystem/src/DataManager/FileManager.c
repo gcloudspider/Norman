@@ -156,3 +156,58 @@ void PrintTeacherDoubleLinkList(TEA **head) {
     return;
 }
 
+int WriteDataToStudentFile(STU **head) {
+    FILE *fp;
+    STU* pn;
+
+    fp = fopen(STU_FILE_STORAGE_NAME,"w+");
+    if(fp == NULL) {
+        perror("while fopen():");
+        return -1;
+    }
+    
+    pn = *head;
+    while(pn) {    
+        fprintf(fp,"%d\t%s\t%d\t%d\t%s\t%s\t%s\t%d\n",
+                pn->id,
+                pn->name,
+                pn->age,
+                pn->sex,
+                pn->telnum,
+                pn->QQ,
+                pn->passwd,
+                pn->classid
+               );
+        pn=pn->next;
+    }
+
+    fclose(fp);
+    return 0;
+}
+
+int WriteDataToTeacherFile(TEA **head) {
+    FILE *fp;
+    TEA* pn;
+
+    fp = fopen(TEA_FILE_STORAGE_NAME,"w+");
+    if(fp == NULL) {
+        perror("while fopen():");
+        return -1;
+    }
+    
+    pn = *head;
+    while(pn) {    
+        fprintf(fp,"%d\t%s\t%d\t%d\t%d\t%d\t%s\n",
+              pn->id,
+              pn->name,
+              pn->age,
+              pn->sex,
+              pn->class_no,
+              pn->lession,
+              pn->passwd);
+        pn=pn->next;
+    }
+
+    fclose(fp);
+    return 0;
+}
