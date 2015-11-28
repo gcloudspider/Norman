@@ -22,22 +22,24 @@ struct score {
     int english;
     int c_lang;
     int java;
-    int c++;
+    int c_adv;
 };
 
-struct student {
+typedef struct student {
     int id;
     char name[64];
     int age;
     int sex;
-    char telnum;
+    char telnum[11];
     char QQ[20];
     char passwd[32];
     int classid;
     struct score *lscore;
-};
+    struct student *pre;
+    struct student *next;
+}STU;
 
-struct teacher {
+typedef struct teacher {
     int id;
     char name[64];
     int age;
@@ -45,6 +47,8 @@ struct teacher {
     int class_no;
     int lession;
     char passwd[32];
-};
+    struct teacher *pre;
+    struct teacher *next;
+}TEA;
 
 #endif
