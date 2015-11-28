@@ -23,9 +23,9 @@
 int ReadStudentDataToLinkList(STU **head) {
     FILE* fp;
     size_t ret;
-    STU* stu;
+    STU* stu,*p;
 
-    fp = fopen(STU_FILE_STORAGE_NAME,"w+");
+    fp = fopen(STU_FILE_STORAGE_NAME,"r+");
     if(fp == NULL) {
         perror("while fopen():");
         return -1;
@@ -48,6 +48,18 @@ int ReadStudentDataToLinkList(STU **head) {
               stu->passwd,
               &stu->classid
               );
+
+        if(*head) {
+            stu->next = NULL;
+            stu->pre=p;
+            p->next = stu;
+        } else {
+            stu->next = *head;
+            stu->pre = *head;
+            *head = stu;
+        }
+        p = stu;
+
     }
 
     fclose(fp);
@@ -56,5 +68,24 @@ int ReadStudentDataToLinkList(STU **head) {
 }
 
 
-
+//打印双向链表
+void PrintStudentDoubleLinkList(STU **head) {
+    STU* pn;
+    pn = *head;
+    printf("num\tname\tage\tsex\ttelnum\tQQ\tpasswd\tclassid\n");
+    while(pn) {
+        printf("%d\t%s\t%d\t%d\t%s\t%s\t%s\t%d\n",
+              pn->id,
+              pn->name,
+              pn->age,
+              pn->sex,
+              pn->telnum,
+              pn->QQ,
+              pn->passwd,
+              pn->classid
+              );   
+        pn = pn->next;
+    }
+    return;
+}
 

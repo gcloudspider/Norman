@@ -22,7 +22,7 @@ int main() {
     STU* head = NULL;
     
     ReadStudentDataToLinkList(&head);
-
+    PrintStudentDoubleLinkList(&head);
 
     return 0;
 }

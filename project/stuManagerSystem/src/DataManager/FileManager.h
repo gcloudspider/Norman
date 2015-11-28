@@ -25,4 +25,6 @@ void WriteDataToStudentFile();
 void ReadTeacherDataToLinkList();
 void WriteDataToTeacherFile();
 
+void PrintStudentDoubleLinkList(STU **head);
+
 #endif
