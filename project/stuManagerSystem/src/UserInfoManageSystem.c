@@ -19,7 +19,7 @@
 
 int main() {
     
-    InitModel();
+    InitAppModel();
 
     return 0;
 }
