@@ -17,6 +17,44 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include "../utils/DataConst.h"
+#include "../utils/DataEnum.h"
+
+void ShowLoginMenu(int logintype) {
+    int userid;
+    char passwd[32] = {0};
+    system("clear");
+    switch(logintype) {
+        case 1:
+            printf("%s\n",PLEASE_INPUT_STUDENT_ID);
+            scanf("%d",&userid);
+            printf("%s\n",PLEASE_INPUT_STUDENT_PASSWD);
+            scanf("%s",passwd);
+            //printf("student=%dpasswd=%s\n",userid,passwd);
+            break;
+        case 2:
+            printf("%s\n",PLEASE_INPUT_TEACHER_ID);
+            scanf("%d",&userid);
+            printf("%s\n",PLEASE_INPUT_TEACHER_PASSWD);
+            scanf("%s",passwd);
+            break;
+        case 3:
+            printf("%s\n",PLEASE_INPUT_ADMIN_ID);
+            scanf("%d",&userid);
+            printf("%s\n",PLEASE_INPUT_ADMIN_PASSWD);
+            scanf("%s",passwd);
+            break;
+        default:
+            break;
+    }
+}
+
+void ShowLoginSuccessMenu() {
+    
+}
+
+void ShowLoginFailedMenu() {
+
+}
 
 void ShowMainMenu() {
     char ch;
@@ -43,10 +81,13 @@ void ShowMainMenu() {
         ch=getchar();
         switch(ch) {
             case '1':
+                ShowLoginMenu(STUDENT);
                 break;
             case '2':
+                ShowLoginMenu(TEACHER);
                 break;
             case '3':
+                ShowLoginMenu(ADMINISTRATOR);
                 break;
             case '4':
                 exit(0);

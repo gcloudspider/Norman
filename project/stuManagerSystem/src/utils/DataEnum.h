@@ -18,9 +18,9 @@
 #define _DATAENUM_H
 
 enum LONGIN {
-    STUDENT,
-    TEACHER,
-    ADMINISTRATOR
+    STUDENT = 1,
+    TEACHER = 2,
+    ADMINISTRATOR = 3
 };
 
 enum USERSEX {
@@ -33,6 +33,6 @@ enum LESSION {
     ENGLISH,
     CLANGE,
     JAVA,
-    C++
+    CAdv
 };
 #endif

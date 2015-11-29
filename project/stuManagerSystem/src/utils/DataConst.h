@@ -34,6 +34,15 @@
 #define SELECT_LOGIN_USER               "请选择登录的用户:"
 #define LOGOUT                          "退出"
 
+/*logging*/
+#define PLEASE_INPUT_STUDENT_ID        "请输入学生学号:"
+#define PLEASE_INPUT_TEACHER_ID        "请输入教师工号:"
+#define PLEASE_INPUT_ADMIN_ID          "请输入管理员工号:"
+
+#define PLEASE_INPUT_STUDENT_PASSWD    "请输入学生密码:"
+#define PLEASE_INPUT_TEACHER_PASSWD    "请输入教师密码:"
+#define PLEASE_INPUT_ADMIN_PASSWD      "请输入管理员密码:"
+
 /*stu logined*/
 #define SHOW_STUDENT_INFOMATION         "显示个人信息"
 

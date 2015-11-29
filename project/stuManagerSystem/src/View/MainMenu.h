@@ -17,6 +17,9 @@
 #ifndef _MAINMENU_H
 #define _MAINMENU_H
 
+void ShowLoginMenu(int logintype);
+void ShowLoginSuccessMenu();
+void ShowLoginFailedMenu();
 void ShowMainMenu();
 
 #endif
