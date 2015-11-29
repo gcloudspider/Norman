@@ -15,6 +15,7 @@
 ##########################################################*/
 
 #include<stdio.h>
+#include "LoginModel.h"
 #include "../utils/DataConst.h"
 
 int onVerifyStudentPasswd(int username,char passwd[]) {
