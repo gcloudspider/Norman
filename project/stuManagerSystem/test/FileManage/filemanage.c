@@ -55,17 +55,24 @@ int delete_double_link_list(STU **head,int n) {
 int main() {
     STU* head_student = NULL;
     TEA* head_teacher = NULL;
-    
+    ADMIN* head_admin = NULL;
+
+    //测试admin链表
+    ReadAdminDataToLinkList(&head_admin);
+    PrintAdminDoubleLinkList(&head_admin);
+
+    //测试student链表
     ReadStudentDataToLinkList(&head_student);
     PrintStudentDoubleLinkList(&head_student);
 
+    //测试teacher链表
     ReadTeacherDataToLinkList(&head_teacher);
     PrintTeacherDoubleLinkList(&head_teacher);
 
     delete_double_link_list(&head_student,1001);
     delete_double_link_list(&head_student,1006);
     PrintStudentDoubleLinkList(&head_student);
-
+    //测试链表回写文件
     WriteDataToStudentFile(&head_student);
 
     return 0;
