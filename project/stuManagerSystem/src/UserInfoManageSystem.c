@@ -16,10 +16,10 @@
 
 #include<stdio.h>
 #include "./Model/InitAppModel.h"
+#include "./View/MainMenu.h"
 
-int main() {
-    
+int main() {   
     InitAppModel();
-
+    ShowMainMenu();
     return 0;
 }
