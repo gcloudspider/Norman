@@ -15,7 +15,7 @@
 ##########################################################*/
 
 #include<stdio.h>
-#include "../../src/DataManager/FileManager.h"
+#include "../../src/DataManage/FileManage.h"
 #include "../../src/utils/DataStruct.h"
 
 
