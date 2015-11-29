@@ -51,4 +51,13 @@ typedef struct teacher {
     struct teacher *next;
 }TEA;
 
+typedef struct admin {
+    int id;
+    char name[64];
+    int age;
+    int sex;
+    char passwd[32];
+    struct admin *pre;
+    struct admin *next;
+}ADMIN;
 #endif
