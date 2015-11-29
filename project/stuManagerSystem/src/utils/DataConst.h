@@ -24,11 +24,14 @@
 /*public*/
 #define LOGINED_MODIFY_PASSWD           "修改密码"
 
+#define MAIN_MENU_WELCOME_TITLE         "欢迎使用学生管理系统"
 
 /*login info*/
 #define LOGIN_SELECT_USER               "用户登录界面"
 #define LOGIN_SELECT_STUDENT            "学生登录"
 #define LOGIN_SELECT_TEACHER            "教师登录"
+#define LOGIN_SELECT_ADMIN              "管理员登录"
+#define SELECT_LOGIN_USER               "请选择登录的用户:"
 #define LOGOUT                          "退出"
 
 /*stu logined*/
