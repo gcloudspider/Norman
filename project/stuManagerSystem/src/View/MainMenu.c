@@ -19,34 +19,45 @@
 #include "../utils/DataConst.h"
 #include "../utils/DataEnum.h"
 #include "../Controller/AppController.h"
+#include "../Controller/LoginController.h"
+
 
 void ShowLoginMenu(int logintype) {
     int userid;
     char passwd[32] = {0};
-    system("clear");
-    switch(logintype) {
-        case 1:
-            printf("%s\n",PLEASE_INPUT_STUDENT_ID);
-            scanf("%d",&userid);
-            printf("%s\n",PLEASE_INPUT_STUDENT_PASSWD);
-            scanf("%s",passwd);
-            //printf("student=%dpasswd=%s\n",userid,passwd);
-            break;
-        case 2:
-            printf("%s\n",PLEASE_INPUT_TEACHER_ID);
-            scanf("%d",&userid);
-            printf("%s\n",PLEASE_INPUT_TEACHER_PASSWD);
-            scanf("%s",passwd);
-            break;
-        case 3:
-            printf("%s\n",PLEASE_INPUT_ADMIN_ID);
-            scanf("%d",&userid);
-            printf("%s\n",PLEASE_INPUT_ADMIN_PASSWD);
-            scanf("%s",passwd);
-            break;
-        default:
-            break;
-    }
+    size_t ret;
+
+    while(1) {
+        system("clear");
+        switch(logintype) {
+            case STUDENT:
+                printf("%s",PLEASE_INPUT_STUDENT_ID);
+                scanf("%d",&userid);
+                ret = onLoginAuthUserId(STUDENT,userid);
+                if(ret == 0) {
+                    printf("%s",PLEASE_INPUT_STUDENT_PASSWD);
+                    scanf("%s",passwd);
+                } else {
+                    printf("%s\n",LOGIN_FAILED_INFO);
+                    sleep(3);
+                }
+                break;
+            case TEACHER:
+                printf("%s\n",PLEASE_INPUT_TEACHER_ID);
+                scanf("%d",&userid);
+                printf("%s\n",PLEASE_INPUT_TEACHER_PASSWD);
+                scanf("%s",passwd);
+                break;
+            case ADMINISTRATOR:
+                printf("%s\n",PLEASE_INPUT_ADMIN_ID);
+                scanf("%d",&userid);
+                printf("%s\n",PLEASE_INPUT_ADMIN_PASSWD);
+                scanf("%s",passwd);
+                break;
+            default:
+                break;
+        }
+    }   
 }
 
 void ShowLoginSuccessMenu() {
