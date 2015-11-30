@@ -18,14 +18,16 @@
 #include "InitAppModel.h"
 #include "../DataManage/FileManage.h"
 #include "../utils/DataStruct.h"
+#include "../utils/global.h"
 
 void InitStudentModel() {
     STU *head = NULL;
     int ret;
     ret = ReadStudentDataToLinkList(&head);
     if(ret==0) {
+        head_student = head;
         printf("Create Student Double Link List From File Sucessfuly!\n");
-        PrintStudentDoubleLinkList(&head);
+        //PrintStudentDoubleLinkList(&head);
     } else {
         printf("Create Student Double Link List Error!\n");
     }
@@ -36,8 +38,9 @@ void InitTeacherModel() {
     int ret;
     ret = ReadTeacherDataToLinkList(&head);
     if(ret == 0) {
+        head_teacher = head;
         printf("Create Teacher Double Link List From File Sucessfuly!\n");
-        PrintTeacherDoubleLinkList(&head);
+        //PrintTeacherDoubleLinkList(&head);
     } else {
         printf("Create Teacher Double Link List Error!\n");
     }
@@ -48,8 +51,9 @@ void InitAdminModel() {
     int ret;
     ret = ReadAdminDataToLinkList(&head);
     if(ret == 0) {
+        head_admin = head;
         printf("Create Admin Double Link List From File Sucessfuly!\n");
-        PrintAdminDoubleLinkList(&head);
+        //PrintAdminDoubleLinkList(&head);
     } else {
         printf("Create Admin Double Link List Error!\n");
     }
