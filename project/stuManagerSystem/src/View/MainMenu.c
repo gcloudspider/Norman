@@ -25,7 +25,7 @@
 void ShowLoginMenu(int logintype) {
     int userid;
     char passwd[32] = {0};
-    size_t ret;
+    size_t ret,result;
 
     while(1) {
         system("clear");
@@ -37,9 +37,15 @@ void ShowLoginMenu(int logintype) {
                 if(ret == 0) {
                     printf("%s",PLEASE_INPUT_STUDENT_PASSWD);
                     scanf("%s",passwd);
-                    onLoginAuthPasswd(STUDENT,userid,passwd);
+                    result = onLoginAuthPasswd(STUDENT,userid,passwd);
+                    if(result == 0) {
+                        printf("%s",LOGIN_SUCCESS_INFO);
+                    } else {
+                        printf("%s\n",AUTH_PASSWD_FAILED_INFO);
+                        sleep(3);
+                    }
                 } else {
-                    printf("%s\n",LOGIN_FAILED_INFO);
+                    printf("%s\n",AUTH_USERID_FAILED_INFO);
                     sleep(3);
                 }
                 break;
@@ -51,7 +57,7 @@ void ShowLoginMenu(int logintype) {
                     printf("%s",PLEASE_INPUT_TEACHER_PASSWD);
                     scanf("%s",passwd);
                 } else {
-                    printf("%s\n",LOGIN_FAILED_INFO);   
+                    printf("%s\n",AUTH_USERID_FAILED_INFO);   
                     sleep(3);
                 }
                 break;
@@ -63,7 +69,7 @@ void ShowLoginMenu(int logintype) {
                     printf("%s",PLEASE_INPUT_ADMIN_PASSWD);
                     scanf("%s",passwd);
                 } else {
-                    printf("%s\n",LOGIN_FAILED_INFO);   
+                    printf("%s\n",AUTH_USERID_FAILED_INFO);   
                     sleep(3);
                 }
                 break;

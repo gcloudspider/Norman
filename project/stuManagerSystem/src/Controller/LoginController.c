@@ -39,10 +39,10 @@ size_t onLoginAuthUserId(int usertype,int userid) {
 
 size_t onLoginAuthPasswd(int usertype,int userid,char *passwd) {
     size_t ret;
-
     switch(usertype) {
         case STUDENT:
             ret = onAuthenticationStudentPasswd(userid,passwd);
+            printf("%d\n",ret);
             break;
         case TEACHER:
             ret = onAuthenticationTeacherPasswd(userid,passwd);

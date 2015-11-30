@@ -57,8 +57,9 @@ int onAuthenticationStudentPasswd(int userid,char *passwd) {
     if(pn == NULL) {
         return -1;
     }
-    
-    if(pn->passwd != passwd) {
+    printf("%p\t%s\n",pn,pn->passwd);
+
+    if(strcmp(pn->passwd,passwd)!=0) {
         return -1;
     }
 
@@ -72,7 +73,7 @@ int onAuthenticationTeacherPasswd(int userid,char *passwd) {
         return -1;
     }
     
-    if(pn->passwd != passwd) {
+    if(strcmp(pn->passwd,passwd)!=0) {
         return -1;
     }
 
@@ -87,7 +88,7 @@ int onAuthenticationAdminPasswd(int userid,char *passwd) {
         return -1;
     }
     
-    if(pn->passwd != passwd) {
+    if(strcmp(pn->passwd,passwd)!=0) {
         return -1;
     }
 
