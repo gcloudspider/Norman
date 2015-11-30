@@ -15,16 +15,16 @@
 ##########################################################*/
 
 #include<stdio.h>
-#include "./Model/InitAppModel.h"
-#include "./View/MainMenu.h"
 #include "./utils/DataStruct.h"
 #include "./utils/global.h"
+#include "./View/MainMenu.h"
+#include "./Controller/AppController.h"
 
 int main() {   
-    InitAppModel();
-    //printf("stu=%p\n",head_student);
-    //printf("tea=%p\n",head_teacher);
-    //printf("admin=%p\n",head_admin);
+    InitAppController();
+    //printf("stu=%p\n",g_pstudent);
+    //printf("tea=%p\n",g_pteacher);
+    //printf("admin=%p\n",g_padmin);
     ShowMainMenu();
     return 0;
 }

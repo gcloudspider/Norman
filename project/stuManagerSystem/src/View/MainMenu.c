@@ -18,6 +18,7 @@
 #include<stdlib.h>
 #include "../utils/DataConst.h"
 #include "../utils/DataEnum.h"
+#include "../Controller/AppController.h"
 
 void ShowLoginMenu(int logintype) {
     int userid;
@@ -90,6 +91,7 @@ void ShowMainMenu() {
                 ShowLoginMenu(ADMINISTRATOR);
                 break;
             case '4':
+                ReleaseAppController();
                 exit(0);
                 break;
             default:

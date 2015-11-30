@@ -1,6 +1,6 @@
 /*########################################################
-##File Name: InitAppModel.h
-##Created Time:2015年11月29日 星期日 11时17分46秒
+##File Name: AppController.h
+##Created Time:2015年11月30日 星期一 08时43分55秒
 ##Author: Norman 
 ##Description: 
 ##
@@ -14,10 +14,10 @@
 ##
 ##########################################################*/
 
-#ifndef _INITAPPMODEL_H
-#define _INITAPPMODEL_H
+#ifndef _APPCONTROLLER_H
+#define _APPCONTROLLER_H
 
-void InitStudentModel();
-void InitTeacherModel();
-void InitAdminModel();
+void InitAppController();
+void ReleaseAppController();
+
 #endif

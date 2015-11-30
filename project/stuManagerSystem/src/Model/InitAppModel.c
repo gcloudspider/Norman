@@ -26,7 +26,7 @@ void InitStudentModel() {
     ret = ReadStudentDataToLinkList(&head);
     if(ret==0) {
         g_pstudent = head;
-        printf("Create Student Double Link List From File Sucessfuly!\n");
+        //printf("Create Student Double Link List From File Sucessfuly!\n");
         //PrintStudentDoubleLinkList(&head);
     } else {
         printf("Create Student Double Link List Error!\n");
@@ -39,7 +39,7 @@ void InitTeacherModel() {
     ret = ReadTeacherDataToLinkList(&head);
     if(ret == 0) {
         g_pteacher = head;
-        printf("Create Teacher Double Link List From File Sucessfuly!\n");
+        //printf("Create Teacher Double Link List From File Sucessfuly!\n");
         //PrintTeacherDoubleLinkList(&head);
     } else {
         printf("Create Teacher Double Link List Error!\n");
@@ -52,16 +52,10 @@ void InitAdminModel() {
     ret = ReadAdminDataToLinkList(&head);
     if(ret == 0) {
         g_padmin = head;
-        printf("Create Admin Double Link List From File Sucessfuly!\n");
+        //printf("Create Admin Double Link List From File Sucessfuly!\n");
         //PrintAdminDoubleLinkList(&head);
     } else {
         printf("Create Admin Double Link List Error!\n");
     }
 }
 
-void InitAppModel() {
-    InitStudentModel();
-    InitTeacherModel();
-    InitAdminModel();
-    return ;
-}
