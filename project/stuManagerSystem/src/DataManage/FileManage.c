@@ -22,7 +22,6 @@
 //从文件读入数据到双向链表
 int ReadStudentDataToLinkList(STU **head) {
     FILE* fp;
-    size_t ret;
     STU* stu,*p;
 
     fp = fopen(STU_FILE_STORAGE_NAME,"r+");
@@ -92,7 +91,6 @@ void PrintStudentDoubleLinkList(STU **head) {
 //从文件读数据写入双向链表
 int ReadTeacherDataToLinkList(TEA **head) {
     FILE* fp;
-    size_t ret;
     TEA* tea,*p;
 
     fp = fopen(TEA_FILE_STORAGE_NAME,"r+");
@@ -216,7 +214,6 @@ int WriteDataToTeacherFile(TEA **head) {
 
 int ReadAdminDataToLinkList(ADMIN **head) {
     FILE* fp;
-    size_t ret;
     ADMIN* admin,*p;
 
     fp = fopen(ADMIN_FILE_STORAGE_NAME,"r+");
