@@ -19,7 +19,7 @@
 #include "../utils/DataStruct.h"
 #include "ReleaseAppModel.h"
 #include "../DataManage/FileManage.h"
-#include "../DataManage/ReleaseLinkList.h"
+#include "../DataManage/LinkListManage.h"
 
 void ReleaseAllModel() {
     size_t s_ret,t_ret,a_ret;
