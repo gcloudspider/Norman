@@ -43,7 +43,7 @@
 #define PLEASE_INPUT_TEACHER_PASSWD    "请输入教师密码:"
 #define PLEASE_INPUT_ADMIN_PASSWD      "请输入管理员密码:"
 /*login error*/
-#define LOGIN_FAILED_INFO              "输入用户ID不存在,请重新输入!"
+#define LOGIN_FAILED_INFO              "输入用户ID不存在,3秒后重新输入!"
 
 
 /*stu logined*/

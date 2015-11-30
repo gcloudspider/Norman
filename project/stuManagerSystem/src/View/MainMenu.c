@@ -43,16 +43,28 @@ void ShowLoginMenu(int logintype) {
                 }
                 break;
             case TEACHER:
-                printf("%s\n",PLEASE_INPUT_TEACHER_ID);
+                printf("%s",PLEASE_INPUT_TEACHER_ID);
                 scanf("%d",&userid);
-                printf("%s\n",PLEASE_INPUT_TEACHER_PASSWD);
-                scanf("%s",passwd);
+                ret = onLoginAuthUserId(TEACHER,userid);
+                if(ret == 0) {
+                    printf("%s",PLEASE_INPUT_TEACHER_PASSWD);
+                    scanf("%s",passwd);
+                } else {
+                    printf("%s\n",LOGIN_FAILED_INFO);   
+                    sleep(3);
+                }
                 break;
             case ADMINISTRATOR:
-                printf("%s\n",PLEASE_INPUT_ADMIN_ID);
+                printf("%s",PLEASE_INPUT_ADMIN_ID);
                 scanf("%d",&userid);
-                printf("%s\n",PLEASE_INPUT_ADMIN_PASSWD);
-                scanf("%s",passwd);
+                ret = onLoginAuthUserId(ADMINISTRATOR,userid);
+                if(ret == 0) {
+                    printf("%s",PLEASE_INPUT_ADMIN_PASSWD);
+                    scanf("%s",passwd);
+                } else {
+                    printf("%s\n",LOGIN_FAILED_INFO);   
+                    sleep(3);
+                }
                 break;
             default:
                 break;

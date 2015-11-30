@@ -26,8 +26,10 @@ size_t onLoginAuthUserId(int usertype,int userid) {
             ret = onAuthenticationStudentUserId(userid);
             break;
         case TEACHER:
+            ret = onAuthenticationTeacherUserId(userid);
             break;
         case ADMINISTRATOR:
+            ret = onAuthenticationAdminUserId(userid);
             break;
         default:
             break;

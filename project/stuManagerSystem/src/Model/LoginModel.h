@@ -18,6 +18,8 @@
 #define _LOGINMODEL_H
 
 int onAuthenticationStudentUserId(int userid);
+int onAuthenticationTeacherUserId(int userid);
+int onAuthenticationAdminUserId(int userid);
 int onAuthenticationStudentPasswd(int username,char passwd[]);
 
 

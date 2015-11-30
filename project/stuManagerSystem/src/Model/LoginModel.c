@@ -31,6 +31,26 @@ int onAuthenticationStudentUserId(int userid) {
     return 0;
 }
 
+int onAuthenticationTeacherUserId(int userid) {
+    TEA* pn;
+    pn = onSearchTeacherLinkList(g_pteacher,userid);
+    if(pn == NULL) {
+        return -1;
+    }
+
+    return 0;
+}
+
+int onAuthenticationAdminUserId(int userid) {
+    ADMIN* pn;
+    pn = onSearchAdminLinkList(g_padmin,userid);
+    if(pn == NULL) {
+        return -1;
+    }
+
+    return 0;
+}
+
 int onAuthenticationStudentPasswd(int username,char passwd[]) {
 
 }

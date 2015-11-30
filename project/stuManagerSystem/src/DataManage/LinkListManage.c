@@ -62,9 +62,23 @@ STU* onSearchStudentLinkList(STU *head,int userid) {
 }
 
 TEA* onSearchTeacherLinkList(TEA *head,int userid) {
-
+    TEA* pn = NULL;
+    while(head) {
+        if(head->id == userid) {
+            pn = head;
+        }
+        head = head->next;
+    }
+    return pn;
 }
 
 ADMIN* onSearchAdminLinkList(ADMIN *head,int userid) {
-    
+    ADMIN* pn = NULL;
+    while(head) {
+        if(head->id == userid) {
+            pn = head;
+        }
+        head = head->next;
+    }
+    return pn;
 }
