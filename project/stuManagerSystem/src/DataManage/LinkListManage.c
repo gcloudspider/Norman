@@ -16,7 +16,7 @@
 
 #include<stdio.h>
 #include<stdlib.h>
-#include "ReleaseLinkList.h"
+#include "LinkListManage.h"
 #include "../utils/DataStruct.h"
 
 int ReleaseStudentLinkList(STU *head) {
