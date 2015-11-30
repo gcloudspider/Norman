@@ -16,6 +16,7 @@
 
 #include<stdio.h>
 #include "global.h"
-STU* head_student;
-TEA* head_teacher;
-ADMIN* head_admin;
+
+STU* g_pstudent;
+TEA* g_pteacher;
+ADMIN* g_padmin;

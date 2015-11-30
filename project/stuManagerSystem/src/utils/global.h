@@ -17,7 +17,7 @@
 #ifndef _GLOBAL_H
 #define _GLOBAL_H
 #include "DataStruct.h"
-extern STU* head_student;
-extern TEA* head_teacher;
-extern ADMIN* head_admin;
+extern STU* g_pstudent;
+extern TEA* g_pteacher;
+extern ADMIN* g_padmin;
 #endif
