@@ -16,8 +16,9 @@
 
 #ifndef _APPCONTROLLER_H
 #define _APPCONTROLLER_H
-
+//初始化APP
 void InitAppController();
+//释放APP
 void ReleaseAppController();
 
 #endif
