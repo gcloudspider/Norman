@@ -15,8 +15,8 @@
 ##########################################################*/
 
 #include<stdio.h>
-#include "../../src/DataManage/FileManage.h"
-#include "../../src/utils/DataStruct.h"
+#include "../src/DataManage/FileManage.h"
+#include "../src/utils/DataStruct.h"
 
 
 int delete_double_link_list(STU **head,int n) {
