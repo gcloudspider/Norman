@@ -1,0 +1,5 @@
+
+
+
+编译:
+    gcc -o UserInfoManageSystem UserInfoManageSystem.c ./View/MainMenu.c Model/InitAppModel.c DataManage/FileManage.c utils/global.h utils/global.c
