@@ -17,9 +17,9 @@
 #ifndef _DATACONST_H
 #define _DATACONST_H
 /*Data Storage FileName*/
-#define STU_FILE_STORAGE_NAME           "student.txt"
-#define TEA_FILE_STORAGE_NAME           "teacher.txt"
-#define ADMIN_FILE_STORAGE_NAME         "admin.txt"
+#define STU_FILE_STORAGE_NAME           "../db/student.txt"
+#define TEA_FILE_STORAGE_NAME           "../db/teacher.txt"
+#define ADMIN_FILE_STORAGE_NAME         "../db/admin.txt"
 
 /*public*/
 #define LOGINED_MODIFY_PASSWD           "修改密码"
