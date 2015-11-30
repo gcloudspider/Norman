@@ -16,6 +16,9 @@
 
 #include<stdio.h>
 #include<stdlib.h>
+#include "StudentMenu.h"
+#include "TeacherMenu.h"
+#include "AdminMenu.h"
 #include "../utils/DataConst.h"
 #include "../utils/DataEnum.h"
 #include "../Controller/AppController.h"
@@ -39,7 +42,9 @@ void ShowLoginMenu(int logintype) {
                     scanf("%s",passwd);
                     result = onLoginAuthPasswd(STUDENT,userid,passwd);
                     if(result == 0) {
-                        printf("%s",LOGIN_SUCCESS_INFO);
+                        printf("%s\n",LOGIN_SUCCESS_INFO);
+                        sleep(1);
+                        ShowStudentMenu();
                     } else {
                         printf("%s\n",AUTH_PASSWD_FAILED_INFO);
                         sleep(3);
@@ -56,6 +61,15 @@ void ShowLoginMenu(int logintype) {
                 if(ret == 0) {
                     printf("%s",PLEASE_INPUT_TEACHER_PASSWD);
                     scanf("%s",passwd);
+                    result = onLoginAuthPasswd(TEACHER,userid,passwd);
+                    if(result == 0) {
+                        printf("%s\n",LOGIN_SUCCESS_INFO);
+                        sleep(1);
+                        ShowTeacherMenu();
+                    } else {
+                        printf("%s\n",AUTH_PASSWD_FAILED_INFO);
+                        sleep(3);  
+                    }
                 } else {
                     printf("%s\n",AUTH_USERID_FAILED_INFO);   
                     sleep(3);
@@ -68,6 +82,15 @@ void ShowLoginMenu(int logintype) {
                 if(ret == 0) {
                     printf("%s",PLEASE_INPUT_ADMIN_PASSWD);
                     scanf("%s",passwd);
+                    result = onLoginAuthPasswd(ADMINISTRATOR,userid,passwd);
+                    if(result == 0) {
+                        printf("%s\n",LOGIN_SUCCESS_INFO);
+                        sleep(1);
+                        ShowAdminMenu();
+                    } else {
+                        printf("%s\n",AUTH_PASSWD_FAILED_INFO);
+                        sleep(3);
+                    }   
                 } else {
                     printf("%s\n",AUTH_USERID_FAILED_INFO);   
                     sleep(3);
