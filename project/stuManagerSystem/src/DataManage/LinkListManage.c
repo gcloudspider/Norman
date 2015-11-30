@@ -48,3 +48,23 @@ int ReleaseAdminLinkList(ADMIN *head) {
     }
     return 0;
 }
+
+
+STU* onSearchStudentLinkList(STU *head,int userid) {
+    STU* pn = NULL;
+    while(head) {
+        if(head->id == userid) {
+            pn = head;
+        }
+        head = head->next;
+    }
+    return pn;
+}
+
+TEA* onSearchTeacherLinkList(TEA *head,int userid) {
+
+}
+
+ADMIN* onSearchAdminLinkList(ADMIN *head,int userid) {
+    
+}

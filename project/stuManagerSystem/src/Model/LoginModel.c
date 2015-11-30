@@ -17,7 +17,20 @@
 #include<stdio.h>
 #include "LoginModel.h"
 #include "../utils/DataConst.h"
+#include "../utils/DataStruct.h"
+#include "../utils/global.h"
+#include "../DataManage/LinkListManage.h"
 
-int onVerifyStudentPasswd(int username,char passwd[]) {
+int onAuthenticationStudentUserId(int userid) {
+    STU* pn;
+    pn = onSearchStudentLinkList(g_pstudent,userid);
+    if(pn == NULL) {
+        return -1;
+    }
+
+    return 0;
+}
+
+int onAuthenticationStudentPasswd(int username,char passwd[]) {
 
 }

@@ -17,7 +17,8 @@
 #ifndef _LOGINMODEL_H
 #define _LOGINMODEL_H
 
-int onVerifyStudentPasswd(int logintype,int username,char passwd[]);
+int onAuthenticationStudentUserId(int userid);
+int onAuthenticationStudentPasswd(int username,char passwd[]);
 
 
 

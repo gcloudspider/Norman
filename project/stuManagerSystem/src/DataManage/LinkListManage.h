@@ -18,9 +18,15 @@
 #define _RELEASELINKLIST_H
 #include "../utils/DataStruct.h"
 
+//释放链表
 int ReleaseStudentLinkList(STU *head);
 int ReleaseTeacherLinkList(TEA *head);
 int ReleaseAdminLinkList(ADMIN *head);
+
+//查找链表
+STU* onSearchStudentLinkList(STU *head,int userid);
+TEA* onSearchTeacherLinkList(TEA *head,int userid);
+ADMIN* onSearchAdminLinkList(ADMIN *head,int userid);
 
 
 #endif
