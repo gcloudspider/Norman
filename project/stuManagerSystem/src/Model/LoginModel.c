@@ -51,6 +51,45 @@ int onAuthenticationAdminUserId(int userid) {
     return 0;
 }
 
-int onAuthenticationStudentPasswd(int username,char passwd[]) {
+int onAuthenticationStudentPasswd(int userid,char *passwd) {
+    STU *pn;
+    pn = onSearchStudentLinkList(g_pstudent,userid);
+    if(pn == NULL) {
+        return -1;
+    }
+    
+    if(pn->passwd != passwd) {
+        return -1;
+    }
 
+    return 0;
+}
+
+int onAuthenticationTeacherPasswd(int userid,char *passwd) {
+    TEA *pn;
+    pn = onSearchTeacherLinkList(g_pteacher,userid);
+    if(pn == NULL) {
+        return -1;
+    }
+    
+    if(pn->passwd != passwd) {
+        return -1;
+    }
+
+    return 0;
+}
+
+
+int onAuthenticationAdminPasswd(int userid,char *passwd) {
+    ADMIN *pn;
+    pn = onSearchAdminLinkList(g_padmin,userid);
+    if(pn == NULL) {
+        return -1;
+    }
+    
+    if(pn->passwd != passwd) {
+        return -1;
+    }
+
+    return 0;
 }

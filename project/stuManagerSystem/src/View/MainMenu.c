@@ -37,6 +37,7 @@ void ShowLoginMenu(int logintype) {
                 if(ret == 0) {
                     printf("%s",PLEASE_INPUT_STUDENT_PASSWD);
                     scanf("%s",passwd);
+                    onLoginAuthPasswd(STUDENT,userid,passwd);
                 } else {
                     printf("%s\n",LOGIN_FAILED_INFO);
                     sleep(3);

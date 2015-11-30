@@ -20,7 +20,10 @@
 int onAuthenticationStudentUserId(int userid);
 int onAuthenticationTeacherUserId(int userid);
 int onAuthenticationAdminUserId(int userid);
-int onAuthenticationStudentPasswd(int username,char passwd[]);
+
+int onAuthenticationStudentPasswd(int userid,char *passwd);
+int onAuthenticationTeacherPasswd(int userid,char *passwd);
+int onAuthenticationAdminPasswd(int userid,char *passwd);
 
 
 

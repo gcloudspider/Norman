@@ -18,5 +18,6 @@
 #define _LOGINCONTROLLER_H
 
 size_t onLoginAuthUserId(int usertype,int userid);
+size_t onLoginAuthPasswd(int usertype,int userid,char *passwd);
 
 #endif

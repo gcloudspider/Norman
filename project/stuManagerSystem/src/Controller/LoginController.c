@@ -36,3 +36,22 @@ size_t onLoginAuthUserId(int usertype,int userid) {
     }
     return ret;
 }
+
+size_t onLoginAuthPasswd(int usertype,int userid,char *passwd) {
+    size_t ret;
+
+    switch(usertype) {
+        case STUDENT:
+            ret = onAuthenticationStudentPasswd(userid,passwd);
+            break;
+        case TEACHER:
+            ret = onAuthenticationTeacherPasswd(userid,passwd);
+            break;
+        case ADMINISTRATOR:
+            ret = onAuthenticationAdminPasswd(userid,passwd);
+            break;
+        default:
+            break;
+    }
+    return ret;
+}
