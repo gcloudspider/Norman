@@ -19,6 +19,60 @@
 #include "AdminMenu.h"
 #include "../utils/DataConst.h"
 
+void AddUserInfo() {
+    char ch;
+    while(1) {
+        system("clear");
+
+        printf("\t\t##################################################\n");
+        printf("\t\t##              %s            ##\n",MAIN_MENU_WELCOME_TITLE);
+        printf("\t\t##################################################\n");
+        printf("\t\t##                                              ##\n");
+        printf("\t\t##                 1.%s               ##\n",ADD_STUDENT_INFOMATION);
+        printf("\t\t##                                              ##\n");
+        printf("\t\t##                 2.%s               ##\n",ADD_TEACHER_INFOMATION);
+        printf("\t\t##                                              ##\n");
+        printf("\t\t##                 3.%s               ##\n",RETURN_PARENT_FOLDER);
+        printf("\t\t##                                              ##\n");
+        printf("\t\t##################################################\n");
+        
+        printf("\n\n");
+        printf("%s",SELECT_MENU_ELEMENT);
+        getchar();
+        ch = getchar();
+
+        switch(ch) {
+            case '1':
+                break;
+            case '2':
+                break;
+            case '3':
+                return;
+                break;
+            default:
+                break;
+        }       
+    }
+}
+
+
+
+void ModifyUserInfo() {
+    //TODO:修改用户信息
+}
+
+void DelUserInfo() {
+    //TODO:删除用户信息
+}
+
+void SearchUserInfo() {
+    //TODO:搜索用户信息
+}
+
+void SearchScore() {
+    //TODO:搜索成绩
+}
+
 void ShowAdminMenu() {
     char ch;
 
@@ -47,14 +101,19 @@ void ShowAdminMenu() {
         ch = getchar();
         switch(ch) {
             case '1':
+                AddUserInfo();
                 break;
             case '2':
+                ModifyUserInfo();
                 break;
             case '3':
+                DelUserInfo();
                 break;
             case '4':
+                SearchUserInfo();
                 break;
             case '5':
+                SearchScore();
                 break;
             case '6':
                 exit(0);

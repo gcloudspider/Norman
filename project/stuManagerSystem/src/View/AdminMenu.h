@@ -18,4 +18,9 @@
 #define _ADMINMENU_H
 
 void ShowAdminMenu();
+void AddUserInfo();
+void ModifyUserInfo();
+void DelUserInfo();
+void SearchUserInfo();
+void SearchScore();
 #endif

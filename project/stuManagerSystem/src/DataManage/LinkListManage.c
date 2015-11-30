@@ -82,3 +82,52 @@ ADMIN* onSearchAdminLinkList(ADMIN *head,int userid) {
     }
     return pn;
 }
+
+
+
+int DelStudentLinkList(STU *head,int userid) {
+    //TODO:删除学生链表中的某个节点
+    return 0;
+}
+
+int DelTeacherLinkList(TEA *head,int userid) {
+    //TODO:删除教师链表中某个节点
+    return 0;
+}
+
+int DelAdminLinkList(ADMIN *head,int userid) {
+    //TODO:删除管理员链表中某个节点
+    return 0;
+}
+
+
+int ModifyStudentLinkList(STU *head,int userid,char *passwd) {
+    //TODO: 修改学生链表信息
+    return 0;
+}
+
+int ModifyTeacherLinkList(TEA *head,int userid,char *passwd) {
+    //TODO:修改教师链表节点信息
+    return 0;
+}
+
+int ModifyAdminLinkList(ADMIN *head,int userid,char *passwd) {
+    //TODO:修改管理员链表节点信息
+    return 0;
+}
+
+
+int AddStudentLinkList(STU *head,STU* pn) {
+    //TODO:新增学生
+    return 0;
+}
+
+int AddTeacherLinkList(TEA *head,TEA* pn) {
+    //TODO:新增教师
+    return 0;
+}
+
+int AddAdminLinkList(ADMIN *head,ADMIN* pn) {
+    //TODO:新增管理员
+    return 0;
+}

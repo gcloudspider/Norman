@@ -51,6 +51,7 @@ void ShowStudentMenu() {
             case '3':
                 break;
             case '4':
+                return;
                 break;
             case '5':
                 exit(0);
