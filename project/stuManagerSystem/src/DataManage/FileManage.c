@@ -37,7 +37,7 @@ int ReadStudentDataToLinkList(STU **head) {
             return -1;
         }
 
-        fscanf(fp,"%d\t%s\t%d\t%d\t%s\t%s\t%s\t%d\n",
+        fscanf(fp,"%d\t%s\t%d\t%d\t%s\t%s\t%s\t%d\t%d\t%d\t%d\t%d\t%d\n",
               &stu->id,
                stu->name,
               &stu->age,
@@ -45,7 +45,12 @@ int ReadStudentDataToLinkList(STU **head) {
               stu->telnum,
               stu->QQ,
               stu->passwd,
-              &stu->classid
+              &stu->classid,
+               &stu->math,
+               &stu->english,
+               &stu->c_lang,
+               &stu->java,
+               &stu->c_adv
               );
 
         if(*head) {
@@ -73,7 +78,7 @@ void PrintStudentDoubleLinkList(STU **head) {
     pn = *head;
     printf("num\tname\tage\tsex\ttelnum\tQQ\tpasswd\tclassid\n");
     while(pn) {
-        printf("%d\t%s\t%d\t%d\t%s\t%s\t%s\t%d\n",
+        printf("%d\t%s\t%d\t%d\t%s\t%s\t%s\t%d\t%d\t%d\t%d\t%d\t%d\n",
               pn->id,
               pn->name,
               pn->age,
@@ -81,7 +86,12 @@ void PrintStudentDoubleLinkList(STU **head) {
               pn->telnum,
               pn->QQ,
               pn->passwd,
-              pn->classid
+              pn->classid,
+               pn->math,
+               pn->english,
+               pn->c_lang,
+               pn->java,
+               pn->c_adv
               );   
         pn = pn->next;
     }
@@ -166,7 +176,7 @@ int WriteDataToStudentFile(STU **head) {
     
     pn = *head;
     while(pn) {    
-        fprintf(fp,"%d\t%s\t%d\t%d\t%s\t%s\t%s\t%d\n",
+        fprintf(fp,"%d\t%s\t%d\t%d\t%s\t%s\t%s\t%d\t%d\t%d\t%d\t%d\t%d\n",
                 pn->id,
                 pn->name,
                 pn->age,
@@ -174,7 +184,12 @@ int WriteDataToStudentFile(STU **head) {
                 pn->telnum,
                 pn->QQ,
                 pn->passwd,
-                pn->classid
+                pn->classid,
+               pn->math,
+               pn->english,
+               pn->c_lang,
+               pn->java,
+               pn->c_adv
                );
         pn=pn->next;
     }

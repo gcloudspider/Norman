@@ -17,14 +17,6 @@
 #ifndef _DATASTRUCT_H
 #define _DATASTRUCT_H
 
-struct score {
-    int math;
-    int english;
-    int c_lang;
-    int java;
-    int c_adv;
-};
-
 typedef struct student {
     int id;
     char name[64];
@@ -34,7 +26,11 @@ typedef struct student {
     char QQ[20];
     char passwd[32];
     int classid;
-    struct score *lscore;
+    int math;
+    int english;
+    int c_lang;
+    int java;
+    int c_adv;
     struct student *pre;
     struct student *next;
 }STU;

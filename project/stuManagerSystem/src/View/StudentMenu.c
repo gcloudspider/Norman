@@ -27,7 +27,6 @@ void showInfo(int userid) {
     STU* pn = NULL;
     pn = onSearchUserInfo(STUDENT,userid);
     printf("\t\t%d\t%s\t%d\n",pn->id,pn->name,pn->age);
-
 }
 
 void ShowStudentMenu(int userid) {
