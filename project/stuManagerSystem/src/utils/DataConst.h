@@ -67,6 +67,14 @@
 #define SHOW_STUDENT_QQ                 "QQ号码"
 #define SHOW_STUDENT_CLASSID            "班级"
 
+#define SHOW_STUDENT_SCORE_MATH         "数学"
+#define SHOW_STUDENT_SCORE_ENGLISH      "英语"
+#define SHOW_STUDENT_SCORE_CLANG        "C语言"
+#define SHOW_STUDENT_SCORE_JAVA         "Java"
+#define SHOW_STUDENT_SCORE_CADV         "C高级"
+
+#define QUERY_STUDENT_INFO_ERROR        "查询用户基本信息失败!"
+#define QUERY_STUDENT_SCORE_ERROR       "查询用户成绩失败!"
 
 #define SEARCH_STUDENT_NUM              "按学号查找"
 #define SEARCH_STUDENT_NAME             "按姓名查找"
