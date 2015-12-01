@@ -16,5 +16,5 @@
 
 #ifndef _STUDENTMENU_H
 #define _STUDENTMENU_H
-void ShowStudentMenu();
+void ShowStudentMenu(int userid);
 #endif

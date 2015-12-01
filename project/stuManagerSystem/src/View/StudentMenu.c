@@ -18,8 +18,19 @@
 #include<stdlib.h>
 #include "StudentMenu.h"
 #include "../utils/DataConst.h"
+#include "../utils/DataEnum.h"
+#include "../utils/DataStruct.h"
+#include "../Controller/LinklistController.h"
 
-void ShowStudentMenu() {
+void showInfo(int userid) {
+    STU* pn = NULL;
+    printf("%p\n",pn);
+    onSearchUserInfo(STUDENT,userid,pn);
+    printf("%p\n",pn);
+    sleep(5);
+}
+
+void ShowStudentMenu(int userid) {
     char ch;
 
     while(1) {
@@ -45,6 +56,7 @@ void ShowStudentMenu() {
         ch = getchar();
         switch(ch) {
             case '1':
+                showInfo(userid);
                 break;
             case '2':
                 break;

@@ -30,7 +30,7 @@ void ShowLoginMenu(int logintype) {
     char passwd[32] = {0};
     size_t ret,result;
 
-    while(1) {
+    //while(1) {
         system("clear");
         switch(logintype) {
             case STUDENT:
@@ -44,7 +44,7 @@ void ShowLoginMenu(int logintype) {
                     if(result == 0) {
                         printf("%s\n",LOGIN_SUCCESS_INFO);
                         sleep(1);
-                        ShowStudentMenu();
+                        ShowStudentMenu(userid);
                     } else {
                         printf("%s\n",AUTH_PASSWD_FAILED_INFO);
                         sleep(3);
@@ -99,7 +99,8 @@ void ShowLoginMenu(int logintype) {
             default:
                 break;
         }
-    }   
+    //}
+    return;
 }
 
 void ShowLoginSuccessMenu() {
