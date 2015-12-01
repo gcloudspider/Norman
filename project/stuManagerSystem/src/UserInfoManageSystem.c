@@ -22,9 +22,6 @@
 
 int main() {   
     InitAppController();
-    //printf("stu=%p\n",g_pstudent);
-    //printf("tea=%p\n",g_pteacher);
-    //printf("admin=%p\n",g_padmin);
     ShowMainMenu();
     return 0;
 }
