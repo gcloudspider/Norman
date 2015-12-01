@@ -50,7 +50,7 @@
 #define SELECT_MENU_ELEMENT             "功能选择:"
 /*stu logined*/
 #define SHOW_STUDENT_INFOMATION         "显示个人信息"
-#define MODIFY_STUDENT_INFOMATION       "修改个人资料"
+#define MODIFY_STUDENT_INFOMATION       "修改个人密码"
 #define QUERY_STUDENT_SCORE             "查询各科成绩"
 #define RETURN_PARENT_FOLDER            "返回上级目录"
 

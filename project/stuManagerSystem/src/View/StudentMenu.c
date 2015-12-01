@@ -54,6 +54,7 @@ void ShowStudentMenu() {
                 return;
                 break;
             case '5':
+                ReleaseAppController();
                 exit(0);
                 break;
             default:

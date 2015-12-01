@@ -63,8 +63,10 @@ void ShowTeacherMenu() {
             case '6':
                 break;
             case '7':
+                return;
                 break;
             case '8':
+                ReleaseAppController();
                 exit(0);
                 break;
             default:
