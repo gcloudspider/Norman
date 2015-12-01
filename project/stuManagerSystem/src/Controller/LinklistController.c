@@ -20,11 +20,12 @@
 #include "../Model/LinkListModel.h"
 #include "../utils/global.h"
 
-void onSearchUserInfo(int usertype,int userid,void* pn) {
+void* onSearchUserInfo(int usertype,int userid) {
+    void* ret;
     switch(usertype) {
         case STUDENT:
             //STU *ret;
-            onSearchStudentInfoModel(g_pstudent,userid,pn);
+            ret = onSearchStudentInfoModel(g_pstudent,userid);
             break;
         case TEACHER:
             //TEA *ret;
@@ -35,4 +36,5 @@ void onSearchUserInfo(int usertype,int userid,void* pn) {
         default:
             break;
     }
+    return ret;
 }

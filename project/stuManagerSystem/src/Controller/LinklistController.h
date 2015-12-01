@@ -17,6 +17,6 @@
 #ifndef _LINKLISTCONTROLLER_H
 #define _LINKLISTCONTROLLER_H
 
-void onSearchUserInfo(int usertype,int userid,void* pn);
+void* onSearchUserInfo(int usertype,int userid);
 
 #endif

@@ -18,7 +18,8 @@
 #include "LinkListModel.h"
 #include "../DataManage/LinkListManage.h"
 
-void onSearchStudentInfoModel(STU* head,int userid,STU* pn) {
+void* onSearchStudentInfoModel(STU* head,int userid) {
+    STU* pn;
     pn = onSearchStudentLinkList(head,userid);
-    return ;
+    return pn;
 }

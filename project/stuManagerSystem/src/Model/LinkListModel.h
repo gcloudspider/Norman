@@ -18,6 +18,6 @@
 #define _LINKLISTMODEL_H
 #include "../utils/DataStruct.h"
 
-void onSearchStudentInfoModel(STU* head,int userid,STU* pn);
+void* onSearchStudentInfoModel(STU* head,int userid);
 
 #endif

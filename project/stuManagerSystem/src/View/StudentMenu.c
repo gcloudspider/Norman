@@ -23,11 +23,11 @@
 #include "../Controller/LinklistController.h"
 
 void showInfo(int userid) {
+    char ch;
     STU* pn = NULL;
-    printf("%p\n",pn);
-    onSearchUserInfo(STUDENT,userid,pn);
-    printf("%p\n",pn);
-    sleep(5);
+    pn = onSearchUserInfo(STUDENT,userid);
+    printf("\t\t%d\t%s\t%d\n",pn->id,pn->name,pn->age);
+
 }
 
 void ShowStudentMenu(int userid) {
