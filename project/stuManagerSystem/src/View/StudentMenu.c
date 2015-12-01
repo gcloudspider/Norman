@@ -26,7 +26,24 @@ void showInfo(int userid) {
     char ch;
     STU* pn = NULL;
     pn = onSearchUserInfo(STUDENT,userid);
-    printf("\t\t%d\t%s\t%d\n",pn->id,pn->name,pn->age);
+
+    printf("%s\t%s\t%s\t%s\t%s\t%s\t%s\n",
+           SHOW_STUDENT_NUM,
+           SHOW_STUDENT_NAME,
+           SHOW_STUDENT_AGE,
+           SHOW_STUDENT_SEX,
+           SHOW_STUDENT_TELNUM,
+           SHOW_STUDENT_QQ,
+           SHOW_STUDENT_CLASSID
+          );
+    printf("%d\t%s\t%d\t%d\t%s\t%s\t%d\n",
+           pn->id,
+           pn->name,
+           pn->age,
+           pn->sex,
+           pn->telnum,
+           pn->QQ,
+           pn->classid);
 }
 
 void ShowStudentMenu(int userid) {

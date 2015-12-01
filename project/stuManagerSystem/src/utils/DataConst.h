@@ -58,6 +58,16 @@
 #define SHOW_TEACHER_INFOMATION         "显示教师信息"
 #define MODIFY_STUDENT_SCORE            "修改学生学分"
 
+/*print student*/
+#define SHOW_STUDENT_NUM                "学号"
+#define SHOW_STUDENT_NAME               "姓名"
+#define SHOW_STUDENT_AGE                "年龄"
+#define SHOW_STUDENT_SEX                "性别"
+#define SHOW_STUDENT_TELNUM             "电话号码"
+#define SHOW_STUDENT_QQ                 "QQ号码"
+#define SHOW_STUDENT_CLASSID            "班级"
+
+
 #define SEARCH_STUDENT_NUM              "按学号查找"
 #define SEARCH_STUDENT_NAME             "按姓名查找"
 #define SEARCH_STUDENT_CLASSID          "按班级查找"
