@@ -19,4 +19,6 @@
 void showTeaInfo(int userid);
 
 void ShowTeacherMenu(int userid);
+
+void modifyStuScore();
 #endif

@@ -73,7 +73,7 @@
 #define SHOW_STUDENT_SCORE_JAVA         "Java"
 #define SHOW_STUDENT_SCORE_CADV         "C高级"
 
-#define QUERY_STUDENT_INFO_ERROR        "查询用户基本信息失败!"
+#define QUERY_STUDENT_INFO_ERROR        "查询用户基本信息失败,请确定用户是否存在!"
 #define QUERY_STUDENT_SCORE_ERROR       "查询用户成绩失败!"
 #define QUERY_STUDENT_PASSWD_ERROR      "查询用户密码失败!"
 #define INPUTY_RETURN_PARENT_FOLDER     "输入y返回菜单"
@@ -98,6 +98,11 @@
 #define SHOW_TEACHER_CLASSNO            "班别"
 #define SHOW_TEACHER_LESSION            "课程"
 
+#define SEARCH_STU_FROM_ID              "输入要修改学生学号:"
+#define SEARCH_STU_SCORE                "该学生成绩如下:"
+#define SEARCH_STU_AFTER_SCORE          "该学生成绩修改后如下:"
+#define SELECT_MODIFY_STU_LESSION       "输入要修改分数(格式:数学 英语 C语言 java C高级):"
+#define SAVE_STUDENT_SCORE              "是否保存该学生成绩,输入YES/NO(Y/N):"
 
 #define SEARCH_STUDENT_NUM              "按学号查找"
 #define SEARCH_STUDENT_NAME             "按姓名查找"

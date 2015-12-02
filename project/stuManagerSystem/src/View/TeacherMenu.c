@@ -61,6 +61,63 @@ void showTeaInfo(int userid) {
     return ;
 }
 
+void modifyStuScore() {
+    char ch;
+    int math,eng,clang,java,cadv;
+    STU* pn = NULL;
+    int userid;
+    printf("%s",SEARCH_STU_FROM_ID);
+    scanf("%d",&userid);
+    pn = onSearchUserInfo(STUDENT,userid);
+    
+    if(pn == NULL) {
+        printf("%s\n",QUERY_STUDENT_INFO_ERROR);
+        sleep(3);
+        return;
+    } else {
+        printf("%s\n",SEARCH_STU_SCORE);
+        printf("1.%s\t%d\n",SHOW_STUDENT_SCORE_MATH,pn->math);
+        printf("2.%s\t%d\n",SHOW_STUDENT_SCORE_ENGLISH,pn->english);
+        printf("3.%s\t%d\n",SHOW_STUDENT_SCORE_CLANG,pn->c_lang);
+        printf("4.%s\t%d\n",SHOW_STUDENT_SCORE_JAVA,pn->java);
+        printf("5.%s\t%d\n",SHOW_STUDENT_SCORE_CADV,pn->c_adv);
+
+        printf("%s\n",SELECT_MODIFY_STU_LESSION);
+        scanf("%d%d%d%d%d",&math,&eng,&clang,&java,&cadv);
+        pn->math = math;
+        pn->english = eng;
+        pn->c_lang = clang;
+        pn->java = java;
+        pn->c_adv = cadv;
+        printf("%s\n",SEARCH_STU_AFTER_SCORE);
+        printf("1.%s\t%d\n",SHOW_STUDENT_SCORE_MATH,pn->math);
+        printf("2.%s\t%d\n",SHOW_STUDENT_SCORE_ENGLISH,pn->english);
+        printf("3.%s\t%d\n",SHOW_STUDENT_SCORE_CLANG,pn->c_lang);
+        printf("4.%s\t%d\n",SHOW_STUDENT_SCORE_JAVA,pn->java);
+        printf("5.%s\t%d\n",SHOW_STUDENT_SCORE_CADV,pn->c_adv);
+    }
+    while((ch=getchar())!='\n');
+    printf("%s",SAVE_STUDENT_SCORE);
+    
+    ch = getchar();
+    if(ch == 'y' || ch == 'Y'||ch == '\n') {
+        int ret;
+        ret = onSaveLinkListToFile(STUDENT);
+        if(ret == 0) {
+            printf("%s\n",SAVE_FILE_SUCCESS);
+            onReloadLinkList(STUDENT);
+            sleep(3);
+            return;
+        } else {
+            printf("%s",SAVE_FILE_FAILED);
+            sleep(3);
+            return;
+        }
+    } else {
+        return;
+    }
+}
+
 void ShowTeacherMenu(int userid) {
     char ch;
 
@@ -96,6 +153,7 @@ void ShowTeacherMenu(int userid) {
                 showTeaInfo(userid);
                 break;
             case '2':
+                modifyStuScore();
                 break;
             case '3':
                 break;
