@@ -42,7 +42,6 @@ size_t onLoginAuthPasswd(int usertype,int userid,char *passwd) {
     switch(usertype) {
         case STUDENT:
             ret = onAuthenticationStudentPasswd(userid,passwd);
-            printf("%d\n",ret);
             break;
         case TEACHER:
             ret = onAuthenticationTeacherPasswd(userid,passwd);

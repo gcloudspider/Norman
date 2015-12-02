@@ -75,6 +75,14 @@
 
 #define QUERY_STUDENT_INFO_ERROR        "查询用户基本信息失败!"
 #define QUERY_STUDENT_SCORE_ERROR       "查询用户成绩失败!"
+#define QUERY_STUDENT_PASSWD_ERROR      "查询用户密码失败!"
+#define INPUTY_RETURN_PARENT_FOLDER     "输入y返回菜单"
+
+#define INPUT_STUDENT_NEW_PASSWD        "输入新密码:"
+#define INPUT_STUDENT_NEW_PASSWD_AGAIN  "确认密码:"
+#define INPUT_NEW_PASSWD_THE_SAME       "输入密码与旧密码相同!3秒后重新输入"
+#define INPUT_NEW_PASSWD_NOTSAME        "确认密码与新密码不相同!3秒后重新输入"
+#define SAVE_STUDENT_PASSWD             "是否保存密码,输入YES/NO(Y/N):"
 
 #define SEARCH_STUDENT_NUM              "按学号查找"
 #define SEARCH_STUDENT_NAME             "按姓名查找"

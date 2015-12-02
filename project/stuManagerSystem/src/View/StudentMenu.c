@@ -31,24 +31,35 @@ void showInfo(int userid) {
         printf("%s",QUERY_STUDENT_INFO_ERROR);
         return;
     }
+    
+    while(1) {
+        system("clear");
+        printf("%s\t%s\t%s\t%s\t%s\t%s\t%s\n",
+            SHOW_STUDENT_NUM,
+            SHOW_STUDENT_NAME,
+            SHOW_STUDENT_AGE,
+            SHOW_STUDENT_SEX,
+            SHOW_STUDENT_TELNUM,
+            SHOW_STUDENT_QQ,
+            SHOW_STUDENT_CLASSID
+            );
+        printf("%d\t%s\t%d\t%d\t%s\t%s\t%d\n",
+            pn->id,
+            pn->name,
+            pn->age,
+            pn->sex,
+            pn->telnum,
+            pn->QQ,
+            pn->classid);
+        while((ch = getchar()) != '\n');
 
-    printf("%s\t%s\t%s\t%s\t%s\t%s\t%s\n",
-           SHOW_STUDENT_NUM,
-           SHOW_STUDENT_NAME,
-           SHOW_STUDENT_AGE,
-           SHOW_STUDENT_SEX,
-           SHOW_STUDENT_TELNUM,
-           SHOW_STUDENT_QQ,
-           SHOW_STUDENT_CLASSID
-          );
-    printf("%d\t%s\t%d\t%d\t%s\t%s\t%d\n",
-           pn->id,
-           pn->name,
-           pn->age,
-           pn->sex,
-           pn->telnum,
-           pn->QQ,
-           pn->classid);
+        printf("%s",INPUTY_RETURN_PARENT_FOLDER);
+        ch=getchar();
+        if(ch=='y'||ch=='Y') {
+            break;
+        }
+    }
+    return ;
 }
 
 void showScore(userid) {
@@ -60,21 +71,77 @@ void showScore(userid) {
         printf("%s",QUERY_STUDENT_SCORE_ERROR);
         return ;
     }
+    while(1) {
+        system("clear");
+        printf("%s\t%s\t%s\t%s\t%s\n",
+               SHOW_STUDENT_SCORE_MATH,
+            SHOW_STUDENT_SCORE_ENGLISH,
+            SHOW_STUDENT_SCORE_CLANG,
+            SHOW_STUDENT_SCORE_JAVA,
+            SHOW_STUDENT_SCORE_CADV
+            );
+        printf("%d\t%d\t%d\t%d\t%d\n",
+            pn->math,
+            pn->english,
+            pn->c_lang,
+            pn->java,
+            pn->c_adv
+        );
+        while((ch = getchar()) != '\n');
 
-    printf("%s\t%s\t%s\t%s\t%s\n",
-           SHOW_STUDENT_SCORE_MATH,
-           SHOW_STUDENT_SCORE_ENGLISH,
-           SHOW_STUDENT_SCORE_CLANG,
-           SHOW_STUDENT_SCORE_JAVA,
-           SHOW_STUDENT_SCORE_CADV
-          );
-    printf("%d\t%d\t%d\t%d\t%d\n",
-           pn->math,
-           pn->english,
-           pn->c_lang,
-           pn->java,
-           pn->c_adv
-          );
+        printf("%s",INPUTY_RETURN_PARENT_FOLDER);
+        ch=getchar();
+        if(ch=='y'||ch=='Y') {
+            break;
+        }
+    }
+}
+
+void modifyPasswd(int userid) {
+    char newpasswd[32] = {0};
+    char newpasswd2[32] = {0};
+    char ch;
+    STU* pn = NULL;
+    pn = onSearchUserInfo(STUDENT,userid);
+    
+    if(pn == NULL) {
+        printf("%s",QUERY_STUDENT_PASSWD_ERROR);
+        return ;
+    }
+    while(1) {
+        system("clear");
+
+        printf("%s",INPUT_STUDENT_NEW_PASSWD);
+        scanf("%s",newpasswd);
+        while((ch=getchar())!= '\n');
+        if(strcmp(newpasswd,pn->passwd)==0){
+            printf("%s\n",INPUT_NEW_PASSWD_THE_SAME);
+            sleep(2);
+            continue;
+        }
+
+        printf("%s",INPUT_STUDENT_NEW_PASSWD_AGAIN);
+        scanf("%s",newpasswd2);
+        while((ch=getchar())!= '\n');
+        if(strcmp(newpasswd2,newpasswd)!=0) {
+            printf("%s\n",INPUT_NEW_PASSWD_NOTSAME);
+            sleep(2);
+            continue;
+        } else {
+            printf("cc");
+            //pn->passwd = newpasswd2;
+        }
+    
+        printf("%s",SAVE_STUDENT_PASSWD);
+        ch = getchar();
+        if(ch == 'y'||ch == 'Y'||ch == '\n'){
+            //TODO:写入文件
+            printf("aa");
+        } else {
+            break;
+        }
+    }
+    return;
 }
 
 void ShowStudentMenu(int userid) {
@@ -98,14 +165,15 @@ void ShowStudentMenu(int userid) {
         printf("\t\t##################################################\n");
         
         printf("\n\n");
+        while((ch=getchar())!= '\n');
         printf("%s",SELECT_MENU_ELEMENT);
-        getchar();
         ch = getchar();
         switch(ch) {
             case '1':
                 showInfo(userid);
                 break;
             case '2':
+                modifyPasswd(userid);
                 break;
             case '3':
                 showScore(userid);
