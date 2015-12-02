@@ -88,3 +88,22 @@ void* onSearchScoreSort(int sortkey) {
     }
     return ret;
 }
+
+
+int AddUserNodeToLinkList(int usertype,void* pn) {
+    int ret;
+    switch(usertype) {
+        case STUDENT:
+            ret = AddStudentNodeToLinkListModel(g_pstudent,pn);
+            break;
+        case TEACHER:
+            ret = AddTeacherNodeToLinkListModel(g_pteacher,pn);
+            break;
+        case ADMINISTRATOR:
+            ret = AddAdminNodeToLinkListModel(g_padmin,pn);
+            break;
+        default:
+            break;
+    }
+    return ret;
+}

@@ -73,3 +73,16 @@ void onSearchScoreSortByTotal(STU** head) {
     
 
 }
+
+
+int AddStudentNodeToLinkListModel(STU* head,STU* pn) {
+    return AddStudentLinkList(head,pn);
+}
+
+int AddTeacherNodeToLinkListModel(TEA* head,TEA* pn) {
+    return AddTeacherLinkList(head,pn);
+}
+
+int AddAdminNodeToLinkListModel(ADMIN* head,ADMIN* pn) {
+    return AddAdminLinkList(head,pn);
+}

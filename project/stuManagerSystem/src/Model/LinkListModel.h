@@ -30,4 +30,10 @@ void onSearchScoreSortByID(STU** head);
 void onSearchScoreSortByName(STU** head);  
 void onSearchScoreSortByClassid(STU** head);  
 void onSearchScoreSortByTotal(STU** head);  
+
+
+
+int AddStudentNodeToLinkListModel(STU* head,STU* pn);
+int AddTeacherNodeToLinkListModel(TEA* head,TEA* pn);
+int AddAdminNodeToLinkListModel(ADMIN* head,ADMIN* pn);
 #endif

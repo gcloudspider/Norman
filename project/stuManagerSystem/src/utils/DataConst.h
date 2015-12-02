@@ -111,20 +111,27 @@
 
 /*admin logined*/
 #define ADD_USER_INFOMATION             "新增用户信息"
-#define ADD_STUDENT_INFOMATION          "添加学生信息"
-#define ADD_TEACHER_INFOMATION          "添加教师信息"
+#define ADD_STUDENTNODE_INFO            "输入学生信息(学号 姓名 年龄 性别 电话号码 QQ 密码 班级 数学 英语 C语言 java C高级):"
+#define ADD_STUDENT_INFOMATION          "新增学生信息"
+#define ADD_TEACHER_INFOMATION          "新增教师信息"
+#define ADD_TEACHERNODE_INFO            "输入教师信息(工号 姓名 年龄 性别 班级 课程 密码):"
+#define ADD_ADMIN_INFOMATION            "新增管理员信息"
+#define ADD_ADMINNODE_INFO              "输入管理员信息(工号 姓名 年龄 性别 密码):"
 
 #define MODIFY_USER_INFOMATION          "修改用户信息"
 #define MODIFY_STUEDENT_INFOMATION      "修改学生信息"
 #define MODIFY_TEACHER_INFOMATION       "修改教师信息"
+#define MODIFY_ADMIN_INFOMATION         "修改管理员信息"
 
 #define DEL_USER_INFOMATION             "删除用户信息"
 #define DEL_STUDENT_INFOMATION          "删除学生信息"
 #define DEL_TEACHER_INFOMATION          "删除教师信息"
+#define DEL_ADMIN_INFOMATION            "删除管理员信息"
 
 #define SEARCH_USER_INFOMATION          "搜索用户信息"
 #define SEARCH_STUDENT_INFOMATION       "搜索学生信息"
 #define SEARCH_TEACHER_INFOMATION       "搜索教师信息"
+#define SEARCH_ADMIN_INFOMATION         "搜索管理员信息"
 
 #define SEARCH_TEACHER_ID               "按工号搜索"
 #define SEARCH_TEACHER_NAME             "按教师姓名搜索"

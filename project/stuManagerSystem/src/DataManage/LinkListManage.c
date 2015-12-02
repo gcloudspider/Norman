@@ -216,15 +216,42 @@ int ModifyAdminLinkList(ADMIN *head,int userid,char *passwd) {
 
 int AddStudentLinkList(STU *head,STU* pn) {
     //TODO:新增学生
+    STU* stu = NULL;
+    stu = head;
+    while(stu) {
+        if(stu->next == NULL) break;  
+    }
+    
+    stu->next = pn;
+    pn->pre = stu;
+
     return 0;
 }
 
 int AddTeacherLinkList(TEA *head,TEA* pn) {
     //TODO:新增教师
+    TEA* tea = NULL;
+    tea = head;
+    while(tea) {
+        if(tea->next == NULL) break;  
+    }
+    
+    tea->next = pn;
+    pn->pre = tea;
+
     return 0;
 }
 
 int AddAdminLinkList(ADMIN *head,ADMIN* pn) {
     //TODO:新增管理员
+    ADMIN* admin = NULL;
+    admin = head;
+    while(admin) {
+        if(admin->next == NULL) break;  
+    }
+    
+    admin->next = pn;
+    pn->pre = admin;
+
     return 0;
 }

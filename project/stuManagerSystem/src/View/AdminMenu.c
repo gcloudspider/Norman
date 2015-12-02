@@ -18,9 +18,94 @@
 #include <stdlib.h>
 #include "AdminMenu.h"
 #include "../utils/DataConst.h"
+#include "../utils/DataEnum.h"
+#include "../utils/DataStruct.h"
+#include "../Controller/LinklistController.h"
+STU* AddStudentNode() {
+    STU* stu = NULL;
+    stu = malloc(sizeof(STU));
+    if(stu == NULL) {
+        printf("malloc error!\n");
+        return NULL;
+    }
+    printf("%s\n",ADD_STUDENTNODE_INFO);
+
+    scanf("%d\t%s\t%d\t%d\t%s\t%s\t%s\t%d\t%d\t%d\t%d\t%d\t%d\n",
+        &stu->id,
+        stu->name,
+        &stu->age,
+        &stu->sex,
+        stu->telnum,
+        stu->QQ,
+        stu->passwd,
+        &stu->classid,
+        &stu->math,
+        &stu->english,
+        &stu->c_lang,
+        &stu->java,
+        &stu->c_adv
+         );
+
+    stu->pre = NULL;
+    stu->next = NULL;
+
+    printf("%p\n",stu);
+    return stu;
+}
+
+TEA* AddTeacherNode() {
+    TEA* tea = NULL;
+    tea = malloc(sizeof(TEA));
+    if(tea == NULL) {
+        printf("malloc error!\n");
+        return NULL;
+    }
+    printf("%s\n",ADD_TEACHERNODE_INFO);
+
+    scanf("%d\t%s\t%d\t%d\t%d\t%d\t%s\n",
+        &tea->id,
+        tea->name,
+        &tea->age,
+        &tea->sex,
+        &tea->class_no,
+        &tea->lession,
+        tea->passwd
+        );
+
+    tea->pre = NULL;
+    tea->next = NULL;
+
+    printf("%p\n",tea);
+    return tea;
+}
+
+ADMIN* AddAdminNode() {
+    ADMIN* admin = NULL;
+    admin = malloc(sizeof(ADMIN));
+    if(admin == NULL) {
+        printf("malloc error!\n");
+        return NULL;
+    }
+    printf("%s\n",ADD_ADMINNODE_INFO);
+
+    scanf("%d\t%s\t%d\t%d\t%s\n",
+        &admin->id,
+        admin->name,
+        &admin->age,
+        &admin->sex,
+        admin->passwd
+        );
+
+    admin->pre = NULL;
+    admin->next = NULL;
+
+    printf("%p\n",admin);
+    return admin;
+}
 
 void AddUserInfo() {
     char ch;
+    int ret;
     while(1) {
         system("clear");
 
@@ -32,7 +117,9 @@ void AddUserInfo() {
         printf("\t\t##                                              ##\n");
         printf("\t\t##                 2.%s               ##\n",ADD_TEACHER_INFOMATION);
         printf("\t\t##                                              ##\n");
-        printf("\t\t##                 3.%s               ##\n",RETURN_PARENT_FOLDER);
+        printf("\t\t##                 3.%s               ##\n",ADD_ADMIN_INFOMATION);
+        printf("\t\t##                                              ##\n");
+        printf("\t\t##                 4.%s               ##\n",RETURN_PARENT_FOLDER);
         printf("\t\t##                                              ##\n");
         printf("\t\t##################################################\n");
         
@@ -42,11 +129,35 @@ void AddUserInfo() {
         ch = getchar();
 
         switch(ch) {
-            case '1':
+            case '1':{
+                STU* pn ;
+                pn = AddStudentNode();
+                ret = AddUserNodeToLinkList(STUDENT,pn);
+                if(ret == 0) {
+                    printf("success");
+                    sleep(5);
+                }
                 break;
-            case '2':
+            }
+            case '2': {
+                TEA* pn;
+                pn = AddTeacherNode();
+                ret = AddUserNodeToLinkList(TEACHER,pn);
+                if(ret == 0) {
+                    
+                }
                 break;
-            case '3':
+            }
+            case '3': {
+                ADMIN* pn;
+                pn = AddAdminNode();
+                ret = AddUserNodeToLinkList(ADMINISTRATOR,pn);
+                if(ret == 0) {
+                    
+                }
+                break;
+            }
+            case '4':
                 return;
                 break;
             default:

@@ -25,4 +25,7 @@ void onReloadLinkList(int usertype);
 
 void *onSearchScoreSort(int sortkey);
 
+
+int AddUserNodeToLinkList(int usertype,void* pn);
+
 #endif
