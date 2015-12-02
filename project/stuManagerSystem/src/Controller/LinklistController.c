@@ -24,11 +24,10 @@ void* onSearchUserInfo(int usertype,int userid) {
     void* ret;
     switch(usertype) {
         case STUDENT:
-            //STU *ret;
             ret = onSearchStudentInfoModel(g_pstudent,userid);
             break;
         case TEACHER:
-            //TEA *ret;
+            ret = onSearchTeacherInfoModel(g_pteacher,userid);
             break;
         case ADMINISTRATOR:
             //ADMIN* ret;

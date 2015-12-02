@@ -17,4 +17,7 @@
 #ifndef _STUDENTMENU_H
 #define _STUDENTMENU_H
 void ShowStudentMenu(int userid);
+void showStuInfo(int userid);
+void showScore(int userid);
+void modifyPasswd(int userid);
 #endif

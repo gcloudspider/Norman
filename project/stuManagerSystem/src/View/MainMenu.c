@@ -65,7 +65,7 @@ void ShowLoginMenu(int logintype) {
                     if(result == 0) {
                         printf("%s\n",LOGIN_SUCCESS_INFO);
                         sleep(1);
-                        ShowTeacherMenu();
+                        ShowTeacherMenu(userid);
                     } else {
                         printf("%s\n",AUTH_PASSWD_FAILED_INFO);
                         sleep(3);  
@@ -86,7 +86,7 @@ void ShowLoginMenu(int logintype) {
                     if(result == 0) {
                         printf("%s\n",LOGIN_SUCCESS_INFO);
                         sleep(1);
-                        ShowAdminMenu();
+                        ShowAdminMenu(userid);
                     } else {
                         printf("%s\n",AUTH_PASSWD_FAILED_INFO);
                         sleep(3);

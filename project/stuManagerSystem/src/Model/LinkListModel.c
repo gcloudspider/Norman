@@ -21,13 +21,20 @@
 #include "../utils/DataConst.h"
 #include "../utils/global.h"
 
-
+//搜索
 void* onSearchStudentInfoModel(STU* head,int userid) {
     STU* pn;
     pn = onSearchStudentLinkList(head,userid);
     return pn;
 }
 
+void* onSearchTeacherInfoModel(TEA* head,int userid) {
+    TEA* pn;
+    pn = onSearchTeacherLinkList(head,userid);
+    return pn;
+}
+
+//保存
 int onSaveStudentLinkListToFileModel(STU* head) {
     int ret;
     ret = WriteDataToStudentFile(&head);

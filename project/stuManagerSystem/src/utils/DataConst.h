@@ -90,6 +90,15 @@
 #define RELOAD_STU_LINK_LIST_FAILED     "重新加载学生链表失败!"
 #define RELOAD_STU_LINK_LIST_SUCCESS    "重新加载学生链表成功!"
 
+/*teacher info*/
+#define SHOW_TEACHER_NUM                "工号"
+#define SHOW_TEACHER_NAME               "姓名"
+#define SHOW_TEACHER_AGE                "年龄"
+#define SHOW_TEACHER_SEX                "性别"
+#define SHOW_TEACHER_CLASSNO            "班别"
+#define SHOW_TEACHER_LESSION            "课程"
+
+
 #define SEARCH_STUDENT_NUM              "按学号查找"
 #define SEARCH_STUDENT_NAME             "按姓名查找"
 #define SEARCH_STUDENT_CLASSID          "按班级查找"

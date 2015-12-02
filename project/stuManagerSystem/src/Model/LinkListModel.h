@@ -19,6 +19,7 @@
 #include "../utils/DataStruct.h"
 
 void* onSearchStudentInfoModel(STU* head,int userid);
+void* onSearchTeacherInfoModel(TEA* head,int userid);
 
 int onSaveStudentLinkListToFileModel(STU* head);
 

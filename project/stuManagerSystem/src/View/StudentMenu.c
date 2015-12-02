@@ -23,7 +23,7 @@
 #include "../utils/DataStruct.h"
 #include "../Controller/LinklistController.h"
 
-void showInfo(int userid) {
+void showStuInfo(int userid) {
     char ch;
     STU* pn = NULL;
     pn = onSearchUserInfo(STUDENT,userid);
@@ -182,7 +182,7 @@ void ShowStudentMenu(int userid) {
         ch = getchar();
         switch(ch) {
             case '1':
-                showInfo(userid);
+                showStuInfo(userid);
                 break;
             case '2':
                 modifyPasswd(userid);

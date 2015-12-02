@@ -18,8 +18,50 @@
 #include<stdlib.h>
 #include "TeacherMenu.h"
 #include "../utils/DataConst.h"
+#include "../utils/DataStruct.h"
+#include "../utils/DataEnum.h"
+#include "../Controller/LinklistController.h"
 
-void ShowTeacherMenu() {
+void showTeaInfo(int userid) {
+    char ch;
+    TEA* pn = NULL;
+    pn = onSearchUserInfo(TEACHER,userid);
+    
+    if(pn == NULL) {
+        printf("%s",QUERY_STUDENT_INFO_ERROR);
+        return;
+    }
+
+    while(1) {
+        system("clear");
+        printf("%s\t%s\t%s\t%s\t%s\t%s\n",
+            SHOW_TEACHER_NUM,
+            SHOW_TEACHER_NAME,
+            SHOW_TEACHER_AGE,
+            SHOW_TEACHER_SEX,
+            SHOW_TEACHER_CLASSNO,
+            SHOW_TEACHER_LESSION
+            );
+        printf("%d\t%s\t%d\t%d\t%d\t%d\n",
+            pn->id,
+            pn->name,
+            pn->age,
+            pn->sex,
+            pn->class_no,
+            pn->lession
+            );
+        while((ch = getchar()) != '\n');
+
+        printf("%s",INPUTY_RETURN_PARENT_FOLDER);
+        ch=getchar();
+        if(ch=='y'||ch=='Y') {
+            break;
+        }
+    }
+    return ;
+}
+
+void ShowTeacherMenu(int userid) {
     char ch;
 
     while(1) {
@@ -51,6 +93,7 @@ void ShowTeacherMenu() {
         ch = getchar();
         switch(ch) {
             case '1':
+                showTeaInfo(userid);
                 break;
             case '2':
                 break;

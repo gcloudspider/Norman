@@ -16,6 +16,7 @@
 
 #ifndef _TEACHERMENU_H
 #define _TEACHERMENU_H
+void showTeaInfo(int userid);
 
-void ShowTeacherMenu();
+void ShowTeacherMenu(int userid);
 #endif
