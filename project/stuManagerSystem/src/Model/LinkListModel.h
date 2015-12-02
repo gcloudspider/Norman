@@ -20,4 +20,7 @@
 
 void* onSearchStudentInfoModel(STU* head,int userid);
 
+int onSaveStudentLinkListToFileModel(STU* head);
+
+void onReloadStudentLinkList(STU* head);
 #endif

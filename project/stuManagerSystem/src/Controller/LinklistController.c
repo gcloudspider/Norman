@@ -38,3 +38,33 @@ void* onSearchUserInfo(int usertype,int userid) {
     }
     return ret;
 }
+
+int onSaveLinkListToFile(int usertype) {
+    int ret;
+    switch(usertype) {
+        case STUDENT:
+            ret = onSaveStudentLinkListToFileModel(g_pstudent);
+            break;
+        case TEACHER:
+            break;
+        case ADMINISTRATOR:
+            break;
+        default:
+            break;
+    }    
+    return ret;
+}
+
+void onReloadLinkList(int usertype) {
+    switch(usertype) {
+        case STUDENT:
+            onReloadStudentLinkList(g_pstudent);
+            break;
+        case TEACHER:
+            break;
+        case ADMINISTRATOR:
+            break;
+        default:
+            break;
+    }
+}

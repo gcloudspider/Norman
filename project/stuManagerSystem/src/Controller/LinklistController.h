@@ -19,4 +19,8 @@
 
 void* onSearchUserInfo(int usertype,int userid);
 
+int onSaveLinkListToFile(int usertype);
+
+void onReloadLinkList(int usertype);
+
 #endif

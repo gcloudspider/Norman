@@ -16,6 +16,7 @@
 
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
 #include "StudentMenu.h"
 #include "../utils/DataConst.h"
 #include "../utils/DataEnum.h"
@@ -116,7 +117,7 @@ void modifyPasswd(int userid) {
         while((ch=getchar())!= '\n');
         if(strcmp(newpasswd,pn->passwd)==0){
             printf("%s\n",INPUT_NEW_PASSWD_THE_SAME);
-            sleep(2);
+            sleep(3);
             continue;
         }
 
@@ -125,18 +126,29 @@ void modifyPasswd(int userid) {
         while((ch=getchar())!= '\n');
         if(strcmp(newpasswd2,newpasswd)!=0) {
             printf("%s\n",INPUT_NEW_PASSWD_NOTSAME);
-            sleep(2);
+            sleep(3);
             continue;
         } else {
-            printf("cc");
-            //pn->passwd = newpasswd2;
+            printf("%s\t%s\n",pn->passwd,newpasswd2);
+            strcpy(pn->passwd,newpasswd2);
         }
     
         printf("%s",SAVE_STUDENT_PASSWD);
         ch = getchar();
         if(ch == 'y'||ch == 'Y'||ch == '\n'){
             //TODO:写入文件
-            printf("aa");
+            int ret;
+            ret = onSaveLinkListToFile(STUDENT);
+            if(ret == 0) {
+                printf("%s\n",SAVE_FILE_SUCCESS);
+                onReloadLinkList(STUDENT);
+                sleep(3);
+                break;
+            } else {
+                printf("%s",SAVE_FILE_FAILED);
+                sleep(3);
+                continue;
+            }
         } else {
             break;
         }

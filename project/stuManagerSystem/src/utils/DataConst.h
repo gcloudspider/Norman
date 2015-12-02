@@ -83,6 +83,12 @@
 #define INPUT_NEW_PASSWD_THE_SAME       "输入密码与旧密码相同!3秒后重新输入"
 #define INPUT_NEW_PASSWD_NOTSAME        "确认密码与新密码不相同!3秒后重新输入"
 #define SAVE_STUDENT_PASSWD             "是否保存密码,输入YES/NO(Y/N):"
+#define SAVE_FILE_SUCCESS               "保存成功!"
+#define SAVE_FILE_FAILED                "保存失败!"
+
+/*reload link list*/
+#define RELOAD_STU_LINK_LIST_FAILED     "重新加载学生链表失败!"
+#define RELOAD_STU_LINK_LIST_SUCCESS    "重新加载学生链表成功!"
 
 #define SEARCH_STUDENT_NUM              "按学号查找"
 #define SEARCH_STUDENT_NAME             "按姓名查找"
