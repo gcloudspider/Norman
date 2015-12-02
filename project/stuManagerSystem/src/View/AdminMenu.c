@@ -21,86 +21,152 @@
 #include "../utils/DataEnum.h"
 #include "../utils/DataStruct.h"
 #include "../Controller/LinklistController.h"
-STU* AddStudentNode() {
-    STU* stu = NULL;
-    stu = malloc(sizeof(STU));
-    if(stu == NULL) {
-        printf("malloc error!\n");
-        return NULL;
-    }
+void AddStudentNode(STU** head) {
+    char ch;
+    STU* pn,*p;
     printf("%s\n",ADD_STUDENTNODE_INFO);
 
-    scanf("%d\t%s\t%d\t%d\t%s\t%s\t%s\t%d\t%d\t%d\t%d\t%d\t%d\n",
-        &stu->id,
-        stu->name,
-        &stu->age,
-        &stu->sex,
-        stu->telnum,
-        stu->QQ,
-        stu->passwd,
-        &stu->classid,
-        &stu->math,
-        &stu->english,
-        &stu->c_lang,
-        &stu->java,
-        &stu->c_adv
-         );
+    while(1) {
+        pn = malloc(sizeof(STU));
+        if(pn == NULL) {
+            printf("malloc error!\n");
+            return ;
+        }
 
-    stu->pre = NULL;
-    stu->next = NULL;
+        scanf("%d%s%d%d%s%s%s%d%d%d%d%d%d",
+            &pn->id,
+            pn->name,
+            &pn->age,
+            &pn->sex,
+            pn->telnum,
+            pn->QQ,
+            pn->passwd,
+            &pn->classid,
+            &pn->math,
+            &pn->english,
+            &pn->c_lang,
+            &pn->java,
+            &pn->c_adv
+            );
+        while((ch=getchar())!='\n');
+        
+        if(*head) {
+            pn->next = NULL;
+            pn->pre=p;
+            p->next = pn;
+        } else {
+            pn->next = *head;
+            pn->pre = *head;
+            *head = pn;
+        }
+        p = pn;
+        printf("%s",INPUT_INFO_CONTINUE);
+clear_enter:
+        ch =getchar();
+        if(ch == 'n'||ch == 'N') {
+            break;
+        } else if(ch == 'y'|| ch == 'Y' || ch=='\n') {
+            continue;
+        } else {
+            goto clear_enter;
+        }
+    }
 
-    printf("%p\n",stu);
-    return stu;
+    printf("%p\n",*head);
+    return ;
 }
 
-TEA* AddTeacherNode() {
-    TEA* tea = NULL;
-    tea = malloc(sizeof(TEA));
-    if(tea == NULL) {
-        printf("malloc error!\n");
-        return NULL;
-    }
+void AddTeacherNode(TEA** head) {
+    char ch;
+    TEA* pn,*p;
     printf("%s\n",ADD_TEACHERNODE_INFO);
+    
+    while(1) {
+        pn = malloc(sizeof(TEA));
+        if(pn == NULL) {
+            printf("malloc error!\n");
+            return ;
+        }
 
-    scanf("%d\t%s\t%d\t%d\t%d\t%d\t%s\n",
-        &tea->id,
-        tea->name,
-        &tea->age,
-        &tea->sex,
-        &tea->class_no,
-        &tea->lession,
-        tea->passwd
-        );
+        scanf("%d%s%d%d%d%d%s",
+            &pn->id,
+            pn->name,
+            &pn->age,
+            &pn->sex,
+            &pn->class_no,
+            &pn->lession,
+            pn->passwd
+            );
+        while((ch=getchar())!='\n');
+        
+        if(*head) {
+            pn->next = NULL;
+            pn->pre=p;
+            p->next = pn;
+        } else {
+            pn->next = *head;
+            pn->pre = *head;
+            *head = pn;
+        }
+        p = pn;
+        printf("%s",INPUT_INFO_CONTINUE);
+clear_enter:
+        ch =getchar();
+        if(ch == 'n'||ch == 'N') {
+            break;
+        } else if(ch == 'y'|| ch == 'Y' || ch=='\n') {
+            continue;
+        } else {
+            goto clear_enter;
+        }
+    }
 
-    tea->pre = NULL;
-    tea->next = NULL;
-
-    printf("%p\n",tea);
-    return tea;
+    return;
 }
 
-ADMIN* AddAdminNode() {
-    ADMIN* admin = NULL;
-    admin = malloc(sizeof(ADMIN));
-    if(admin == NULL) {
-        printf("malloc error!\n");
-        return NULL;
-    }
+void AddAdminNode(ADMIN** head) {
+    char ch;
+    ADMIN* pn,*p;
     printf("%s\n",ADD_ADMINNODE_INFO);
 
-    scanf("%d\t%s\t%d\t%d\t%s\n",
-        &admin->id,
-        admin->name,
-        &admin->age,
-        &admin->sex,
-        admin->passwd
-        );
+    while(1) {
+        pn = malloc(sizeof(ADMIN));
+        if(pn == NULL) {
+            printf("malloc error!\n");
+            return ;
+        }
 
-    admin->pre = NULL;
-    admin->next = NULL;
-
-    printf("%p\n",admin);
-    return admin;
+        scanf("%d%s%d%d%s",
+             &pn->id,
+             pn->name,
+             &pn->age,
+             &pn->sex,
+              pn->passwd
+             );
+        while((ch=getchar())!='\n');
+        
+        if(*head) {
+            pn->next = NULL;
+            pn->pre=p;
+            p->next = pn;
+        } else {
+            pn->next = *head;
+            pn->pre = *head;
+            *head = pn;
+        }
+        p = pn;
+        printf("%s",INPUT_INFO_CONTINUE);
+clear_enter:
+        ch =getchar();
+        if(ch == 'n'||ch == 'N') {
+            break;
+        } else if(ch == 'y'|| ch == 'Y' || ch=='\n') {
+            continue;
+        } else {
+            goto clear_enter;
+        }
+    }
+    return;
 }
 
 void AddUserInfo() {
@@ -130,8 +196,9 @@ void AddUserInfo() {
 
         switch(ch) {
             case '1':{
-                STU* pn ;
-                pn = AddStudentNode();
+                STU* pn=NULL ;
+                AddStudentNode(&pn);
+                printf("%p\n",&pn);
                 ret = AddUserNodeToLinkList(STUDENT,pn);
                 if(ret == 0) {
                     printf("success");
@@ -140,8 +207,8 @@ void AddUserInfo() {
                 break;
             }
             case '2': {
-                TEA* pn;
-                pn = AddTeacherNode();
+                TEA* pn=NULL;
+                AddTeacherNode(&pn);
                 ret = AddUserNodeToLinkList(TEACHER,pn);
                 if(ret == 0) {
                     
@@ -149,11 +216,13 @@ void AddUserInfo() {
                 break;
             }
             case '3': {
-                ADMIN* pn;
-                pn = AddAdminNode();
+                ADMIN* pn=NULL;
+                AddAdminNode(&pn);
+                printf("%p\n",&pn);
                 ret = AddUserNodeToLinkList(ADMINISTRATOR,pn);
                 if(ret == 0) {
-                    
+                    printf("sss\n");
+                    sleep(5);
                 }
                 break;
             }

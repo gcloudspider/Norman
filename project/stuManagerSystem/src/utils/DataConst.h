@@ -112,6 +112,7 @@
 /*admin logined*/
 #define ADD_USER_INFOMATION             "新增用户信息"
 #define ADD_STUDENTNODE_INFO            "输入学生信息(学号 姓名 年龄 性别 电话号码 QQ 密码 班级 数学 英语 C语言 java C高级):"
+#define INPUT_INFO_CONTINUE             "是否继续输入信息,输入YES或者No(Y/N):"
 #define ADD_STUDENT_INFOMATION          "新增学生信息"
 #define ADD_TEACHER_INFOMATION          "新增教师信息"
 #define ADD_TEACHERNODE_INFO            "输入教师信息(工号 姓名 年龄 性别 班级 课程 密码):"
