@@ -24,4 +24,10 @@ void* onSearchTeacherInfoModel(TEA* head,int userid);
 int onSaveStudentLinkListToFileModel(STU* head);
 
 void onReloadStudentLinkList(STU* head);
+
+
+void onSearchScoreSortByID(STU** head);  
+void onSearchScoreSortByName(STU** head);  
+void onSearchScoreSortByClassid(STU** head);  
+void onSearchScoreSortByTotal(STU** head);  
 #endif

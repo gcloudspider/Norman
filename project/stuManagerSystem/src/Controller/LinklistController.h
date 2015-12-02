@@ -23,4 +23,6 @@ int onSaveLinkListToFile(int usertype);
 
 void onReloadLinkList(int usertype);
 
+void *onSearchScoreSort(int sortkey);
+
 #endif

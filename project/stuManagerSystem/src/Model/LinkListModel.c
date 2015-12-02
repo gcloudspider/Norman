@@ -56,3 +56,20 @@ void onReloadStudentLinkList(STU* head) {
         }   
     }
 }
+
+void onSearchScoreSortByID(STU** head){
+    onSortStudentLinkListByID(&*head);
+}
+
+void onSearchScoreSortByName(STU** head) {
+    
+
+}
+void onSearchScoreSortByClassid(STU** head) {
+
+}
+
+void onSearchScoreSortByTotal(STU** head) {
+    
+
+}

@@ -67,3 +67,24 @@ void onReloadLinkList(int usertype) {
             break;
     }
 }
+
+void* onSearchScoreSort(int sortkey) {
+    void * ret;
+    switch(sortkey) {
+        case ID:
+            onSearchScoreSortByID(&g_pstudent);  
+            break;
+        case NAME:
+            onSearchScoreSortByName(&g_pstudent);  
+            break;
+        case CLASSID:
+            onSearchScoreSortByClassid(&g_pstudent);  
+            break;
+        case TOTAL:
+            onSearchScoreSortByTotal(&g_pstudent);  
+            break;
+        default:
+            break;
+    }
+    return ret;
+}

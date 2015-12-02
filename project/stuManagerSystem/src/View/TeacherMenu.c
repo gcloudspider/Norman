@@ -119,7 +119,8 @@ void modifyStuScore() {
 }
 
 void showScorebyID() {
-
+    STU* pn;
+    pn = onSearchScoreSort(ID); 
 }
 
 void showScorebyName() {

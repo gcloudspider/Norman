@@ -35,4 +35,11 @@ enum LESSION {
     JAVA,
     CAdv
 };
+
+enum SORTKEY {
+    ID = 1,
+    NAME = 2,
+    CLASSID = 3,
+    TOTAL = 4
+};
 #endif

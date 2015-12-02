@@ -42,4 +42,10 @@ int ModifyAdminLinkList(ADMIN *head,int userid,char *passwd);
 int AddStudentLinkList(STU *head,STU* pn);
 int AddTeacherLinkList(TEA *head,TEA* pn);
 int AddAdminLinkList(ADMIN *head,ADMIN* pn);
+
+//排序链表
+void onSortStudentLinkListByID(STU** head);
+void onSortStudentLinkListByName(STU** head);
+void onSortStudentLinkListByClassid(STU** head);
+void onSortStudentLinkListByTotal(STU** head);
 #endif

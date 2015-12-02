@@ -83,7 +83,104 @@ ADMIN* onSearchAdminLinkList(ADMIN *head,int userid) {
     return pn;
 }
 
+//排序
+void onSortStudentLinkListByID(STU** head) {
+    STU *pn,*max;
+    STU *new_head = NULL;
+    printf("head=%p\n",*head);
 
+    while(head) {
+        max = *head;
+        pn = *head;
+        while(pn) {
+            //查找最大节点
+            if(pn->id > max->id) {
+                max = pn;
+                break;
+            }
+            pn = pn->next;
+        }
+        //printf("search max=%p\tstu_num=%d\n",max,max->stu_num);
+
+        if(max) {
+            //是否new_head 是否为空
+            if(new_head) {
+                if(max == *head) {
+                    if(max->next) {     //是第一个但head链表还有节点
+                        max->next->pre= NULL;
+                        *head = max->next;
+                        max->next = new_head;
+                        new_head->pre = max;
+                        new_head = max;
+                    } else {            //head中最后一个
+                        max->next = new_head;
+                        new_head->pre = max;
+                        new_head = max;
+                        *head = NULL;
+                    }
+                } else {
+                    if(max->next) {
+                        max->pre->next = max->next;
+                        max->next->pre = max->pre;
+                        max->next = new_head;
+                        new_head->pre = max;
+                        max->pre = NULL;
+                        new_head = max;
+                    } else {        //new_head有节点,head有节点max 是最后一个
+                        max->pre->next = NULL;
+                        max->next = new_head;
+                        max->pre = NULL;
+                        new_head->pre = max;
+                        new_head = max;
+                    }
+                }
+            } else {
+                //判断将添加max 为head 第一个
+                if(max == *head) {
+                    //判断将添加max 为head 最后一个
+                    if(max->next) {
+                        max->next->pre = NULL;
+                        *head = max->next;
+                        max->next = NULL;
+                        new_head = max;
+                    } else {
+                        *head = NULL;
+                        new_head=max;
+                    }
+                } else {
+                    //判断是否为最后一个
+                    if(max->next){
+                        max->pre->next = max->next;
+                        max->next->pre = max->pre;
+                        max->next = NULL;
+                        max->pre = NULL;
+                        new_head = max;
+                    } else {
+                        max->pre->next = NULL;
+                        max->pre = NULL;
+                        new_head = max;
+                    }
+                }   
+            }
+        } else {
+            break;
+        }   
+    }
+    *head = new_head;
+    return ;
+}
+
+void onSortStudentLinkListByName(STU** head) {
+
+}
+
+void onSortStudentLinkListByClassid(STU** head) {
+
+}
+
+void onSortStudentLinkListByTotal(STU** head) {
+    
+}
 
 int DelStudentLinkList(STU *head,int userid) {
     //TODO:删除学生链表中的某个节点
