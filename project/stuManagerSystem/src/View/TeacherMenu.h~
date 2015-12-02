@@ -24,10 +24,4 @@ void modifyStuScore();
 
 void showScorebyID();
 
-void showScorebyName();
-
-void showScorebyClassid();
-
-void showScoreByCount();
-
 #endif

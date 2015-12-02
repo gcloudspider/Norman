@@ -104,10 +104,10 @@
 #define SELECT_MODIFY_STU_LESSION       "输入要修改分数(格式:数学 英语 C语言 java C高级):"
 #define SAVE_STUDENT_SCORE              "是否保存该学生成绩,输入YES/NO(Y/N):"
 
-#define SEARCH_STUDENT_NUM              "按学号查找"
-#define SEARCH_STUDENT_NAME             "按姓名查找"
-#define SEARCH_STUDENT_CLASSID          "按班级查找"
-#define SEARCH_STUDENT_SCORE            "按成绩查找"
+#define SEARCH_STUDENT_NUM              "按学号显示成绩"
+#define SEARCH_STUDENT_NAME             "按姓名显示成绩"
+#define SEARCH_STUDENT_CLASSID          "按班级显示成绩"
+#define SEARCH_STUDENT_SCORE            "按总成绩排序显示"
 
 /*admin logined*/
 #define ADD_USER_INFOMATION             "新增用户信息"

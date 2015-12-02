@@ -132,8 +132,8 @@ void ShowMainMenu() {
 
         printf("\n\n");
         printf("%s",SELECT_LOGIN_USER);
-       
-        ch=getchar();
+        scanf("%c",&ch);
+        //ch=getchar();
         switch(ch) {
             case '1':
                 ShowLoginMenu(STUDENT);

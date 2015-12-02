@@ -118,6 +118,22 @@ void modifyStuScore() {
     }
 }
 
+void showScorebyID() {
+
+}
+
+void showScorebyName() {
+
+}
+
+void showScorebyClassid() {
+
+}
+
+void showScoreByCount() {
+
+}
+
 void ShowTeacherMenu(int userid) {
     char ch;
 
@@ -131,13 +147,13 @@ void ShowTeacherMenu(int userid) {
         printf("\t\t##                                              ##\n");
         printf("\t\t##                 2.%s               ##\n",MODIFY_STUDENT_SCORE);
         printf("\t\t##                                              ##\n");
-        printf("\t\t##                 3.%s                 ##\n",SEARCH_STUDENT_NUM);
+        printf("\t\t##                 3.%s             ##\n",SEARCH_STUDENT_NUM);
         printf("\t\t##                                              ##\n");
-        printf("\t\t##                 4.%s                 ##\n",SEARCH_STUDENT_NAME);
+        printf("\t\t##                 4.%s             ##\n",SEARCH_STUDENT_NAME);
         printf("\t\t##                                              ##\n");
-        printf("\t\t##                 5.%s                 ##\n",SEARCH_STUDENT_CLASSID);
+        printf("\t\t##                 5.%s             ##\n",SEARCH_STUDENT_CLASSID);
         printf("\t\t##                                              ##\n");
-        printf("\t\t##                 6.%s                 ##\n",SEARCH_STUDENT_SCORE);
+        printf("\t\t##                 6.%s           ##\n",SEARCH_STUDENT_SCORE);
         printf("\t\t##                                              ##\n");
         printf("\t\t##                 7.%s               ##\n",RETURN_PARENT_FOLDER);
         printf("\t\t##                                              ##\n");
@@ -156,12 +172,16 @@ void ShowTeacherMenu(int userid) {
                 modifyStuScore();
                 break;
             case '3':
+                showScorebyID();
                 break;
             case '4':
+                showScorebyName();
                 break;
             case '5':
+                showScorebyClassid();
                 break;
             case '6':
+                showScoreByCount();
                 break;
             case '7':
                 return;
