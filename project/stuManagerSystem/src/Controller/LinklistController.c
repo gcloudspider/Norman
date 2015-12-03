@@ -68,20 +68,20 @@ void onReloadLinkList(int usertype) {
     }
 }
 
-void* onSearchScoreSort(int sortkey) {
-    void * ret;
+STU* onSearchScoreSort(int sortkey) {
+    STU * ret;
     switch(sortkey) {
         case ID:
-            onSearchScoreSortByID(&g_pstudent);  
+            ret = onSearchScoreSortByID(g_pstudent);  
             break;
         case NAME:
-            onSearchScoreSortByName(&g_pstudent);  
+            ret = onSearchScoreSortByName(g_pstudent);  
             break;
         case CLASSID:
-            onSearchScoreSortByClassid(&g_pstudent);  
+            ret = onSearchScoreSortByClassid(g_pstudent);  
             break;
         case TOTAL:
-            onSearchScoreSortByTotal(&g_pstudent);  
+            ret = onSearchScoreSortByTotal(g_pstudent);  
             break;
         default:
             break;

@@ -44,8 +44,8 @@ int AddTeacherLinkList(TEA *head,TEA* pn);
 int AddAdminLinkList(ADMIN *head,ADMIN* pn);
 
 //排序链表
-void onSortStudentLinkListByID(STU** head);
-void onSortStudentLinkListByName(STU** head);
-void onSortStudentLinkListByClassid(STU** head);
-void onSortStudentLinkListByTotal(STU** head);
+STU* onSortStudentLinkListByID(STU* head);
+STU* onSortStudentLinkListByName(STU* head);
+STU* onSortStudentLinkListByClassid(STU* head);
+STU* onSortStudentLinkListByTotal(STU* head);
 #endif

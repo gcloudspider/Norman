@@ -84,19 +84,18 @@ ADMIN* onSearchAdminLinkList(ADMIN *head,int userid) {
 }
 
 //排序
-void onSortStudentLinkListByID(STU** head) {
+STU* onSortStudentLinkListByID(STU* head) {
     STU *pn,*max;
     STU *new_head = NULL;
-    printf("head=%p\n",*head);
+    printf("head=%p\n",head);
 
     while(head) {
-        max = *head;
-        pn = *head;
+        max = head;
+        pn = head;
         while(pn) {
             //查找最大节点
             if(pn->id > max->id) {
                 max = pn;
-                break;
             }
             pn = pn->next;
         }
@@ -105,10 +104,10 @@ void onSortStudentLinkListByID(STU** head) {
         if(max) {
             //是否new_head 是否为空
             if(new_head) {
-                if(max == *head) {
+                if(max == head) {
                     if(max->next) {     //是第一个但head链表还有节点
                         max->next->pre= NULL;
-                        *head = max->next;
+                        head = max->next;
                         max->next = new_head;
                         new_head->pre = max;
                         new_head = max;
@@ -116,7 +115,7 @@ void onSortStudentLinkListByID(STU** head) {
                         max->next = new_head;
                         new_head->pre = max;
                         new_head = max;
-                        *head = NULL;
+                        head = NULL;
                     }
                 } else {
                     if(max->next) {
@@ -136,15 +135,15 @@ void onSortStudentLinkListByID(STU** head) {
                 }
             } else {
                 //判断将添加max 为head 第一个
-                if(max == *head) {
+                if(max == head) {
                     //判断将添加max 为head 最后一个
                     if(max->next) {
                         max->next->pre = NULL;
-                        *head = max->next;
+                        head = max->next;
                         max->next = NULL;
                         new_head = max;
                     } else {
-                        *head = NULL;
+                        head = NULL;
                         new_head=max;
                     }
                 } else {
@@ -166,19 +165,21 @@ void onSortStudentLinkListByID(STU** head) {
             break;
         }   
     }
-    *head = new_head;
-    return ;
+    
+    printf("new_head=%p\n",new_head);
+    //*head = new_head;
+    return new_head;
 }
 
-void onSortStudentLinkListByName(STU** head) {
+STU* onSortStudentLinkListByName(STU* head) {
 
 }
 
-void onSortStudentLinkListByClassid(STU** head) {
+STU* onSortStudentLinkListByClassid(STU* head) {
 
 }
 
-void onSortStudentLinkListByTotal(STU** head) {
+STU* onSortStudentLinkListByTotal(STU* head) {
     
 }
 

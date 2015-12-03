@@ -16,6 +16,7 @@
 
 #ifndef _LINKLISTCONTROLLER_H
 #define _LINKLISTCONTROLLER_H
+#include "../utils/DataStruct.h"
 
 void* onSearchUserInfo(int usertype,int userid);
 
@@ -23,7 +24,7 @@ int onSaveLinkListToFile(int usertype);
 
 void onReloadLinkList(int usertype);
 
-void *onSearchScoreSort(int sortkey);
+STU* onSearchScoreSort(int sortkey);
 
 
 int AddUserNodeToLinkList(int usertype,void* pn);

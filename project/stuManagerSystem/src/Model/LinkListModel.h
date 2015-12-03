@@ -26,10 +26,10 @@ int onSaveStudentLinkListToFileModel(STU* head);
 void onReloadStudentLinkList(STU* head);
 
 
-void onSearchScoreSortByID(STU** head);  
-void onSearchScoreSortByName(STU** head);  
-void onSearchScoreSortByClassid(STU** head);  
-void onSearchScoreSortByTotal(STU** head);  
+STU* onSearchScoreSortByID(STU* head);  
+STU* onSearchScoreSortByName(STU* head);  
+STU* onSearchScoreSortByClassid(STU* head);  
+STU* onSearchScoreSortByTotal(STU* head);  
 
 
 

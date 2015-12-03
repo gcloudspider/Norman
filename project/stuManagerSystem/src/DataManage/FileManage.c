@@ -76,16 +76,19 @@ int ReadStudentDataToLinkList(STU **head) {
 void PrintStudentDoubleLinkList(STU **head) {
     STU* pn;
     pn = *head;
-    printf("num\tname\tage\tsex\ttelnum\tQQ\tpasswd\tclassid\n");
+    printf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n",
+          SHOW_STUDENT_NUM,
+          SHOW_STUDENT_NAME,
+          SHOW_STUDENT_CLASSID,
+          SHOW_STUDENT_SCORE_MATH,
+          SHOW_STUDENT_SCORE_ENGLISH,
+          SHOW_STUDENT_SCORE_CLANG,
+          SHOW_STUDENT_SCORE_JAVA,
+          SHOW_STUDENT_SCORE_CADV);
     while(pn) {
-        printf("%d\t%s\t%d\t%d\t%s\t%s\t%s\t%d\t%d\t%d\t%d\t%d\t%d\n",
+        printf("%d\t%s\t%d\t%d\t%d\t%d\t%d\t%d\n",
               pn->id,
               pn->name,
-              pn->age,
-              pn->sex,
-              pn->telnum,
-              pn->QQ,
-              pn->passwd,
               pn->classid,
                pn->math,
                pn->english,

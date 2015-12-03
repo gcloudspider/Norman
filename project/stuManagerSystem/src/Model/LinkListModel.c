@@ -57,19 +57,19 @@ void onReloadStudentLinkList(STU* head) {
     }
 }
 
-void onSearchScoreSortByID(STU** head){
-    onSortStudentLinkListByID(&*head);
+STU* onSearchScoreSortByID(STU* head){
+    return onSortStudentLinkListByID(head);
 }
 
-void onSearchScoreSortByName(STU** head) {
+STU* onSearchScoreSortByName(STU* head) {
     
 
 }
-void onSearchScoreSortByClassid(STU** head) {
+STU* onSearchScoreSortByClassid(STU* head) {
 
 }
 
-void onSearchScoreSortByTotal(STU** head) {
+STU* onSearchScoreSortByTotal(STU* head) {
     
 
 }

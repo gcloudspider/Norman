@@ -120,7 +120,21 @@ void modifyStuScore() {
 
 void showScorebyID() {
     STU* pn;
+    char ch;
     pn = onSearchScoreSort(ID); 
+    if(pn == NULL) {
+        return ;
+    }
+    while(1) {
+        system("clear");
+        PrintStudentDoubleLinkList(&pn);
+        while((ch=getchar())!='\n');
+        printf("%s",INPUTY_RETURN_PARENT_FOLDER);
+        ch= getchar();
+        if(ch == 'y'|| ch == 'Y') {
+            break;   
+        }
+    }
 }
 
 void showScorebyName() {
