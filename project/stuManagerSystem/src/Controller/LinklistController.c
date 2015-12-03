@@ -45,8 +45,10 @@ int onSaveLinkListToFile(int usertype) {
             ret = onSaveStudentLinkListToFileModel(g_pstudent);
             break;
         case TEACHER:
+            ret = onSaveTeacherLinkListToFileModel(g_pteacher);
             break;
         case ADMINISTRATOR:
+            ret = onSaveAdminLinkListToFileModel(g_padmin);
             break;
         default:
             break;
@@ -60,8 +62,10 @@ void onReloadLinkList(int usertype) {
             onReloadStudentLinkList(g_pstudent);
             break;
         case TEACHER:
+            onReloadTeacherLinkList(g_pteacher);
             break;
         case ADMINISTRATOR:
+            onReloadAdminLinkList(g_padmin);
             break;
         default:
             break;

@@ -57,6 +57,50 @@ void onReloadStudentLinkList(STU* head) {
     }
 }
 
+int onSaveTeacherLinkListToFileModel(TEA* head) {
+    int ret;
+    ret = WriteDataToTeacherFile(&head);
+    return ret;
+}
+
+void onReloadTeacherLinkList(TEA* head) {
+    int ret,rets;
+    TEA* pn = NULL;
+    ret = ReleaseTeacherLinkList(head);
+    if(ret == 0) {
+        rets = ReadTeacherDataToLinkList(&pn);
+        if(rets==0) {
+            g_pteacher = pn;
+            //printf("%s\n",RELOAD_STU_LINK_LIST_SUCCESS);
+        } else {
+            printf("%s\n",RELOAD_STU_LINK_LIST_FAILED);
+            return;
+        }   
+    }
+}
+
+int onSaveAdminLinkListToFileModel(ADMIN* head) {
+    int ret;
+    ret = WriteDataToAdminFile(&head);
+    return ret;
+}
+
+void onReloadAdminLinkList(ADMIN* head) {
+    int ret,rets;
+    ADMIN* pn = NULL;
+    ret = ReleaseAdminLinkList(head);
+    if(ret == 0) {
+        rets = ReadAdminDataToLinkList(&pn);
+        if(rets==0) {
+            g_padmin = pn;
+            //printf("%s\n",RELOAD_STU_LINK_LIST_SUCCESS);
+        } else {
+            printf("%s\n",RELOAD_STU_LINK_LIST_FAILED);
+            return;
+        }   
+    }
+}
+
 STU* onSearchScoreSortByID(STU* head){
     return onSortStudentLinkListByID(head);
 }

@@ -22,8 +22,12 @@ void* onSearchStudentInfoModel(STU* head,int userid);
 void* onSearchTeacherInfoModel(TEA* head,int userid);
 
 int onSaveStudentLinkListToFileModel(STU* head);
+int onSaveTeacherLinkListToFileModel(TEA* head);
+int onSaveAdminLinkListToFileModel(ADMIN* head);
 
 void onReloadStudentLinkList(STU* head);
+void onReloadTeacherLinkList(TEA* head);
+void onReloadAdminLinkList(ADMIN* head);
 
 
 STU* onSearchScoreSortByID(STU* head);  

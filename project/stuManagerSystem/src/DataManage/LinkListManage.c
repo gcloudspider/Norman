@@ -460,7 +460,8 @@ int AddStudentLinkList(STU *head,STU* pn) {
     STU* stu = NULL;
     stu = head;
     while(stu) {
-        if(stu->next == NULL) break;  
+        if(stu->next == NULL) break;
+        stu = stu->next;
     }
     
     stu->next = pn;
@@ -475,6 +476,7 @@ int AddTeacherLinkList(TEA *head,TEA* pn) {
     tea = head;
     while(tea) {
         if(tea->next == NULL) break;  
+        tea = tea->next;
     }
     
     tea->next = pn;
@@ -489,6 +491,7 @@ int AddAdminLinkList(ADMIN *head,ADMIN* pn) {
     admin = head;
     while(admin) {
         if(admin->next == NULL) break;  
+        admin = admin->next;
     }
     
     admin->next = pn;

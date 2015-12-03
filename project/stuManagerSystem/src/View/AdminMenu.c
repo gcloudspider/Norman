@@ -202,8 +202,24 @@ void AddUserInfo() {
                 printf("%p\n",&pn);
                 ret = AddUserNodeToLinkList(STUDENT,pn);
                 if(ret == 0) {
-                    printf("success");
-                    sleep(5);
+                    while((ch=getchar())!='\n');
+                    printf("%s",SAVE_NEWSTUDENT_TOFILE);
+                    ch = getchar();
+                    if(ch == 'y' || ch == 'Y') {
+                        ret = onSaveLinkListToFile(STUDENT);
+                        if(ret == 0) {
+                            printf("%s\n",SAVE_FILE_SUCCESS);
+                            onReloadLinkList(STUDENT);
+                            sleep(3);
+                            return;
+                        } else {
+                            printf("%s",SAVE_FILE_FAILED);
+                            sleep(3);
+                            return;
+                        }
+                    } else {
+                        return;
+                    }
                 }
                 break;
             }
@@ -212,18 +228,50 @@ void AddUserInfo() {
                 AddTeacherNode(&pn);
                 ret = AddUserNodeToLinkList(TEACHER,pn);
                 if(ret == 0) {
-                    
+                    while((ch=getchar())!='\n');
+                    printf("%s",SAVE_NEWTEACHER_TOFILE);   
+                    ch = getchar();
+                    if(ch == 'y' || ch == 'Y') {
+                        ret = onSaveLinkListToFile(TEACHER);
+                        if(ret == 0) {
+                            printf("%s\n",SAVE_FILE_SUCCESS);
+                            onReloadLinkList(TEACHER);
+                            sleep(3);
+                            return;
+                        } else {
+                            printf("%s",SAVE_FILE_FAILED);
+                            sleep(3);
+                            return;
+                        }
+                    } else {
+                        return;
+                    }
                 }
                 break;
             }
             case '3': {
                 ADMIN* pn=NULL;
                 AddAdminNode(&pn);
-                printf("%p\n",&pn);
                 ret = AddUserNodeToLinkList(ADMINISTRATOR,pn);
                 if(ret == 0) {
-                    printf("sss\n");
-                    sleep(5);
+                    while((ch=getchar())!= '\n');
+                    printf("%s",SAVE_NEWADMIN_TOFILE);   
+                    ch = getchar();
+                    if(ch == 'y' || ch == 'Y') {
+                        ret = onSaveLinkListToFile(ADMINISTRATOR);
+                        if(ret == 0) {
+                            printf("%s\n",SAVE_FILE_SUCCESS);
+                            onReloadLinkList(ADMINISTRATOR);
+                            sleep(3);
+                            return;
+                        } else {
+                            printf("%s\n",SAVE_FILE_FAILED);
+                            sleep(3);
+                            return;
+                        }
+                    } else {
+                        return;
+                    }
                 }
                 break;
             }

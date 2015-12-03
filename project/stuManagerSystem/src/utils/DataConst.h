@@ -120,6 +120,10 @@
 #define ADD_ADMIN_INFOMATION            "新增管理员信息"
 #define ADD_ADMINNODE_INFO              "输入管理员信息(工号 姓名 年龄 性别 密码):"
 
+#define SAVE_NEWSTUDENT_TOFILE          "是否保存新增的学生,输入YES/NO(Y/N):"
+#define SAVE_NEWTEACHER_TOFILE          "是否保存新增的教师,输入YES/NO(Y/N):"
+#define SAVE_NEWADMIN_TOFILE            "是否保存新增的管理员,输入YES/NO(Y/N):"
+
 #define MODIFY_USER_INFOMATION          "修改用户信息"
 #define MODIFY_STUEDENT_INFOMATION      "修改学生信息"
 #define MODIFY_TEACHER_INFOMATION       "修改教师信息"
