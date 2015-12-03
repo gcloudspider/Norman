@@ -66,6 +66,7 @@
 #define SHOW_STUDENT_TELNUM             "电话号码"
 #define SHOW_STUDENT_QQ                 "QQ号码"
 #define SHOW_STUDENT_CLASSID            "班级"
+#define SHOW_STUDENT_PASSWD             "密码"
 
 #define SHOW_STUDENT_SCORE_MATH         "数学"
 #define SHOW_STUDENT_SCORE_ENGLISH      "英语"
@@ -98,6 +99,14 @@
 #define SHOW_TEACHER_SEX                "性别"
 #define SHOW_TEACHER_CLASSNO            "班别"
 #define SHOW_TEACHER_LESSION            "课程"
+#define SHOW_TEACHER_PASSWD             "密码"
+
+/*admin info*/
+#define SHOW_ADMIN_NUM                  "工号"
+#define SHOW_ADMIN_NAME                 "姓名"
+#define SHOW_ADMIN_AGE                  "年龄"
+#define SHOW_ADMIN_SEX                  "性别"
+#define SHOW_ADMIN_PASSWD               "密码"
 
 #define SEARCH_STU_FROM_ID              "输入要修改学生学号:"
 #define SEARCH_STU_SCORE                "该学生成绩如下:"
@@ -129,15 +138,29 @@
 #define MODIFY_TEACHER_INFOMATION       "修改教师信息"
 #define MODIFY_ADMIN_INFOMATION         "修改管理员信息"
 
+#define INPUT_MODIFY_STUDENT_ID         "输入要修改的学生ID:"
+#define INPUT_MODIFY_TEACHER_ID         "输入要修改的教师ID:"
+#define INPUT_MODIFY_ADMIN_ID           "输入要修改的管理员ID:"
+
+#define SEARCH_STUDENT_INFO             "当前学生信息如下:"
+#define SEARCH_TEACHER_INFO             "当前教师信息如下:"
+#define SEARCH_ADMIN_INFO               "当前管理员信息如下:"
+
 #define DEL_USER_INFOMATION             "删除用户信息"
 #define DEL_STUDENT_INFOMATION          "删除学生信息"
 #define DEL_TEACHER_INFOMATION          "删除教师信息"
 #define DEL_ADMIN_INFOMATION            "删除管理员信息"
+#define INPUT_DEL_STUDENT_ID            "输入要删除的学生ID:"
+#define INPUT_DEL_TEACHER_ID            "输入要删除的教师ID:"
+#define INPUT_DEL_ADMIN_ID              "输入要删除的管理员ID:"
 
 #define SEARCH_USER_INFOMATION          "搜索用户信息"
 #define SEARCH_STUDENT_INFOMATION       "搜索学生信息"
 #define SEARCH_TEACHER_INFOMATION       "搜索教师信息"
 #define SEARCH_ADMIN_INFOMATION         "搜索管理员信息"
+#define INPUT_SEARCh_STUDENT_ID         "输入要查找的学生ID:"
+#define INPUT_SEARCH_TEACHER_ID         "输入要查找的教师ID:"
+#define INPUT_SEARCH_ADMIN_ID           "输入要查找的管理员ID:"
 
 #define SEARCH_TEACHER_ID               "按工号搜索"
 #define SEARCH_TEACHER_NAME             "按教师姓名搜索"

@@ -34,4 +34,8 @@ int ReadAdminDataToLinkList(ADMIN **head);
 int WriteDataToAdminFile(ADMIN **head);
 void PrintAdminDoubleLinkList(ADMIN **head);
 
+//打印基本信息
+void PrintStudentInfo(STU **head);
+void PrintTeacherInfo(TEA **head);
+void PrintAdminInfo(ADMIN **head);
 #endif

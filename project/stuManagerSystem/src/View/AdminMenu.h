@@ -16,11 +16,28 @@
 
 #ifndef _ADMINMENU_H
 #define _ADMINMENU_H
+#include "../utils/DataStruct.h"
 
 void ShowAdminMenu();
+
 void AddUserInfo();
+void AddStudentNode(STU** pn);
+void AddTeacherNode(TEA** pn);
+void AddAdminNode(ADMIN** pn);
+
 void ModifyUserInfo();
+void modifyStudentInfo();
+void modifyTeacherInfo();
+void modifyAdminInfo();
+
 void DelUserInfo();
+void delStudentInfo();
+void delTeacherInfo();
+void delAdminInfo();
+
 void SearchUserInfo();
-void SearchScore();
+void searchStudentInfo();
+void searchTeacherInfo();
+void searchAdminInfo();
+
 #endif

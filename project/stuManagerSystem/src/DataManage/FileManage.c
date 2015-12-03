@@ -317,3 +317,78 @@ void PrintAdminDoubleLinkList(ADMIN **head) {
     }
     return;
 }
+
+void PrintStudentInfo(STU **head) {
+    STU* pn;
+    pn = *head;
+    printf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n",
+          SHOW_STUDENT_NUM,
+          SHOW_STUDENT_NAME,
+          SHOW_STUDENT_AGE,
+          SHOW_STUDENT_SEX,
+          SHOW_STUDENT_TELNUM,
+          SHOW_STUDENT_QQ,
+          SHOW_STUDENT_CLASSID,
+          SHOW_STUDENT_PASSWD
+          );
+    while(pn) {
+        printf("%d\t%s\t%d\t%d\t%s\t%s\t%d\t%s\n",
+              pn->id,
+              pn->name,
+               pn->age,
+               pn->sex,
+               pn->telnum,
+               pn->QQ,
+               pn->classid,
+               pn->passwd
+              );   
+        pn = pn->next;
+    }
+    return;   
+}
+
+void PrintTeacherInfo(TEA **head) {
+    TEA* pn;
+    pn = *head;
+    printf("%s\t%s\t%s\t%s\t%s\t%s\t%s\n",
+          SHOW_TEACHER_NUM,
+          SHOW_TEACHER_NAME,
+          SHOW_TEACHER_AGE,
+          SHOW_TEACHER_SEX,
+          SHOW_TEACHER_CLASSNO,
+          SHOW_TEACHER_LESSION,
+          SHOW_TEACHER_PASSWD);
+    while(pn) {
+        printf("%d\t%s\t%d\t%d\t%d\t%d\t%s\n",
+              pn->id,
+              pn->name,
+              pn->age,
+              pn->sex,
+              pn->class_no,
+              pn->lession,
+              pn->passwd
+              );   
+        pn = pn->next;
+    }
+}
+
+void PrintAdminInfo(ADMIN **head) {
+    ADMIN* pn;
+    pn = *head;
+    printf("%s\t%s\t%s\t%s\t%s\n",
+          SHOW_ADMIN_NUM,
+          SHOW_ADMIN_NAME,
+          SHOW_ADMIN_AGE,
+          SHOW_ADMIN_SEX,
+          SHOW_ADMIN_PASSWD);
+    while(pn) {
+        printf("%d\t%s\t%d\t%d\t%s\n",
+               pn->id,
+              pn->name,
+              pn->age,
+              pn->sex,
+              pn->passwd
+              );   
+        pn = pn->next;
+    }
+}

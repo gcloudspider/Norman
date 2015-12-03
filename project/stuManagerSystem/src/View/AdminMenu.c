@@ -19,8 +19,9 @@
 #include "AdminMenu.h"
 #include "../utils/DataConst.h"
 #include "../utils/DataEnum.h"
-#include "../utils/DataStruct.h"
 #include "../Controller/LinklistController.h"
+#include "../utils/global.h"
+
 void AddStudentNode(STU** head) {
     char ch;
     STU* pn,*p;
@@ -184,7 +185,7 @@ void AddUserInfo() {
         printf("\t\t##                                              ##\n");
         printf("\t\t##                 2.%s               ##\n",ADD_TEACHER_INFOMATION);
         printf("\t\t##                                              ##\n");
-        printf("\t\t##                 3.%s               ##\n",ADD_ADMIN_INFOMATION);
+        printf("\t\t##                 3.%s             ##\n",ADD_ADMIN_INFOMATION);
         printf("\t\t##                                              ##\n");
         printf("\t\t##                 4.%s               ##\n",RETURN_PARENT_FOLDER);
         printf("\t\t##                                              ##\n");
@@ -285,6 +286,32 @@ void AddUserInfo() {
 }
 
 
+void modifyStudentInfo() {
+    char ch;
+    while(1) {
+        system("clear");
+        printf("%s\n",SEARCH_STUDENT_INFO);
+        PrintStudentInfo(&g_pstudent);
+    }   
+}
+
+void modifyTeacherInfo() {
+    char ch;
+    while(1) {
+        system("clear");
+        printf("%s\n",SEARCH_STUDENT_INFO);
+        PrintTeacherInfo(&g_pteacher);
+    }   
+}
+
+void modifyAdminInfo() {
+    char ch;
+    while(1) {
+        system("clear");
+        printf("%s\n",SEARCH_STUDENT_INFO);
+        PrintAdminInfo(&g_padmin);
+    }   
+}
 
 void ModifyUserInfo() {
     //TODO:修改用户信息
@@ -300,7 +327,9 @@ void ModifyUserInfo() {
         printf("\t\t##                                              ##\n");
         printf("\t\t##                 2.%s               ##\n",MODIFY_TEACHER_INFOMATION);
         printf("\t\t##                                              ##\n");
-        printf("\t\t##                 3.%s               ##\n",RETURN_PARENT_FOLDER);
+        printf("\t\t##                 3.%s             ##\n",MODIFY_ADMIN_INFOMATION);
+        printf("\t\t##                                              ##\n");
+        printf("\t\t##                 4.%s               ##\n",RETURN_PARENT_FOLDER);
         printf("\t\t##                                              ##\n");
         printf("\t\t##################################################\n");
         
@@ -310,16 +339,58 @@ void ModifyUserInfo() {
         ch = getchar();
         switch(ch) {
             case '1':
+                modifyStudentInfo();
                 break;
             case '2':
+                modifyTeacherInfo();
                 break;
             case '3':
+                modifyAdminInfo();
+                break;
+            case '4':
                 return;
                 break;
             default:
                 break;
         }
     }
+}
+
+void delStudentInfo(){
+    char ch;
+    int userid;
+
+    while(1) {
+        system("clear");
+        printf("%s\n",SEARCH_STUDENT_INFO);
+        PrintStudentInfo(&g_pstudent);
+        printf("%s",INPUT_DEL_STUDENT_ID);
+        scanf("%d",&userid);
+
+        while((ch=getchar())!='\n');
+        ch = getchar();
+        if(ch== 'y'||ch == 'Y'){
+            break;
+        }
+    }
+}
+
+void delTeacherInfo() {
+    char ch;
+    while(1) {
+        system("clear");
+        printf("%s\n",SEARCH_TEACHER_INFO);
+        PrintTeacherInfo(&g_pteacher);
+    }   
+}
+
+void delAdminInfo() {
+    char ch;
+    while(1) {
+        system("clear");
+        printf("%s\n",SEARCH_ADMIN_INFO);
+        PrintAdminInfo(&g_padmin);
+    }   
 }
 
 void DelUserInfo() {
@@ -336,7 +407,9 @@ void DelUserInfo() {
         printf("\t\t##                                              ##\n");
         printf("\t\t##                 2.%s               ##\n",DEL_TEACHER_INFOMATION);
         printf("\t\t##                                              ##\n");
-        printf("\t\t##                 3.%s               ##\n",RETURN_PARENT_FOLDER);
+        printf("\t\t##                 3.%s             ##\n",DEL_ADMIN_INFOMATION);
+        printf("\t\t##                                              ##\n");
+        printf("\t\t##                 4.%s               ##\n",RETURN_PARENT_FOLDER);
         printf("\t\t##                                              ##\n");
         printf("\t\t##################################################\n");
         
@@ -346,16 +419,33 @@ void DelUserInfo() {
         ch = getchar();
         switch(ch) {
             case '1':
+                delStudentInfo();
                 break;
             case '2':
+                delTeacherInfo();
                 break;
             case '3':
+                delAdminInfo();
+                break;
+            case '4':
                 return;
                 break;
             default:
                 break;
         }
     }   
+}
+
+void searchStudentInfo() {
+
+}
+
+void searchTeacherInfo() {
+
+}
+
+void searchAdminInfo() {
+
 }
 
 void SearchUserInfo() {
@@ -372,7 +462,9 @@ void SearchUserInfo() {
         printf("\t\t##                                              ##\n");
         printf("\t\t##                 2.%s               ##\n",SEARCH_TEACHER_INFOMATION);
         printf("\t\t##                                              ##\n");
-        printf("\t\t##                 3.%s               ##\n",RETURN_PARENT_FOLDER);
+        printf("\t\t##                 3.%s             ##\n",SEARCH_ADMIN_INFOMATION);
+        printf("\t\t##                                              ##\n");
+        printf("\t\t##                 4.%s               ##\n",RETURN_PARENT_FOLDER);
         printf("\t\t##                                              ##\n");
         printf("\t\t##################################################\n");
         
@@ -382,10 +474,15 @@ void SearchUserInfo() {
         ch = getchar();
         switch(ch) {
             case '1':
+                searchStudentInfo();
                 break;
             case '2':
+                searchTeacherInfo();
                 break;
             case '3':
+                searchAdminInfo();
+                break;
+            case '4':
                 return;
                 break;
             default:
@@ -394,41 +491,6 @@ void SearchUserInfo() {
     }   
 }
 
-void SearchScore() {
-    //TODO:搜索成绩
-    char ch;
-    while(1) {
-        system("clear");
-
-        printf("\t\t##################################################\n");
-        printf("\t\t##              %s            ##\n",MAIN_MENU_WELCOME_TITLE);
-        printf("\t\t##################################################\n");
-        printf("\t\t##                                              ##\n");
-        printf("\t\t##                 1.%s               ##\n",MODIFY_STUDENT_INFOMATION);
-        printf("\t\t##                                              ##\n");
-        printf("\t\t##                 2.%s               ##\n",MODIFY_TEACHER_INFOMATION);
-        printf("\t\t##                                              ##\n");
-        printf("\t\t##                 3.%s               ##\n",RETURN_PARENT_FOLDER);
-        printf("\t\t##                                              ##\n");
-        printf("\t\t##################################################\n");
-        
-        printf("\n\n");
-        printf("%s",SELECT_MENU_ELEMENT);
-        getchar();
-        ch = getchar();
-        switch(ch) {
-            case '1':
-                break;
-            case '2':
-                break;
-            case '3':
-                return;
-                break;
-            default:
-                break;
-        }
-    }   
-}
 
 void ShowAdminMenu() {
     char ch;
