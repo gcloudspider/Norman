@@ -62,16 +62,15 @@ STU* onSearchScoreSortByID(STU* head){
 }
 
 STU* onSearchScoreSortByName(STU* head) {
-    
-
+    return onSortStudentLinkListByName(head);
 }
-STU* onSearchScoreSortByClassid(STU* head) {
 
+STU* onSearchScoreSortByClassid(STU* head) {
+    return onSortStudentLinkListByClassid(head);
 }
 
 STU* onSearchScoreSortByTotal(STU* head) {
-    
-
+    return onSortStudentLinkListByTotal(head);
 }
 
 

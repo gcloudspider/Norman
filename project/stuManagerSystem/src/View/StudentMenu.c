@@ -74,19 +74,21 @@ void showScore(userid) {
     }
     while(1) {
         system("clear");
-        printf("%s\t%s\t%s\t%s\t%s\n",
+        printf("%s\t%s\t%s\t%s\t%s\t%s\n",
                SHOW_STUDENT_SCORE_MATH,
             SHOW_STUDENT_SCORE_ENGLISH,
             SHOW_STUDENT_SCORE_CLANG,
             SHOW_STUDENT_SCORE_JAVA,
-            SHOW_STUDENT_SCORE_CADV
+            SHOW_STUDENT_SCORE_CADV,
+            SHOW_STUDENT_TOTAL_SCORE
             );
-        printf("%d\t%d\t%d\t%d\t%d\n",
+        printf("%d\t%d\t%d\t%d\t%d\t%d\n",
             pn->math,
             pn->english,
             pn->c_lang,
             pn->java,
-            pn->c_adv
+            pn->c_adv,
+            pn->total
         );
         while((ch = getchar()) != '\n');
 

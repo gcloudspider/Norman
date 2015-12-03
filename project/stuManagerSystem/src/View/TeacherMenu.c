@@ -21,6 +21,7 @@
 #include "../utils/DataStruct.h"
 #include "../utils/DataEnum.h"
 #include "../Controller/LinklistController.h"
+#include "../utils/global.h"
 
 void showTeaInfo(int userid) {
     char ch;
@@ -124,6 +125,69 @@ void showScorebyID() {
     pn = onSearchScoreSort(ID); 
     if(pn == NULL) {
         return ;
+    } else {
+        g_pstudent = pn;
+        while(1) {
+            system("clear");
+            PrintStudentDoubleLinkList(&pn);
+            while((ch=getchar())!='\n');
+            printf("%s",INPUTY_RETURN_PARENT_FOLDER);
+            ch= getchar();
+            if(ch == 'y'|| ch == 'Y') {
+                break;   
+            }
+        }
+    }   
+}
+
+
+void showScorebyName() {
+    STU* pn;
+    char ch;
+    pn = onSearchScoreSort(NAME);
+    if(pn == NULL) {
+        return ;
+    } else {
+        while(1) {
+        system("clear");
+        PrintStudentDoubleLinkList(&pn);
+        while((ch=getchar())!='\n');
+        printf("%s",INPUTY_RETURN_PARENT_FOLDER);
+        ch= getchar();
+        if(ch == 'y'|| ch == 'Y') {
+                break;   
+            }
+        }
+    }
+}
+
+void showScorebyClassid() {
+    STU* pn;
+    char ch;
+    pn = onSearchScoreSort(CLASSID);
+    if(pn == NULL) {
+        return ;
+    } else {
+        g_pstudent = pn;
+        while(1) {
+        system("clear");
+        PrintStudentDoubleLinkList(&pn);
+        while((ch=getchar())!='\n');
+        printf("%s",INPUTY_RETURN_PARENT_FOLDER);
+        ch= getchar();
+        if(ch == 'y'|| ch == 'Y') {
+            break;   
+        }
+    }  
+    }   
+}
+
+void showScoreByCount() {
+    STU* pn;
+    char ch;
+    pn = onSearchScoreSort(TOTAL);
+    if(pn == NULL) {
+        return ;
     }
     while(1) {
         system("clear");
@@ -135,18 +199,6 @@ void showScorebyID() {
             break;   
         }
     }
-}
-
-void showScorebyName() {
-
-}
-
-void showScorebyClassid() {
-
-}
-
-void showScoreByCount() {
-
 }
 
 void ShowTeacherMenu(int userid) {

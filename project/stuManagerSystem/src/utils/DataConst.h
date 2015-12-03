@@ -72,6 +72,7 @@
 #define SHOW_STUDENT_SCORE_CLANG        "C语言"
 #define SHOW_STUDENT_SCORE_JAVA         "Java"
 #define SHOW_STUDENT_SCORE_CADV         "C高级"
+#define SHOW_STUDENT_TOTAL_SCORE        "总成绩"
 
 #define QUERY_STUDENT_INFO_ERROR        "查询用户基本信息失败,请确定用户是否存在!"
 #define QUERY_STUDENT_SCORE_ERROR       "查询用户成绩失败!"

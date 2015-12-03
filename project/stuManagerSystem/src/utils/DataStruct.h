@@ -31,6 +31,7 @@ typedef struct student {
     int c_lang;
     int java;
     int c_adv;
+    int total;
     struct student *pre;
     struct student *next;
 }STU;

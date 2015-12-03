@@ -37,7 +37,7 @@ int ReadStudentDataToLinkList(STU **head) {
             return -1;
         }
 
-        fscanf(fp,"%d\t%s\t%d\t%d\t%s\t%s\t%s\t%d\t%d\t%d\t%d\t%d\t%d\n",
+        fscanf(fp,"%d\t%s\t%d\t%d\t%s\t%s\t%s\t%d\t%d\t%d\t%d\t%d\t%d\t%d\n",
               &stu->id,
                stu->name,
               &stu->age,
@@ -50,7 +50,8 @@ int ReadStudentDataToLinkList(STU **head) {
                &stu->english,
                &stu->c_lang,
                &stu->java,
-               &stu->c_adv
+               &stu->c_adv,
+               &stu->total
               );
 
         if(*head) {
@@ -76,7 +77,7 @@ int ReadStudentDataToLinkList(STU **head) {
 void PrintStudentDoubleLinkList(STU **head) {
     STU* pn;
     pn = *head;
-    printf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n",
+    printf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n",
           SHOW_STUDENT_NUM,
           SHOW_STUDENT_NAME,
           SHOW_STUDENT_CLASSID,
@@ -84,9 +85,10 @@ void PrintStudentDoubleLinkList(STU **head) {
           SHOW_STUDENT_SCORE_ENGLISH,
           SHOW_STUDENT_SCORE_CLANG,
           SHOW_STUDENT_SCORE_JAVA,
-          SHOW_STUDENT_SCORE_CADV);
+          SHOW_STUDENT_SCORE_CADV,
+          SHOW_STUDENT_TOTAL_SCORE);
     while(pn) {
-        printf("%d\t%s\t%d\t%d\t%d\t%d\t%d\t%d\n",
+        printf("%d\t%s\t%d\t%d\t%d\t%d\t%d\t%d\t%d\n",
               pn->id,
               pn->name,
               pn->classid,
@@ -94,7 +96,8 @@ void PrintStudentDoubleLinkList(STU **head) {
                pn->english,
                pn->c_lang,
                pn->java,
-               pn->c_adv
+               pn->c_adv,
+               pn->total
               );   
         pn = pn->next;
     }
@@ -179,7 +182,7 @@ int WriteDataToStudentFile(STU **head) {
     
     pn = *head;
     while(pn) {    
-        fprintf(fp,"%d\t%s\t%d\t%d\t%s\t%s\t%s\t%d\t%d\t%d\t%d\t%d\t%d\n",
+        fprintf(fp,"%d\t%s\t%d\t%d\t%s\t%s\t%s\t%d\t%d\t%d\t%d\t%d\t%d\t%d\n",
                 pn->id,
                 pn->name,
                 pn->age,
@@ -192,7 +195,8 @@ int WriteDataToStudentFile(STU **head) {
                pn->english,
                pn->c_lang,
                pn->java,
-               pn->c_adv
+               pn->c_adv,
+                pn->total
                );
         pn=pn->next;
     }
