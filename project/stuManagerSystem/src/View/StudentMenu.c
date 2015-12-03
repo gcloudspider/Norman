@@ -169,7 +169,7 @@ void ShowStudentMenu(int userid) {
         printf("\t\t##                                              ##\n");
         printf("\t\t##                 1.%s               ##\n",SHOW_STUDENT_INFOMATION);
         printf("\t\t##                                              ##\n");
-        printf("\t\t##                 2.%s               ##\n",MODIFY_STUDENT_INFOMATION);
+        printf("\t\t##                 2.%s               ##\n",MODIFY_STUDENT_PASSWD);
         printf("\t\t##                                              ##\n");
         printf("\t\t##                 3.%s               ##\n",QUERY_STUDENT_SCORE);
         printf("\t\t##                                              ##\n");

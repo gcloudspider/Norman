@@ -20,6 +20,7 @@
 
 void* onSearchStudentInfoModel(STU* head,int userid);
 void* onSearchTeacherInfoModel(TEA* head,int userid);
+void* onSearchAdminInfoModel(ADMIN* head,int userid);
 
 int onSaveStudentLinkListToFileModel(STU* head);
 int onSaveTeacherLinkListToFileModel(TEA* head);

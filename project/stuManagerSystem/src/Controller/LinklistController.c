@@ -31,6 +31,7 @@ void* onSearchUserInfo(int usertype,int userid) {
             break;
         case ADMINISTRATOR:
             //ADMIN* ret;
+            ret = onSearchAdminInfoModel(g_padmin,userid);
             break;
         default:
             break;

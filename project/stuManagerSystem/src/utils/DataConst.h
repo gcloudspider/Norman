@@ -50,7 +50,7 @@
 #define SELECT_MENU_ELEMENT             "功能选择:"
 /*stu logined*/
 #define SHOW_STUDENT_INFOMATION         "显示个人信息"
-#define MODIFY_STUDENT_INFOMATION       "修改个人密码"
+#define MODIFY_STUDENT_PASSWD           "修改个人密码"
 #define QUERY_STUDENT_SCORE             "查询各科成绩"
 #define RETURN_PARENT_FOLDER            "返回上级目录"
 
@@ -134,13 +134,16 @@
 #define SAVE_NEWADMIN_TOFILE            "是否保存新增的管理员,输入YES/NO(Y/N):"
 
 #define MODIFY_USER_INFOMATION          "修改用户信息"
-#define MODIFY_STUEDENT_INFOMATION      "修改学生信息"
+#define MODIFY_STUDENT_INFOMATION       "修改学生信息"
 #define MODIFY_TEACHER_INFOMATION       "修改教师信息"
 #define MODIFY_ADMIN_INFOMATION         "修改管理员信息"
 
 #define INPUT_MODIFY_STUDENT_ID         "输入要修改的学生ID:"
 #define INPUT_MODIFY_TEACHER_ID         "输入要修改的教师ID:"
 #define INPUT_MODIFY_ADMIN_ID           "输入要修改的管理员ID:"
+#define MODIFY_STUDENT_INFO             "输入学生信息(学号 姓名 年龄 性别 电话号码 QQ 班级 密码):"
+#define MODIFY_TEACHER_INFO             "输入教师信息(工号 姓名 年龄 性别 班级 课程 密码):"
+#define MODIFY_ADMIN_INFO               "输入管理员信息(工号 姓名 年龄 性别 密码):"
 
 #define INFO_MODIFY_SUCCESS             "修改数据成功!"
 #define INFO_MODIFY_FAILED              "修改数据失败!"

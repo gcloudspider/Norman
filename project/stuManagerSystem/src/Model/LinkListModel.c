@@ -34,6 +34,12 @@ void* onSearchTeacherInfoModel(TEA* head,int userid) {
     return pn;
 }
 
+void* onSearchAdminInfoModel(ADMIN* head,int userid) {
+    ADMIN* pn;
+    pn = onSearchAdminLinkList(head,userid);
+    return pn;
+}
+
 //保存
 int onSaveStudentLinkListToFileModel(STU* head) {
     int ret;
