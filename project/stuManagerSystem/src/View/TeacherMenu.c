@@ -64,7 +64,7 @@ void showTeaInfo(int userid) {
 
 void modifyStuScore() {
     char ch;
-    int math,eng,clang,java,cadv;
+    int math,eng,clang,java,cadv,total;
     STU* pn = NULL;
     int userid;
     printf("%s",SEARCH_STU_FROM_ID);
@@ -82,9 +82,10 @@ void modifyStuScore() {
         printf("3.%s\t%d\n",SHOW_STUDENT_SCORE_CLANG,pn->c_lang);
         printf("4.%s\t%d\n",SHOW_STUDENT_SCORE_JAVA,pn->java);
         printf("5.%s\t%d\n",SHOW_STUDENT_SCORE_CADV,pn->c_adv);
+        printf("6.%s\t%d\n",SHOW_STUDENT_TOTAL_SCORE,pn->total);
 
         printf("%s\n",SELECT_MODIFY_STU_LESSION);
-        scanf("%d%d%d%d%d",&math,&eng,&clang,&java,&cadv);
+        scanf("%d%d%d%d%d%d",&math,&eng,&clang,&java,&cadv,&total);
         pn->math = math;
         pn->english = eng;
         pn->c_lang = clang;
@@ -96,6 +97,7 @@ void modifyStuScore() {
         printf("3.%s\t%d\n",SHOW_STUDENT_SCORE_CLANG,pn->c_lang);
         printf("4.%s\t%d\n",SHOW_STUDENT_SCORE_JAVA,pn->java);
         printf("5.%s\t%d\n",SHOW_STUDENT_SCORE_CADV,pn->c_adv);
+        printf("6.%s\t%d\n",SHOW_STUDENT_TOTAL_SCORE,pn->total);
     }
     while((ch=getchar())!='\n');
     printf("%s",SAVE_STUDENT_SCORE);
@@ -148,13 +150,14 @@ void showScorebyName() {
     if(pn == NULL) {
         return ;
     } else {
+        g_pstudent = pn;
         while(1) {
-        system("clear");
-        PrintStudentDoubleLinkList(&pn);
-        while((ch=getchar())!='\n');
-        printf("%s",INPUTY_RETURN_PARENT_FOLDER);
-        ch= getchar();
-        if(ch == 'y'|| ch == 'Y') {
+            system("clear");
+            PrintStudentDoubleLinkList(&pn);
+            while((ch=getchar())!='\n');
+            printf("%s",INPUTY_RETURN_PARENT_FOLDER);
+            ch= getchar();
+            if(ch == 'y'|| ch == 'Y') {
                 break;   
             }
         }
@@ -188,17 +191,20 @@ void showScoreByCount() {
     pn = onSearchScoreSort(TOTAL);
     if(pn == NULL) {
         return ;
+    } else {
+        g_pstudent = pn;
+        while(1) {
+            system("clear");
+            PrintStudentDoubleLinkList(&pn);
+            while((ch=getchar())!='\n');
+            printf("%s",INPUTY_RETURN_PARENT_FOLDER);
+            ch= getchar();
+            if(ch == 'y'|| ch == 'Y') {
+                break;   
+            }
+        }    
     }
-    while(1) {
-        system("clear");
-        PrintStudentDoubleLinkList(&pn);
-        while((ch=getchar())!='\n');
-        printf("%s",INPUTY_RETURN_PARENT_FOLDER);
-        ch= getchar();
-        if(ch == 'y'|| ch == 'Y') {
-            break;   
-        }
-    }
+    
 }
 
 void ShowTeacherMenu(int userid) {

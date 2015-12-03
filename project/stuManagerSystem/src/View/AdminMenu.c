@@ -33,7 +33,7 @@ void AddStudentNode(STU** head) {
             return ;
         }
 
-        scanf("%d%s%d%d%s%s%s%d%d%d%d%d%d",
+        scanf("%d%s%d%d%s%s%s%d%d%d%d%d%d%d",
             &pn->id,
             pn->name,
             &pn->age,
@@ -46,7 +46,8 @@ void AddStudentNode(STU** head) {
             &pn->english,
             &pn->c_lang,
             &pn->java,
-            &pn->c_adv
+            &pn->c_adv,
+            &pn->total
             );
         while((ch=getchar())!='\n');
         

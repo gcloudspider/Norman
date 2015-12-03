@@ -102,7 +102,7 @@
 #define SEARCH_STU_FROM_ID              "输入要修改学生学号:"
 #define SEARCH_STU_SCORE                "该学生成绩如下:"
 #define SEARCH_STU_AFTER_SCORE          "该学生成绩修改后如下:"
-#define SELECT_MODIFY_STU_LESSION       "输入要修改分数(格式:数学 英语 C语言 java C高级):"
+#define SELECT_MODIFY_STU_LESSION       "输入要修改分数(格式:数学 英语 C语言 java C高级 总分):"
 #define SAVE_STUDENT_SCORE              "是否保存该学生成绩,输入YES/NO(Y/N):"
 
 #define SEARCH_STUDENT_NUM              "按学号显示成绩"
@@ -112,7 +112,7 @@
 
 /*admin logined*/
 #define ADD_USER_INFOMATION             "新增用户信息"
-#define ADD_STUDENTNODE_INFO            "输入学生信息(学号 姓名 年龄 性别 电话号码 QQ 密码 班级 数学 英语 C语言 java C高级):"
+#define ADD_STUDENTNODE_INFO            "输入学生信息(学号 姓名 年龄 性别 电话号码 QQ 密码 班级 数学 英语 C语言 java C高级 总分):"
 #define INPUT_INFO_CONTINUE             "是否继续输入信息,输入YES或者No(Y/N):"
 #define ADD_STUDENT_INFOMATION          "新增学生信息"
 #define ADD_TEACHER_INFOMATION          "新增教师信息"
