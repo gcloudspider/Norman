@@ -288,28 +288,119 @@ void AddUserInfo() {
 
 void modifyStudentInfo() {
     char ch;
+    int ret;
+    int userid;
+
     while(1) {
         system("clear");
         printf("%s\n",SEARCH_STUDENT_INFO);
         PrintStudentInfo(&g_pstudent);
+        printf("%s",INPUT_MODIFY_STUDENT_ID);
+        scanf("%d",&userid);
+        ret = onModifyUserFromLinkList(STUDENT,userid);
+        if(ret == 0){
+            while((ch=getchar())!='\n');
+            printf("%s",INFO_MODIFY_SUCCESS);
+            printf("%s",SAVE_MODIFYSTUDENT_TOFILE);
+            ch = getchar();
+            if(ch== 'y'||ch == 'Y'){
+                ret = onSaveLinkListToFile(STUDENT);
+                if(ret == 0) {
+                    printf("%s\n",SAVE_FILE_SUCCESS);
+                    onReloadLinkList(STUDENT);
+                    sleep(3);
+                    return;
+                } else {
+                    printf("%s",SAVE_FILE_FAILED);
+                    sleep(3);
+                    return;
+                }
+            } else {
+                break;
+            }
+        } else {
+            printf("%s",INFO_MODIFY_FAILED);
+            sleep(3);
+            break;
+        }
     }   
 }
 
 void modifyTeacherInfo() {
     char ch;
+    int ret,userid;
+
     while(1) {
         system("clear");
         printf("%s\n",SEARCH_STUDENT_INFO);
         PrintTeacherInfo(&g_pteacher);
+        printf("%s",INPUT_MODIFY_TEACHER_ID);
+        scanf("%d",&userid);
+        ret = onModifyUserFromLinkList(TEACHER,userid);
+        if(ret == 0){
+            while((ch=getchar())!='\n');
+            printf("%s",INFO_MODIFY_SUCCESS);
+            printf("%s",SAVE_MODIFYTEACHER_TOFILE);
+            ch = getchar();
+            if(ch== 'y'||ch == 'Y'){
+                ret = onSaveLinkListToFile(TEACHER);
+                if(ret == 0) {
+                    printf("%s\n",SAVE_FILE_SUCCESS);
+                    onReloadLinkList(TEACHER);
+                    sleep(3);
+                    return;
+                } else {
+                    printf("%s",SAVE_FILE_FAILED);
+                    sleep(3);
+                    return;
+                }
+            } else {
+                break;
+            }
+        } else {
+            printf("%s",INFO_MODIFY_FAILED);
+            sleep(3);
+            break;
+        }
     }   
 }
 
 void modifyAdminInfo() {
     char ch;
+    int ret,userid;
+
     while(1) {
         system("clear");
         printf("%s\n",SEARCH_STUDENT_INFO);
         PrintAdminInfo(&g_padmin);
+        printf("%s",INPUT_MODIFY_ADMIN_ID);
+        scanf("%d",&userid);
+        ret = onModifyUserFromLinkList(ADMINISTRATOR,userid);
+        if(ret == 0){
+            while((ch=getchar())!='\n');
+            printf("%s",INFO_MODIFY_SUCCESS);
+            printf("%s",SAVE_MODIFYADMIN_TOFILE);
+            ch = getchar();
+            if(ch== 'y'||ch == 'Y'){
+                ret = onSaveLinkListToFile(ADMINISTRATOR);
+                if(ret == 0) {
+                    printf("%s\n",SAVE_FILE_SUCCESS);
+                    onReloadLinkList(ADMINISTRATOR);
+                    sleep(3);
+                    return;
+                } else {
+                    printf("%s",SAVE_FILE_FAILED);
+                    sleep(3);
+                    return;
+                }
+            } else {
+                break;
+            }
+        } else {
+            printf("%s",INFO_MODIFY_FAILED);
+            sleep(3);
+            break;
+        }
     }   
 }
 

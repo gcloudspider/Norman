@@ -146,7 +146,7 @@
 #define INFO_MODIFY_FAILED              "修改数据失败!"
 #define SAVE_MODIFYSTUDENT_TOFILE       "是否保存修改的学生,输入YES/NO(Y/N):"
 #define SAVE_MODIFYTEACHER_TOFILE       "是否保存修改的教师,输入YES/NO(Y/N):"
-#define SAVE_MODIFYDMIN_TOFILE          "是否保存修改的管理员,输入YES/NO(Y/N):"
+#define SAVE_MODIFYADMIN_TOFILE         "是否保存修改的管理员,输入YES/NO(Y/N):"
 
 #define SEARCH_STUDENT_INFO             "当前学生信息如下:"
 #define SEARCH_TEACHER_INFO             "当前教师信息如下:"
