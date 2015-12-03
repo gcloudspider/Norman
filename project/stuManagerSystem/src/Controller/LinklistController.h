@@ -26,7 +26,11 @@ void onReloadLinkList(int usertype);
 
 STU* onSearchScoreSort(int sortkey);
 
-
 int AddUserNodeToLinkList(int usertype,void* pn);
+
+int onDelUserFromLinkList(int usertype,int userid);
+
+int onModifyUserFromLinkList(int usertype,int userid);
+
 
 #endif

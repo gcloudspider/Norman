@@ -29,14 +29,14 @@ TEA* onSearchTeacherLinkList(TEA *head,int userid);
 ADMIN* onSearchAdminLinkList(ADMIN *head,int userid);
 
 //删除链表节点
-int DelStudentLinkList(STU *head,int userid);
-int DelTeacherLinkList(TEA *head,int userid);
-int DelAdminLinkList(ADMIN *head,int userid);
+int DelStudentLinkList(STU **head,int userid);
+int DelTeacherLinkList(TEA **head,int userid);
+int DelAdminLinkList(ADMIN **head,int userid);
 
 //修改链表密码
-int ModifyStudentLinkList(STU *head,int userid,char *passwd);
-int ModifyTeacherLinkList(TEA *head,int userid,char *passwd);
-int ModifyAdminLinkList(ADMIN *head,int userid,char *passwd);
+int ModifyStudentLinkList(STU *head,int userid);
+int ModifyTeacherLinkList(TEA *head,int userid);
+int ModifyAdminLinkList(ADMIN *head,int userid);
 
 //新增用户
 int AddStudentLinkList(STU *head,STU* pn);

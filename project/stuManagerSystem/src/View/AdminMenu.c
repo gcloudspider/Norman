@@ -359,6 +359,7 @@ void ModifyUserInfo() {
 void delStudentInfo(){
     char ch;
     int userid;
+    int ret;
 
     while(1) {
         system("clear");
@@ -366,10 +367,30 @@ void delStudentInfo(){
         PrintStudentInfo(&g_pstudent);
         printf("%s",INPUT_DEL_STUDENT_ID);
         scanf("%d",&userid);
-
-        while((ch=getchar())!='\n');
-        ch = getchar();
-        if(ch== 'y'||ch == 'Y'){
+        ret = onDelUserFromLinkList(STUDENT,userid);
+        if(ret==0) {
+            while((ch=getchar())!='\n');
+            printf("%s",INFO_DEL_SUCCESS);
+            printf("%s",SAVE_DELSTUDENT_TOFILE);
+            ch = getchar();
+            if(ch== 'y'||ch == 'Y'){
+                ret = onSaveLinkListToFile(STUDENT);
+                if(ret == 0) {
+                    printf("%s\n",SAVE_FILE_SUCCESS);
+                    onReloadLinkList(STUDENT);
+                    sleep(3);
+                    return;
+                } else {
+                    printf("%s",SAVE_FILE_FAILED);
+                    sleep(3);
+                    return;
+                }
+            } else {
+                break;
+            }
+        } else {
+            printf("%s\n",INFO_DEL_FAILED);
+            sleep(3);
             break;
         }
     }
@@ -377,19 +398,81 @@ void delStudentInfo(){
 
 void delTeacherInfo() {
     char ch;
+    int userid;
+    int ret;
+
     while(1) {
         system("clear");
         printf("%s\n",SEARCH_TEACHER_INFO);
         PrintTeacherInfo(&g_pteacher);
+        printf("%s",INPUT_DEL_TEACHER_ID);
+        scanf("%d",&userid);
+        ret = onDelUserFromLinkList(TEACHER,userid);
+        if(ret==0) {
+            while((ch=getchar())!='\n');
+            printf("%s",INFO_DEL_SUCCESS);
+            printf("%s",SAVE_DELTEACHER_TOFILE);
+            ch = getchar();
+            if(ch== 'y'||ch == 'Y'){
+                ret = onSaveLinkListToFile(TEACHER);
+                if(ret == 0) {
+                    printf("%s\n",SAVE_FILE_SUCCESS);
+                    onReloadLinkList(TEACHER);
+                    sleep(3);
+                    return;
+                } else {
+                    printf("%s",SAVE_FILE_FAILED);
+                    sleep(3);
+                    return;
+                }
+            } else {
+                break;
+            }
+        } else {
+            printf("%s\n",INFO_DEL_FAILED);
+            sleep(3);
+            break;
+        }
     }   
 }
 
 void delAdminInfo() {
     char ch;
+    int userid;
+    int ret;
+
     while(1) {
         system("clear");
         printf("%s\n",SEARCH_ADMIN_INFO);
         PrintAdminInfo(&g_padmin);
+        printf("%s",INPUT_DEL_ADMIN_ID);
+        scanf("%d",&userid);
+        ret = onDelUserFromLinkList(ADMINISTRATOR,userid);
+        if(ret==0) {
+            while((ch=getchar())!='\n');
+            printf("%s",INFO_DEL_SUCCESS);
+            printf("%s",SAVE_DELADMIN_TOFILE);
+            ch = getchar();
+            if(ch== 'y'||ch == 'Y'){
+                ret = onSaveLinkListToFile(ADMINISTRATOR);
+                if(ret == 0) {
+                    printf("%s\n",SAVE_FILE_SUCCESS);
+                    onReloadLinkList(ADMINISTRATOR);
+                    sleep(3);
+                    return;
+                } else {
+                    printf("%s",SAVE_FILE_FAILED);
+                    sleep(3);
+                    return;
+                }
+            } else {
+                break;
+            }
+        } else {
+            printf("%s\n",INFO_DEL_FAILED);
+            sleep(3);
+            break;
+        }
     }   
 }
 

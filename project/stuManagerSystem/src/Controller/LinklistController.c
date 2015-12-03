@@ -111,3 +111,40 @@ int AddUserNodeToLinkList(int usertype,void* pn) {
     }
     return ret;
 }
+
+int onDelUserFromLinkList(int usertype,int userid) {
+    int ret;
+    switch(usertype) {
+        case STUDENT:
+            ret = DelStudentFromLinkListModel(&g_pstudent,userid);
+            break;
+        case TEACHER:
+            ret = DelTeacherFromLinkListModel(&g_pteacher,userid);
+            break;
+        case ADMINISTRATOR:
+            ret = DelAdminFromLinkListModel(&g_padmin,userid);
+            break;
+        default:
+            break;
+    }
+    return ret;
+}
+
+
+int onModifyUserFromLinkList(int usertype,int userid) {
+    int ret;
+    switch(usertype) {
+        case STUDENT:
+            ret = ModifyStudentFromLinkListModel(g_pstudent,userid);
+            break;
+        case TEACHER:
+            ret = ModifyTeacherFromLinkListModel(g_pteacher,userid);
+            break;
+        case ADMINISTRATOR:
+            ret = ModifyAdminFromLinkListModel(g_padmin,userid);
+            break;
+        default:
+            break;
+    }
+    return ret;
+}

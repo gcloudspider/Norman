@@ -119,7 +119,7 @@ STU* onSearchScoreSortByTotal(STU* head) {
 
 
 int AddStudentNodeToLinkListModel(STU* head,STU* pn) {
-    return AddStudentLinkList(head,pn);
+     return AddStudentLinkList(head,pn);
 }
 
 int AddTeacherNodeToLinkListModel(TEA* head,TEA* pn) {
@@ -128,4 +128,29 @@ int AddTeacherNodeToLinkListModel(TEA* head,TEA* pn) {
 
 int AddAdminNodeToLinkListModel(ADMIN* head,ADMIN* pn) {
     return AddAdminLinkList(head,pn);
+}
+
+
+int DelStudentFromLinkListModel(STU** head,int userid) {
+   return DelStudentLinkList(&*head,userid);
+}
+
+int DelTeacherFromLinkListModel(TEA** head,int userid) {
+    return DelTeacherLinkList(&*head,userid);
+}
+
+int DelAdminFromLinkListModel(ADMIN** head,int userid) {
+    return DelAdminLinkList(&*head,userid);
+}
+
+int ModifyStudentFromLinkListModel(STU* head,int userid) {
+    return ModifyStudentLinkList(head,userid);
+}
+
+int ModifyTeacherFromLinkListModel(TEA* head,int userid) {
+    return ModifyTeacherLinkList(head,userid);
+}
+
+int ModifyAdminFromLinkListModel(ADMIN* head,int userid) {
+    return ModifyAdminLinkList(head,userid);
 }

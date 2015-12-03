@@ -142,6 +142,12 @@
 #define INPUT_MODIFY_TEACHER_ID         "输入要修改的教师ID:"
 #define INPUT_MODIFY_ADMIN_ID           "输入要修改的管理员ID:"
 
+#define INFO_MODIFY_SUCCESS             "修改数据成功!"
+#define INFO_MODIFY_FAILED              "修改数据失败!"
+#define SAVE_MODIFYSTUDENT_TOFILE       "是否保存修改的学生,输入YES/NO(Y/N):"
+#define SAVE_MODIFYTEACHER_TOFILE       "是否保存修改的教师,输入YES/NO(Y/N):"
+#define SAVE_MODIFYDMIN_TOFILE          "是否保存修改的管理员,输入YES/NO(Y/N):"
+
 #define SEARCH_STUDENT_INFO             "当前学生信息如下:"
 #define SEARCH_TEACHER_INFO             "当前教师信息如下:"
 #define SEARCH_ADMIN_INFO               "当前管理员信息如下:"
@@ -153,6 +159,11 @@
 #define INPUT_DEL_STUDENT_ID            "输入要删除的学生ID:"
 #define INPUT_DEL_TEACHER_ID            "输入要删除的教师ID:"
 #define INPUT_DEL_ADMIN_ID              "输入要删除的管理员ID:"
+#define INFO_DEL_SUCCESS                "删除数据成功!"
+#define INFO_DEL_FAILED                 "删除数据失败!"
+#define SAVE_DELSTUDENT_TOFILE          "是否保存删除的学生,输入YES/NO(Y/N):"
+#define SAVE_DELTEACHER_TOFILE          "是否保存删除的教师,输入YES/NO(Y/N):"
+#define SAVE_DELADMIN_TOFILE            "是否保存删除的管理员,输入YES/NO(Y/N):"
 
 #define SEARCH_USER_INFOMATION          "搜索用户信息"
 #define SEARCH_STUDENT_INFOMATION       "搜索学生信息"

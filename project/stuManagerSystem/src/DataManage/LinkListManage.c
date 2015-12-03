@@ -423,33 +423,117 @@ STU* onSortStudentLinkListByTotal(STU* head) {
     return new_head;
 }
 
-int DelStudentLinkList(STU *head,int userid) {
+int DelStudentLinkList(STU **head,int userid) {
     //TODO:删除学生链表中的某个节点
+    STU* pn;
+    pn = *head;
+    //1.查找要删除的节点
+    while(pn) {
+        if(pn->id == userid) break;
+        pn = pn->next;
+    }
+
+    if(pn){
+        if(pn == *head) {
+            //要删除的是第一个
+            if(pn->next) {          //是否为最后一个
+                pn->next->pre = NULL;
+                *head = pn->next;
+            }else {
+                *head=NULL;          //是最后一个,解除head指针指向
+            }
+        } else {
+            if(pn->next){
+             pn->next->pre=pn->pre;
+             pn->pre->next = pn->next;
+            }else {
+                pn->pre->next = pn->next;
+            }
+        }
+    } else {
+        return -1;
+    }
     return 0;
 }
 
-int DelTeacherLinkList(TEA *head,int userid) {
+int DelTeacherLinkList(TEA **head,int userid) {
     //TODO:删除教师链表中某个节点
+    TEA* pn;
+    pn = *head;
+    //1.查找要删除的节点
+    while(pn) {
+        if(pn->id == userid) break;
+        pn = pn->next;
+    }
+
+    if(pn){
+        if(pn == *head) {
+            //要删除的是第一个
+            if(pn->next) {          //是否为最后一个
+                pn->next->pre = NULL;
+                *head = pn->next;
+            }else {
+                *head=NULL;          //是最后一个,解除head指针指向
+            }
+        } else {
+            if(pn->next){
+             pn->next->pre=pn->pre;
+             pn->pre->next = pn->next;
+            }else {
+                pn->pre->next = pn->next;
+            }
+        }
+    } else {
+        return -1;
+    }
     return 0;
 }
 
-int DelAdminLinkList(ADMIN *head,int userid) {
+int DelAdminLinkList(ADMIN **head,int userid) {
     //TODO:删除管理员链表中某个节点
+    ADMIN* pn;
+    pn = *head;
+    //1.查找要删除的节点
+    while(pn) {
+        if(pn->id == userid) break;
+        pn = pn->next;
+    }
+
+    if(pn){
+        if(pn == *head) {
+            //要删除的是第一个
+            if(pn->next) {          //是否为最后一个
+                pn->next->pre = NULL;
+                *head = pn->next;
+            }else {
+                *head=NULL;          //是最后一个,解除head指针指向
+            }
+        } else {
+            if(pn->next){
+             pn->next->pre=pn->pre;
+             pn->pre->next = pn->next;
+            }else {
+                pn->pre->next = pn->next;
+            }
+        }
+    } else {
+        return -1;
+    }
     return 0;
 }
 
 
-int ModifyStudentLinkList(STU *head,int userid,char *passwd) {
+int ModifyStudentLinkList(STU *head,int userid) {
     //TODO: 修改学生链表信息
     return 0;
 }
 
-int ModifyTeacherLinkList(TEA *head,int userid,char *passwd) {
+int ModifyTeacherLinkList(TEA *head,int userid) {
     //TODO:修改教师链表节点信息
     return 0;
 }
 
-int ModifyAdminLinkList(ADMIN *head,int userid,char *passwd) {
+int ModifyAdminLinkList(ADMIN *head,int userid) {
     //TODO:修改管理员链表节点信息
     return 0;
 }
