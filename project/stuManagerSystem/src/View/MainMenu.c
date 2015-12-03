@@ -30,85 +30,78 @@ void ShowLoginMenu(int logintype) {
     char passwd[32] = {0};
     size_t ret,result;
 
-    //while(1) {
-        system("clear");
-        switch(logintype) {
-            case STUDENT:
-                printf("%s",PLEASE_INPUT_STUDENT_ID);
-                scanf("%d",&userid);
-                ret = onLoginAuthUserId(STUDENT,userid);
-                if(ret == 0) {
-                    printf("%s",PLEASE_INPUT_STUDENT_PASSWD);
-                    scanf("%s",passwd);
-                    result = onLoginAuthPasswd(STUDENT,userid,passwd);
-                    if(result == 0) {
-                        printf("%s\n",LOGIN_SUCCESS_INFO);
-                        sleep(1);
-                        ShowStudentMenu(userid);
-                    } else {
-                        printf("%s\n",AUTH_PASSWD_FAILED_INFO);
-                        sleep(3);
-                    }
+    system("clear");
+    switch(logintype) {
+        case STUDENT: {
+            printf("%s",PLEASE_INPUT_STUDENT_ID);
+            scanf("%d",&userid);
+            ret = onLoginAuthUserId(STUDENT,userid);
+            if(ret == 0) {
+                printf("%s",PLEASE_INPUT_STUDENT_PASSWD);
+                scanf("%s",passwd);
+                result = onLoginAuthPasswd(STUDENT,userid,passwd);
+                if(result == 0) {
+                    printf("%s\n",LOGIN_SUCCESS_INFO);
+                    sleep(1);
+                    ShowStudentMenu(userid);
                 } else {
-                    printf("%s\n",AUTH_USERID_FAILED_INFO);
+                    printf("%s\n",AUTH_PASSWD_FAILED_INFO);
                     sleep(3);
                 }
-                break;
-            case TEACHER:
-                printf("%s",PLEASE_INPUT_TEACHER_ID);
-                scanf("%d",&userid);
-                ret = onLoginAuthUserId(TEACHER,userid);
-                if(ret == 0) {
-                    printf("%s",PLEASE_INPUT_TEACHER_PASSWD);
-                    scanf("%s",passwd);
-                    result = onLoginAuthPasswd(TEACHER,userid,passwd);
-                    if(result == 0) {
-                        printf("%s\n",LOGIN_SUCCESS_INFO);
-                        sleep(1);
-                        ShowTeacherMenu(userid);
-                    } else {
-                        printf("%s\n",AUTH_PASSWD_FAILED_INFO);
-                        sleep(3);  
-                    }
-                } else {
-                    printf("%s\n",AUTH_USERID_FAILED_INFO);   
-                    sleep(3);
-                }
-                break;
-            case ADMINISTRATOR:
-                printf("%s",PLEASE_INPUT_ADMIN_ID);
-                scanf("%d",&userid);
-                ret = onLoginAuthUserId(ADMINISTRATOR,userid);
-                if(ret == 0) {
-                    printf("%s",PLEASE_INPUT_ADMIN_PASSWD);
-                    scanf("%s",passwd);
-                    result = onLoginAuthPasswd(ADMINISTRATOR,userid,passwd);
-                    if(result == 0) {
-                        printf("%s\n",LOGIN_SUCCESS_INFO);
-                        sleep(1);
-                        ShowAdminMenu(userid);
-                    } else {
-                        printf("%s\n",AUTH_PASSWD_FAILED_INFO);
-                        sleep(3);
-                    }   
-                } else {
-                    printf("%s\n",AUTH_USERID_FAILED_INFO);   
-                    sleep(3);
-                }
-                break;
-            default:
-                break;
+            } else {
+                printf("%s\n",AUTH_USERID_FAILED_INFO);
+                sleep(3);
+            }
+            break;
         }
-    //}
+        case TEACHER: {
+            printf("%s",PLEASE_INPUT_TEACHER_ID);
+            scanf("%d",&userid);
+            ret = onLoginAuthUserId(TEACHER,userid);
+            if(ret == 0) {
+                printf("%s",PLEASE_INPUT_TEACHER_PASSWD);
+                scanf("%s",passwd);
+                result = onLoginAuthPasswd(TEACHER,userid,passwd);
+                if(result == 0) {
+                    printf("%s\n",LOGIN_SUCCESS_INFO);
+                    sleep(1);
+                    ShowTeacherMenu(userid);
+                } else {
+                    printf("%s\n",AUTH_PASSWD_FAILED_INFO);
+                    sleep(3);  
+                }
+            } else {
+                printf("%s\n",AUTH_USERID_FAILED_INFO);   
+                sleep(3);
+            }
+            break;
+        }
+        case ADMINISTRATOR: {
+            printf("%s",PLEASE_INPUT_ADMIN_ID);
+            scanf("%d",&userid);
+            ret = onLoginAuthUserId(ADMINISTRATOR,userid);
+            if(ret == 0) {
+                printf("%s",PLEASE_INPUT_ADMIN_PASSWD);
+                scanf("%s",passwd);
+                result = onLoginAuthPasswd(ADMINISTRATOR,userid,passwd);
+                if(result == 0) {
+                    printf("%s\n",LOGIN_SUCCESS_INFO);
+                    sleep(1);
+                    ShowAdminMenu(userid);
+                } else {
+                    printf("%s\n",AUTH_PASSWD_FAILED_INFO);
+                    sleep(3);
+                }   
+            } else {
+                printf("%s\n",AUTH_USERID_FAILED_INFO);   
+                sleep(3);
+            }
+            break;
+        }
+        default:
+            break;   
+    }
     return;
-}
-
-void ShowLoginSuccessMenu() {
-    
-}
-
-void ShowLoginFailedMenu() {
-
 }
 
 void ShowMainMenu() {
@@ -130,10 +123,11 @@ void ShowMainMenu() {
         printf("\t\t##                 4.%s                       ##\n",LOGOUT);
         printf("\t\t##################################################\n");
 
-        printf("\n\n");
+        printf("\n");
         printf("%s",SELECT_LOGIN_USER);
-        scanf("%c",&ch);
-        //ch=getchar();
+        
+        ch=getchar();
+
         switch(ch) {
             case '1':
                 ShowLoginMenu(STUDENT);

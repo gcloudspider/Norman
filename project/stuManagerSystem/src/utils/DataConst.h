@@ -172,9 +172,10 @@
 #define SEARCH_STUDENT_INFOMATION       "搜索学生信息"
 #define SEARCH_TEACHER_INFOMATION       "搜索教师信息"
 #define SEARCH_ADMIN_INFOMATION         "搜索管理员信息"
-#define INPUT_SEARCh_STUDENT_ID         "输入要查找的学生ID:"
+#define INPUT_SEARCH_STUDENT_ID         "输入要查找的学生ID:"
 #define INPUT_SEARCH_TEACHER_ID         "输入要查找的教师ID:"
 #define INPUT_SEARCH_ADMIN_ID           "输入要查找的管理员ID:"
+#define CONTINUE_SEARCH_USER            "是否继续查找用户:输入YES/NO(Y/N):"
 
 #define SEARCH_TEACHER_ID               "按工号搜索"
 #define SEARCH_TEACHER_NAME             "按教师姓名搜索"

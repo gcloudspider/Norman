@@ -655,15 +655,136 @@ void DelUserInfo() {
 }
 
 void searchStudentInfo() {
+    char ch;
+    int userid;
+    STU* pn;
 
+    system("clear");
+    while(1) {
+        printf("%s",INPUT_SEARCH_STUDENT_ID);
+        scanf("%d",&userid);
+        pn = onSearchUserInfo(STUDENT,userid);
+        if(pn == NULL) {
+            printf("%s\n",QUERY_STUDENT_INFO_ERROR);
+            sleep(3);
+            return;
+        } else {
+            printf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n",
+            SHOW_STUDENT_NUM,
+            SHOW_STUDENT_NAME,
+            SHOW_STUDENT_AGE,
+            SHOW_STUDENT_SEX,
+            SHOW_STUDENT_TELNUM,
+            SHOW_STUDENT_QQ,
+            SHOW_STUDENT_CLASSID,
+            SHOW_STUDENT_PASSWD
+            );
+            printf("%d\t%s\t%d\t%d\t%s\t%s\t%d\t%s\n",
+            pn->id,
+            pn->name,
+            pn->age,
+            pn->sex,
+            pn->telnum,
+            pn->QQ,
+            pn->classid,
+            pn->passwd
+            );
+        }
+        while((ch=getchar())!='\n');
+        printf("%s",CONTINUE_SEARCH_USER);
+        ch = getchar();
+        if(ch == 'y'||ch == 'Y') {
+            continue;
+        }else {
+            break;
+        }
+    }
 }
 
 void searchTeacherInfo() {
+    char ch;
+    int userid;
+    TEA* pn;
 
+    system("clear");
+    while(1) {
+        printf("%s",INPUT_SEARCH_TEACHER_ID);
+        scanf("%d",&userid);
+        pn = onSearchUserInfo(TEACHER,userid);
+        if(pn == NULL) {
+            printf("%s\n",QUERY_STUDENT_INFO_ERROR);
+            sleep(3);
+            return;
+        } else {
+            printf("%s\t%s\t%s\t%s\t%s\t%s\t%s\n",
+            SHOW_TEACHER_NUM,
+            SHOW_TEACHER_NAME,
+            SHOW_TEACHER_AGE,
+            SHOW_TEACHER_SEX,
+            SHOW_TEACHER_CLASSNO,
+            SHOW_TEACHER_LESSION,
+            SHOW_TEACHER_PASSWD
+            );
+            printf("%d\t%s\t%d\t%d\t%d\t%d\t%s\n",
+            pn->id,
+            pn->name,
+            pn->age,
+            pn->sex,
+            pn->class_no,
+            pn->lession,
+            pn->passwd
+            );
+        }
+        while((ch=getchar())!='\n');
+        printf("%s",CONTINUE_SEARCH_USER);
+        ch = getchar();
+        if(ch == 'y'||ch == 'Y') {
+            continue;
+        }else {
+            break;
+        }
+    }   
 }
 
 void searchAdminInfo() {
+    char ch;
+    int userid;
+    ADMIN* pn;
 
+    system("clear");
+    while(1) {
+        printf("%s",INPUT_SEARCH_ADMIN_ID);
+        scanf("%d",&userid);
+        pn = onSearchUserInfo(ADMINISTRATOR,userid);
+        if(pn == NULL) {
+            printf("%s\n",QUERY_STUDENT_INFO_ERROR);
+            sleep(3);
+            return;
+        } else {
+            printf("%s\t%s\t%s\t%s\t%s\n",
+            SHOW_ADMIN_NUM,
+            SHOW_ADMIN_NAME,
+            SHOW_ADMIN_AGE,
+            SHOW_ADMIN_SEX,
+            SHOW_ADMIN_PASSWD
+            );
+            printf("%d\t%s\t%d\t%d\t%s\n",
+            pn->id,
+            pn->name,
+            pn->age,
+            pn->sex,
+            pn->passwd
+            );
+        }
+        while((ch=getchar())!='\n');
+        printf("%s",CONTINUE_SEARCH_USER);
+        ch = getchar();
+        if(ch == 'y'||ch == 'Y') {
+            continue;
+        }else {
+            break;
+        }
+    }   
 }
 
 void SearchUserInfo() {
