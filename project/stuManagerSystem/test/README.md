@@ -6,11 +6,6 @@
 ##Description: 
 ###################################################
 
-filemanage.c  <br/>
-   测试stuManageSystem链表程序 <br />
+test 测试目录:
 
-maketest <br />
-   测试make<br />
-
-automaketest <br />
-   测试大项目auto make 编写<br/> 
+    执行make 生成filemanage 程序运行可测试文件封装函数

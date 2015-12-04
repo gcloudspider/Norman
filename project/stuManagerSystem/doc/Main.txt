@@ -1,5 +1,15 @@
 
+Install:
+    make 执行make命令，在src下生成程序
 
+    cd src 进入src目录 
 
-编译:
-    gcc -o UserInfoManageSystem UserInfoManageSystem.c ./View/MainMenu.c Model/InitAppModel.c DataManage/FileManage.c utils/global.h utils/global.c Model/ReleaseAppModel.c  Controller/AppController.c DataManage/LinkListManage.c Controller/LoginController.c Model/LoginModel.c 
+    ./stuManageSystem运行命令
+
+    密码存放在../db目录
+
+disct:
+    打包成tar.gz  执行make disct命令即可打包在当前目录下
+
+clean:
+    make clean 清理目录下的临时生成文件
