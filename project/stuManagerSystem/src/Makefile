@@ -4,9 +4,9 @@ CXX = gcc
 BIN = UserInfoManageSystem
 OBJS = UserInfoManageSystem.o ./View/MainMenu.o ./View/AdminMenu.o ./View/StudentMenu.o ./View/TeacherMenu.o ./Controller/AppController.o ./Controller/LinklistController.o ./Controller/LoginController.o ./Model/InitAppModel.o ./Model/LinkListModel.o ./Model/LoginModel.o ./DataManage/FileManage.o ./DataManage/LinkListManage.o ./utils/global.o ./Model/ReleaseAppModel.o 
 
-.PHONY: all clean $(SUBDIRS)
+.PHONY: all clean
 
-all clean: UserInfoManageSystem.o $(BIN)
+all:UserInfoManageSystem.o $(BIN)
 	@echo "---enter src---"
 	cd utils && $(MAKE) $@
 	cd View && $(MAKE) $@
@@ -15,6 +15,18 @@ all clean: UserInfoManageSystem.o $(BIN)
 	cd DataManage && $(MAKE) $@
 	@echo "---level src---"
 	
+
+clean:
+	@echo "---enter src---"
+	cd utils && $(MAKE) $@
+	cd View && $(MAKE) $@
+	cd Controller && $(MAKE) $@
+	cd Model && $(MAKE) $@
+	cd DataManage && $(MAKE) $@
+	@echo "---level src---"
+	rm -rf *.o
+	rm -rf $(BIN)
+
 $(BIN):$(OBJS)
 	$(CXX) $(OBJS) -o $@
 
@@ -22,4 +34,5 @@ UserInfoManageSystem.o:UserInfoManageSystem.c ./utils/DataStruct.h ./utils/globa
 	@echo "----enter src UserInfoManageSystem----"
 	$(CXX) -c $<
 	@echo "----leave src UserInfoManageSystem----"
+
 

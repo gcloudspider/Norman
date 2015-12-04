@@ -126,6 +126,7 @@ void ShowMainMenu() {
         printf("\n");
         printf("%s",SELECT_LOGIN_USER);
         
+        while((ch=getchar())!= '\n');
         ch=getchar();
 
         switch(ch) {
