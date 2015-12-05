@@ -41,6 +41,14 @@ decltype(n+=m) d = c;
 //auto int r;       
 //auto s;           auto为占位符,声明变量必须马上初始化
 
+int& food(int& i);
+float food(float& f);
+template <typename T>
+/*返回值类型后置语法:为了解决函数返回值类型依赖于参数而导致难以确定返回值类型的问题*/
+auto func(T& val) -> decltype(foo(val)) {
+    return foo(val);
+}
+
 int main() {
     printf("%p\t%d\n",&x,x);
     printf("%p\t%d\n",pi,*pi);
