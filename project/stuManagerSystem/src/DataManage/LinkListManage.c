@@ -183,7 +183,6 @@ STU* onSortStudentLinkListByName(STU* head) {
             }
             pn = pn->next;
         }
-        //printf("search max=%p\tstu_num=%d\n",max,max->stu_num);
 
         if(max) {
             //是否new_head 是否为空
