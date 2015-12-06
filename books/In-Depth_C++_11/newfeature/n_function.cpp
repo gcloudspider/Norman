@@ -39,14 +39,14 @@ class Bar{
 };
 
 int main(){
-    function<void(void)> fr1 = func;
+    function<void(void)> fr1 = func;        //绑定普通函数
     fr1();
 
-    function<int(int)> fr2 = Foo::foo_func;
+    function<int(int)> fr2 = Foo::foo_func;     //绑定一个类的静态成员函数
     cout<<fr2(123)<<endl;
 
     Bar bar;
-    fr2 = bar;
+    fr2 = bar;                              //绑定一个仿函数
     cout<<fr2(123) <<endl;
     
     return 0;
