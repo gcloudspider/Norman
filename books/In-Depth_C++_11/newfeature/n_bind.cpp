@@ -18,6 +18,15 @@
 #include<functional>
 using namespace std;
 
+class A{
+public:
+    int i_ = 0;
+
+    void output(int x,int y){
+        cout<<x <<" "<<y<<endl;
+    }
+};
+
 void call_when_even(int x,const function<void(int)>& f) {
     if(!(x & 1)) {
         f(x);
@@ -30,6 +39,10 @@ void output(int x){
 
 void output_add_2(int x) {
     cout<<x+2<<" ";
+}
+
+void output_1(int x,int y){
+    cout<<x<<" "<<y<<endl;
 }
 
 int main(){
@@ -47,6 +60,27 @@ int main(){
         }
         cout<<endl;
     }
+///////////////////////////
+    bind(output_1,1,2)();
+    bind(output_1,placeholders::_1,2)(1);
+    bind(output_1,2,placeholders::_1)(1);
+
+    //bind(output_1,2,placeholders::_2)(1);   //调用时没有第二个参数
+    bind(output_1,2,placeholders::_2)(1,2);
+
+    bind(output_1,placeholders::_1,placeholders::_2)(1,2);
+    bind(output_1,placeholders::_2,placeholders::_2)(1,2);
+    bind(output_1,placeholders::_2,placeholders::_1)(1,2);
+//////////////////////////
+    A a;
+    function<void(int,int)> fr = bind(&A::output,&a,placeholders::_1,placeholders::_2);
+    fr(1,2);
+
+    function<int&(void)> fr_i = bind(&A::i_,&a);
+    fr_i() = 123;
+
+    cout<<a.i_ <<endl;
+
     return 0;
 }
 
