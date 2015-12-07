@@ -1,6 +1,6 @@
 #Compiled source#
 #################
-
+*.doc
 *.swp
 *.txt~
 #Packages#
