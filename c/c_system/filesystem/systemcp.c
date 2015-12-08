@@ -72,7 +72,12 @@ int mycp(const char* dst,const char* src){
     return 0;
 }
 
-int main(){
+int main(int argc,char* argv[]){
+    printf("%d\n",argc);
+    if(argc < 3) {
+        printf("Usage: cp dst src\n");
+        return -1;
+    }
     int ret;
     ret = mycp("b.txt","a.txt");
 
