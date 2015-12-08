@@ -15,12 +15,14 @@
 ##########################################################*/
 
 #include<stdio.h>
+#include<stdlib.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <unistd.h>
 #include <errno.h>
 #define MAXLEN 10
+#define VERSION "1.0"
 
 void mycat(int fd){
     char buffer[MAXLEN] = {0};
@@ -36,7 +38,7 @@ void mycat(int fd){
     }
 
     if(ret >0) {
-        //buffer[ret] = 0;
+        buffer[ret] = 0;
         printf("%s",buffer);
     }
 }
@@ -54,17 +56,43 @@ int isHere(const char* filename){
     return fd;
 }
 
-int main(){
-    int ret;
-    ret = isHere("a.txt");
+void usage(){
+    fprintf(stderr,"Usage: systemcat <filename>\n");
+    exit(2);
+}
 
-    if(-1==ret){
-        printf("file not exist!\n");
-    } else {
-        //printf("file exist!\n");
-        mycat(ret);
-        
-        close(ret);
+int main(int argc,char *argv[]){
+    int ret;
+    int ch;
+    while((ch =getopt(argc,argv,"hV"))!=EOF){
+        switch(ch){
+            case 'h':
+                usage();
+                break;
+            case 'V':
+                printf("%s Version:%s\n",argv[1],VERSION);
+                exit(0);
+                break;
+            default:
+                usage();
+                break;
+        }
     }
+
+    if(argc == 1){
+        usage();
+    }
+
+    if(argc >1){
+        char *str = argv[1];
+        ret = isHere(str);
+        if(-1==ret){
+            printf("file not exist!\n");
+        } else {
+            mycat(ret);
+            close(ret);
+        }
+    }
+
     return 0;
 }

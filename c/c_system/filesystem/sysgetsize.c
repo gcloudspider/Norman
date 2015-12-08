@@ -38,9 +38,9 @@ int getsize(const char* str){
     if(-1 == ret){
         perror("error");
         return ret;
-    } else {
-        close(fd);
     }
+    
+    close(fd);
 
     return ret;
 }

@@ -73,13 +73,14 @@ int mycp(const char* dst,const char* src){
 }
 
 int main(int argc,char* argv[]){
-    printf("%d\n",argc);
     if(argc < 3) {
         printf("Usage: cp dst src\n");
         return -1;
     }
     int ret;
-    ret = mycp("b.txt","a.txt");
+    char *src = argv[2];
+    char *dst = argv[1];
+    ret = mycp(dst,src);
 
     if(-1 == ret){
         printf("copy failed!\n");  
