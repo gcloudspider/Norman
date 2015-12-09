@@ -48,5 +48,8 @@
 *.x86_64
 *.hex
 
+#dir
+project/github/
+
 #files
 tags
