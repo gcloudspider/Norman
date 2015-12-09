@@ -32,62 +32,56 @@ void usage(){
 void merge(char* dst,const char* src,int n){
     int fd,fs;
     int ret,wet;
-    char buffer[MAXLEN] = {0};
+    char ch;
 
     fs = open(src,O_RDONLY);
     if(-1 == fs){
+        printf("%d\n",__LINE__);
         perror("error");
         return ;
     }
 
     fd = open(dst,O_WRONLY);
     if(-1 == fd){
+        printf("%d\n",__LINE__);
         perror("error");
         return ;
     }
     
-    if(n==0){
-        ret = lseek(fd,0,SEEK_CUR);
-    } else if(n == -1){
-        ret = lseek(fd,0,SEEK_END);
-    } else {
-        ret = lseek(fd,n,SEEK_SET);
-    }
- 
+    ret = lseek(fd,0,SEEK_END);
     if(-1 == ret){
+        printf("%d\n",__LINE__);
         perror("error");
-        return;
+        return ;
     }
 
-    while(1){
-        ret = read(fs,buffer,MAXLEN);
-        if(-1 == ret){
-            perror("error");
-            return ;
+    if(ret > n){
+        lseek(fd,n,SEEK_SET);
+        lseek(fs,0,SEEK_END);
+
+        while(1){
+            ret = read(fd,&ch,1);
+            if(ret<=0)break;
+            write(fs,&ch,1);
         }
-        
-        if(ret < MAXLEN){
-            break;
+        lseek(fd,n,SEEK_SET);
+        lseek(fs,0,SEEK_SET);
+        while(1){
+            ret = read(fs,&ch,1);
+            if(ret<=0)break;
+            write(fd,&ch,1);
         }
-        
-        wet = write(fd,buffer,MAXLEN);
-        if(-1 == wet){
-            perror("error");
-            return ;
+    }else {
+        lseek(fd,0,SEEK_END);
+        while(1){
+            ret = read(fs,&ch,1);
+            if(ret<=0) break;
+            write(fd,&ch,1);
         }
     }
 
-    if(ret >0){
-        buffer[ret] = 0;
-        wet = write(fd,buffer,MAXLEN);
-        if(-1 == wet){
-            perror("error");
-            return ;
-        }
-    }
     close(fs);
     close(fd);
-
 }
 
 int main(int argc,char *argv[]) {
