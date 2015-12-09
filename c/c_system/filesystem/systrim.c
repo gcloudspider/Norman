@@ -14,17 +14,37 @@
 ##
 ##########################################################*/
 
-#include<stdio.h>
-#include<stdlib.h>
-#include<getopt.h>
-#include<sys/types.h>
-#include<sys/stat.h>
-
+#include"head.h"
 void usage(){
     fprintf(stderr,"Usage: systrim <filename>\n");
     exit(2);
 }
 
+int strtrim(const char* src){
+    int fd;
+    char ch;
+    int ret;
+    int rd_off =0,wr_off=0;
+    fd = open(src,O_RDWR);
+    if(-1 == fd){
+        perror("error");
+        return -1;
+    }
+    while(1){
+        ret = read(fd,&ch,1);
+        if(ret <=0)break;
+        rd_off = lseek(fd,0,SEEK_CUR);
+        if(ch !=' '){
+            lseek(fd,wr_off,SEEK_SET);
+            write(fd,&ch,1);
+            wr_off=lseek(fd,0,SEEK_CUR);
+        }
+        lseek(fd,rd_off,SEEK_SET);
+    }
+    ftruncate(fd,wr_off);
+    close(fd);
+    return 0;
+}
 
 int main(int argc,char* argv[]){
     int ch;
@@ -43,14 +63,9 @@ int main(int argc,char* argv[]){
         }
     }
 
-    if(argc == 1){
+    if(argc <2){
         usage();
     }
-
-    if(argc >1 && argc <3){
-        usage();
-    }
-    
-
-
+ 
+    strtrim(argv[1]);
 }
