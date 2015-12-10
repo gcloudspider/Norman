@@ -38,23 +38,11 @@ int main(int argc,char* argv[]){
     int i,count;
 
     if(argc == 1){
-        //fd = opendir("./");
-        //while(d=readdir(fd)){
-        //    printf("%s\t",d->d_name);   
-        //}
         count = scandir("./",&m,filter,alphasort);
         for(i=0;i<count;i++){
             printf("%s\n",m[i]->d_name);
         }
     }
-
-    fd = opendir(argv[1]);
-    while(d=readdir(fd)){
-        stat(d->d_name,finfo);
-        printf("%u",(unsigned int)finfo->st_mode);
-        printf("%s\n",d->d_name);
-    }
-
 
     while((ch=getopt(argc,argv,"hvl"))!=EOF){
         switch(ch){
