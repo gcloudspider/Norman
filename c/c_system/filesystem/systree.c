@@ -16,6 +16,8 @@
 
 #include<stdio.h>
 #include"head.h"
+char dirname[1024] = {0};
+
 
 int filter(const struct dirent *d){
     if(strcmp(d->d_name,".")==0||(strcmp(d->d_name,"..")==0))
@@ -23,7 +25,26 @@ int filter(const struct dirent *d){
     return 1;
 }
 
-int mytree(const char* dir){
+int mytestree(const char* dir){
+    struct dirent **m;
+    int i,cout;
+    cout = scandir(dir,&m,filter,alphasort);
+    for(i=0;i<cout;i++){
+        struct stat buf;
+        int ret;
+        ret = lstat(m[i]->d_name,&buf);
+        if(-1 == ret){
+            perror("error");
+            return -1;
+        }
+        if(S_ISDIR(buf.st_mode)){
+            mytestree(m[i]->d_name);
+        }
+        printf("%s\n",m[i]->d_name);
+    }
+}
+
+int mytree(char* dir){
     int ret;
     struct dirent **m;
     struct stat buf;
@@ -32,7 +53,10 @@ int mytree(const char* dir){
 
     cout=scandir(dir,&m,filter,alphasort);
     for(i=0;i<cout;i++){
-        ret = stat(m[i]->d_name,&buf);
+        strcpy(dirname,dir);
+        strcat(dirname,"/");
+        strcat(dirname,m[i]->d_name);
+        ret = lstat(m[i]->d_name,&buf);
         if(-1 == ret){
             perror("error");
             //printf("%s\n",m[i]->d_name);
@@ -44,12 +68,14 @@ int mytree(const char* dir){
             case S_IFCHR:
                 break;
             case S_IFDIR:
-                mytree(m[i]->d_name);
+                strcat(dirname,m[i]->d_name);
+                mytree(dirname);
                 break;
             case S_IFIFO:
                 break;
             case S_IFLNK:
                 readlink(m[i]->d_name,lbuf,1024);
+                printf("%s -> %s\n",m[i]->d_name,lbuf);
                 break;
             case S_IFREG:
                 printf("%s\n",m[i]->d_name);
@@ -67,6 +93,7 @@ int main(int argc,char *argv[]){
     
     if(argc ==1){
         mytree("./");
+        //mytestree("./");
     }
 
     return 0;
