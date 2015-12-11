@@ -75,3 +75,10 @@
 
     17.接口和实现: 接口名如Ixxx  I接口修饰前缀
                            Cxxx  C类修饰前缀
+
+    18.项目构建工具:
+        Autotools <br />
+        CMake     <br/>
+            CMake 使用C++编写,原生支持跨平台 
+        GYP       <br /> 
+             GYP由Chromium团队开发跨平台自动化项目构建工具
