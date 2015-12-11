@@ -3,7 +3,8 @@
 ##Created Time:2015年12月10日 星期四 15时35分05秒
 ##Author: Norman 
 ##Description: 
-##
+##  1.所有用户空间程序启动都是先有init进程发起
+    2.
 ##Issue: 
 ##
 ##Analyze: 
