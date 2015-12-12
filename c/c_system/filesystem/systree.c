@@ -149,8 +149,9 @@ int mytree(char* dir){
                 default:
                     break;
             }
+            free(m[i]);
         }
-        
+        free(m);   
     }
 }
 
