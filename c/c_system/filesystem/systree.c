@@ -29,6 +29,16 @@
 
 #include<stdio.h>
 #include"head.h"
+enum tfiletype{
+    FBLOCK = 1,
+    FCHAR = 2,
+    FIFO = 3,
+    FSOCKET = 4,
+    FDIR = 5,
+    FREG = 6,
+    FLINK = 7
+};
+
 int deep = 0;
 char format[1024];
 
@@ -38,7 +48,7 @@ int filter(const struct dirent *d){
     return 1;
 }
 
-void print_file(const char* path,int last) {
+void print_file(const char* path,int last,int color) {
     int i;
     for(i=0;i<deep;i++){
         if(format[i]){
@@ -52,7 +62,31 @@ void print_file(const char* path,int last) {
     } else {
         printf("├── ");
     }
-    printf("%s\n",path);
+    switch(color){
+        case FBLOCK:
+            printf("%s\n",path);
+            break;
+        case FCHAR:
+            printf("\033[40;33m%s\033[0m\n",path);
+            break;
+        case FIFO:
+            printf("%s\n",path);
+            break;
+        case FSOCKET:
+            printf("\033[47;31m%s\033[0m\n",path);
+            break;
+        case FDIR:
+            printf("\033[40;34m%s\033[0m\n",path);
+            break;
+        case FREG:
+            printf("%s\n",path);
+            break;
+        case FLINK:
+            printf("\033[40;34m%s\033[0m\n",path);
+            break;
+        default:
+            break;
+    }
 }
 
 int mytree(char* dir){
@@ -78,13 +112,13 @@ int mytree(char* dir){
             }
             switch(buf.st_mode & S_IFMT) {
                 case S_IFBLK:
-                    print_file(m[i]->d_name,(i==cout-1));
+                    print_file(m[i]->d_name,(i==cout-1),FBLOCK);
                     break;
                 case S_IFCHR:
-                    print_file(m[i]->d_name,(i==cout-1));
+                    print_file(m[i]->d_name,(i==cout-1),FCHAR);
                     break;
                 case S_IFDIR:
-                    print_file(m[i]->d_name,(i==cout-1));
+                    print_file(m[i]->d_name,(i==cout-1),FDIR);
                     if(i == cout-1){
                         format[deep++]=0;
                     } else {
@@ -94,7 +128,7 @@ int mytree(char* dir){
                     deep--;
                     break;
                 case S_IFIFO:
-                    print_file(m[i]->d_name,(i==cout-1));
+                    print_file(m[i]->d_name,(i==cout-1),FIFO);
                     break;
                 case S_IFLNK:
                     r=readlink(dirname,lbuf,1024);
@@ -104,13 +138,13 @@ int mytree(char* dir){
                     strcpy(dirname,m[i]->d_name);
                     strcat(dirname," -> ");
                     strcat(dirname,lbuf);
-                    print_file(dirname,(i==cout-1));
+                    print_file(dirname,(i==cout-1),FLINK);
                     break;
                 case S_IFREG:
-                    print_file(m[i]->d_name,(i==cout-1));
+                    print_file(m[i]->d_name,(i==cout-1),FREG);
                     break;
                 case S_IFSOCK:
-                    print_file(m[i]->d_name,(i==cout-1));
+                    print_file(m[i]->d_name,(i==cout-1),FSOCKET);
                     break;
                 default:
                     break;
