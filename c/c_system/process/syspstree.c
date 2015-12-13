@@ -15,8 +15,8 @@
 ##Issue: 
 ##
 ##Analyze:  通过扫描/proc文件系统中的status文件来得到
-##          1.扫描/proc 得到一个进程信息,将每个进程生成一个链表的节点
-##          3.打印链表输出显示
+##          1.扫描/proc 得到一个进程信息,放入到指针数组中
+##          2.打印链表输出显示
 ##
 ##Induction:
 ##
@@ -36,12 +36,14 @@ typedef struct ProcNode{
 }PN;
 
 int filter(const struct dirent* d){
-    if(strcmp(d->d_name,".")==0
-       ||(strcmp(d->d_name,"..")==0)
-      ||(isalnum(atoi(d->d_name))!=0)){
-        return 0;
+    int i;
+    int n = strlen(d->d_name);
+    for(i=0;i<n;i++){
+        if((!isdigit(d->d_name[i]))){
+            return 0;
+        } else 
+            return 1;
     }
-    return 1;
 }
 
 int getpidfromstr(const char* buffer){
@@ -103,7 +105,7 @@ void getname(const char* buffer,char *Name){
 PN* getfileinfo(const char* filepath){
     FILE* fd;
     int ret,size;
-    int pid,ppid;
+    int pid=0,ppid=0;
     char buf[1024];
     char Name[1024]={0};
     PN *pro;
@@ -114,6 +116,10 @@ PN* getfileinfo(const char* filepath){
     }
 
     fd = fopen(filepath,"r");
+    if(fd == NULL ){
+        perror("fopen");
+        return NULL;
+    }
     while((fgets(buf,1024,fd))!=NULL){
         getname(buf,Name);
         if(Name != NULL){
@@ -125,8 +131,6 @@ PN* getfileinfo(const char* filepath){
         if((ppid = getppidfromstr(buf))!= -1){
             pro->ppid = ppid;
         }
-        if((Name !=NULL )&& (pid && ppid) !=0)
-            break;
     }
     fclose(fd);
 
@@ -145,6 +149,7 @@ int scanprocdir(const char* dir){
     if(cout <0){
         perror("scandir");
     } else {
+        printf("cout=%d\n",cout);
         for(i=0;i<cout;i++){
             strcpy(dirpath,dir);
             strcat(dirpath,"/");
@@ -153,6 +158,7 @@ int scanprocdir(const char* dir){
             stat(dirpath,&buf);
             if(S_ISDIR(buf.st_mode)){
                 strcat(dirpath,DEFAULTFILE);
+                printf("%d\t%s\n",i,dirpath);
                 pro[i] = getfileinfo(dirpath);
             }
         }
