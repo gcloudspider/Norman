@@ -1,0 +1,27 @@
+jiffies变量: <br/>
+    全局变量jiffies用来记录自系统启动以来产生的节拍总数，<br/>
+    启动时,内核将该变量 初始化为0 此后每次时钟中断处理程序都会增加该变量的值<br/>
+
+    一秒内时钟中断的次数等于Hz 所以jiffies一秒内增加的值也就是Hz <br/>
+
+    系统运行时间 以秒为单位,等于jiffies/Hz <br/>
+
+    注意:jiffies类型为无符号长整型(unsigned long) <br/>
+
+HZ:<br/>
+    Linux核心每隔固定周期会发出timer interrupt(IRQ 0)  <br/>
+    HZ用来定义每一秒有几次 <br />
+    HZ可在编译核心时设定<br />
+    查看/proc/interrupt的timer中断次数,并于一秒后再次查看，两者相差250左右 <br/>
+
+Tick:<br />
+    Tick是HZ的倒数,即timer interrupt每发生一次中断的时间 <br/>
+
+Xtime全局变量: <br />
+    xtime是timeval数据结构变量 <br/>
+    xtime是从cmos电路中取得时间,一般从1970年1月1号00:00:00计算到现在。(实时时钟) <br/>
+
+
+RTC:<br/>
+    实时时钟，硬件时钟,用来持久存放系统时间,系统关闭后靠主板上的电池保持计时, <br />
+    系统启动时,内核通过读取RTC来初始化WallTime 并存放在xtime变量中。RTC主要作用!<br />
