@@ -167,9 +167,31 @@ int locateElem(LinkList L,int pos){
 
 //清空链表
 int clear_link_list(LinkList* L){
-    int j;
     LinkList p,q; 
-    return ;
+    p = (*L)->next;
+    while(p){
+        q = p->next;
+        free(p);
+        p = q;
+    }
+    (*L)->next = NULL;
+    return 1;
+}
+
+
+void insert_link_list(LinkList L){
+    LinkList current,p;
+    if(L == NULL){
+        return ;
+    }
+    current = L->next;
+    while(current->next != NULL){
+        p = current->next;
+        current->next = p->next;
+        p->next = L->next;
+        L->next = p;
+        traverseList(L); 
+    }
 }
 
 int main(){
@@ -256,6 +278,11 @@ int main(){
             printf("\n");
             break;
         case 9:
+            printf("反转链表");
+            reverse_link_list(L);
+            printf("反转链表后:\n");
+            printlinklist(L);
+            printf("\n");
             break;
         case 10:
             break;
