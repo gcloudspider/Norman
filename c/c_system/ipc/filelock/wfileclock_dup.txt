@@ -1,0 +1,6 @@
+
+dup(fd)
+
+dup2(fd,STUOUT_FILENO);
+
+
