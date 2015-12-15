@@ -38,9 +38,9 @@ int main(){
     int ret;
     
     signal(26,do_virtual);
-    signal(SIGALRM,do_alarm);
+    //signal(SIGALRM,do_alarm);
     
-    setitimer(ITIMER_REAL,&mytimer,NULL);
+    //setitimer(ITIMER_REAL,&mytimer,NULL);
     setitimer(ITIMER_VIRTUAL,&virtual,NULL);
 
     while(1){
