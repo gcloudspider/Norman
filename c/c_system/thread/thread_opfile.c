@@ -16,46 +16,56 @@
 ##########################################################*/
 
 #include<stdio.h>
-#include<pthread.h>
+#include"head.h"
+int flag = 0;
+
+void call_back(int s){
+    static int a = 0;
+    char file[1024] = {0};
+    a++;
+    if(a<=30){
+        sprintf(file,"file_%d",a);
+        creat(file,0666);
+        printf("create file %s success!\n",file);
+    }
+    if(a%2==0){
+        flag = 1;
+    }
+    alarm(1);
+}
 
 void* thread_del_file(void* v){
     int i;
-    char name[20];
+    char file[1024];
     int ret;
-
-    for(i=0;i<30;i++){
-        sprintf(name,"file_%d",i);
-        if(access(name,F_OK)==0){
-            ret = remove(name);
-            if(-1 == ret){
-                perror("remove");
-            }
-            printf("delete %s success!\n",name);
-        }
+    
+    while(i<=30){
+        if(flag){
+            flag = 0;
+        sprintf(file,"file_%d",i);
+        remove(file);
+        printf("remove file %s success\n",file);
+        i++;
+        }   
     }
-    return ;
+    return v;
 }
 
 int main(){
     pthread_t threadid;
-    int i;
     int f,ret;
-    void *value;
+    void *rret;
     char name[20];
 
-    pthread_create(&threadid,NULL,thread_del_file,&i);
+    pthread_create(&threadid,NULL,thread_del_file,NULL);
 
-    for(i=0;i<30;i++){
-        sprintf(name,"file_%d",i);
-        f=access(name,F_OK);
-        if(-1==f){
-            ret = creat(name,O_RDWR);   
-            if(-1 == ret){
-                perror("creat");
-            }
-            printf("create %s success!\n",name);
-        }   
+    signal(SIGALRM,call_back);
+    alarm(1);
+    int i = 30;
+    while(i--){
+        pause();
     }
-    
+
+    pthread_join(threadid,&rret);
     return 0;
 }
