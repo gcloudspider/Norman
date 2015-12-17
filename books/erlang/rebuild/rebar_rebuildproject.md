@@ -18,3 +18,14 @@ rebar构建项目:
         rebarapp_sup.erl应用的Supervisor Behaviour代码文件
 
 rebar内置gen_server, gen_fsm application等 Erlan/OTP行为模式的模板,可以自动生成这些行为模式的框架代码
+  rebar create template=simplesrv srvid=rebarapp_server
+
+模板名称:
+  gen_server ----> simplesrv
+  gen_fsm    ----> simplefsm
+  application----> simpleapp
+
+srvid gen_server模板ID
+gen_fsm     ----> fsmid
+application ----> appid
+gen_server  ----> app_server
