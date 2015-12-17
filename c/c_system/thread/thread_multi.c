@@ -55,6 +55,14 @@ void create_file(const char* filename){
     //pthread_join(thread_id,&rret);
 }
 
+void readfile_single_thread(){
+    //TODO:
+}
+
+void readfile_multi_thread(){
+    //TODO
+}
+
 int main(int argc,char * argv[]){
 
     int ch;
@@ -68,8 +76,10 @@ int main(int argc,char * argv[]){
                 create_file(argv[1]);
                 break;
             case 's':
+                readfile_single_thread();
                 break;
             case 'm':
+                readfile_multi_thread();
                 break;
             default:
                 break;
