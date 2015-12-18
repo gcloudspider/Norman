@@ -35,4 +35,5 @@
 #include<sys/msg.h>
 #include<sys/shm.h>
 #include<pthread.h>
+#include<semaphore.h>
 #endif
