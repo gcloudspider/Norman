@@ -17,36 +17,37 @@
 #include<stdio.h>
 #include "head.h"
 
-pthread_rwlock_t mutex;
+pthread_mutex_t mutex;
 
 int stunum = 0;
 
 void* func_teacher(void* v){
     int n=0;
+    int k=0;
     int count = 1;
-    while(stunum<=30){
-        if(n== stunum) n=stunum;
-        if((n!=0)&&(n%10 ==0)){
-            printf("happy happy!\n");
-            count++;
+    while(1){
+        pthread_mutex_lock(&mutex);
+        if(stunum == 10){
+            printf("drink beer!beer!beer! num=%d k=%d\n",n,++k);
+            stunum = 0;
         }
-        if(count == 3)break;
+        if(k==3)break;
+        pthread_mutex_unlock(&mutex);
     }
+    printf("teacher finish!!!\n");
+    return v;
 }
 
 void* func_student(void* v){
     int time;
     time = rand()%10+1;
-    printf("thread=%d time=%d\n",(int)v,time);
+    printf("thread=%d get running... time=%d\n",(int)v,time);
     sleep(time);
+    pthread_mutex_lock(&mutex);
     stunum++;
-    if(stunum == 10){
-        pthread_rwlock_wrlock(&mutex);
-        if(stunum == 0){
-            pthread_rwlock_unlock(&mutex);
-        }
-    }
-
+    printf("thread %d finish!\n",(int)v);
+    pthread_mutex_unlock(&mutex);
+    return v;
 }
 
 int main(){
@@ -54,7 +55,7 @@ int main(){
     void* rret;
     pthread_t ptid[30],tea;
     
-    pthread_rwlock_init(&mutex,NULL);
+    pthread_mutex_init(&mutex,NULL);
     pthread_create(&tea,NULL,func_teacher,NULL);
     for(i=0;i<30;i++){
         pthread_create(&ptid[i],NULL,func_student,(void*)i);

@@ -26,7 +26,7 @@ void* func_sem(void* v){
     int thread_num = (int)v;
     int delay_time,count;
 
-    sem_wait(&sem);
+    sem_wait(&sem);     //带有阻塞的申请p操作
     printf("Thread %d is starting.\n",thread_num);
     for(count =0;count<REPEAT_TIMES;count++){
         delay_time=(int)(DELAY*(rand()/(double)RAND_MAX))+1;
@@ -35,8 +35,9 @@ void* func_sem(void* v){
     }
     printf("Thread %d is exiting.\n",thread_num);
 
+    //释放资源v操作
     sem_post(&sem);
-    pthread_exit(NULL);
+    pthread_exit(NULL); //线程主动结束
 }
 
 int main(){
@@ -45,7 +46,9 @@ int main(){
     int i;
 
     srand((int)time(0));
-    sem_init(&sem,0,3);
+    sem_init(&sem,0,3);  //3为信号量初始值
+    //0:多线程间共享
+    //1:多进程间共享
     
     for(i=0;i<THREADNUM;i++){
         pthread_create(&ptid[i],NULL,func_sem,(void*)i);
@@ -56,7 +59,7 @@ int main(){
     }
 
     for(i=0;i<THREADNUM;i++){
-        sem_destroy(&sem);
+        sem_destroy(&sem);      //取消信号量
     }
 
     return 0;
