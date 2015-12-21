@@ -25,6 +25,7 @@ int main(){
         struct sockaddr_in cin;
         int len;
         char buf[1024]={0};
+        char bufip[15] = {0};
 
         sfd = socket(AF_INET,SOCK_STREAM,0);
         if(-1 == sfd){
@@ -68,12 +69,12 @@ int main(){
                     perror("fork");
                     continue;
                 } else {
-                    printf("client IP = %s\n",inet_ntop(AF_INET,&cin.sin_addr.s_addr,buf,15));
+                    printf("client IP = %s\n",inet_ntop(AF_INET,&cin.sin_addr.s_addr,bufip,15));
                     printf("client port = %d\n",ntohs(cin.sin_port));
                     while(1){
                         ret = read(cfd,buf,1024);
                         if(ret <=0){
-                            printf("ip=%s port=%d client disconnect!\n",inet_ntop(AF_INET,&cin.sin_addr.s_addr,buf,15),ntohs(cin.sin_port));
+                            printf("ip=%s port=%d client disconnect!\n",inet_ntop(AF_INET,&cin.sin_addr.s_addr,bufip,15),ntohs(cin.sin_port));
                             goto failed;
                         }
                         write(1,buf,1024);

@@ -31,7 +31,7 @@ int main(){
     }
 
     sin.sin_family = AF_INET;
-    sin.sin_port = htons(5000);
+    sin.sin_port = htons(5001);
 
     if(inet_pton(AF_INET,"192.168.1.15",&sin.sin_addr.s_addr)<=0){
         perror("inet_pton");
@@ -44,10 +44,14 @@ int main(){
         return -1;
     }
 
-    printf("intput anykey to send\"1234567890\" to server....\n");
-    getchar();
-    write(sfd,"1234567890",10);
-
+    printf("connect OK!\n");
+    while(1){
+        printf("input:\n");
+        ret = read(0,buf,1024);
+        buf[ret] = 0;
+        printf("send to \n");
+        write(sfd,buf,ret);
+    }
     close(sfd);
 
     return 0;
