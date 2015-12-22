@@ -77,12 +77,12 @@
                            Cxxx  C类修饰前缀
 
     18.项目构建工具:
-        Autotools <br />
-        CMake     <br/>
+        Autotools 
+        CMake     
             CMake 使用C++编写,原生支持跨平台 
-        GYP       <br /> 
+        GYP
              GYP由Chromium团队开发跨平台自动化项目构建工具
 
     19.内存泄漏检测工具:
-        windows:vs中代码包含crtdbg.h  <br/>
-        Linux: mtrace  valgrind<br /> 
+        windows:vs中代码包含crtdbg.h
+        Linux: mtrace  valgrind 
