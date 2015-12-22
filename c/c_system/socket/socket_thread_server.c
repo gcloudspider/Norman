@@ -64,18 +64,29 @@ void* func_read(void *v){
     int ret;
     char buf[1024] = {0};
     char bufip[15] = {0};
+    struct sockaddr_in tin;
+    int len = sizeof(tin);
+
     //加锁    
-    pthread_mutex_lock(&mutex);
+    /*
+    thread_mutex_lock(&mutex);
     struct sockaddr_in tcin;
     tcin = cin;
     pthread_mutex_unlock(&mutex); //解锁
+    */
 
     while(1){
         ret = read((int)v,buf,1024);
         if(ret <= 0){
             //TODO:客户端断开,线程结束,将消息通知watch
             //pthread_pool_delete(gettid());  //清理线程池
-            printf("disconnected! client ip=%s port=%d\n",inet_ntop(AF_INET,&tcin.sin_addr.s_addr,bufip,15),ntohs(tcin.sin_port));
+            //printf("disconnected! client ip=%s port=%d\n",inet_ntop(AF_INET,&tcin.sin_addr.s_addr,bufip,15),ntohs(tcin.sin_port));
+            ret = getpeername((int)v,(struct sockaddr*)&tin,(socklen_t*)&len);
+            if(-1 == ret){
+                perror("getpeername");
+                break;
+            }
+            printf("disconnect! client ip=%s port=%d\n",inet_ntop(AF_INET,&tin.sin_addr.s_addr,bufip,15),ntohs(tin.sin_port));
             break;
         }
         write(1,buf,1024);
@@ -100,6 +111,7 @@ int main(int argc ,char *argv[]) {
     //设置结构体的信息
     sin.sin_family = AF_INET;
     sin.sin_port = htons(5002);
+    //sin.sin_addr.s_addr = INADDR_ANY; //INADDR_ANY 宏等价于0.0.0.0
 
     if(inet_pton(AF_INET,"0.0.0.0",&sin.sin_addr.s_addr)<=0){
         perror("inet_pton");
