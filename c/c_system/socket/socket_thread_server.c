@@ -2,11 +2,7 @@
 ##File Name: socket_thread_server.c
 ##Created Time:2015年12月21日 星期一 19时28分42秒
 ##Author: Norman 
-##Description:  事件驱动!!!
-##              1.创建一个监控线程 监控线程ID有线程退出将couttpid 减1
-##              2.创建子线程用于读取socket中数据
-##              3.子线程有客户端断开,将消息通知watch线程
-##              4.watch收到事件将链表中数据删除
+##Description:
 ##
 ##Issue: 
 ##              1.互斥锁问题
@@ -28,37 +24,6 @@ int couttpid=0;
 pthread_t threadid[MAXTHREAD];  //TODO:结构体创建链表
 struct sockaddr_in cin;
 pthread_mutex_t mutex;
-
-typedef struct threadpool{
-    pthread_t threadid;
-    struct threadpool *pre;
-    struct threadpool *next;
-}TP;
-
-//TODO:创建线程池
-void pthread_pool_init(TP* threadpool){
-    return ;
-}
-
-//TODO:追加到线程池
-int pthread_pool_append(pthread_t ttid){
-
-    return 0;
-}
-
-//TODO:删除线程池中线程
-int pthread_pool_delete(pthread_t ttid){
-    
-    return 0;
-}
-
-void* func_watch(void* v){
-    while(1){
-        //TODO:watch接收到消息将threadid清除
-        //couttpid--
-    }   
-    return v;
-}
 
 void* func_read(void *v){
     int ret;
@@ -100,7 +65,6 @@ int main(int argc ,char *argv[]) {
     struct sockaddr_in sin;
     int len;
     char bufip[15] = {0};
-    TP pthreadhead;
 
     sfd = socket(AF_INET,SOCK_STREAM,0);
     if(-1 == sfd){
@@ -136,9 +100,7 @@ int main(int argc ,char *argv[]) {
     pid_t tpid;
     len = sizeof(cin);
     
-    //pthread_pool_init(&pthreadhead);
     pthread_mutex_init(&mutex,NULL);        //初始化锁
-    //pthread_create(&tpid,NULL,func_watch,NULL);  //监控线程
 
     while(1){
         cfd = accept(sfd,(struct sockaddr*)&cin,(socklen_t*)&len);
@@ -148,7 +110,6 @@ int main(int argc ,char *argv[]) {
         } else {
             printf("connected! client ip=%s port=%d\n",inet_ntop(AF_INET,&cin.sin_addr.s_addr,bufip,15),ntohs(cin.sin_port));
             pthread_create(&threadid[couttpid++],NULL,func_read,(void*)cfd);  //子线程读SOCKET buf
-            //pthread_pool_append(threadid);                                  //将线程ID添加到线程池
             pthread_detach(threadid[couttpid++]);
             if(couttpid == MAXTHREAD){
                 printf("Max Thread! please waitting for release something\n");
