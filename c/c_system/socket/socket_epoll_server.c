@@ -16,6 +16,155 @@
 
 #include<stdio.h>
 #include "head.h"
+#define MAXTHREAD 10
+#define gettid() syscall(__NR_gettid)
+
+typedef void*(*FUNC_POINT)(void* argv);
+typedef struct tasklist{
+    FUNC_POINT function;
+    void* argv;
+    struct tasklist *next;
+}QTASKLIST;
+
+typedef struct{
+    pthread_mutex_t mutex;
+    pthread_cond_t cond;
+    int max_thread_num;
+    pthread_t thread_id[MAXTHREAD];
+    QTASKLIST* qhead;
+    QTASKLIST* qtail;
+}TD;
+
+TD td;
+
+//线程等待着wakeup
+void* wait_wakeup(void* argv){
+    QTASKLIST* ptask = NULL;
+    while(1){
+        ptask = NULL;
+        pthread_mutex_lock(&td.mutex);
+        pthread_cond_wait(&td.cond,&td.mutex);
+        printf("thread %ld actived!\n",gettid());
+
+        if(td.qhead){
+            ptask = td.qhead;
+            if(td.qhead == td.qtail){
+                td.qhead = td.qtail = NULL;
+            } else {
+                td.qhead = td.qhead->next;
+            }
+        }
+        pthread_mutex_unlock(&td.mutex);
+        if(ptask)
+            ptask->function(ptask->argv);
+
+        printf("thread %ld release work address:%p!\n",gettid(),ptask);
+        free(ptask);
+    }
+    return argv;
+}
+
+void pthread_pool_init(){
+    int i;
+    pthread_mutex_init(&td.mutex,NULL);
+    pthread_cond_init(&td.cond,NULL);
+    td.max_thread_num = MAXTHREAD;
+    td.qhead = NULL;
+    td.qtail = NULL;
+    for(i=0;i<td.max_thread_num;i++){
+        pthread_create(&td.thread_id[i],NULL,wait_wakeup,NULL);
+        pthread_detach(td.thread_id[i]);
+    }
+}
+
+void pool_add_work(FUNC_POINT function,void* argv){
+    QTASKLIST* ptask = malloc(sizeof(QTASKLIST));
+    printf("malloc work address:%p\n",ptask);
+    ptask->function = function;
+    ptask->argv = argv;
+    pthread_mutex_lock(&td.mutex);
+    if(td.qhead){
+        td.qtail->next = ptask;
+        td.qtail = ptask;
+    } else {
+        td.qtail = ptask;
+        td.qhead = td.qtail;
+    }
+    pthread_mutex_unlock(&td.mutex);
+    pthread_cond_signal(&td.cond);
+}
+
+void *wchat_robot(void* argv){
+    struct sockaddr_in tcin;
+    int cfd = (int) argv;
+    int ret;
+    char buf[1024] = {0};
+    int len = sizeof(tcin);
+
+    getpeername(cfd,(struct sockaddr*)&tcin,(socklen_t*)&len);
+    printf("client ip=%s,port=%d connected!\n",inet_ntop(AF_INET,&tcin.sin_addr.s_addr,buf,15),ntohs(tcin.sin_port));
+    while(1){
+        ret = read(cfd,buf,1024);
+        if(ret <= 0){
+            printf("client ip=%s,port=%d\n disconnect",inet_ntop(AF_INET,&tcin.sin_addr.s_addr,buf,15),ntohs(tcin.sin_port));
+            goto failed;
+        }
+        write(1,buf,ret);
+        write(1,"\n",1);
+    }
+failed:
+    close(cfd);
+    return argv;
+}
+
+void* upload_file(void* argv){
+    printf("starting upload file...!\n");
+    return argv;
+}
+
+void* download_file(void* argv){
+    printf("starting download file...!\n");
+    return argv;
+}
+
+void parse_buf(const char* buf,char* buffer){
+    int i=1,j;
+    j=strlen(buf) -1;
+    while(isspace(buf[i])&&(i<=j)){
+        i++;
+        if(0<i)
+            strcpy(buffer,&buf[i]);
+    }
+    return ;
+}
+
+void handle_buf(const char* buf,int cfd){
+    char ch;
+    ch = buf[0];
+    int ret;
+    char* buffer;
+
+    switch(ch){
+        case '1':{
+            parse_buf(buf,buffer);
+            ret = strlen(buffer);
+            write(1,buffer,ret);
+            write(1,"\n",1);
+            break;
+        }
+        case '2':
+            pool_add_work(wchat_robot,(void*)cfd);
+            break;
+        case '3':
+            pool_add_work(upload_file,(void*)cfd);
+            break;
+        case '4':
+            pool_add_work(download_file,(void*)cfd);
+            break;
+        default:
+            break;
+    }
+}
 
 
 int main(){
@@ -60,15 +209,14 @@ int main(){
     }
 
     len=sizeof(sin);
-    printf("socket file discript id:%d\n",sfd);
+    //printf("socket file discript id:%d\n",sfd);
     ev.data.fd = sfd;
     ev.events = EPOLLIN|EPOLLET;            //EPoll 事件 read 读操作
     epoll_ctl(eh,EPOLL_CTL_ADD,sfd,&ev);    //注册文件描述符sfd 到poll实例
 
+    pthread_pool_init();
+
     while(1){
-        //轮循I/O事件返回evs 数组要处理的
-        //nfound 事件总数
-        printf("epoll waiting!!\n");
         nfound = epoll_wait(eh,evs,10,-1);  
         if(nfound < 0){
             perror("epoll_wait");
@@ -77,12 +225,8 @@ int main(){
             printf("time out!\n");
             continue;
         } else {
-            printf("get event evs[%d]\n",nfound);
             for(i=0;i<nfound;i++){
-                //判断队列中是事有sfd该文件描述符的事件
-                printf("event fd:%d\n",evs[i].data.fd);
                 if(evs[i].data.fd == sfd){
-                    printf("begin accept!!\n");
                     cfd = accept(sfd,(struct sockaddr*)&cin,(socklen_t*)&len);
                     if(-1 == cfd){
                         perror("accept");
@@ -101,8 +245,7 @@ int main(){
                         ev.data.fd = evs[i].data.fd;
                         epoll_ctl(eh,EPOLL_CTL_DEL,evs[i].data.fd,&ev);
                     } else {
-                        write(1,buf,ret);
-                        write(1,"\n",1);
+                        handle_buf(buf,cfd);
                     }
                 }
             }
