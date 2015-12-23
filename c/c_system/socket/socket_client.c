@@ -33,7 +33,7 @@ int main(){
     sin.sin_family = AF_INET;
     sin.sin_port = htons(5002);
 
-    if(inet_pton(AF_INET,"192.168.1.15",&sin.sin_addr.s_addr)<=0){
+    if(inet_pton(AF_INET,"127.0.0.1",&sin.sin_addr.s_addr)<=0){
         perror("inet_pton");
         return -1;
     }
