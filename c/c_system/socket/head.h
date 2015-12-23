@@ -23,6 +23,7 @@
 #include<sys/stat.h>
 #include<getopt.h>
 #include<sys/types.h>
+#include<sys/syscall.h>
 #include<fcntl.h>
 #include<unistd.h>
 #include<sys/mman.h>
