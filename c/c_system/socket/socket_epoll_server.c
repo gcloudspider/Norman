@@ -47,7 +47,7 @@ void* wait_wakeup(void* argv){
 
         //线程监控队列,若有任务未处理,自己处理。没有任务回到等待唤醒状态
         while(1){
-            printf("thread %ld actived!\n",gettid());
+            printf("thread id:%ld actived!\n",gettid());
             if(td.qhead){
                 ptask = td.qhead;
                 if(td.qhead == td.qtail){
@@ -61,7 +61,7 @@ void* wait_wakeup(void* argv){
             pthread_mutex_unlock(&td.mutex);
             if(ptask){
                 ptask->function(ptask->argv);
-                printf("thread %ld release work address:%p!\n",gettid(),ptask);
+                printf("thread id:%ld release work address:%p!\n",gettid(),ptask);
                 free(ptask);
             }
         }   
@@ -84,7 +84,7 @@ void pthread_pool_init(){
 
 void pool_add_work(FUNC_POINT function,void* argv){
     QTASKLIST* ptask = malloc(sizeof(QTASKLIST));
-    printf("malloc work address:%p\n",ptask);
+    printf("malloc task address:%p\n",ptask);
     ptask->function = function;
     ptask->argv = argv;
     pthread_mutex_lock(&td.mutex);
@@ -207,15 +207,13 @@ int main(){
         return -1;
     }
 
-    eh = epoll_create(8000);            //创建一个poll 实例,
-                                        //这个文件描述符用于后面所有的调用
+    eh = epoll_create(8000);            //创建一个poll 实例
     if(-1 == eh){
         perror("epoll_create");
         return -1;
     }
 
     len=sizeof(sin);
-    //printf("socket file discript id:%d\n",sfd);
     ev.data.fd = sfd;
     ev.events = EPOLLIN|EPOLLET;            //EPoll 事件 read 读操作
     epoll_ctl(eh,EPOLL_CTL_ADD,sfd,&ev);    //注册文件描述符sfd 到poll实例
