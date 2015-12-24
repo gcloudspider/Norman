@@ -44,22 +44,27 @@ void* wait_wakeup(void* argv){
         ptask = NULL;
         pthread_mutex_lock(&td.mutex);
         pthread_cond_wait(&td.cond,&td.mutex);
-        printf("thread %ld actived!\n",gettid());
 
-        if(td.qhead){
-            ptask = td.qhead;
-            if(td.qhead == td.qtail){
-                td.qhead = td.qtail = NULL;
+        //线程监控队列,若有任务未处理,自己处理。没有任务回到等待唤醒状态
+        while(1){
+            printf("thread %ld actived!\n",gettid());
+            if(td.qhead){
+                ptask = td.qhead;
+                if(td.qhead == td.qtail){
+                    td.qhead = td.qtail = NULL;
+                } else {
+                    td.qhead = td.qhead->next;
+                }
             } else {
-                td.qhead = td.qhead->next;
+                break;
             }
-        }
-        pthread_mutex_unlock(&td.mutex);
-        if(ptask)
-            ptask->function(ptask->argv);
-
-        printf("thread %ld release work address:%p!\n",gettid(),ptask);
-        free(ptask);
+            pthread_mutex_unlock(&td.mutex);
+            if(ptask){
+                ptask->function(ptask->argv);
+                printf("thread %ld release work address:%p!\n",gettid(),ptask);
+                free(ptask);
+            }
+        }   
     }
     return argv;
 }
@@ -162,6 +167,7 @@ void handle_buf(const char* buf,int cfd){
             pool_add_work(download_file,(void*)cfd);
             break;
         default:
+            printf("Unknow data!\n");
             break;
     }
 }

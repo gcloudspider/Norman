@@ -16,6 +16,7 @@
 
 #include<stdio.h>
 #include "head.h"
+
 typedef enum {false = 0, true = 1} bool;
 
 struct sockaddr_in sin;

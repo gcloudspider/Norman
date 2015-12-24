@@ -21,7 +21,7 @@
 ##########################################################*/
 #include<stdio.h>
 #include "head.h"
-#define MAXTHREAD 10
+#define MAXTHREAD 3
 #define gettid() syscall(__NR_gettid)
 
 typedef void*(*THING)(void* argv);
@@ -51,26 +51,30 @@ void* do_something(void* argv){
         //2.线程阻塞等待任务
         pthread_mutex_lock(&td.mutex);
         pthread_cond_wait(&td.cond,&td.mutex);
-        printf("thread %ld actived!\n",gettid());
         
         //队列先进先出(从头取,尾插入)
-        if(td.qhead){
-            pwork = td.qhead;
-            if(td.qhead == td.qtail){
-                td.qhead = td.qtail = NULL;
+        while(1){
+            printf("thread id:%ld actived!\n",gettid());
+            if(td.qhead){
+                pwork = td.qhead;
+                if(td.qhead == td.qtail){
+                    td.qhead = td.qtail = NULL;
+                } else {
+                    td.qhead = td.qhead->next;
+                }
             } else {
-                td.qhead = td.qhead->next;
+                break;
             }
-        }
-        pthread_mutex_unlock(&td.mutex);
-        //从队列中取出后执行函数
-        if(pwork)
-            pwork->thing(pwork->argv);
-
-        //任务完成后!释放任务!
-        printf("thread %ld release work address:%p !\n",gettid(),pwork);
-        free(pwork);
-        //pthread_pool_release(pwork);
+            pthread_mutex_unlock(&td.mutex);
+            //从队列中取出后执行函数
+            if(pwork){
+                pwork->thing(pwork->argv);
+                //任务完成后!释放任务!
+                printf("thread id: %ld release work address:%p !\n",gettid(),pwork);
+                free(pwork);
+                //pthread_pool_release(pwork);
+            } 
+        }   
     }
     return argv;
 }
@@ -91,7 +95,7 @@ void pthread_pool_init(){
 }
 
 void pthread_pool_release(QWORK* work){
-    printf("thread %ld release!\n",gettid());
+    printf("thread id:%ld release!\n",gettid());
     free(work);
 }
 
