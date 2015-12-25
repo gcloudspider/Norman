@@ -22,7 +22,7 @@
 int main(){
     const char *host = "127.0.0.1";
     const char *user = "root";
-    const char *pass = "ak476660685";
+    const char *pass = "****";
     const char *db = "mysql";
 
     MYSQL mysql;
