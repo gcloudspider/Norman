@@ -1,9 +1,13 @@
-SUBDIRS = src test
+SUBDIRS = src \
+		  test
 
-.PHONY:all clean dist
+.PHONY:all clean dist $(SUBDIRS)
 
-all clean:
-	cd $(SUBDIRS) && $(MAKE) $@
+all clean:$(SUBDIRS)
+
+$(SUBDIRS):
+	$(MAKE) -j2 -C $@ $(MAKECMDGOALS)
+
 
 dist:
 	tar -zcvf imserver-1.0.tar.gz ./db ./doc ./src ./test ./Makefile ./README.md
