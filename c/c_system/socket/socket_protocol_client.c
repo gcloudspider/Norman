@@ -68,10 +68,40 @@ struct package{
 
 /////////////////////////////
 
-void usage(char *argv[]){
-    fprintf(stderr,"Usage:%s [-t text] [-l login] [-f file] [-i image]",argv[0]);
+void* thread_read(void* argv){
+    int sfd = (int)argv;
+    int ret;
+    char buf[1024] = {0};
+    struct package p;
+    while(1){
+        ret = read(sfd,&p.msghead,sizeof(p.msghead));
+        if(p.msghead.msgtype == 1){
+            ret = read(sfd,buf,p.msghead.length);
+            write(1,"server:",strlen("server:"));
+            write(1,buf,p.msghead.length);
+        } else {
+            printf("error format!\n");
+        }
+    }
+    return argv;
 }
 
+void* thread_write(void* argv){
+    int sfd = (int) argv;
+    int ret;
+    char buf[1024] = {0};
+    struct package p;
+    while(1){
+        ret = read(0,buf,1024);
+        buf[ret] =0;
+        p.msghead.msgtype = buf[0]-'0';
+        p.msghead.version=1;
+        p.msghead.length = strlen(buf)-1;
+        write(sfd,&p.msghead,sizeof(p.msghead));
+        write(sfd,&buf[1],p.msghead.length);
+    }
+    return argv;
+}
 
 int main(int argc,char* argv[]){
     int sfd,ret;
@@ -79,31 +109,9 @@ int main(int argc,char* argv[]){
     struct sockaddr_in cin;
     int len;
     char buf[1024]= {0};
-    char ch;
     struct package p;
-
-    if(argc<2){
-        usage(argv);
-    }
-    
-    while((ch=getopt(argc,argv,"filt"))!=EOF) {
-        switch(ch){
-            case 'f':
-                p.msghead.msgtype = FILETYPE;
-                break;
-            case 'i':
-                p.msghead.msgtype = IMAGETYPE;
-                break;
-            case 'l':
-                p.msghead.msgtype = LOGINTYPE;
-                break;
-            case 't':
-                p.msghead.msgtype = TEXTTYPE;
-                break;
-            default:
-                break;
-        }
-    }
+    pthread_t tid01,tid02;
+    void* rret;
 
     sfd = socket(AF_INET,SOCK_STREAM,0);
     if(sfd == -1){
@@ -126,13 +134,13 @@ int main(int argc,char* argv[]){
     }
 
     printf("connect OK!\n");
-    while(1){
-        printf("input:\n");
-        ret = read(0,buf,1024);
-        buf[ret] = 0;
-        printf("send to \n");
-        write(sfd,buf,ret);
-    }
+
+    pthread_create(&tid01,NULL,thread_read,(void*)sfd);
+    pthread_create(&tid02,NULL,thread_write,(void*)sfd);
+
+    pthread_join(tid01,&rret);
+    pthread_join(tid02,&rret);
+
     close(sfd);
 
     return 0;

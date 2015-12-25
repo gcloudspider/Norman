@@ -85,7 +85,8 @@ typedef struct{
 }TD;
 
 TD td;
-
+int eh;
+struct epoll_event ev,evs[10];
 
 //线程等待着wakeup
 void* wait_wakeup(void* argv){
@@ -106,6 +107,7 @@ void* wait_wakeup(void* argv){
                     td.qhead = td.qhead->next;
                 }
             } else {
+                printf("queue no task! thread id:%ld waiting....!\n",gettid());
                 break;
             }
             pthread_mutex_unlock(&td.mutex);
@@ -149,26 +151,27 @@ void pool_add_work(FUNC_POINT function,void* argv){
     pthread_cond_signal(&td.cond);
 }
 
-void *wchat_robot(void* argv){
+void *writeback(void* argv){
     struct sockaddr_in tcin;
     int cfd = (int) argv;
     int ret;
     char buf[1024] = {0};
     int len = sizeof(tcin);
+    struct msghead head;
 
-    getpeername(cfd,(struct sockaddr*)&tcin,(socklen_t*)&len);
-    printf("client ip=%s,port=%d connected!\n",inet_ntop(AF_INET,&tcin.sin_addr.s_addr,buf,15),ntohs(tcin.sin_port));
-    while(1){
-        ret = read(cfd,buf,1024);
-        if(ret <= 0){
-            printf("client ip=%s,port=%d\n disconnect",inet_ntop(AF_INET,&tcin.sin_addr.s_addr,buf,15),ntohs(tcin.sin_port));
-            goto failed;
-        }
-        write(1,buf,ret);
-        write(1,"\n",1);
+    ret = read(cfd,buf,1024);
+    if(ret <=0){
+        close(cfd);
+        printf("close cfd=%d\n",cfd);
+        return argv;
     }
-failed:
-    close(cfd);
+
+    head.msgtype = 1;
+    head.version = 1;
+    head.length = strlen(buf);
+    write(cfd,&head,sizeof(head));
+    write(cfd,buf,head.length);
+
     return argv;
 }
 
@@ -182,42 +185,43 @@ void* download_file(void* argv){
     return argv;
 }
 
-void parse_buf(const char* buf,char* buffer){
-    int i=1,j;
-    j=strlen(buf) -1;
-    while(isspace(buf[i])&&(i<=j)){
-        i++;
-        if(0<i)
-            strcpy(buffer,&buf[i]);
-    }
-    return ;
-}
-
-void handle_buf(const char* buf,int cfd){
-    char ch;
-    ch = buf[0];
+void parse(int cfd){
+    char buf[1024];
     int ret;
-    char* buffer;
+    struct package p;
 
-    switch(ch){
-        case '1':{
-            parse_buf(buf,buffer);
-            ret = strlen(buffer);
-            write(1,buffer,ret);
+    ret = read(cfd,&p.msghead,sizeof(p.msghead));
+    if(ret <=0){
+        printf("cfd=%d close!\n",cfd);
+        close(cfd);
+        ev.data.fd = cfd;
+        epoll_ctl(eh,EPOLL_CTL_DEL,ev.data.fd,&ev);
+        return ;
+    }
+
+
+    switch(p.msghead.msgtype){
+        case 1:{
+            ret = read(cfd,buf,p.msghead.length);
+            if(ret <=0){
+                printf("cfd no data!\n");
+                return;
+            }
+            write(1,buf,p.msghead.length);
             write(1,"\n",1);
             break;
         }
-        case '2':
-            pool_add_work(wchat_robot,(void*)cfd);
+        case 2:
+            pool_add_work(writeback,(void*)cfd);
             break;
-        case '3':
-            pool_add_work(upload_file,(void*)cfd);
+        case 3:
             break;
-        case '4':
-            pool_add_work(download_file,(void*)cfd);
+        case 4:
             break;
         default:
-            printf("Unknow data!\n");
+            write(1,"unknow type",strlen("unknow type"));
+            write(1,"\n",1);
+            read(cfd,buf,1024);
             break;
     }
 }
@@ -227,9 +231,8 @@ int main(){
     int sfd,ret,cfd;
     struct sockaddr_in sin;
     struct sockaddr_in cin;
-    int eh,nfound,max=10;
+    int nfound,max=10;
     int len,i;
-    struct epoll_event ev,evs[10];
     char buf[1024] = {0};
 
     sfd = socket(AF_INET,SOCK_STREAM,0);
@@ -291,16 +294,8 @@ int main(){
                         epoll_ctl(eh,EPOLL_CTL_ADD,cfd,&ev);
                         continue;
                     }
-                } else {
-                    ret = read(evs[i].data.fd,buf,1024);
-                    if(ret <=0){
-                        printf("cfd=%d close!\n",evs[i].data.fd);
-                        close(evs[i].data.fd);
-                        ev.data.fd = evs[i].data.fd;
-                        epoll_ctl(eh,EPOLL_CTL_DEL,evs[i].data.fd,&ev);
-                    } else {
-                        handle_buf(buf,cfd);
-                    }
+                } else if(evs[i].events == EPOLLIN|EPOLLET){
+                    parse(evs[i].data.fd);
                 }
             }
         }
