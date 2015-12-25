@@ -86,3 +86,7 @@
     19.内存泄漏检测工具:
         windows:vs中代码包含crtdbg.h
         Linux: mtrace  valgrind 
+
+    20.  策略
+         机制
+

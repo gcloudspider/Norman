@@ -1,6 +1,6 @@
 CC = gcc
 
-LDFLAGS= 
+LDFLAGS= -lmysqlclient
 
 BIN = test_iniparser
 
@@ -13,7 +13,7 @@ all:$(BIN)
 
 
 test_iniparser:$(OBJ)
-	$(CC) -o $@ $(OBJ) $(EXSRC)
+	$(CC) -o $@ $(OBJ) $(EXSRC) $(LDFLAGS)
 
 clean:$(BIN)
 	rm -rf $(BIN)
