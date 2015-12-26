@@ -17,7 +17,7 @@
 #include<stdio.h>
 #include "../include/chatserver.h"
 
-int init_epoll(int threadnum){
+int nv_init_epoll(int threadnum){
     eh = epoll_create(threadnum);
     if(-1 == eh){
         perror("epoll_create");
@@ -26,16 +26,17 @@ int init_epoll(int threadnum){
     return 0;
 }
 
-int add_epoll(int fd){
+int nv_add_epoll(int fd){
     ev.data.fd = fd;
     ev.events = EPOLLIN|EPOLLET;
     epoll_ctl(eh,EPOLL_CTL_ADD,fd,&ev);
 }
 
-int found_epoll(){
+int nv_found_epoll(){
     return epoll_wait(eh,evs,10,-1);
 }
 
-int del_epoll(int cfd){
-    
+int nv_del_epoll(int fd){
+    ev.data.fd = fd;
+    epoll_ctl(eh,EPOLL_CTL_DEL,fd,&ev);
 }

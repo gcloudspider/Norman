@@ -17,6 +17,6 @@
 #include<stdio.h>
 #include "../include/chatserver.h"
 
-int init_thread_mutex(pthread_mutex_t* mutex){
+int nv_init_thread_mutex(pthread_mutex_t* mutex){
     return pthread_mutex_init(mutex,NULL);
 }

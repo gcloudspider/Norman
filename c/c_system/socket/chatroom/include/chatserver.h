@@ -106,27 +106,105 @@ typedef struct socket{
     struct sockaddr_in sin;
     struct sockaddr_in cin;
 }SOCK;
+//////////////////////////////////////////
+//消息
+typedef unsigned char u8;
+typedef unsigned char u16;
+typedef unsigned char u32;
 
+enum MsgType{
+    SIGNIN = 1,
+    SIGNUP = 2,
+    ONLINE = 3,
+    LOGOUT = 4,
+    SINGLE_SESSION = 5,
+    GROUP_SESSION = 6,
+    MULTI_SESSION = 7,
+    BROAD_SESSION = 8
+};
+
+struct MsgHead{
+    u8 type;
+    u8 version;
+    u16 length;
+};
+
+struct signin {
+    
+};
+
+struct signup {
+    
+};
+
+struct online {
+    
+};
+
+struct logout {
+    
+};
+
+struct Single_session {
+
+};
+
+struct Group_session {
+
+};
+
+struct Multi_session {
+
+};
+
+struct Broad_session {
+    
+};
+
+union body{
+    struct signin singin;   //登录
+    struct signup signup;   //注册
+    struct online online;   //在线用户
+    struct logout logout;   //退出
+    struct Single_session Single_session;   //单人会话
+    struct Group_session Group_session;     //群组会话
+    struct Multi_session Multi_session;     //多人会话
+    struct Broad_session Broad_session;     //广播会话
+};
+
+struct package{
+    struct MsgHead head;
+    union body body;
+};
 
 /*function*/
-int init_conf(SEVCF* cf,const char* cpath);
+int nv_init_conf(SEVCF* cf,const char* cpath);
 
-void parse_msg(int cfd);
+void nv_parse_msg(int cfd);
 
-int init_db(USERINFO* uinfo,USERINFO** uhead,const char* dbpath);
+int nv_init_db(USERINFO* uinfo,USERINFO** uhead,const char* dbpath);
 
-int init_thread_mutex(pthread_mutex_t *mutex);
+int nv_init_thread_mutex(pthread_mutex_t *mutex);
 
-int init_thread_cond(pthread_cond_t *cond);
+int nv_init_thread_cond(pthread_cond_t *cond);
 
-int init_thread_pool(TD* td);
+int nv_init_thread_pool(TD* td);
+void nv_pool_add_task(FUNC_POINT function,void* argv);
 
-int init_epoll(int threadnum);
-int add_epoll(int fd);
-int del_epoll(int cfd);
+int nv_init_epoll(int threadnum);
+int nv_add_epoll(int fd);
+int nv_del_epoll(int fd);
+int nv_found_epoll();
 
-int init_socket(SOCK* sock,const char* ip,int port,int connum);
+int nv_init_socket(SOCK* sock,const char* ip,int port,int connum);
 
-void* thread_wakeup(void* argv);
+void* nv_thread_wakeup(void* argv);
+void* nv_cond_login(void* argv);
+void* nv_cond_logout(void* argv);
+void* nv_cond_register(void* argv);
+void* nv_cond_single_session(void* argv);
+void* nv_cond_mutli_session(void* argv);
+void* nv_cond_group_session(void* argv);
+void* nv_cond_broad_session(void* argv);
 
 #endif

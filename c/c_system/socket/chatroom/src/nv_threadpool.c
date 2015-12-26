@@ -17,20 +17,20 @@
 #include<stdio.h>
 #include "../include/chatserver.h"
 
-int init_thread_pool(TD* td){
+int nv_init_thread_pool(TD* td){
     int i;
     td->max_thread_num = DEFAULT_THREADNUM;
     td->qhead = NULL;
     td->qtail = NULL;
     for(i=0;i<td->max_thread_num;i++){
-        pthread_create(&td->thread_id[i],NULL,thread_wakeup,NULL);
+        pthread_create(&td->thread_id[i],NULL,nv_thread_wakeup,NULL);
         pthread_detach(td->thread_id[i]);
     }
     return 0;
 }
 
 
-void* thread_wakeup(void* argv){
+void* nv_thread_wakeup(void* argv){
     QTASKLIST* ptask = NULL;
     while(1){
         ptask = NULL;
@@ -58,4 +58,21 @@ void* thread_wakeup(void* argv){
         }   
     }
     return argv;
+}
+
+void nv_pool_add_task(FUNC_POINT function,void* argv){
+    QTASKLIST* ptask = malloc(sizeof(QTASKLIST));
+    printf("malloc task address:%p\n",ptask);
+    ptask->function = function;
+    ptask->argv = argv;
+    pthread_mutex_lock(&td.mutex);
+    if(td.qhead){
+        td.qtail->next = ptask;
+        td.qtail = ptask;
+    } else {
+        td.qtail = ptask;
+        td.qhead = td.qtail;
+    }
+    pthread_mutex_unlock(&td.mutex);
+    pthread_cond_signal(&td.cond);
 }

@@ -18,7 +18,7 @@
 #include "../include/chatserver.h"
 #include "../include/iniparser.h"
 
-int init_conf(SEVCF *cf,const char* cpath){
+int nv_init_conf(SEVCF *cf,const char* cpath){
     dictionary* ini;
 
     ini = iniparser_load(cpath);
@@ -40,8 +40,38 @@ int init_conf(SEVCF *cf,const char* cpath){
     return 0;
 }
 
-void parse_msg(int cfd){
-    
+void nv_parse_msg(int cfd){
+    int ret;
+    struct package p;
+
+    ret = read(cfd,&p.head,sizeof(p.head));
+    if(ret <=0){
+        close(cfd);
+        nv_del_epoll(cfd);
+        return ;
+    }
+
+    switch(p.head.type){
+        case 1:
+            nv_pool_add_task(nv_cond_login,(void*)cfd);
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+        case 4:
+            break;
+        case 5:
+            break;
+        case 6:
+            break;
+        case 7:
+            break;
+        case 8:
+            break;
+        default:
+            break;
+    }
 }
 
 

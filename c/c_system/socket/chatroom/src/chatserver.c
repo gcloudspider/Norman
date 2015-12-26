@@ -26,7 +26,7 @@ int main(int argc,char *argv[]){
     int nfound,len;
 
     //初始化配置文件
-    ret = init_conf(&cf,DEFAULT_CFGPATH);
+    ret = nv_init_conf(&cf,DEFAULT_CFGPATH);
     if(-1 == ret){
         fprintf(stderr,"load %s conf error!\n",DEFAULT_CFGPATH);
         exit(2);
@@ -34,7 +34,7 @@ int main(int argc,char *argv[]){
     
     //printf("loaded conf successfuly!\n");
     //TODO:初始化数据库
-    ret = init_db(&uinfo,&uhead,cf.dbpath);
+    ret = nv_init_db(&uinfo,&uhead,cf.dbpath);
     if(-1 == ret){
         fprintf(stderr,"init db error!\n");
         exit(2);
@@ -42,42 +42,42 @@ int main(int argc,char *argv[]){
     printf("init db successfuly!\n");
 
     //TODO:初始化互斥锁
-    ret = init_thread_mutex(&td.mutex);
+    ret = nv_init_thread_mutex(&td.mutex);
     if(-1 == ret){
         fprintf(stderr,"init thread mutex failed!\n");
         exit(2);
     }
 
-    ret = init_thread_cond(&td.cond);
+    ret = nv_init_thread_cond(&td.cond);
     if(-1 == ret){
         fprintf(stderr,"init mutex cond failed!\n");
         exit(2);
     }
     
     //TODO:初始化线程池
-    ret = init_thread_pool(&td);
+    ret = nv_init_thread_pool(&td);
     if(-1 == ret){
         fprintf(stderr,"init thread pool failed!\n");
         exit(2);
     }
     
     //TODO:创建SOCK服务器
-    ret = init_socket(&sock,cf.server_ip,cf.server_port,cf.server_connum);
+    ret = nv_init_socket(&sock,cf.server_ip,cf.server_port,cf.server_connum);
     if(-1 == ret){
         fprintf(stderr,"init socket failed!\n");
         exit(2);
     }
 
-    ret = init_epoll(cf.server_threadnum);
+    ret = nv_init_epoll(cf.server_threadnum);
     if(-1 == ret){
         fprintf(stderr,"init epoll failed!\n");
         exit(2);
     }
     len = sizeof(sock.sin);
-    add_epoll(sock.sfd);
+    nv_add_epoll(sock.sfd);
 
     while(1){
-        nfound = found_epoll();
+        nfound = nv_found_epoll();
         if(nfound <0){
             perror("epoll_wait");
             continue;
@@ -93,11 +93,11 @@ int main(int argc,char *argv[]){
                         continue;
                     } else {
                         ev.data.fd = sock.cfd;
-                        add_epoll(sock.cfd);
+                        nv_add_epoll(sock.cfd);
                         continue;
                     }
                 } else if(evs[i].events == EPOLLIN|EPOLLET){
-                    parse_msg(evs[i].data.fd);
+                    nv_parse_msg(evs[i].data.fd);
                 }
             }
         }

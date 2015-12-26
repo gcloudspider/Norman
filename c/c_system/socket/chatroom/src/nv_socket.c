@@ -17,7 +17,7 @@
 #include<stdio.h>
 #include "../include/chatserver.h"
 
-int init_socket(SOCK* sock,const char* ip,int port,int connum){
+int nv_init_socket(SOCK* sock,const char* ip,int port,int connum){
     int ret;
     int len;
     

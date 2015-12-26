@@ -18,6 +18,34 @@
 #include "../include/chatserver.h"
 
 
-int init_thread_cond(pthread_cond_t* cond){
+int nv_init_thread_cond(pthread_cond_t* cond){
     return pthread_cond_init(cond,NULL);
+}
+
+void* nv_cond_login(void* argv){
+    
+}
+
+void* nv_cond_logout(void* argv){
+    
+}
+
+void* nv_cond_register(void* argv){
+    
+}
+
+void* nv_cond_single_session(void* argv){
+    
+}
+
+void* nv_cond_mutli_session(void* argv){
+    
+}
+
+void* nv_cond_group_session(void* argv){
+    
+}
+
+void* nv_cond_broad_session(void* argv){
+    
 }

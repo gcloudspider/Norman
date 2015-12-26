@@ -18,7 +18,7 @@
 #include "../include/chatserver.h"
 
 
-int init_db(USERINFO* uinfo,USERINFO** uhead,const char* dbpath){
+int nv_init_db(USERINFO* uinfo,USERINFO** uhead,const char* dbpath){
     FILE* fp;
     USERINFO *p=NULL;
 
