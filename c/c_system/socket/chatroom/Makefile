@@ -1,16 +1,13 @@
-CXX=gcc
+SUBDIRS = src\
+		  test
 
-BIN=chatroom
+.PHONY:all clean dist $(SUBDIRS)
 
-SRC=$(shell ls *.c)
-OBJ=$(SRC:.c=.o)
+all clean:$(SUBDIRS)
 
-all:$(BIN)
-	@echo "Output:\"" $(BIN)"\""
+$(SUBDIRS):
+	$(MAKE) -j2 -C $@ $(MAKECMDGOALS)
 
-$(BIN):$(OBJ)
-	$(CXX) -o $@ $(OBJ)
 
-clean:
-	rm -rf $(BIN)
-	rm -rf *.o
+dist:
+	tar -zcvf chatserver-1.0.tar.gz ./db ./src ./conf ./Makefile ./include
