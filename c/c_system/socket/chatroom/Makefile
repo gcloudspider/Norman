@@ -1,4 +1,5 @@
 SUBDIRS = src\
+		  client\
 		  test
 
 .PHONY:all clean dist $(SUBDIRS)
