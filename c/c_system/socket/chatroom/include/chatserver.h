@@ -42,6 +42,8 @@
 #include<arpa/inet.h>
 #include<sys/epoll.h>
 
+#define gettid() syscall(__NR_gettid)
+
 /*const*/
 #define CUSTOM_PROMPT_IP        "ip not found!"
 #define CUSTOM_PROMPT_DB        "dbpath not found!"
@@ -61,7 +63,6 @@
 
 
 /*struct*/
-
 typedef struct servercfg{
     const char* server_ip;
     int  server_port;
@@ -95,6 +96,10 @@ typedef struct thread{
     QTASKLIST* qtail;
 }TD;
 
+TD td;
+int eh;
+struct epoll_event ev,evs[10];
+
 typedef struct socket{
     int sfd;
     int cfd;
@@ -106,13 +111,19 @@ typedef struct socket{
 /*function*/
 int init_conf(SEVCF* cf,const char* cpath);
 
+void parse_msg(int cfd);
+
 int init_db(USERINFO* uinfo,USERINFO** uhead,const char* dbpath);
 
-int init_thread_mutex(TD* td);
+int init_thread_mutex(pthread_mutex_t *mutex);
 
-int init_thread_cond(TD* td);
+int init_thread_cond(pthread_cond_t *cond);
 
 int init_thread_pool(TD* td);
+
+int init_epoll(int threadnum);
+int add_epoll(int fd);
+int del_epoll(int cfd);
 
 int init_socket(SOCK* sock,const char* ip,int port,int connum);
 

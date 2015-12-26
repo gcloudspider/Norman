@@ -22,8 +22,8 @@ int main(int argc,char *argv[]){
     USERINFO uinfo;
     USERINFO *uhead=NULL;
     SOCK sock;
-    TD td;
-    int ret;
+    int i,ret;
+    int nfound,len;
 
     //初始化配置文件
     ret = init_conf(&cf,DEFAULT_CFGPATH);
@@ -42,13 +42,13 @@ int main(int argc,char *argv[]){
     printf("init db successfuly!\n");
 
     //TODO:初始化互斥锁
-    ret = init_thread_mutex(&td);
+    ret = init_thread_mutex(&td.mutex);
     if(-1 == ret){
         fprintf(stderr,"init thread mutex failed!\n");
         exit(2);
     }
 
-    ret = init_thread_cond(&td);
+    ret = init_thread_cond(&td.cond);
     if(-1 == ret){
         fprintf(stderr,"init mutex cond failed!\n");
         exit(2);
@@ -61,16 +61,49 @@ int main(int argc,char *argv[]){
         exit(2);
     }
     
-
     //TODO:创建SOCK服务器
     ret = init_socket(&sock,cf.server_ip,cf.server_port,cf.server_connum);
     if(-1 == ret){
         fprintf(stderr,"init socket failed!\n");
-    }
-    while(1){
-        
+        exit(2);
     }
 
+    ret = init_epoll(cf.server_threadnum);
+    if(-1 == ret){
+        fprintf(stderr,"init epoll failed!\n");
+        exit(2);
+    }
+    len = sizeof(sock.sin);
+    add_epoll(sock.sfd);
+
+    while(1){
+        nfound = found_epoll();
+        if(nfound <0){
+            perror("epoll_wait");
+            continue;
+        } else if(nfound == 0){
+            fprintf(stderr,"time out!\n");
+            continue;
+        } else {
+            for(i=0;i<nfound;i++){
+                if(evs[i].data.fd == sock.sfd){
+                    sock.cfd = accept(sock.sfd,(struct sockaddr*)&sock.cin,(socklen_t*)&len);
+                    if(-1 == sock.cfd){
+                        perror("accept");
+                        continue;
+                    } else {
+                        ev.data.fd = sock.cfd;
+                        add_epoll(sock.cfd);
+                        continue;
+                    }
+                } else if(evs[i].events == EPOLLIN|EPOLLET){
+                    parse_msg(evs[i].data.fd);
+                }
+            }
+        }
+    }
+    close(sock.sfd);
+    return 0;
 }
 
 
