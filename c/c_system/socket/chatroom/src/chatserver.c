@@ -21,6 +21,8 @@ int main(int argc,char *argv[]){
     SEVCF cf;
     USERINFO uinfo;
     USERINFO *uhead=NULL;
+    SOCK sock;
+    TD td;
     int ret;
 
     //初始化配置文件
@@ -39,13 +41,35 @@ int main(int argc,char *argv[]){
     }
     printf("init db successfuly!\n");
 
+    //TODO:初始化互斥锁
+    ret = init_thread_mutex(&td);
+    if(-1 == ret){
+        fprintf(stderr,"init thread mutex failed!\n");
+        exit(2);
+    }
 
+    ret = init_thread_cond(&td);
+    if(-1 == ret){
+        fprintf(stderr,"init mutex cond failed!\n");
+        exit(2);
+    }
+    
+    //TODO:初始化线程池
+    ret = init_thread_pool(&td);
+    if(-1 == ret){
+        fprintf(stderr,"init thread pool failed!\n");
+        exit(2);
+    }
+    
 
     //TODO:创建SOCK服务器
-
-    //TODO:初始化线程池
-
-    //TODO:初始化互斥锁
+    ret = init_socket(&sock,cf.server_ip,cf.server_port,cf.server_connum);
+    if(-1 == ret){
+        fprintf(stderr,"init socket failed!\n");
+    }
+    while(1){
+        
+    }
 
 }
 

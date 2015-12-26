@@ -43,12 +43,23 @@
 #include<sys/epoll.h>
 
 /*const*/
-#define DEFAULT_SERVER      "127.0.0.1"
-#define DEFAULT_PORT        8080
-#define DEFAULT_CONNUM      100
-#define DEFAULT_THREADNUM   100
+#define CUSTOM_PROMPT_IP        "ip not found!"
+#define CUSTOM_PROMPT_DB        "dbpath not found!"
 
-#define DEFAULT_CFGPATH     "../conf/chatroom.cfg"
+#define CONF_SERVER_IP          "SERVER:SERVER"
+#define CONF_SERVER_PORT        "SERVER:PORT"
+#define CONF_SERVER_CONNUM      "SERVER:CONNECT"
+#define CONF_SERVER_THREADNUM   "SERVER:THREADNUM"
+#define CONF_DB_PATH            "db:db"
+
+#define DEFAULT_SERVER          "127.0.0.1"
+#define DEFAULT_PORT            8080
+#define DEFAULT_CONNUM          100
+#define DEFAULT_THREADNUM       100
+
+#define DEFAULT_CFGPATH         "../conf/chatroom.cfg"
+
+
 /*struct*/
 
 typedef struct servercfg{
@@ -68,9 +79,43 @@ typedef struct userinfo{
     struct userinfo *next;
 }USERINFO;
 
+typedef void*(*FUNC_POINT)(void* argv);
+typedef struct tasklist{
+    FUNC_POINT function;
+    void* argv;
+    struct tasklist *next;
+}QTASKLIST;
+
+typedef struct thread{
+    pthread_mutex_t mutex;
+    pthread_cond_t cond;
+    int max_thread_num;
+    pthread_t thread_id[DEFAULT_THREADNUM];
+    QTASKLIST* qhead;
+    QTASKLIST* qtail;
+}TD;
+
+typedef struct socket{
+    int sfd;
+    int cfd;
+    struct sockaddr_in sin;
+    struct sockaddr_in cin;
+}SOCK;
+
+
 /*function*/
 int init_conf(SEVCF* cf,const char* cpath);
 
 int init_db(USERINFO* uinfo,USERINFO** uhead,const char* dbpath);
+
+int init_thread_mutex(TD* td);
+
+int init_thread_cond(TD* td);
+
+int init_thread_pool(TD* td);
+
+int init_socket(SOCK* sock,const char* ip,int port,int connum);
+
+void* thread_wakeup(void* argv);
 
 #endif
