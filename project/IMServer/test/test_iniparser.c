@@ -18,19 +18,19 @@ int main(){
     /* Get attributes */
     printf("Mirror:\n");
     tmp = iniparser_getint(ini, "mirror:mport", -1);
-    printf("mport:         [%x]\n", tmp);
+    printf("mport:         [%d]\n", tmp);
 
     printf("igmp:\n");
     tmp = iniparser_getint(ini, "igmp:mport", -1);
-    printf("mport:         [%x]\n", tmp);
+    printf("mport:         [%d]\n", tmp);
 
     printf("flooding:\n");
     tmp = iniparser_getint(ini, "flooding:multicast", -1);
-    printf("multicast:     [%x]\n", tmp);
+    printf("multicast:     [%d]\n", tmp);
 
     printf("flooding:\n");
     tmp = iniparser_getint(ini, "flooding:unicast", -1);
-    printf("unicast:       [%x]\n", tmp);
+    printf("unicast:       [%d]\n", tmp);
     iniparser_freedict(ini);
     return 0;
 } 
