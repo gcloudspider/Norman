@@ -76,6 +76,7 @@ typedef struct userinfo{
     int online;
     char username[64];
     char passwd[128];
+    char clientIp[255];
     struct userinfo *pre;
     struct userinfo *next;
 }USERINFO;
@@ -96,9 +97,11 @@ typedef struct thread{
     QTASKLIST* qtail;
 }TD;
 
+//全局变量
 TD td;
 int eh;
 struct epoll_event ev,evs[10];
+USERINFO *uhead;
 
 typedef struct socket{
     int sfd;
@@ -130,23 +133,27 @@ struct MsgHead{
 };
 
 struct signin {
-    
+    char username[64];
+    char passwd[128];
 };
 
 struct signup {
-    
+    char username[64];
+    char passwd[128];
 };
 
 struct online {
-    
+    char username[64];
+    char ipaddr[255];
 };
 
 struct logout {
-    
+    char username[64];
+    int online;
 };
 
 struct Single_session {
-
+    
 };
 
 struct Group_session {
@@ -182,7 +189,8 @@ int nv_init_conf(SEVCF* cf,const char* cpath);
 
 void nv_parse_msg(int cfd);
 
-int nv_init_db(USERINFO* uinfo,USERINFO** uhead,const char* dbpath);
+int nv_init_db(USERINFO* uinfo,const char* dbpath);
+int nv_print_all_user();
 
 int nv_init_thread_mutex(pthread_mutex_t *mutex);
 

@@ -52,22 +52,22 @@ void nv_parse_msg(int cfd){
     }
 
     switch(p.head.type){
-        case 1:
+        case SIGNIN:
             nv_pool_add_task(nv_cond_login,(void*)cfd);
             break;
-        case 2:
+        case SIGNUP:
             break;
-        case 3:
+        case ONLINE:
             break;
-        case 4:
+        case LOGOUT:
             break;
-        case 5:
+        case SINGLE_SESSION:
             break;
-        case 6:
+        case GROUP_SESSION:
             break;
-        case 7:
+        case MULTI_SESSION:
             break;
-        case 8:
+        case BROAD_SESSION:
             break;
         default:
             break;

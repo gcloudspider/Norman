@@ -18,7 +18,7 @@
 #include "../include/chatserver.h"
 
 
-int nv_init_db(USERINFO* uinfo,USERINFO** uhead,const char* dbpath){
+int nv_init_db(USERINFO* uinfo,const char* dbpath){
     FILE* fp;
     USERINFO *p=NULL;
 
@@ -40,19 +40,45 @@ int nv_init_db(USERINFO* uinfo,USERINFO** uhead,const char* dbpath){
                 uinfo->passwd,
                 &uinfo->online);
 
-        if(*uhead){
+        if(uhead){
             uinfo->next = NULL;
             uinfo->pre = p;
             p->next = uinfo;
         } else {
-            uinfo->next = *uhead;
-            uinfo->pre = *uhead;
-            *uhead = uinfo;
+            uinfo->next = uhead;
+            uinfo->pre = uhead;
+            uhead = uinfo;
         }
         p= uinfo;
     }
     
     fclose(fp);
     return 0;
+}
+
+int nv_print_online_user(USERINFO* uhead){
+    USERINFO* pn;
+    
+    pn = uhead;
+    if(uhead){
+        printf("Online user:\n");
+        while(pn){
+            if(pn->online){
+                printf("%s\n",pn->username);
+            }
+            pn= pn->next;
+        }
+    }
+}
+
+int nv_print_all_user(){
+    USERINFO *pn;
+    pn = uhead;
+    if(uhead){
+        while(pn){
+            printf("%s\n",pn->username);
+            pn = pn->next;
+        }
+    }
 }
 

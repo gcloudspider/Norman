@@ -23,7 +23,7 @@ int nv_init_thread_cond(pthread_cond_t* cond){
 }
 
 void* nv_cond_login(void* argv){
-    
+    printf("%p\n",uhead);
 }
 
 void* nv_cond_logout(void* argv){

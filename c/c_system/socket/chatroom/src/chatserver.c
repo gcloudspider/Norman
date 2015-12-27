@@ -20,7 +20,6 @@
 int main(int argc,char *argv[]){
     SEVCF cf;
     USERINFO uinfo;
-    USERINFO *uhead=NULL;
     SOCK sock;
     int i,ret;
     int nfound,len;
@@ -34,12 +33,13 @@ int main(int argc,char *argv[]){
     
     //printf("loaded conf successfuly!\n");
     //TODO:初始化数据库
-    ret = nv_init_db(&uinfo,&uhead,cf.dbpath);
+    ret = nv_init_db(&uinfo,cf.dbpath);
     if(-1 == ret){
         fprintf(stderr,"init db error!\n");
         exit(2);
     }
-    printf("init db successfuly!\n");
+    printf("init db %p successfuly!\n",uhead);
+    //nv_print_all_user();
 
     //TODO:初始化互斥锁
     ret = nv_init_thread_mutex(&td.mutex);
