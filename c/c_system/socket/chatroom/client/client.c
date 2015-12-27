@@ -20,14 +20,25 @@ int sfd;
 struct package p;
 
 void* thread_read(void* argv){
+    int ret;
+    char buf[1024] = {0};
     while(1){
-
+        ret = read(sfd,&p.head,sizeof(p.head));
+        if(p.head.type == 1){
+            ret = read(sfd,&p.body,sizeof(p.body));
+            if(p.body.signin.logined == 1){
+                write(1,"登陆成功!",strlen("登录成功!"));
+            }
+        } else {
+            printf("error format!\n");
+        }
     }
+    return argv;
 }
 
 void* thread_write(void* argv){
     write(sfd,&p.head,sizeof(p.head));
-    write(sfd,&p.body,1024);
+    write(sfd,&p.body,sizeof(p.body));
     return argv;
 }
 
@@ -52,8 +63,10 @@ void register_user(){
     scanf("%s",passwd);
     printf("user=%spasswd=%s\n",username,passwd);
     
-    p.body.signup.username = username;
-    p.body.signup.passwd = passwd;
+    memcpy(p.body.signin.username,username,sizeof(username));
+    memcpy(p.body.signin.passwd,passwd,sizeof(passwd));
+    //p.body.signup.username = username;
+    //p.body.signup.passwd = passwd;
 
     p.head.type = SIGNUP;
     p.head.version = 0;
@@ -73,8 +86,11 @@ void login(){
     scanf("%s",passwd);
     printf("user=%spasswd=%s\n",username,passwd);
     
-    p.body.signin.username = username;
-    p.body.signin.passwd = passwd;
+    memcpy(p.body.signin.username,username,sizeof(username));
+    memcpy(p.body.signin.passwd,passwd,sizeof(passwd));
+
+    //p.body.signin.username = username;
+    //p.body.signin.passwd = passwd;
     p.head.type = SIGNIN;
     p.head.version = 1;
 

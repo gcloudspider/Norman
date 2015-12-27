@@ -132,14 +132,19 @@ struct MsgHead{
     u16 length;
 };
 
+//严重Bug: 程序会Crash
+//SOCKET编程中不能使用char *username 来发送或接收数据
+//Issues: 何时需要序列化
 struct signin {
-    char *username;
-    char *passwd;
+    int logined;
+    char username[64];  //error: char* username;
+    char passwd[128];   //error: char* passwd
 };
 
 struct signup {
-    char *username;
-    char *passwd;
+    int registed;
+    char username[64];
+    char passwd[128];
 };
 
 struct online {
