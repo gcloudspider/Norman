@@ -138,8 +138,8 @@ struct signin {
 };
 
 struct signup {
-    char username[64];
-    char passwd[128];
+    char *username;
+    char *passwd;
 };
 
 struct online {
@@ -186,11 +186,11 @@ struct package{
 
 /*function*/
 int nv_init_conf(SEVCF* cf,const char* cpath);
-
 void nv_parse_msg(int cfd);
 
 int nv_init_db(USERINFO* uinfo,const char* dbpath);
 int nv_print_all_user();
+int nv_print_online_user();
 
 int nv_init_thread_mutex(pthread_mutex_t *mutex);
 
@@ -210,6 +210,7 @@ void* nv_thread_wakeup(void* argv);
 void* nv_cond_login(void* argv);
 void* nv_cond_logout(void* argv);
 void* nv_cond_register(void* argv);
+void* nv_cond_online_user(void* argv);
 void* nv_cond_single_session(void* argv);
 void* nv_cond_mutli_session(void* argv);
 void* nv_cond_group_session(void* argv);
