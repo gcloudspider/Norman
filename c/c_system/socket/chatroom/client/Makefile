@@ -10,7 +10,7 @@ all:$(BIN)
 	@echo "Output:\"" $(BIN)"\""
 
 $(BIN):$(OBJ)
-	$(CXX) -g -o $@ $(SRC) 
+	$(CXX) -g -o $@ $(SRC) $(CLIBS)
 
 clean:
 	rm -rf $(BIN)
