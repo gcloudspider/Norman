@@ -16,6 +16,7 @@
 
 #include<stdio.h>
 #include "head.h"
+#include<netinet/tcp.h>
 #define MAXTHREAD 10
 #define gettid() syscall(__NR_gettid)
 /*协议*/
@@ -190,7 +191,7 @@ void parse(int cfd){
 
     ret = read(cfd,&p.msghead,sizeof(p.msghead));
     if(ret <=0){
-        if(ret == ETIMEDOUT){
+        if(errno == ETIMEDOUT){
             printf("keepalive timeout! disconnected!\n");
         }
         printf("cfd=%d close!\n",cfd);
