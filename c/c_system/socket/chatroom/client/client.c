@@ -27,7 +27,7 @@ void* thread_read(void* argv){
 
 void* thread_write(void* argv){
     write(sfd,&p.head,sizeof(p.head));
-    write(sfd,&p.body,p.head.length);
+    write(sfd,&p.body,1024);
     return argv;
 }
 
@@ -73,10 +73,10 @@ void login(){
     scanf("%s",passwd);
     printf("user=%spasswd=%s\n",username,passwd);
     
-    p.body.signup.username = username;
-    p.body.signup.passwd = passwd;
+    p.body.signin.username = username;
+    p.body.signin.passwd = passwd;
     p.head.type = SIGNIN;
-    p.head.version = 0;
+    p.head.version = 1;
 
     handle_message();
     

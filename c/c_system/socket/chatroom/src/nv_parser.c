@@ -59,7 +59,7 @@ void nv_parse_msg(int cfd){
 
     switch(p.head.type){
         case SIGNIN:
-            printf("login signal!\n");
+            printf("login signal cfd=%d!\n",cfd);
             nv_pool_add_task(nv_cond_login,(void*)cfd);
             break;
         case SIGNUP:

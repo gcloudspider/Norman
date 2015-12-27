@@ -105,7 +105,7 @@ USERINFO *uhead;
 
 typedef struct socket{
     int sfd;
-    int cfd;
+ //   int cfd;
     struct sockaddr_in sin;
     struct sockaddr_in cin;
 }SOCK;
@@ -133,8 +133,8 @@ struct MsgHead{
 };
 
 struct signin {
-    char username[64];
-    char passwd[128];
+    char *username;
+    char *passwd;
 };
 
 struct signup {
@@ -169,7 +169,7 @@ struct Broad_session {
 };
 
 union body{
-    struct signin singin;   //登录
+    struct signin signin;   //登录
     struct signup signup;   //注册
     struct online online;   //在线用户
     struct logout logout;   //退出

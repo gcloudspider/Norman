@@ -23,7 +23,21 @@ int nv_init_thread_cond(pthread_cond_t* cond){
 }
 
 void* nv_cond_login(void* argv){
-    printf("%p\n",uhead);
+    struct package p;
+    int ret;
+    int cfd = (int) argv;
+    printf("cond_login cfd=%d\n",cfd);
+
+    ret = read(cfd,&p.body.signin,1024);
+    if(-1 == ret){
+        perror("read");
+        return ;
+    }
+    printf("read data %s!\n",p.body.signin.username);
+    //Issues1: thread debug ?
+    //printf("%s%s\n",p.body.signin.username,p.body.signin.passwd);
+    
+    return argv;
 }
 
 void* nv_cond_logout(void* argv){

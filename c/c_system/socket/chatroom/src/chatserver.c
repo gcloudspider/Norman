@@ -21,7 +21,7 @@ int main(int argc,char *argv[]){
     SEVCF cf;
     USERINFO uinfo;
     SOCK sock;
-    int i,ret;
+    int i,ret,cfd;
     int nfound,len;
     char buf[1024];
 
@@ -88,14 +88,14 @@ int main(int argc,char *argv[]){
         } else {
             for(i=0;i<nfound;i++){
                 if(evs[i].data.fd == sock.sfd){
-                    sock.cfd = accept(sock.sfd,(struct sockaddr*)&sock.cin,(socklen_t*)&len);
+                    cfd = accept(sock.sfd,(struct sockaddr*)&sock.cin,(socklen_t*)&len);
                     printf("client ip=%s port=%d\n",inet_ntop(AF_INET,&sock.cin.sin_addr.s_addr,buf,15),ntohs(sock.cin.sin_port));
-                    if(-1 == sock.cfd){
+                    if(-1 == cfd){
                         perror("accept");
                         continue;
                     } else {
-                        ev.data.fd = sock.cfd;
-                        nv_add_epoll(sock.cfd);
+                        ev.data.fd = cfd;
+                        nv_add_epoll(cfd);
                         continue;
                     }
                 } else if(evs[i].events == EPOLLIN|EPOLLET){
