@@ -4,7 +4,7 @@ CLIBS:= -pthread
 
 SRC:=$(wildcard *.c)
 OBJ:=${SRC:%.c=%.o}
-BIN:=chatroom
+BIN:=ChatServer
 
 all:$(BIN)
 	@echo "Output:\"" $(BIN)"\""

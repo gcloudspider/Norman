@@ -23,6 +23,7 @@ int main(int argc,char *argv[]){
     SOCK sock;
     int i,ret;
     int nfound,len;
+    char buf[1024];
 
     //初始化配置文件
     ret = nv_init_conf(&cf,DEFAULT_CFGPATH);
@@ -88,6 +89,7 @@ int main(int argc,char *argv[]){
             for(i=0;i<nfound;i++){
                 if(evs[i].data.fd == sock.sfd){
                     sock.cfd = accept(sock.sfd,(struct sockaddr*)&sock.cin,(socklen_t*)&len);
+                    printf("client ip=%s port=%d\n",inet_ntop(AF_INET,&sock.cin.sin_addr.s_addr,buf,15),ntohs(sock.cin.sin_port));
                     if(-1 == sock.cfd){
                         perror("accept");
                         continue;

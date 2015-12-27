@@ -34,6 +34,10 @@ void* nv_cond_register(void* argv){
     
 }
 
+void* nv_cond_online_user(void* argv){
+
+}
+
 void* nv_cond_single_session(void* argv){
     
 }
