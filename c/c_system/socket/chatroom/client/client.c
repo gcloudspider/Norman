@@ -31,6 +31,7 @@ void* thread_read(void* argv){
             }
         } else {
             printf("error format!\n");
+            break;
         }
     }
     return argv;

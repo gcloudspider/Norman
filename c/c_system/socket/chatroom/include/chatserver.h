@@ -136,7 +136,8 @@ struct MsgHead{
 //SOCKET编程中不能使用char *username 来发送或接收数据
 //Issues: 何时需要序列化
 struct signin {
-    int logined;
+    int  result;
+    char resMsg[256];
     char username[64];  //error: char* username;
     char passwd[128];   //error: char* passwd
 };
@@ -194,6 +195,7 @@ int nv_init_conf(SEVCF* cf,const char* cpath);
 void nv_parse_msg(int cfd);
 
 int nv_init_db(USERINFO* uinfo,const char* dbpath);
+int nv_auth_user();
 int nv_print_all_user();
 int nv_print_online_user();
 

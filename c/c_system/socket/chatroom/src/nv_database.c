@@ -82,3 +82,28 @@ int nv_print_all_user(){
     }
 }
 
+int nv_auth_user(const char* username,const char* passwd){
+    USERINFO* pn;
+    int ret;
+
+    pn = uhead;
+    if(uhead){
+        while(pn){
+            if(strcmp(pn->username,username)==0){
+                if(strcmp(pn->passwd,passwd)==0){
+                    pn->online = 1;
+                    ret = 0;
+                    break;
+                } else {
+                    ret = 2;
+                    break;
+                }   
+            } else{
+                ret = 1;
+            }
+            pn = pn->next;
+        }
+    }
+    
+    return ret;
+}

@@ -25,7 +25,7 @@ int nv_init_thread_cond(pthread_cond_t* cond){
 void* nv_cond_login(void* argv){
     struct package p;
     USERINFO* pn = NULL;
-    int ret,auth=0;
+    int ret;
     int cfd = (int) argv;
     printf("cond_login cfd=%d\n",cfd);
     char buf[1024];
@@ -38,7 +38,9 @@ void* nv_cond_login(void* argv){
     }
 
     //Issues1: thread debug ?
-    printf("%s%s\n",p.body.signin.username,p.body.signin.passwd);
+    printf("read data username=%spasswd=%s\n",p.body.signin.username,p.body.signin.passwd);
+    ret = nv_auth_user(p.body.signin.username,p.body.signin.passwd);
+    /*
     pn = uhead;
     if(uhead){
         while(pn){
@@ -50,7 +52,23 @@ void* nv_cond_login(void* argv){
             pn = pn->next;
         }
     }
+    */
+    printf("login result = %d\n",ret);
 
+    switch(ret){
+        case 0:
+            printf("Auth passwd success!\n");
+            break;
+        case 1:
+            printf("User not exist!\n");
+            break;
+        case 2:
+            printf("Auth passwd failed!\n");
+            break;
+        default:
+            break;
+    }
+/*
     if(1 == auth){
         printf("Auth passwd success!\n");
         p.body.signin.logined = 1;
@@ -58,9 +76,9 @@ void* nv_cond_login(void* argv){
         printf("Auth passwd failed!\n");
         p.body.signin.logined = 0;
     }
-
+*/
     p.head.type = 1;
-    p.head.type = 1;
+    p.head.version = 1;
 
     write(cfd,&p.head,sizeof(p.head));
     write(cfd,&p.body,sizeof(p.body));
