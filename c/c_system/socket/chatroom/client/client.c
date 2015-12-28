@@ -19,6 +19,11 @@
 int sfd;
 struct package p;
 
+void print_message_body(){
+    write(1,p.body.signin.resMsg,strlen(p.body.signin.resMsg));
+    write(1,"\n",1);
+}
+
 void* thread_read(void* argv){
     int ret;
     char buf[1024] = {0};
@@ -26,9 +31,7 @@ void* thread_read(void* argv){
         ret = read(sfd,&p.head,sizeof(p.head));
         if(p.head.type == 1){
             ret = read(sfd,&p.body,sizeof(p.body));
-            if(p.body.signin.result == 1){
-                write(1,"登陆成功!",strlen("登录成功!"));
-            }
+            print_message_body();
         } else {
             printf("error format!\n");
             break;

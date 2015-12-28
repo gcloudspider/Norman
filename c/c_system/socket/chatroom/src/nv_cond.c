@@ -36,47 +36,30 @@ void* nv_cond_login(void* argv){
         perror("recv");
         return ;
     }
-
+    
     //Issues1: thread debug ?
     printf("read data username=%spasswd=%s\n",p.body.signin.username,p.body.signin.passwd);
     ret = nv_auth_user(p.body.signin.username,p.body.signin.passwd);
-    /*
-    pn = uhead;
-    if(uhead){
-        while(pn){
-            if((strcmp(pn->username,p.body.signin.username)==0)&&(strcmp(pn->passwd,p.body.signin.passwd)==0)){
-                auth = 1;
-                pn->online = 1;
-                break;
-            }
-            pn = pn->next;
-        }
-    }
-    */
+    
     printf("login result = %d\n",ret);
 
     switch(ret){
         case 0:
-            printf("Auth passwd success!\n");
+            p.body.signin.result = 0;
+            memcpy(p.body.signin.resMsg,"Auth passwd success!",strlen("Auth passwd success!"));
             break;
         case 1:
-            printf("User not exist!\n");
+            p.body.signin.result = 1;
+            memcpy(p.body.signin.resMsg,"User not exist!",strlen("User not exist!"));
             break;
         case 2:
-            printf("Auth passwd failed!\n");
+            p.body.signin.result = 2;
+            memcpy(p.body.signin.resMsg,"Auth passwd failed!",strlen("Auth passwd failed!"));
             break;
         default:
             break;
     }
-/*
-    if(1 == auth){
-        printf("Auth passwd success!\n");
-        p.body.signin.logined = 1;
-    } else {
-        printf("Auth passwd failed!\n");
-        p.body.signin.logined = 0;
-    }
-*/
+    
     p.head.type = 1;
     p.head.version = 1;
 
