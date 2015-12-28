@@ -16,6 +16,7 @@
 
 #include<stdio.h>
 #include "head.h"
+#include<netinet/in.h>
 
 typedef enum {false = 0, true = 1} bool;
 

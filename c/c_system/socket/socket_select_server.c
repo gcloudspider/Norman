@@ -53,7 +53,7 @@ int main(){
     FD_SET(sfd,&set);   //3.将sfd文件描述符添加到集合中
     rset = set;         //4.备份集合
     int max = sfd+1;
-    int nfound;
+    int nfound,len,i;
     len = sizeof(sin);
     while(1){
         set = rset;
