@@ -19,9 +19,41 @@
 int sfd;
 struct package p;
 
+void showUserMenu(){
+    char ch;
+    while(1){
+        system("clear");
+        printf("##########################################\n");
+        printf("##              1.查看在线用户          ##\n");
+        printf("##                                      ##\n");
+        printf("##              2.发起聊天              ##\n");
+        printf("##                                      ##\n");
+        printf("##              3.退出登陆              ##\n");
+        printf("##########################################\n");
+        
+        while((ch=getchar())!='\n');
+        printf("请输入选择:");
+        
+        ch = getchar();
+        switch(ch){
+            case '1':
+                
+                break;
+            case '2':
+                break;
+            case '3':
+                logout();
+                break;
+            default:
+                break;
+        }
+    }
+}
+
 void print_message_body(){
     write(1,p.body.signin.resMsg,strlen(p.body.signin.resMsg));
     write(1,"\n",1);
+    sleep(1);
 }
 
 void* thread_read(void* argv){
@@ -32,6 +64,10 @@ void* thread_read(void* argv){
         if(p.head.type == 1){
             ret = read(sfd,&p.body,sizeof(p.body));
             print_message_body();
+            if(p.body.signin.result == 0){
+                showUserMenu();  
+            } 
+            break;
         } else {
             printf("error format!\n");
             break;
@@ -73,7 +109,7 @@ void register_user(){
     //p.body.signup.passwd = passwd;
 
     p.head.type = SIGNUP;
-    p.head.version = 0;
+    p.head.version = 1;
 
     handle_message();
 
