@@ -26,7 +26,7 @@ void* thread_read(void* argv){
         ret = read(sfd,&p.head,sizeof(p.head));
         if(p.head.type == 1){
             ret = read(sfd,&p.body,sizeof(p.body));
-            if(p.body.signin.logined == 1){
+            if(p.body.signin.result == 1){
                 write(1,"登陆成功!",strlen("登录成功!"));
             }
         } else {
