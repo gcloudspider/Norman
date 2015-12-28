@@ -14,9 +14,6 @@ all:$(BIN)
 $(BIN):$(OBJ)
 	$(CXX) -g -o $@ $(OBJ) $(CLIBS)
 
-%:%.c
-	$(CC) -g -c $<
-
 clean:
 	rm -rf $(BIN)
 	rm -rf *.o
