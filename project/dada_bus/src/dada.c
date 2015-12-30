@@ -32,6 +32,12 @@ void app_init(){
     int ret;
 
     ret = dada_conf_init(&cf,DEFAULT_CFGPATH);
+    if(-1 == ret){
+        printf("conf init failed!\n");
+        return ;
+    }
+
+    ret = dada_database_init(cf.database);
 }
 
 int main(int argc,char* argv[]){

@@ -31,7 +31,8 @@ int main(int argc,char* argv[]){
     mysql_init(&my_connection);
     if(mysql_real_connect(&my_connection,"localhost",USERNAME,PASSWD,DBNAME,0,NULL,0)){
         printf("connection success\n");
-        sql = "INSERT INTO dadauser(userid,username,nickname,passwd,telphone)values(1001,'遝','norman','123456','15012960449')";
+        mysql_query(&my_connection,"SET NAMES UTF8");
+        sql = "INSERT INTO dadauser(userid,username,nickname,passwd,telphone)values(1001,'李辉','norman','123456','15012960449')";
         res = mysql_query(&my_connection,sql);
         if(!res){
             printf("Inserted %lu rows\n",(unsigned long)mysql_affected_rows(&my_connection));
