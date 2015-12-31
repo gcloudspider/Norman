@@ -2,18 +2,19 @@ CC = gcc
 
 LDFLAGS1= -lmysqlclient
 LDFLAGS2= -lm -I.
+LDFLAGS3= -lzlog
 
 BIN1 = test_iniparser
-BIN2 = test_log
+BIN2 = test_zlog
 BIN3 = $(SRC3:%.c=%)
 BIN4 = $(SRC4:%.c=%) 
 
 INIEXSRC= ../src/dictionary.c ../src/iniparser.c 
-LOGEXSRC= ../src/log.c 
+LOGEXSRC=  
 JSONEXSRC= ../src/cjson.c
 
 SRC1= test_iniparser.c
-SRC2= test_log.c
+SRC2= test_zlog.c
 SRC3= $(wildcard *database*.c)
 SRC4= $(wildcard *json*.c)
 
@@ -32,7 +33,7 @@ $(BIN1):$(OBJ1)
 	$(CC) -o $@ $(OBJ1) $(INIEXSRC)
 
 $(BIN2):$(OBJ2)
-	$(CC) -o $@ $(OBJ2) $(LOGEXSRC)
+	$(CC) -o $@ $(OBJ2) $(LDFLAGS3)
 
 $(BIN3):$(OBJ3)
 	$(CC) -o $@ $@.o $(LDFLAGS1)
