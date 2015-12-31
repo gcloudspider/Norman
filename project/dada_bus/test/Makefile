@@ -1,28 +1,46 @@
 CC = gcc
 
-LDFLAGS= -lmysqlclient
+LDFLAGS1= -lmysqlclient
+LDFLAGS2= -lm -I.
 
-BIN = test_iniparser test_hello test_database
+BIN1 = test_iniparser
+BIN2 = test_log
+BIN3 = test_database
+BIN4 = $(SRC4:%.c=%) 
 
 INIEXSRC= ../src/dictionary.c ../src/iniparser.c 
 LOGEXSRC= ../src/log.c 
+JSONEXSRC= ../src/cjson.c
 
+SRC1= test_iniparser.c
+SRC2= test_log.c
+SRC3= test_database.c
+SRC4= $(wildcard *json*.c)
 
-SRC:= $(shell ls *.c )
-OBJ = $(SRC:%.c=%.o)
+OBJ1 = $(SRC1:%.c=%.o)
+OBJ2 = $(SRC2:%.c=%.o)
+OBJ3 = $(SRC3:%.c=%.o)
+OBJ4 = $(SRC4:%.c=%.o)
 
 .PHONY:all clean
 
-all:$(BIN)
-	@echo "finished make Output:\""$(BIN)"\""
+all:$(BIN1) $(BIN2) $(BIN3) $(BIN4)
+	@echo "finished make Output:\""$(BIN1) $(BIN2) $(BIN3) $(BIN4)"\""
 
 
-$(BIN):
+$(BIN1):$(OBJ1)
+	$(CC) -o $@ $(OBJ1) $(INIEXSRC)
 
-test_iniparser:
-	$(CC) -o $@ $(OBJ) $(INIEXSRC) $(LDFLAGS)
+$(BIN2):$(OBJ2)
+	$(CC) -o $@ $(OBJ2) $(LOGEXSRC)
+
+$(BIN3):$(OBJ3)
+	$(CC) -o $@ $(OBJ3) $(LDFLAGS1)
+
+$(BIN4):$(OBJ4)
+	$(CC) -o $@ $@.o $(JSONEXSRC) $(LDFLAGS2)
 
 clean:
-	rm -rf $(BIN)
+	rm -rf $(BIN1) $(BIN2) $(BIN3) $(BIN4)
 	rm -rf *.o
 
