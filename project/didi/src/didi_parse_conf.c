@@ -1,5 +1,5 @@
 /*########################################################
-##File Name: dada_parse_conf.c
+##File Name: didi_parse_conf.c
 ##Created Time:2015年12月29日 星期二 20时52分36秒
 ##Author: Norman 
 ##Description: 
@@ -15,10 +15,10 @@
 ##########################################################*/
 
 #include<stdio.h>
-#include "../include/dada.h"
+#include "../include/didi.h"
 #include "../include/iniparser.h"
 
-int dada_conf_init(CF *cf,const char* cpath){
+int didi_conf_init(CF *cf,const char* cpath){
     dictionary* ini;
 
     ini = iniparser_load(cpath);

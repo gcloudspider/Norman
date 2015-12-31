@@ -7,7 +7,7 @@ int main(int argc,char** argv)
 {
     int rc;
     zlog_category_t *c;
-    rc = zlog_init("../conf/log.conf");
+    rc = zlog_init("../conf/zlog.conf");
 
     if(rc){
         printf("init failed!\n");

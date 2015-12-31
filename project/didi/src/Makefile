@@ -4,7 +4,7 @@ CLIBS:= -pthread -lm -I.
 
 SRC:=$(wildcard *.c)
 OBJ:=${SRC:%.c=%.o}
-BIN:=dadabus
+BIN:=didiserver
 
 .PHONY:all clean
 

@@ -8,7 +8,7 @@ int main(){
     int status;
     int tmp;
     dictionary * ini;
-    ini = iniparser_load("../conf/dadabus.cfg");
+    ini = iniparser_load("../conf/didi.conf");
     if (ini==NULL){
         fprintf(stderr, "cannot parse file: %s\n", "switch.ini");
         return -1;

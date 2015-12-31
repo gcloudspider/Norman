@@ -1,5 +1,5 @@
 /*########################################################
-##File Name: dada.c
+##File Name: didi.c
 ##Created Time:2015年12月29日 星期二 20时49分25秒
 ##Author: Norman 
 ##Description: 
@@ -15,7 +15,7 @@
 ##########################################################*/
 
 #include<stdio.h>
-#include "../include/dada.h"
+#include "../include/didi.h"
 
 void usage(const char* progname){
     fprintf(stderr,"Usage: %s [-d deamon] [-h help] [-v version]\n",progname);
@@ -31,13 +31,13 @@ void app_init(){
     CF cf;
     int ret;
 
-    ret = dada_conf_init(&cf,DEFAULT_CFGPATH);
+    ret = didi_conf_init(&cf,DEFAULT_CFGPATH);
     if(-1 == ret){
         printf("conf init failed!\n");
         return ;
     }
 
-    //ret = dada_database_init(cf.database);
+    //ret = didi_database_init(cf.database);
 }
 
 int main(int argc,char* argv[]){

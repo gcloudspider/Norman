@@ -1,5 +1,5 @@
 /*########################################################
-##File Name: dada.h
+##File Name: didi.h
 ##Created Time:2015年12月29日 星期二 20时49分13秒
 ##Author: Norman 
 ##Description: 
@@ -14,8 +14,8 @@
 ##
 ##########################################################*/
 
-#ifndef _DADA_H
-#define _DADA_H
+#ifndef _didi_H
+#define _didi_H
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
@@ -68,7 +68,7 @@
 #define DEFAULT_CONNUM          100
 #define DEFAULT_THREADNUM       100
 
-#define DEFAULT_CFGPATH         "../conf/dadabus.cfg"
+#define DEFAULT_CFGPATH         "../conf/didi.conf"
 
 typedef struct server{
     const char *hostip;
@@ -97,9 +97,9 @@ typedef struct conf{
 
 //function
 //
-int dada_conf_init(CF *cf,const char* cpath);
+int didi_conf_init(CF *cf,const char* cpath);
 
 //db
-int dada_db_init(MYSQL *db);
+int didi_db_init(MYSQL *db);
 
 #endif
