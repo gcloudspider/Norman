@@ -5,7 +5,7 @@ LDFLAGS2= -lm -I.
 
 BIN1 = test_iniparser
 BIN2 = test_log
-BIN3 = test_database
+BIN3 = $(SRC3:%.c=%)
 BIN4 = $(SRC4:%.c=%) 
 
 INIEXSRC= ../src/dictionary.c ../src/iniparser.c 
@@ -14,7 +14,7 @@ JSONEXSRC= ../src/cjson.c
 
 SRC1= test_iniparser.c
 SRC2= test_log.c
-SRC3= test_database.c
+SRC3= $(wildcard *database*.c)
 SRC4= $(wildcard *json*.c)
 
 OBJ1 = $(SRC1:%.c=%.o)
@@ -35,7 +35,7 @@ $(BIN2):$(OBJ2)
 	$(CC) -o $@ $(OBJ2) $(LOGEXSRC)
 
 $(BIN3):$(OBJ3)
-	$(CC) -o $@ $(OBJ3) $(LDFLAGS1)
+	$(CC) -o $@ $@.o $(LDFLAGS1)
 
 $(BIN4):$(OBJ4)
 	$(CC) -o $@ $@.o $(JSONEXSRC) $(LDFLAGS2)
