@@ -37,7 +37,7 @@ void app_init(){
         return ;
     }
 
-    ret = dada_database_init(cf.database);
+    //ret = dada_database_init(cf.database);
 }
 
 int main(int argc,char* argv[]){
