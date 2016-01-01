@@ -56,6 +56,7 @@ void app_daemon(int ischdir,int isclose){
 
 void app_init(){
     CF cf;
+    zlog_category_t *c;
     int ret;
 
     ret = didi_conf_init(&cf,DEFAULT_CFGPATH);
@@ -63,15 +64,21 @@ void app_init(){
         printf("conf init failed!\n");
         return ;
     }
-
-    printf("%s\n",cf.log.logconf);
     
-    ret = didi_log_init(cf.log.logconf);
-
-    while(1){
-    
+    ret = didi_log_init(&c,cf.log.logconf);
+    if(-1 == ret){
+        zlog_info(c,"didi init log model failed!\n");
+        return ;
     }
-    //ret = didi_database_init(cf.database);
+    zlog_info(c,"didi init log model success!\n");
+    
+    while(1){
+        //TODO:   
+    }
+
+    didi_log_release();
+
+
 }
 
 int main(int argc,char* argv[]){

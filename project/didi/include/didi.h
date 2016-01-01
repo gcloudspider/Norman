@@ -99,7 +99,8 @@ typedef struct conf{
 //
 int didi_conf_init(CF *cf,const char* cpath);
 
-int didi_log_init(const char* logpath);
+int didi_log_init(zlog_category_t **c,const char* logpath);
+int didi_log_release();
 
 //db
 int didi_db_init(MYSQL *db);
