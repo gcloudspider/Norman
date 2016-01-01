@@ -37,12 +37,23 @@ DROP TABLE IF EXISTS `didiorders`;
 CREATE TABLE `didiorders` (
     `id` int(10) NOT NULL AUTO_INCREMENT,
     `orderid` int(10) NOT NULL COMMENT '订单号',
-    `starting` varchar(255) NOT NULL COMMENT '出发地',
+    `starting` varchar(255) NOT NULL COMMENT '始发地',
     `destination` varchar(255) NOT NULL COMMENT '目的地',
     `userid` int(10) NOT NULL COMMENT '订单发起人id',
     `driverid` int(10) NOT NULL COMMENT '订单接收司机id',
+    `starttime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '上车时间',
+    `arrivaltime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '到达时间',
+    `payment` varchar(255) NOT NULL COMMENT '付款(元)',
+ 
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS `dididriver`;
+CREATE TABLE `dididriver` (
+    `id` int(10) NOT NULL AUTO_INCREMENT,
+    `driverid` int(10) NOT NULL COMMENT ‘'司机证件号',
+    `drivercarnum` varchar(20) NOT NULL COMMENT '车牌号',
+    `driverphoto` varchar(255) NOT NULL COMMENT '照片',
+)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
