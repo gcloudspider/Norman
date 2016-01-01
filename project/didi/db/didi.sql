@@ -44,15 +44,22 @@ CREATE TABLE `didiorders` (
     `starttime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '上车时间',
     `arrivaltime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '到达时间',
     `payment` varchar(255) NOT NULL COMMENT '付款(元)',
- 
+    PRIMARY KEY(`id`),
+    UNIQUE KEY `orderid` (`orderid`)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `dididriver`;
+
 CREATE TABLE `dididriver` (
     `id` int(10) NOT NULL AUTO_INCREMENT,
-    `driverid` int(10) NOT NULL COMMENT ‘'司机证件号',
-    `drivercarnum` varchar(20) NOT NULL COMMENT '车牌号',
+    `driverid` int(10) NOT NULL COMMENT '司机证件号',
+    `drivername` varchar(255) NOT NULL COMMENT '司机姓名',
+    `driverpasswd` varchar(255) NOT NULL COMMENT '司机登录密码',
+    `drivertelphone` varchar(255) NOT NULL COMMENT '司机电话号码',
+    `drivercarnum` varchar(255) NOT NULL COMMENT '车牌号',
     `driverphoto` varchar(255) NOT NULL COMMENT '照片',
+    PRIMARY KEY(`id`),
+    UNIQUE KEY `driverid` (`driverid`)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
