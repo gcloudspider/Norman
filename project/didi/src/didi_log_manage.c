@@ -16,3 +16,12 @@
 
 #include<stdio.h>
 #include "../include/didi.h"
+
+int didi_log_init(const char* logpath){
+    
+    int rc;
+    zlog_category_t *c;
+    rc = zlog_init(logpath);
+
+    return 0;
+}

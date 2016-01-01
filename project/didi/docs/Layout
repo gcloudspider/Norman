@@ -1,0 +1,42 @@
+
+
+didi
+    |----conf
+    |       |____didi.conf
+    |       |____zlog.conf
+    |
+    |----db
+    |     |____didi.sql
+    |
+    |----docs
+    |       |____INSTALL.md
+    |       |____Layout.md
+    |
+    |----include
+    |       |____didi.h
+    |       |____iniparser.h
+    |       |____dictionary.h
+    |       |____cjson.h
+    | 
+    |----src
+    |       |____client
+    |       |       |____Makefile
+    |       |       
+    |       |____driver
+    |       |       |____Makefile
+    |       |       
+    |       |____didi.c
+    |       |____cjson.c
+    |       |____iniparser.c
+    |       |____dictionary.c
+    |       |____didi_parse_conf.c
+    |       |____didi_log_manage.c
+    |       |____didi_database_manage.c
+    |       |____Makefile
+    |
+    |----test
+    |       |____
+    |       |____
+    |
+    |----Makefile
+    |----README.md

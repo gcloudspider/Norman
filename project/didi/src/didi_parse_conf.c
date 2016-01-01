@@ -39,7 +39,6 @@ int didi_conf_init(CF *cf,const char* cpath){
     cf->mysql.username = iniparser_getstring(ini,CONF_DB_USERNAME,CUSTOM_PROMPT_DBUSER);
     cf->mysql.passwd = iniparser_getstring(ini,CONF_DB_PASSWD,CUSTOM_PROMPT_DBPASSWD);
     
-    cf->log.logpath = iniparser_getstring(ini,CONF_LOG_PATH,CUSTOM_PROMPT_LOG);
-    cf->log.loglevel = iniparser_getint(ini,CONF_LOG_LEVEL,-1);
+    cf->log.logconf = iniparser_getstring(ini,CONF_LOG_PATH,CUSTOM_PROMPT_LOG);
     return 0;
 }

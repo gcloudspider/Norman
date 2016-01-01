@@ -42,6 +42,8 @@
 #include<arpa/inet.h>
 #include<sys/epoll.h>
 
+#include<zlog.h>
+
 //prompt
 #define CUSTOM_PROMPT_IP        "ip not found!"
 #define CUSTOM_PROMPT_DB        "host not found!"
@@ -60,8 +62,7 @@
 #define CONF_DB_USERNAME        "mysql:username"
 #define CONF_DB_PASSWD          "mysql:passwd"
 //log
-#define CONF_LOG_PATH           "log:logpath"
-#define CONF_LOG_LEVEL          "log:loglevel"
+#define CONF_LOG_PATH           "log:logconf"
 
 #define DEFAULT_SERVER          "0.0.0.0"
 #define DEFAULT_PORT            8080
@@ -85,8 +86,7 @@ typedef struct mysql{
 }MYSQL;
 
 typedef struct log{
-    const char* logpath;
-    int  loglevel;
+    const char* logconf;
 }LOG;
 
 typedef struct conf{
@@ -98,6 +98,8 @@ typedef struct conf{
 //function
 //
 int didi_conf_init(CF *cf,const char* cpath);
+
+int didi_log_init(const char* logpath);
 
 //db
 int didi_db_init(MYSQL *db);
