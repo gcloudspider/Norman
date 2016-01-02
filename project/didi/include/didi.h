@@ -43,6 +43,7 @@
 #include<sys/epoll.h>
 
 #include<zlog.h>
+#include<mysql/mysql.h>
 
 //prompt
 #define CUSTOM_PROMPT_IP        "ip not found!"
@@ -78,12 +79,12 @@ typedef struct server{
     int  threadnum;
 }SERVER;
 
-typedef struct mysql{
+typedef struct didimysql{
     const char* hostname;
     const char* dbname;
     const char* username;
     const char* passwd;
-}MYSQL;
+}DIDISQL;
 
 typedef struct log{
     const char* logconf;
@@ -91,18 +92,20 @@ typedef struct log{
 
 typedef struct conf{
     struct server server;
-    struct mysql mysql;
+    struct didimysql didimysql;
     struct log log;
 }CF;
 
 //function
-//
 int didi_conf_init(CF *cf,const char* cpath);
 
 int didi_log_init(zlog_category_t **c,const char* logpath);
 int didi_log_release();
 
 //db
-int didi_db_init(MYSQL *db);
+int didi_db_init(MYSQL *db,DIDISQL didimysql,zlog_category_t **c);
+int didi_db_release(MYSQL *db,zlog_category_t **c);
 
+int didi_cache_init(MYSQL *db,zlog_category_t **c);
+int didi_cache_release(zlog_category_t **c);
 #endif
