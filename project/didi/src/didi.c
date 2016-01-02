@@ -57,14 +57,15 @@ void app_daemon(int ischdir,int isclose){
 void app_init(){
     CF cf;
     zlog_category_t *c;
+    MYSQL db;
     int ret;
-
+    //初始化配置文件
     ret = didi_conf_init(&cf,DEFAULT_CFGPATH);
     if(-1 == ret){
-        printf("conf init failed!\n");
+        printf("didi conf init failed!\n");
         return ;
     }
-    
+    //初始化zlog日志系统
     ret = didi_log_init(&c,cf.log.logconf);
     if(-1 == ret){
         zlog_info(c,"didi init log model failed!\n");
@@ -72,12 +73,16 @@ void app_init(){
     }
     zlog_info(c,"didi init log model success!\n");
     
+    //初始化数据库
+    didi_db_init(&db,cf.didimysql,&c);
+    //初始化缓冲区
+    didi_cache_init(&db,&c);
     while(1){
         //TODO:   
     }
 
+    didi_db_release(&db,&c);
     didi_log_release();
-
 
 }
 
