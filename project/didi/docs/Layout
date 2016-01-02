@@ -1,18 +1,18 @@
-
+代码分布:
 
 didi
-    |----conf
-    |       |____didi.conf
-    |       |____zlog.conf
+    |----conf                           //配置文件目录
+    |       |____didi.conf              //主程序配置文件
+    |       |____zlog.conf              //日志系统配置文件 zlog
     |
-    |----db
-    |     |____didi.sql
+    |----db                             //数据库
+    |     |____didi.sql                 //mysql Script
     |
     |----docs
-    |       |____INSTALL.md
-    |       |____Layout.md
+    |       |____INSTALL.md             //安装文档
+    |       |____Layout                 //布局文档
     |
-    |----include
+    |----include                        //头文件
     |       |____didi.h
     |       |____iniparser.h
     |       |____dictionary.h

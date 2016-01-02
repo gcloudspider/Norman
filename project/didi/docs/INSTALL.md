@@ -4,6 +4,10 @@
 安装mysql服务端与C Connector <br />
 2.sudo apt-get install mysql-server libmysqlclient-dev <br />
 
+mysql > grant all privileges on didi.\* to didi@localhost identified by 'didi123456';
+mysql > flush privileges;
+
+
 安装zlog模块 <br />
 3.sudo git clone https://github.com/bmanojlovic/zlog.git <br />
 4.cd zlog <br />
