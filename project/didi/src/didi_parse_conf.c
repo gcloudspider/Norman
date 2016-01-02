@@ -34,10 +34,10 @@ int didi_conf_init(CF *cf,const char* cpath){
     cf->server.connect = iniparser_getint(ini,CONF_SERVER_CONNUM,-1);
     cf->server.threadnum = iniparser_getint(ini,CONF_SERVER_THREADNUM,-1);
     
-    cf->mysql.hostname = iniparser_getstring(ini,CONF_DB_HOSTNAME,CUSTOM_PROMPT_DB);
-    cf->mysql.dbname = iniparser_getstring(ini,CONF_DB_NAME,CUSTOM_PROMPT_DBNAME);
-    cf->mysql.username = iniparser_getstring(ini,CONF_DB_USERNAME,CUSTOM_PROMPT_DBUSER);
-    cf->mysql.passwd = iniparser_getstring(ini,CONF_DB_PASSWD,CUSTOM_PROMPT_DBPASSWD);
+    cf->didimysql.hostname = iniparser_getstring(ini,CONF_DB_HOSTNAME,CUSTOM_PROMPT_DB);
+    cf->didimysql.dbname = iniparser_getstring(ini,CONF_DB_NAME,CUSTOM_PROMPT_DBNAME);
+    cf->didimysql.username = iniparser_getstring(ini,CONF_DB_USERNAME,CUSTOM_PROMPT_DBUSER);
+    cf->didimysql.passwd = iniparser_getstring(ini,CONF_DB_PASSWD,CUSTOM_PROMPT_DBPASSWD);
     
     cf->log.logconf = iniparser_getstring(ini,CONF_LOG_PATH,CUSTOM_PROMPT_LOG);
     return 0;
