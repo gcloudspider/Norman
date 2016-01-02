@@ -36,3 +36,11 @@ int didi_db_release(MYSQL *db,zlog_category_t **c){
     mysql_close(db);
     zlog_info(*c,"didi release db success!\n");
 }
+
+void query_online_user(){
+
+}
+
+void query_online_driver(){
+
+}

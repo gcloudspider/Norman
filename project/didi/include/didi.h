@@ -105,7 +105,13 @@ int didi_log_release();
 //db
 int didi_db_init(MYSQL *db,DIDISQL didimysql,zlog_category_t **c);
 int didi_db_release(MYSQL *db,zlog_category_t **c);
+void query_online_user();
+void query_online_driver();
+
 
 int didi_cache_init(MYSQL *db,zlog_category_t **c);
+int init_user_linklist();
+int init_driver_linklist();
+
 int didi_cache_release(zlog_category_t **c);
 #endif
