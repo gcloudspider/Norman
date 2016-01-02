@@ -1,6 +1,6 @@
 CXX:=gcc
 #CFLAGS:= -g -o
-CLIBS:= -pthread -lm -I. -lzlog
+CLIBS:= -pthread -lm -I. -lzlog -lmysqlclient
 
 SRC:=$(wildcard *.c)
 OBJ:=${SRC:%.c=%.o}
