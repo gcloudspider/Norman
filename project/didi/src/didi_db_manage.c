@@ -28,6 +28,8 @@ int didi_db_init(MYSQL *db,didi_mysql_t didimysql,zlog_category_t **c){
         zlog_info(*c,"didi connect db failed!\n");
         if(mysql_error(db)){
             zlog_info(*c,"connect error %d:%s\n",mysql_errno(db),mysql_error(db));
+            zlog_info(*c,"error: main process exit!");
+            exit(2);
         }
     }
 }

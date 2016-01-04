@@ -124,6 +124,12 @@ struct didi_thread_s{
     struct didi_tasklist_s *qtail;
 };
 
+struct didi_socket_s{
+    int sfd;
+    struct sockaddr_in sin;
+    struct sockaddr_in cin;
+};
+
 /* types */
 typedef struct didi_server_s didi_server_t;
 typedef struct didi_mysql_s didi_mysql_t;
@@ -134,6 +140,8 @@ typedef struct didi_user_s didi_user_t;
 typedef struct didi_driver_s didi_driver_t;
 typedef struct didi_tasklist_s didi_tasklist_t;
 typedef struct didi_thread_s didi_thread_t;
+
+typedef struct didi_socket_s didi_socket_t;
 
 //Global Var
 didi_thread_t didi_td;
@@ -160,10 +168,13 @@ int init_driver_linklist();
 int didi_cache_release(zlog_category_t **c);
 
 //loop
-int didi_iniit_pool(didi_thread_t* didi_td);
+int didi_add_epoll(didi_thread_t* didi_td,int fd);
+int didi_init_epoll(didi_thread_t* didi_td,int threadnum);
+int didi_init_socket(didi_socket_t *sock,const char* ip,int port,int connect);
+int didi_init_pool(didi_thread_t* didi_td);
 int didi_init_cond(pthread_cond_t* cond);
 int didi_init_mutex(pthread_mutex_t* mutex);
-int didi_init_loop(zlog_category_t **c);
+int didi_init_loop(didi_server_t server,zlog_category_t **c);
 
 void* didi_thread_wakeup(void* argv);
 #endif

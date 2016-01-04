@@ -77,7 +77,7 @@ void app_init(){
     didi_db_init(&db,cf.didimysql,&c);
 
     //主服务
-    didi_init_loop(&c);
+    didi_init_loop(cf.server,&c);
 
     didi_db_release(&db,&c);
     didi_log_release();
