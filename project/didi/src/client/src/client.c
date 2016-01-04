@@ -17,6 +17,7 @@
 #include<stdio.h>
 #include "../include/user.h"
 #include "../include/cjson.h"
+
 int sfd;
 
 void showUserMenu(){
@@ -88,7 +89,8 @@ void register_user(){
     scanf("%s",passwd);
     printf("user=%spasswd=%s\n",username,passwd);
     
-    //create_js();
+    cJSON* root;
+    create_js(root);
     
     handle_message();
 

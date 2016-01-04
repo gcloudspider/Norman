@@ -47,10 +47,12 @@
 /*const*/
 
 #define DEFAULT_SERVER          "127.0.0.1"
-#define DEFAULT_PORT            8080
+#define DEFAULT_PORT            8081
 #define DEFAULT_CONNUM          100
 #define DEFAULT_THREADNUM       100
 
 #define DEFAULT_CFGPATH         "../conf/chatroom.cfg"
+int create_js();
 
 #endif
+
