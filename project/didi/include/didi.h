@@ -168,13 +168,22 @@ int init_driver_linklist();
 int didi_cache_release(zlog_category_t **c);
 
 //loop
+//
+int didi_found_epoll(int eh,struct epoll_event evs[10]);
 int didi_add_epoll(didi_thread_t* didi_td,int fd);
 int didi_init_epoll(didi_thread_t* didi_td,int threadnum);
 int didi_init_socket(didi_socket_t *sock,const char* ip,int port,int connect);
+int didi_release_socket(didi_socket_t sock_t,zlog_category_t **c);
 int didi_init_pool(didi_thread_t* didi_td);
 int didi_init_cond(pthread_cond_t* cond);
 int didi_init_mutex(pthread_mutex_t* mutex);
-int didi_init_loop(didi_server_t server,zlog_category_t **c);
+int didi_init_loop(didi_socket_t sock_t,didi_server_t server,zlog_category_t **c);
+
 
 void* didi_thread_wakeup(void* argv);
+
+int didi_run(didi_socket_t sock_t,zlog_category_t **c);
+
+void didi_parse_msg(int cfd);
+
 #endif

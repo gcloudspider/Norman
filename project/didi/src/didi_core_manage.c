@@ -44,3 +44,45 @@ void* didi_thread_wakeup(void* argv){
     return argv;
 }
 
+
+int didi_run(didi_socket_t sock_t,zlog_category_t **c){
+    int nfound,len;
+    int i;
+    int cfd;
+    char buf[1024] = {0};
+
+    len = sizeof(sock_t.sin);
+
+    while(1){
+        nfound = didi_found_epoll(didi_td.eh,didi_td.evs);
+        if(nfound < 0){
+            zlog_info(*c,"epoll_wait error!\n");
+            continue;
+        } else if(nfound == 0){
+            zlog_info(*c,"time out!\n");
+            continue;
+        } else {
+            for(i=0;i<nfound;i++){
+                if(didi_td.evs[i].data.fd == sock_t.sfd){
+                    cfd = accept(sock_t.sfd,(struct sockaddr*)&sock_t.cin,(socklen_t*)&len);
+                    zlog_info(*c,"client connect ip=%s port=%d\n",inet_ntop(AF_INET,&sock_t.cin.sin_addr.s_addr,buf,15),ntohs(sock_t.cin.sin_port));
+                    if(-1 == cfd){
+                        zlog_info(*c,"accept error!\n");
+                        continue;
+                    } else {
+                        didi_td.ev.data.fd = cfd;
+                        didi_add_epoll(&didi_td,cfd);
+                        continue;
+                    }
+                }else if (didi_td.evs[i].events == EPOLLIN|EPOLLET){
+                    didi_parse_msg(didi_td.evs[i].data.fd);
+                }
+            }
+        }
+    }
+    return 0;
+}
+
+void didi_parse_msg(int cfd){
+
+}

@@ -58,6 +58,7 @@ void app_init(){
     didi_conf_t cf;
     zlog_category_t *c;
     MYSQL db;
+    didi_socket_t sock_t;
     int ret;
     //初始化配置文件
     ret = didi_conf_init(&cf,DEFAULT_CFGPATH);
@@ -77,7 +78,11 @@ void app_init(){
     didi_db_init(&db,cf.didimysql,&c);
 
     //主服务
-    didi_init_loop(cf.server,&c);
+    didi_init_loop(sock_t,cf.server,&c);
+
+    didi_run(sock_t,&c);
+
+    didi_release_socket(sock_t,&c);
 
     didi_db_release(&db,&c);
     didi_log_release();

@@ -76,9 +76,13 @@ int didi_add_epoll(didi_thread_t *didi_td,int fd){
     epoll_ctl(didi_td->eh,EPOLL_CTL_ADD,fd,&didi_td->ev);
 }
 
-int didi_init_loop(didi_server_t server,zlog_category_t **c){
+int didi_found_epoll(int eh,struct epoll_event evs[10]){
+    return epoll_wait(eh,evs,10,-1);
+}
+
+int didi_init_loop(didi_socket_t sock_t,didi_server_t server,zlog_category_t **c){
     int ret,len;
-    didi_socket_t sock_t;
+    //didi_socket_t sock_t;
 
     //初始化互斥锁
     ret = didi_init_mutex(&didi_td.mutex);
@@ -111,7 +115,7 @@ int didi_init_loop(didi_server_t server,zlog_category_t **c){
         zlog_info(*c,"init socket failed!\n");
         exit(2);
     }
-    zlog_info(*c,"initi socket successfuly!\n");
+    zlog_info(*c,"init socket successfuly!\n");
 
     //初始化epoll
     ret = didi_init_epoll(&didi_td,server.threadnum);
@@ -119,9 +123,12 @@ int didi_init_loop(didi_server_t server,zlog_category_t **c){
         zlog_info(*c,"init epoll failed!\n");
         exit(2);
     }
-    zlog_info(*c,"initi epoll successfuly!\n");
+    zlog_info(*c,"init epoll successfuly!\n");
 
-    len = sizeof(sock_t.sin);
     didi_add_epoll(&didi_td,sock_t.sfd);
 }
 
+int didi_release_socket(didi_socket_t sock_t,zlog_category_t **c){
+    close(sock_t.sfd);
+    zlog_info(*c,"release socket successfuly!\n");
+}
