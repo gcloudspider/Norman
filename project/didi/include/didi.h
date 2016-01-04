@@ -44,6 +44,7 @@
 
 #include<zlog.h>
 #include<mysql/mysql.h>
+#include"cjson.h"
 
 //prompt
 #define CUSTOM_PROMPT_IP        "ip not found!"
@@ -96,8 +97,6 @@ struct didi_conf_s{
     struct didi_log_s log;
 };
 
-//////////////////////////////////////////////////
-
 struct didi_user_s{
 
 };
@@ -130,6 +129,46 @@ struct didi_socket_s{
     struct sockaddr_in cin;
 };
 
+enum packtype{
+    PACKTYPE_REQUEST = 1,           //请求包
+    PACKTYPE_RESPONE = 2            //响应包
+};
+
+enum event{
+    EVENT_REGISTER = 1,             //注册事件
+    EVENT_LOGIN = 2,                //登录事件
+    EVENT_LOGOUT = 3,               //退出事件
+    EVENT_QUERY = 4                 //查询订单事件
+};
+
+struct signup{
+    char username[64];
+    char passwd[128];
+};
+
+struct signin{
+    char username[64];
+    char passwd[128];
+};
+
+struct signout{
+    char username[64];
+};
+
+union packbody{
+    struct signup signup;           //注册
+    struct signin signin;           //登录
+    struct signout  signout;        //登出 (退出)
+};
+
+struct didi_packmsg_s{
+    int packtype;
+    int event;
+    char version[8];
+    char reqId[16];
+    union packbody packbody;
+};
+
 /* types */
 typedef struct didi_server_s didi_server_t;
 typedef struct didi_mysql_s didi_mysql_t;
@@ -142,6 +181,7 @@ typedef struct didi_tasklist_s didi_tasklist_t;
 typedef struct didi_thread_s didi_thread_t;
 
 typedef struct didi_socket_s didi_socket_t;
+typedef struct didi_packmsg_s didi_packmsg_t;
 
 //Global Var
 didi_thread_t didi_td;
@@ -149,26 +189,12 @@ didi_user_t *didi_user_head;
 didi_driver_t *didi_driver_head;
 
 
-//function
+//init function
 int didi_conf_init(didi_conf_t *cf,const char* cpath);
-
 int didi_log_init(zlog_category_t **c,const char* logpath);
 int didi_log_release();
-
-//db
 int didi_db_init(MYSQL *db,didi_mysql_t didimysql,zlog_category_t **c);
 int didi_db_release(MYSQL *db,zlog_category_t **c);
-void query_online_user();
-void query_online_driver();
-
-
-int didi_cache_init(MYSQL *db,zlog_category_t **c);
-int init_user_linklist();
-int init_driver_linklist();
-int didi_cache_release(zlog_category_t **c);
-
-//loop
-//
 int didi_found_epoll(int eh,struct epoll_event evs[10]);
 int didi_add_epoll(didi_thread_t* didi_td,int fd);
 int didi_del_epoll(int fd);
@@ -179,12 +205,23 @@ int didi_init_pool(didi_thread_t* didi_td);
 int didi_init_cond(pthread_cond_t* cond);
 int didi_init_mutex(pthread_mutex_t* mutex);
 int didi_init_loop(didi_socket_t *sock_t,didi_server_t server,zlog_category_t **c);
-
-
 void* didi_thread_wakeup(void* argv);
-
 int didi_run(didi_socket_t sock_t,zlog_category_t **c);
 
+int didi_cache_init(MYSQL *db,zlog_category_t **c);
+int didi_cache_release(zlog_category_t **c);
+////////////////////////////////////////////////////////////////////////////////////////
 void didi_parse_msg(int cfd,zlog_category_t **c);
+int didi_create_remsg(cJSON* root,didi_packmsg_t pg,zlog_category_t **c);
+int didi_release_json(cJSON* root,zlog_category_t **c);
+char* didi_convert_json(cJSON *root,zlog_category_t **c);
+cJSON* didi_conver_string(char* string,zlog_category_t **c);
+cJSON* didi_getjson_node(cJSON* root,const char* node,zlog_category_t **c);
+cJSON* didi_getitem_node(cJSON* node,const char* item,zlog_category_t **c);
+////////////////////////////////////////////////////////////////////////////////////////
+void query_online_user();
+void query_online_driver();
 
+int init_user_linklist();
+int init_driver_linklist();
 #endif
