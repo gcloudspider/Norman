@@ -25,10 +25,10 @@ int didi_db_init(MYSQL *db,didi_mysql_t didimysql,zlog_category_t **c){
         zlog_info(*c,"didi connection db success!\n");
         mysql_query(db,"SET NAMES UTF8");
     } else {
-        zlog_info(*c,"didi connect db failed!\n");
+        zlog_error(*c,"didi connect db failed!\n");
         if(mysql_error(db)){
-            zlog_info(*c,"connect error %d:%s\n",mysql_errno(db),mysql_error(db));
-            zlog_info(*c,"error: main process exit!");
+            zlog_error(*c,"connect error %d:%s\n",mysql_errno(db),mysql_error(db));
+            zlog_error(*c,"error: main process exit!");
             exit(2);
         }
     }

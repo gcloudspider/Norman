@@ -92,7 +92,7 @@ int didi_init_loop(didi_socket_t *sock_t,didi_server_t server,zlog_category_t **
     //初始化互斥锁
     ret = didi_init_mutex(&didi_td.mutex);
     if(-1 == ret){
-        zlog_info(*c,"init thread mutex failed!\n");
+        zlog_error(*c,"init thread mutex failed!\n");
         exit(2);
     }
     zlog_info(*c,"init thread mutex successfuly!\n");
@@ -101,7 +101,7 @@ int didi_init_loop(didi_socket_t *sock_t,didi_server_t server,zlog_category_t **
 
     ret = didi_init_cond(&didi_td.cond);
     if(-1 == ret){
-        zlog_info(*c,"init thread cond failed!\n");
+        zlog_error(*c,"init thread cond failed!\n");
         exit(2);
     }
     zlog_info(*c,"init thread mutex successfuly!\n");
@@ -109,7 +109,7 @@ int didi_init_loop(didi_socket_t *sock_t,didi_server_t server,zlog_category_t **
     //初始化线程池 
     ret = didi_init_pool(&didi_td);
     if(-1 == ret){
-        zlog_info(*c,"init thread pool failed!\n");
+        zlog_error(*c,"init thread pool failed!\n");
         exit(2);
     }
     zlog_info(*c,"init thread mutex successfuly!\n");
@@ -117,7 +117,7 @@ int didi_init_loop(didi_socket_t *sock_t,didi_server_t server,zlog_category_t **
     //初始化Socket对象
     ret = didi_init_socket(sock_t,server.hostip,server.port,server.connect);
     if(-1 == ret){
-        zlog_info(*c,"init socket failed!\n");
+        zlog_error(*c,"init socket failed!\n");
         exit(2);
     }
     zlog_info(*c,"init socket successfuly! sfd=%d\n",sock_t->sfd);
@@ -125,7 +125,7 @@ int didi_init_loop(didi_socket_t *sock_t,didi_server_t server,zlog_category_t **
     //初始化epoll
     ret = didi_init_epoll(&didi_td,server.threadnum);
     if(-1 == ret){
-        zlog_info(*c,"init epoll failed!\n");
+        zlog_error(*c,"init epoll failed!\n");
         exit(2);
     }
     zlog_info(*c,"init epoll successfuly!\n");
