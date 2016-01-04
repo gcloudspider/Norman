@@ -85,7 +85,7 @@ int didi_del_epoll(int fd){
     epoll_ctl(didi_td.eh,EPOLL_CTL_DEL,fd,&didi_td.ev);
 }
 
-int didi_init_loop(didi_socket_t sock_t,didi_server_t server,zlog_category_t **c){
+int didi_init_loop(didi_socket_t *sock_t,didi_server_t server,zlog_category_t **c){
     int ret,len;
     //didi_socket_t sock_t;
 
@@ -115,12 +115,12 @@ int didi_init_loop(didi_socket_t sock_t,didi_server_t server,zlog_category_t **c
     zlog_info(*c,"init thread mutex successfuly!\n");
 
     //初始化Socket对象
-    ret = didi_init_socket(&sock_t,server.hostip,server.port,server.connect);
+    ret = didi_init_socket(sock_t,server.hostip,server.port,server.connect);
     if(-1 == ret){
         zlog_info(*c,"init socket failed!\n");
         exit(2);
     }
-    zlog_info(*c,"init socket successfuly!\n");
+    zlog_info(*c,"init socket successfuly! sfd=%d\n",sock_t->sfd);
 
     //初始化epoll
     ret = didi_init_epoll(&didi_td,server.threadnum);
@@ -130,10 +130,10 @@ int didi_init_loop(didi_socket_t sock_t,didi_server_t server,zlog_category_t **c
     }
     zlog_info(*c,"init epoll successfuly!\n");
 
-    didi_add_epoll(&didi_td,sock_t.sfd);
+    didi_add_epoll(&didi_td,sock_t->sfd);
 }
 
-int didi_release_socket(didi_socket_t sock_t,zlog_category_t **c){
-    close(sock_t.sfd);
+int didi_release_socket(didi_socket_t* sock_t,zlog_category_t **c){
+    close(sock_t->sfd);
     zlog_info(*c,"release socket successfuly!\n");
 }

@@ -78,11 +78,11 @@ void app_init(){
     didi_db_init(&db,cf.didimysql,&c);
 
     //主服务
-    didi_init_loop(sock_t,cf.server,&c);
-
+    didi_init_loop(&sock_t,cf.server,&c);
+    
     didi_run(sock_t,&c);
 
-    didi_release_socket(sock_t,&c);
+    didi_release_socket(&sock_t,&c);
 
     didi_db_release(&db,&c);
     didi_log_release();

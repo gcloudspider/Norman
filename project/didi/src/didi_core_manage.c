@@ -32,6 +32,7 @@ void* didi_thread_wakeup(void* argv){
                 didi_td.qhead = didi_td.qhead->next;
                 }
             } else {
+                
                 break;
             }
             pthread_mutex_unlock(&didi_td.mutex);
@@ -55,6 +56,7 @@ int didi_run(didi_socket_t sock_t,zlog_category_t **c){
 
     while(1){
         nfound = didi_found_epoll(didi_td.eh,didi_td.evs);
+        zlog_info(*c,"epoll wait found %d evs",nfound);
         if(nfound < 0){
             zlog_info(*c,"epoll_wait error!\n");
             continue;
@@ -63,6 +65,7 @@ int didi_run(didi_socket_t sock_t,zlog_category_t **c){
             continue;
         } else {
             for(i=0;i<nfound;i++){
+                zlog_info(*c,"evs fd=%d sock_t.sfd=%d ",didi_td.evs[i].data.fd,sock_t.sfd);
                 if(didi_td.evs[i].data.fd == sock_t.sfd){
                     cfd = accept(sock_t.sfd,(struct sockaddr*)&sock_t.cin,(socklen_t*)&len);
                     zlog_info(*c,"client connect ip=%s port=%d\n",inet_ntop(AF_INET,&sock_t.cin.sin_addr.s_addr,buf,15),ntohs(sock_t.cin.sin_port));
