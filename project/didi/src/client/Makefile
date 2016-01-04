@@ -1,10 +1,8 @@
-CC=gcc
+SUBDIRS = src
 
+.PHONY:all clean $(SUBDIRS)
 
-.PHONY:all clean
+all clean:$(SUBDIRS)
 
-all:
-
-
-clean:
-	rm -rf *.o
+$(SUBDIRS):
+	$(MAKE) -j2 -C $@ $(MAKECMDGOALS)
