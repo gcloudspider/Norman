@@ -18,7 +18,7 @@
 #include "../include/didi.h"
 #include "../include/iniparser.h"
 
-int didi_conf_init(CF *cf,const char* cpath){
+int didi_conf_init(didi_conf_t *cf,const char* cpath){
     dictionary* ini;
 
     ini = iniparser_load(cpath);
