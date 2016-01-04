@@ -171,6 +171,7 @@ int didi_cache_release(zlog_category_t **c);
 //
 int didi_found_epoll(int eh,struct epoll_event evs[10]);
 int didi_add_epoll(didi_thread_t* didi_td,int fd);
+int didi_del_epoll(int fd);
 int didi_init_epoll(didi_thread_t* didi_td,int threadnum);
 int didi_init_socket(didi_socket_t *sock,const char* ip,int port,int connect);
 int didi_release_socket(didi_socket_t sock_t,zlog_category_t **c);
@@ -184,6 +185,6 @@ void* didi_thread_wakeup(void* argv);
 
 int didi_run(didi_socket_t sock_t,zlog_category_t **c);
 
-void didi_parse_msg(int cfd);
+void didi_parse_msg(int cfd,zlog_category_t **c);
 
 #endif

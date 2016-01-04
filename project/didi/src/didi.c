@@ -18,7 +18,7 @@
 #include "../include/didi.h"
 
 void usage(const char* progname){
-    fprintf(stderr,"Usage: %s [-d deamon] [-h help] [-v version]\n",progname);
+    fprintf(stderr,"Usage: %s [-d deamon] [-f forground] [-h help] [-v version]\n",progname);
     exit(2);
 }
 
@@ -96,10 +96,13 @@ int main(int argc,char* argv[]){
         usage(argv[0]);
     }
     
-    while((ch=getopt(argc,argv,"dhv"))!= EOF){
+    while((ch=getopt(argc,argv,"dfhv"))!= EOF){
         switch(ch){
             case 'd':
-		        //app_daemon(1,1);
+		        app_daemon(1,1);
+                app_init();
+                break;
+            case 'f':
                 app_init();
                 break;
             case 'h':

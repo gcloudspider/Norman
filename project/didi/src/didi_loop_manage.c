@@ -80,6 +80,11 @@ int didi_found_epoll(int eh,struct epoll_event evs[10]){
     return epoll_wait(eh,evs,10,-1);
 }
 
+int didi_del_epoll(int fd){
+    didi_td.ev.data.fd = fd;
+    epoll_ctl(didi_td.eh,EPOLL_CTL_DEL,fd,&didi_td.ev);
+}
+
 int didi_init_loop(didi_socket_t sock_t,didi_server_t server,zlog_category_t **c){
     int ret,len;
     //didi_socket_t sock_t;

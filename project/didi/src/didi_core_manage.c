@@ -75,7 +75,7 @@ int didi_run(didi_socket_t sock_t,zlog_category_t **c){
                         continue;
                     }
                 }else if (didi_td.evs[i].events == EPOLLIN|EPOLLET){
-                    didi_parse_msg(didi_td.evs[i].data.fd);
+                    didi_parse_msg(didi_td.evs[i].data.fd,c);
                 }
             }
         }
@@ -83,6 +83,19 @@ int didi_run(didi_socket_t sock_t,zlog_category_t **c){
     return 0;
 }
 
-void didi_parse_msg(int cfd){
+void didi_parse_msg(int cfd,zlog_category_t **c){
+    struct sockaddr_in tcin;
+    char buf[1024] = {0};
+    int ret;
+    int len = sizeof(tcin);
 
+    ret = read(cfd,buf,1024);
+    if(ret <=0){
+        getpeername(cfd,(struct sockaddr*)&tcin,(socklen_t*)&len);
+        zlog_info(*c,"client ip=%s,port=%d disconnect!\n",inet_ntop(AF_INET,&tcin.sin_addr.s_addr,buf,15),ntohs(tcin.sin_port));
+        close(cfd);
+        didi_del_epoll(cfd);
+        return ;
+    }
+    printf("buf=%s",buf);
 }
