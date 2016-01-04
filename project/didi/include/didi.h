@@ -72,38 +72,83 @@
 
 #define DEFAULT_CFGPATH         "../conf/didi.conf"
 
-typedef struct server{
+struct didi_server_s{
     const char *hostip;
     int  port;
     int  connect;
     int  threadnum;
-}SERVER;
+};
 
-typedef struct didimysql{
+struct didi_mysql_s{
     const char* hostname;
     const char* dbname;
     const char* username;
     const char* passwd;
-}DIDISQL;
+};
 
-typedef struct log{
+struct didi_log_s{
     const char* logconf;
-}LOG;
+};
 
-typedef struct conf{
-    struct server server;
-    struct didimysql didimysql;
-    struct log log;
-}CF;
+struct didi_conf_s{
+    struct didi_server_s server;
+    struct didi_mysql_s didimysql;
+    struct didi_log_s log;
+};
+
+//////////////////////////////////////////////////
+
+struct didi_user_s{
+
+};
+
+struct didi_driver_s{
+
+};
+
+typedef void*(*DIDI_FUNC_POINT)(void* argv);
+struct didi_tasklist_s{
+    DIDI_FUNC_POINT didi_func;
+    void* argv;
+    struct didi_tasklist_s *next;
+};
+
+struct didi_thread_s{
+    int eh;
+    struct epoll_event ev,evs[10];
+    pthread_mutex_t mutex;
+    pthread_cond_t cond;
+    int max_thread_num;
+    pthread_t pthread_id[DEFAULT_THREADNUM];
+    struct didi_tasklist_s *qhead;
+    struct didi_tasklist_s *qtail;
+};
+
+/* types */
+typedef struct didi_server_s didi_server_t;
+typedef struct didi_mysql_s didi_mysql_t;
+typedef struct didi_log_s didi_log_t;
+typedef struct didi_conf_s didi_conf_t;
+
+typedef struct didi_user_s didi_user_t;
+typedef struct didi_driver_s didi_driver_t;
+typedef struct didi_tasklist_s didi_tasklist_t;
+typedef struct didi_thread_s didi_thread_t;
+
+//Global Var
+didi_thread_t didi_td;
+didi_user_t *didi_user_head;
+didi_driver_t *didi_driver_head;
+
 
 //function
-int didi_conf_init(CF *cf,const char* cpath);
+int didi_conf_init(didi_conf_t *cf,const char* cpath);
 
 int didi_log_init(zlog_category_t **c,const char* logpath);
 int didi_log_release();
 
 //db
-int didi_db_init(MYSQL *db,DIDISQL didimysql,zlog_category_t **c);
+int didi_db_init(MYSQL *db,didi_mysql_t didimysql,zlog_category_t **c);
 int didi_db_release(MYSQL *db,zlog_category_t **c);
 void query_online_user();
 void query_online_driver();
@@ -112,6 +157,13 @@ void query_online_driver();
 int didi_cache_init(MYSQL *db,zlog_category_t **c);
 int init_user_linklist();
 int init_driver_linklist();
-
 int didi_cache_release(zlog_category_t **c);
+
+//loop
+int didi_iniit_pool(didi_thread_t* didi_td);
+int didi_init_cond(pthread_cond_t* cond);
+int didi_init_mutex(pthread_mutex_t* mutex);
+int didi_init_loop(zlog_category_t **c);
+
+void* didi_thread_wakeup(void* argv);
 #endif

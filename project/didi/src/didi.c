@@ -55,7 +55,7 @@ void app_daemon(int ischdir,int isclose){
 }
 
 void app_init(){
-    CF cf;
+    didi_conf_t cf;
     zlog_category_t *c;
     MYSQL db;
     int ret;
@@ -75,11 +75,9 @@ void app_init(){
     
     //初始化数据库
     didi_db_init(&db,cf.didimysql,&c);
-    //初始化缓冲区
-    didi_cache_init(&db,&c);
-    while(1){
-        //TODO:   
-    }
+
+    //主服务
+    didi_init_loop(&c);
 
     didi_db_release(&db,&c);
     didi_log_release();
