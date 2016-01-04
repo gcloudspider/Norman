@@ -17,7 +17,7 @@
 #include<stdio.h>
 #include "../include/didi.h"
 
-int didi_db_init(MYSQL *db,DIDISQL didimysql,zlog_category_t **c){
+int didi_db_init(MYSQL *db,didi_mysql_t didimysql,zlog_category_t **c){
     char *sql;
     int res;
     mysql_init(db);
