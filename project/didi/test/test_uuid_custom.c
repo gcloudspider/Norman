@@ -23,7 +23,7 @@
  * @param buf - buffer to be filled with the uuid string
  */
 
-char *random_uuid(char *buf) {
+char *random_uuid(char buf[37]) {
     const char *c = "89ab";
     char *p = buf;
     int n;
