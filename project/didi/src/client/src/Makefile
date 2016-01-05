@@ -1,6 +1,6 @@
 CXX:=gcc
 #CFLAGS:= -g -o
-CLIBS:= -pthread -lm -I.
+CLIBS:= -pthread -lm -I. -luuid
 
 SRC:=$(wildcard *.c)
 OBJ:=${SRC:%.c=%.o}

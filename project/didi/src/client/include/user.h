@@ -90,7 +90,7 @@ struct didi_packmsg_s{
     int packtype;
     int event;
     char version[8];
-    char reqId[16];
+    char reqId[37];
     union packbody packbody;
 };
 

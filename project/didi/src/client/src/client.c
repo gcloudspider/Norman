@@ -60,6 +60,9 @@ void* thread_read(void* argv){
     int ret;
     char buf[1024] = {0};
     while(1){
+        ret = read(sfd,buf,strlen(buf));
+        printf("%s\n",buf);
+        sleep(1);
     }
     return argv;
 }
@@ -73,9 +76,9 @@ void handle_message(){
     void* rret;
 
     pthread_create(&ttid01,NULL,thread_read,(void*)sfd);
-    pthread_create(&ttid02,NULL,thread_write,(void*)sfd);
+    //pthread_create(&ttid02,NULL,thread_write,(void*)sfd);
     pthread_join(ttid01,&rret);
-    pthread_join(ttid02,&rret);
+    //pthread_join(ttid02,&rret);
 }
 
 void register_user(){
@@ -84,14 +87,13 @@ void register_user(){
     char *s;
     char guid[37];
     random_uuid(guid);
-    printf("guid = %s\n", guid);
 
     printf("请输入用户名:");
     scanf("%s",pg.packbody.signup.username);
     printf("\n");
     printf("请输入密码:");
     scanf("%s",pg.packbody.signup.passwd);
-    printf("user=%spasswd=%s\n",pg.packbody.signup.username,pg.packbody.signup.passwd);
+    //printf("user=%spasswd=%s\n",pg.packbody.signup.username,pg.packbody.signup.passwd);
 
     pg.packtype = PACKTYPE_REQUEST;
     pg.event = EVENT_REGISTER;
@@ -100,7 +102,9 @@ void register_user(){
 
     didi_create_regmsg(&root,pg);
     s = didi_ufconvert_json(&root);
+    write(sfd,s,strlen(s));
     printf("%s\n",s);
+    handle_message();
     
 
 }
