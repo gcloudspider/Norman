@@ -53,6 +53,10 @@
 #define DEFAULT_THREADNUM       100
 
 #define DEFAULT_CFGPATH         "../conf/chatroom.cfg"
+enum usertype{
+    PERSONAL_USER = 1,
+    DRIVERS_USERS = 2
+};
 
 enum packtype{
     PACKTYPE_REQUEST = 1,
@@ -67,6 +71,9 @@ enum event{
 };
 
 struct signup{
+    int usertype;
+    char telphone[12];
+    char nickname[64];
     char username[64];
     char passwd[128];
 };

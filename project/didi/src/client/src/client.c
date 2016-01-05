@@ -87,10 +87,13 @@ void register_user(){
     char *s;
     char guid[37];
     random_uuid(guid);
-
-    printf("请输入用户名:");
+    pg.packbody.signup.usertype = PERSONAL_USER;
+    printf("请输入手机号码:");
+    scanf("%s",pg.packbody.signup.telphone);
+    printf("请输入昵称:");
+    scanf("%s",pg.packbody.signup.nickname);
+    printf("请输入真实姓名:");
     scanf("%s",pg.packbody.signup.username);
-    printf("\n");
     printf("请输入密码:");
     scanf("%s",pg.packbody.signup.passwd);
     //printf("user=%spasswd=%s\n",pg.packbody.signup.username,pg.packbody.signup.passwd);

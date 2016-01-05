@@ -36,6 +36,9 @@ int didi_create_regmsg(cJSON** root,didi_packmsg_t pg){
     cJSON_AddStringToObject(js_head,"reqId",pg.reqId);
 
     cJSON_AddItemToObject(*root,body,js_body=cJSON_CreateObject());
+    cJSON_AddNumberToObject(js_body,"usertype",pg.packbody.signup.usertype);
+    cJSON_AddStringToObject(js_body,"telphone",pg.packbody.signup.telphone);
+    cJSON_AddStringToObject(js_body,"nickname",pg.packbody.signup.nickname);
     cJSON_AddStringToObject(js_body,"username",pg.packbody.signup.username);
     cJSON_AddStringToObject(js_body,"passwd",pg.packbody.signup.passwd);
 
