@@ -45,6 +45,7 @@
 #include<zlog.h>
 #include<mysql/mysql.h>
 #include"cjson.h"
+#define gettid() syscall(__NR_gettid)
 
 //prompt
 #define CUSTOM_PROMPT_IP        "ip not found!"
@@ -105,10 +106,11 @@ struct didi_driver_s{
 
 };
 
-typedef void*(*DIDI_FUNC_POINT)(void* argv);
+typedef void*(*DIDI_FUNC_POINT)(void* argv,void* argv2);
 struct didi_tasklist_s{
     DIDI_FUNC_POINT didi_func;
     void* argv;
+    void* argv2;
     struct didi_tasklist_s *next;
 };
 
@@ -223,11 +225,11 @@ cJSON* didi_getitem_node(cJSON* node,const char* item);
 /////////////////////////////////////////////////////////////////////////
 //添加任务
 void* didi_thread_wakeup(void* argv);
-void didi_add_task(DIDI_FUNC_POINT didi_func,void* argv);
+void didi_add_task(DIDI_FUNC_POINT didi_func,void* argv,void* argv2);
 ////////////////////////////////////////////////////////////////////////
 //事件
 //
-void* didi_event_register(void* argv);
+void* didi_event_register(void* argv,void* argv2);
 void* didi_event_login(void* argv);
 void* didi_event_logout(void* argv);
 void* didi_event_query(void* argv);

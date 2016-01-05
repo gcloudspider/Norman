@@ -24,6 +24,7 @@ void* didi_thread_wakeup(void* argv){
         pthread_mutex_lock(&didi_td.mutex);
         pthread_cond_wait(&didi_td.cond,&didi_td.mutex);
         while(1){
+            zlog_info(c,"thread id:%ld actived!",gettid());
             if(didi_td.qhead){
                 ptask = didi_td.qhead;
                 if(didi_td.qhead == didi_td.qtail){
@@ -32,12 +33,13 @@ void* didi_thread_wakeup(void* argv){
                 didi_td.qhead = didi_td.qhead->next;
                 }
             } else {
-                
+                zlog_info(c,"queue no task! thread id:%ld waiting..!",gettid());
                 break;
             }
             pthread_mutex_unlock(&didi_td.mutex);
             if(ptask){
-                ptask->didi_func(ptask->argv);
+                ptask->didi_func(ptask->argv,ptask->argv2);
+                zlog_info(c,"thread id:%ld release work address:%p!",gettid(),ptask);
                 free(ptask);
             }
         }
@@ -116,19 +118,19 @@ void didi_parse_msg(int cfd){
         switch(item2->valueint){
             case EVENT_REGISTER:
                 zlog_warn(c,"event register user");
-                didi_add_task(didi_event_register,(void*)cfd);
+                didi_add_task(didi_event_register,(void*)cfd,(void*)buf);
                 break;
             case EVENT_LOGIN:
                 zlog_warn(c,"event user login!");
-                didi_add_task(didi_event_login,(void*)cfd);
+                //didi_add_task(didi_event_login,(void*)cfd);
                 break;
             case EVENT_LOGOUT:
                 zlog_warn(c,"event user logout!");
-                didi_add_task(didi_event_logout,(void*)cfd);
+                //didi_add_task(didi_event_logout,(void*)cfd);
                 break;
             case EVENT_QUERY:
                 zlog_warn(c,"event query user order!");
-                didi_add_task(didi_event_query,(void*)cfd);
+                //didi_add_task(didi_event_query,(void*)cfd);
                 break;
             default:
                 break;
@@ -136,11 +138,13 @@ void didi_parse_msg(int cfd){
     }
 }
 
-void didi_add_task(DIDI_FUNC_POINT didi_func,void* argv){
+void didi_add_task(DIDI_FUNC_POINT didi_func,void* argv,void* argv2){
     didi_tasklist_t* ptask = malloc(sizeof(didi_tasklist_t));
+    zlog_info(c,"malloc task address:%p",ptask);
     ptask->didi_func = didi_func;
     ptask->argv = argv;
-    zlog_info(c,"add cfd=%d to task list",(int)argv);
+    ptask->argv2 = argv2;
+    zlog_info(c,"add cfd=%d  argv2=%s to task list",(int)argv,(char*)argv2);
     pthread_mutex_lock(&didi_td.mutex);
     if(didi_td.qhead){
         didi_td.qtail->next = ptask;
