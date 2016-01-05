@@ -183,45 +183,61 @@ typedef struct didi_thread_s didi_thread_t;
 typedef struct didi_socket_s didi_socket_t;
 typedef struct didi_packmsg_s didi_packmsg_t;
 
-//Global Var
+//Global Var 全局变量 
 didi_thread_t didi_td;
+zlog_category_t *c;
 didi_user_t *didi_user_head;
 didi_driver_t *didi_driver_head;
 
 
-//init function
+//////////////////////////////////////////////////////////////////////
+//初始化
 int didi_conf_init(didi_conf_t *cf,const char* cpath);
 int didi_log_init(zlog_category_t **c,const char* logpath);
 int didi_log_release();
-int didi_db_init(MYSQL *db,didi_mysql_t didimysql,zlog_category_t **c);
-int didi_db_release(MYSQL *db,zlog_category_t **c);
+int didi_db_init(MYSQL *db,didi_mysql_t didimysql);
+int didi_db_release(MYSQL *db);
 int didi_found_epoll(int eh,struct epoll_event evs[10]);
 int didi_add_epoll(didi_thread_t* didi_td,int fd);
 int didi_del_epoll(int fd);
 int didi_init_epoll(didi_thread_t* didi_td,int threadnum);
 int didi_init_socket(didi_socket_t *sock,const char* ip,int port,int connect);
-int didi_release_socket(didi_socket_t *sock_t,zlog_category_t **c);
+int didi_release_socket(didi_socket_t *sock_t);
 int didi_init_pool(didi_thread_t* didi_td);
 int didi_init_cond(pthread_cond_t* cond);
 int didi_init_mutex(pthread_mutex_t* mutex);
-int didi_init_loop(didi_socket_t *sock_t,didi_server_t server,zlog_category_t **c);
-void* didi_thread_wakeup(void* argv);
-int didi_run(didi_socket_t sock_t,zlog_category_t **c);
+int didi_init_loop(didi_socket_t *sock_t,didi_server_t server);
+int didi_run(didi_socket_t sock_t);
 
-int didi_cache_init(MYSQL *db,zlog_category_t **c);
-int didi_cache_release(zlog_category_t **c);
-////////////////////////////////////////////////////////////////////////////////////////
-void didi_parse_msg(int cfd,zlog_category_t **c);
-int didi_create_remsg(cJSON* root,didi_packmsg_t pg,zlog_category_t **c);
-int didi_release_json(cJSON* root,zlog_category_t **c);
-char* didi_convert_json(cJSON *root,zlog_category_t **c);
-cJSON* didi_conver_string(char* string,zlog_category_t **c);
-cJSON* didi_getjson_node(cJSON* root,const char* node,zlog_category_t **c);
-cJSON* didi_getitem_node(cJSON* node,const char* item,zlog_category_t **c);
-////////////////////////////////////////////////////////////////////////////////////////
+int didi_cache_init(MYSQL *db);
+int didi_cache_release();
+/////////////////////////////////////////////////////////////////////////
+//json数据格式处理
+void didi_parse_msg(int cfd);
+int didi_create_remsg(cJSON* root,didi_packmsg_t pg);
+int didi_release_json(cJSON* root);
+char* didi_convert_json(cJSON* root);
+void didi_conver_string(cJSON** root,char* string);
+cJSON* didi_getjson_node(cJSON* root,const char* node);
+cJSON* didi_getitem_node(cJSON* node,const char* item);
+/////////////////////////////////////////////////////////////////////////
+//添加任务
+void* didi_thread_wakeup(void* argv);
+void didi_add_task(DIDI_FUNC_POINT didi_func,void* argv);
+////////////////////////////////////////////////////////////////////////
+//事件
+//
+void* didi_event_register(void* argv);
+void* didi_event_login(void* argv);
+void* didi_event_logout(void* argv);
+void* didi_event_query(void* argv);
+
+///////////////////////////////////////////////////////////////////////
+//数据库
 void query_online_user();
 void query_online_driver();
-
+//////////////////////////////////////////////////////////////////////
+//缓存区
 int init_user_linklist();
 int init_driver_linklist();
 #endif

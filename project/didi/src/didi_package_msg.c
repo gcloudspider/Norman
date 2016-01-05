@@ -17,7 +17,7 @@
 #include<stdio.h>
 #include "../include/didi.h"
 
-int didi_create_regmsg(cJSON* root,didi_packmsg_t pg,zlog_category_t **c){
+int didi_create_regmsg(cJSON* root,didi_packmsg_t pg){
     const char* const head = "head";
     const char* const body = "body";
     cJSON *js_head;
@@ -25,7 +25,7 @@ int didi_create_regmsg(cJSON* root,didi_packmsg_t pg,zlog_category_t **c){
     
     root = cJSON_CreateObject();
     if(!root){
-        zlog_error(*c,"get root failed!");
+        zlog_error(c,"get root failed!");
         return -1;
     }
 
@@ -42,19 +42,19 @@ int didi_create_regmsg(cJSON* root,didi_packmsg_t pg,zlog_category_t **c){
     return 0;
 }
 //释放json对象
-int didi_release_json(cJSON* root,zlog_category_t **c){
+int didi_release_json(cJSON* root){
     if(!root){
-        zlog_error(*c,"get root failed!");
+        zlog_error(c,"get root failed!");
         return -1;
     }
     cJSON_Delete(root);
     return 0;
 }
 //json对象转换成字符串
-char* didi_convert_json(cJSON* root,zlog_category_t **c){
+char* didi_convert_json(cJSON* root){
     char *result;
     if(!root){
-        zlog_error(*c,"get root failed!");
+        zlog_error(c,"get root failed!");
         return NULL;
     }
     result = cJSON_Print(root);
@@ -63,34 +63,34 @@ char* didi_convert_json(cJSON* root,zlog_category_t **c){
 }
 
 //将字符串转换成json对象
-cJSON* didi_convert_string(char *string,zlog_category_t **c){
-    cJSON* root;
-    root = cJSON_Parse(string);
+void didi_convert_string(cJSON** root,char *string){
+    //cJSON* root;
+    *root = cJSON_Parse(string);
 
-    if(!root){
-        zlog_error(*c,"get root failed!");
-        return NULL;
+    if(!*root){
+        zlog_error(c,"get root failed!");
+       // return NULL;
     }
-    return root;
+    //return root;
 }
 
 //获取json节点
-cJSON* didi_getjson_node(cJSON* root,const char* node,zlog_category_t **c) {
+cJSON* didi_getjson_node(cJSON* root,const char* node) {
     cJSON* js_node;
     js_node = cJSON_GetObjectItem(root,node);
     if(!js_node){
-        zlog_error(*c,"not found %s node!",node);
+        zlog_error(c,"not found %s node!",node);
         return NULL;
     }
     return js_node;
 }
 
 //获取节点item数据
-cJSON* didi_getitem_node(cJSON* node,const char* item,zlog_category_t **c){
+cJSON* didi_getitem_node(cJSON* node,const char* item){
     cJSON* nitem;
     nitem = cJSON_GetObjectItem(node,item);
-    if(!item){
-        zlog_error(*c,"not found %s item",item);
+    if(!nitem){
+        zlog_error(c,"not found %s item",item);
         return NULL;
     }
     return nitem;

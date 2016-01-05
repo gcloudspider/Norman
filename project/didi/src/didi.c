@@ -56,7 +56,7 @@ void app_daemon(int ischdir,int isclose){
 
 void app_init(){
     didi_conf_t cf;
-    zlog_category_t *c;
+    //zlog_category_t *c;
     MYSQL db;
     didi_socket_t sock_t;
     int ret;
@@ -75,16 +75,16 @@ void app_init(){
     zlog_info(c,"didi init log model success!\n");
     
     //初始化数据库
-    didi_db_init(&db,cf.didimysql,&c);
+    didi_db_init(&db,cf.didimysql);
 
     //主服务
-    didi_init_loop(&sock_t,cf.server,&c);
+    didi_init_loop(&sock_t,cf.server);
     
-    didi_run(sock_t,&c);
+    didi_run(sock_t);
 
-    didi_release_socket(&sock_t,&c);
+    didi_release_socket(&sock_t);
 
-    didi_db_release(&db,&c);
+    didi_db_release(&db);
     didi_log_release();
 
 }

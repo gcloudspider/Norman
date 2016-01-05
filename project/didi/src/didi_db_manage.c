@@ -17,26 +17,26 @@
 #include<stdio.h>
 #include "../include/didi.h"
 
-int didi_db_init(MYSQL *db,didi_mysql_t didimysql,zlog_category_t **c){
+int didi_db_init(MYSQL *db,didi_mysql_t didimysql){
     char *sql;
     int res;
     mysql_init(db);
     if(mysql_real_connect(db,didimysql.hostname,didimysql.username,didimysql.passwd,didimysql.dbname,0,NULL,0)){
-        zlog_info(*c,"didi connection db success!");
+        zlog_info(c,"didi connection db success!");
         mysql_query(db,"SET NAMES UTF8");
     } else {
-        zlog_error(*c,"didi connect db failed!");
+        zlog_error(c,"didi connect db failed!");
         if(mysql_error(db)){
-            zlog_error(*c,"connect error %d:%s",mysql_errno(db),mysql_error(db));
-            zlog_error(*c,"error: main process exit!");
+            zlog_error(c,"connect error %d:%s",mysql_errno(db),mysql_error(db));
+            zlog_error(c,"error: main process exit!");
             exit(2);
         }
     }
 }
 
-int didi_db_release(MYSQL *db,zlog_category_t **c){
+int didi_db_release(MYSQL *db){
     mysql_close(db);
-    zlog_info(*c,"didi release db success!");
+    zlog_info(c,"didi release db success!");
 }
 
 void query_online_user(){

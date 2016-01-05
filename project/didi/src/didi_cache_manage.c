@@ -30,29 +30,29 @@ int init_driver_linklist(){
     return 0;
 }
 
-int didi_cache_init(MYSQL *db,zlog_category_t **c){
+int didi_cache_init(MYSQL *db){
     //初始化普通用户
     int ret;
 
-    zlog_info(*c,"didi init cache from user!\n");
+    zlog_info(c,"didi init cache from user!\n");
     
     ret = init_user_linklist();
     if(-1 == ret){
-        zlog_info(*c,"didi init user linklist failed!\n");
+        zlog_info(c,"didi init user linklist failed!\n");
         return ret;
     }
     
     //初始化司机
-    zlog_info(*c,"didi init cache from driver!\n");
+    zlog_info(c,"didi init cache from driver!\n");
     ret = init_driver_linklist();
     if(-1 == ret){
-        zlog_info(*c,"didi init driver linklist failed!\n");
+        zlog_info(c,"didi init driver linklist failed!\n");
         return ret;
     }
 
     return 0;
 }
 
-int didi_cache_release(zlog_category_t **c){
-    zlog_info(*c,"didi release cache success!\n");
+int didi_cache_release(){
+    zlog_info(c,"didi release cache success!\n");
 }
