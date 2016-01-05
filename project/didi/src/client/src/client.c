@@ -80,6 +80,11 @@ void handle_message(){
 
 void register_user(){
     didi_packmsg_t pg;
+    cJSON* root;
+    char *s;
+    char guid[37];
+    random_uuid(guid);
+    printf("guid = %s\n", guid);
 
     printf("请输入用户名:");
     scanf("%s",pg.packbody.signup.username);
@@ -91,13 +96,12 @@ void register_user(){
     pg.packtype = PACKTYPE_REQUEST;
     pg.event = EVENT_REGISTER;
     strcpy(pg.version,"1.0");
-    strcpy(pg.reqId,genreqId());
+    strcpy(pg.reqId,guid);
 
-
-    cJSON* root;
-    didi_create_regmsg(root,pg);
+    didi_create_regmsg(&root,pg);
+    s = didi_ufconvert_json(&root);
+    printf("%s\n",s);
     
-    handle_message();
 
 }
 
