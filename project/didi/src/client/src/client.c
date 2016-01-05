@@ -79,18 +79,23 @@ void handle_message(){
 }
 
 void register_user(){
-    char username[64];
-    char passwd[128];
+    didi_packmsg_t pg;
 
     printf("请输入用户名:");
-    scanf("%s",username);
+    scanf("%s",pg.packbody.signup.username);
     printf("\n");
     printf("请输入密码:");
-    scanf("%s",passwd);
-    printf("user=%spasswd=%s\n",username,passwd);
-    
+    scanf("%s",pg.packbody.signup.passwd);
+    printf("user=%spasswd=%s\n",pg.packbody.signup.username,pg.packbody.signup.passwd);
+
+    pg.packtype = PACKTYPE_REQUEST;
+    pg.event = EVENT_REGISTER;
+    strcpy(pg.version,"1.0");
+    strcpy(pg.reqId,genreqId());
+
+
     cJSON* root;
-    create_js(root);
+    didi_create_regmsg(root,pg);
     
     handle_message();
 

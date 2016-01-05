@@ -42,6 +42,7 @@
 #include<arpa/inet.h>
 #include<sys/epoll.h>
 
+#include "cjson.h"
 #define gettid() syscall(__NR_gettid)
 
 /*const*/
@@ -52,7 +53,61 @@
 #define DEFAULT_THREADNUM       100
 
 #define DEFAULT_CFGPATH         "../conf/chatroom.cfg"
-int create_js();
 
+enum packtype{
+    PACKTYPE_REQUEST = 1,
+    PACKTYPE_RESPONE = 2
+};
+
+enum event{
+    EVENT_REGISTER = 1,
+    EVENT_LOGIN = 2,
+    EVENT_LOGOUT = 3,
+    EVENT_QUERY = 4
+};
+
+struct signup{
+    char username[64];
+    char passwd[128];
+};
+
+struct signin{
+    char username[64];
+    char passwd[128];
+};
+
+struct signout{
+    char username[64];
+};
+
+union packbody{
+    struct signup signup;
+    struct signin signin;
+    struct signout signout;
+};
+
+struct didi_packmsg_s{
+    int packtype;
+    int event;
+    char version[8];
+    char reqId[16];
+    union packbody packbody;
+};
+
+typedef struct didi_packmsg_s didi_packmsg_t;
+
+int didi_create_regmsg(cJSON* root,didi_packmsg_t pg);
+
+int didi_release_json(cJSON* root);
+
+char* didi_convert_json(cJSON* root);
+
+cJSON* didi_convert_string(char *string);
+
+cJSON* didi_getjson_node(cJSON* root,const char* node);
+
+cJSON* didi_getitem_node(cJSON* node,const char* item);
+
+char* genreqId();
 #endif
 
