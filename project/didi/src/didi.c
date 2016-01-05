@@ -57,7 +57,7 @@ void app_daemon(int ischdir,int isclose){
 void app_init(){
     didi_conf_t cf;
     //zlog_category_t *c;
-    MYSQL db;
+    //MYSQL db;
     didi_socket_t sock_t;
     int ret;
     //初始化配置文件

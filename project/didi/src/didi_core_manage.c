@@ -122,15 +122,15 @@ void didi_parse_msg(int cfd){
                 break;
             case EVENT_LOGIN:
                 zlog_warn(c,"event user login!");
-                //didi_add_task(didi_event_login,(void*)cfd);
+                didi_add_task(didi_event_login,(void*)cfd,(void*)buf);
                 break;
             case EVENT_LOGOUT:
                 zlog_warn(c,"event user logout!");
-                //didi_add_task(didi_event_logout,(void*)cfd);
+                didi_add_task(didi_event_logout,(void*)cfd,(void*)buf);
                 break;
             case EVENT_QUERY:
                 zlog_warn(c,"event query user order!");
-                //didi_add_task(didi_event_query,(void*)cfd);
+                didi_add_task(didi_event_query,(void*)cfd,(void*)buf);
                 break;
             default:
                 break;

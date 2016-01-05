@@ -99,7 +99,12 @@ struct didi_conf_s{
 };
 
 struct didi_user_s{
-
+    int fd;
+    int userid;
+    char username[64];
+    char nickname[64];
+    char passwd[128];
+    char telphone[12];
 };
 
 struct didi_driver_s{
@@ -129,6 +134,11 @@ struct didi_socket_s{
     int sfd;
     struct sockaddr_in sin;
     struct sockaddr_in cin;
+};
+
+enum usertype{
+    PERSONAL_USER = 1,
+    DRIVERS_USERS = 2
 };
 
 enum packtype{
@@ -188,6 +198,7 @@ typedef struct didi_packmsg_s didi_packmsg_t;
 //Global Var 全局变量 
 didi_thread_t didi_td;
 zlog_category_t *c;
+MYSQL db;
 didi_user_t *didi_user_head;
 didi_driver_t *didi_driver_head;
 
@@ -230,16 +241,22 @@ void didi_add_task(DIDI_FUNC_POINT didi_func,void* argv,void* argv2);
 //事件
 //
 void* didi_event_register(void* argv,void* argv2);
-void* didi_event_login(void* argv);
-void* didi_event_logout(void* argv);
-void* didi_event_query(void* argv);
+void* didi_event_login(void* argv,void* argv2);
+void* didi_event_logout(void* argv,void* argv2);
+void* didi_event_query(void* argv,void* argv2);
 
 ///////////////////////////////////////////////////////////////////////
 //数据库
+int query_user_exist(MYSQL *db,const char* telphone);
+int didi_insert_user(MYSQL *db,didi_user_t user);
 void query_online_user();
 void query_online_driver();
 //////////////////////////////////////////////////////////////////////
 //缓存区
 int init_user_linklist();
 int init_driver_linklist();
+
+/////////////////////////////////////////////////////////////////////
+//杂项方法
+int didi_generate_userid();
 #endif
