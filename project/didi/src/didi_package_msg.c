@@ -25,7 +25,7 @@ int didi_create_regmsg(cJSON* root,didi_packmsg_t pg,zlog_category_t **c){
     
     root = cJSON_CreateObject();
     if(!root){
-        zlog_error(*c,"get root failed!\n");
+        zlog_error(*c,"get root failed!");
         return -1;
     }
 
@@ -44,7 +44,7 @@ int didi_create_regmsg(cJSON* root,didi_packmsg_t pg,zlog_category_t **c){
 //释放json对象
 int didi_release_json(cJSON* root,zlog_category_t **c){
     if(!root){
-        zlog_error(*c,"get root failed!\n");
+        zlog_error(*c,"get root failed!");
         return -1;
     }
     cJSON_Delete(root);
@@ -54,7 +54,7 @@ int didi_release_json(cJSON* root,zlog_category_t **c){
 char* didi_convert_json(cJSON* root,zlog_category_t **c){
     char *result;
     if(!root){
-        zlog_error(*c,"get root failed!\n");
+        zlog_error(*c,"get root failed!");
         return NULL;
     }
     result = cJSON_Print(root);
@@ -68,7 +68,7 @@ cJSON* didi_convert_string(char *string,zlog_category_t **c){
     root = cJSON_Parse(string);
 
     if(!root){
-        zlog_error(*c,"get root failed!\n");
+        zlog_error(*c,"get root failed!");
         return NULL;
     }
     return root;
@@ -79,7 +79,7 @@ cJSON* didi_getjson_node(cJSON* root,const char* node,zlog_category_t **c) {
     cJSON* js_node;
     js_node = cJSON_GetObjectItem(root,node);
     if(!js_node){
-        zlog_error(*c,"not found %s node!\n",node);
+        zlog_error(*c,"not found %s node!",node);
         return NULL;
     }
     return js_node;
@@ -90,7 +90,7 @@ cJSON* didi_getitem_node(cJSON* node,const char* item,zlog_category_t **c){
     cJSON* nitem;
     nitem = cJSON_GetObjectItem(node,item);
     if(!item){
-        zlog_error(*c,"not found %s item\n",item);
+        zlog_error(*c,"not found %s item",item);
         return NULL;
     }
     return nitem;
