@@ -22,13 +22,13 @@ DROP TABLE IF EXISTS `didiuser`;
 CREATE TABLE `didiuser` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `userid` int(10) NOT NULL COMMENT '用户ID',
-  `username` varchar(255) NOT NULL COMMENT '用户名',
+  `username` varchar(255) NOT NULL COMMENT '真实用户名',
   `nickname` varchar(255) NOT NULL COMMENT '昵称',
   `passwd` varchar(255) NOT NULL COMMENT '密码',
   `telphone` varchar(255) NOT NULL COMMENT '电话号码',
   PRIMARY KEY (`id`),
   UNIQUE KEY `userid` (`userid`),
-  KEY `name` (`username`)
+  UNIQUE KEY `telphone` (`telphone`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4959 DEFAULT CHARSET=utf8;
 
 
@@ -59,8 +59,9 @@ CREATE TABLE `dididriver` (
     `drivercarnum` varchar(255) NOT NULL COMMENT '车牌号',
     `driverphoto` varchar(255) NOT NULL COMMENT '照片',
     PRIMARY KEY(`id`),
-    UNIQUE KEY `driverid` (`driverid`)
-)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+    UNIQUE KEY `driverid` (`driverid`),
+    UNIQUE KEY `drivertelphone` (`drivertelphone`)
+)ENGINE=InnoDB AUTO_INCREMENT=4959 DEFAULT CHARSET=utf8;
 
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
