@@ -66,6 +66,13 @@ void login(){
     pg.event = EVENT_LOGIN;
     strcpy(pg.version,"1.0");
     strcpy(pg.reqId,guid);
+    didi_create_regmsg(&root,pg);
+
+    s= didi_ufconvert_json(&root);
+    printf("%s\n",s);
+    write(sfd,s,strlen(s));
+
+    handle_message();
 }   
 
 
