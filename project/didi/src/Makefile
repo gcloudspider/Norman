@@ -15,7 +15,7 @@ all:$(BIN) $(SUBDIRS)
 	@echo "Output:\"" $(BIN)"\""
 
 $(BIN):$(OBJ)
-	$(CXX) -g -o $@ $(OBJ) $(CLIBS)
+	$(CXX) -g -o $@ $(SRC) $(CLIBS)
 
 clean: $(SUBDIRS)
 	rm -rf $(BIN)
