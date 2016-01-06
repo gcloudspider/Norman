@@ -15,7 +15,9 @@
 ##########################################################*/
 
 #include<stdio.h>
-#include "../include/driver.h"
+#include "../include/user.h"
+#include "../include/cjson.h"
+
 int sfd;
 
 void showUserMenu(){
@@ -25,7 +27,7 @@ void showUserMenu(){
         printf("##########################################\n");
         printf("##              1.我的订单              ##\n");
         printf("##                                      ##\n");
-        printf("##              2.发起订单              ##\n");
+        printf("##              2.抢订单                ##\n");
         printf("##                                      ##\n");
         printf("##              3.退出登陆              ##\n");
         printf("##########################################\n");
@@ -49,16 +51,48 @@ void showUserMenu(){
     }
 }
 
-void print_message_body(){
-    write(1,"\n",1);
-    sleep(1);
+void print_message_body(cJSON* root){
+    cJSON* headnode,*bodynode;
+    cJSON* headitem,*bodyitem;
+
+    headnode = didi_getjson_node(&root,"head");
+    headitem = didi_getitem_node(&headnode,"packtype");
+    if((headitem->valueint) == PACKTYPE_RESPONE){
+        headitem = didi_getitem_node(&headnode,"event");
+        switch(headitem->valueint){
+            case EVENT_REGISTER:
+                    bodynode = didi_getjson_node(&root,"body");
+                    bodyitem = didi_getitem_node(&bodynode,"recode");
+                    if((bodyitem->valueint) == USER_EXIST ){
+                        printf("此用户已被注册!3秒后返回主界面!\n");
+                    } else if((bodyitem->valueint) == REQUER_SUCCESS){
+                        printf("此用户注册成功!3秒后返回主界面!\n");
+                    } else {
+                        printf("未知错误!3秒后返回主界面!\n");
+                    }
+                break;
+            case EVENT_LOGIN:
+                break;
+            default:
+                break;
+        }
+    }
+    
+    sleep(3);
 }
 
 void* thread_read(void* argv){
     int ret;
     char buf[1024] = {0};
+    cJSON* root;
+
     while(1){
+        ret = read(sfd,buf,1024);
+        //printf("%s\n",buf);
+        root = didi_convert_string(buf);
+        break;
     }
+    print_message_body(root);
     return argv;
 }
 
@@ -71,24 +105,39 @@ void handle_message(){
     void* rret;
 
     pthread_create(&ttid01,NULL,thread_read,(void*)sfd);
-    pthread_create(&ttid02,NULL,thread_write,(void*)sfd);
+    //pthread_create(&ttid02,NULL,thread_write,(void*)sfd);
     pthread_join(ttid01,&rret);
-    pthread_join(ttid02,&rret);
+    //pthread_join(ttid02,&rret);
 }
 
 void register_user(){
-    char username[64];
-    char passwd[128];
-
-    printf("请输入用户名:");
-    scanf("%s",username);
-    printf("\n");
+    didi_packmsg_t pg;
+    cJSON* root;
+    char *s;
+    char guid[37];
+    random_uuid(guid);
+    pg.packbody.signup.usertype = DRIVERS_USERS;
+    printf("请输入手机号码:");
+    scanf("%s",pg.packbody.signup.telphone);
+    printf("请输入姓名:");
+    scanf("%s",pg.packbody.signup.username);
+    printf("请输入车牌号:");
+    scanf("%s",pg.packbody.signup.carnum);
     printf("请输入密码:");
-    scanf("%s",passwd);
-    printf("user=%spasswd=%s\n",username,passwd);
-    
+    scanf("%s",pg.packbody.signup.passwd);
+    //printf("user=%spasswd=%s\n",pg.packbody.signup.username,pg.packbody.signup.passwd);
 
+    pg.packtype = PACKTYPE_REQUEST;
+    pg.event = EVENT_REGISTER;
+    strcpy(pg.version,"1.0");
+    strcpy(pg.reqId,guid);
+
+    didi_create_regmsg(&root,pg);
+    s = didi_ufconvert_json(&root);
+    write(sfd,s,strlen(s));
+    //printf("%s\n",s);
     handle_message();
+    
 
 }
 
@@ -117,9 +166,11 @@ void showMenu(){
     while(1){
         system("clear");
         printf("##########################################\n");
-        printf("##              1.用户注册              ##\n");
+        printf("##               司机用户端             ##\n");
+        printf("##########################################\n");
+        printf("##              1.注册司机              ##\n");
         printf("##                                      ##\n");
-        printf("##              2.用户登录              ##\n");
+        printf("##              2.司机登录              ##\n");
         printf("##                                      ##\n");
         printf("##              3.退出程序              ##\n");
         printf("##########################################\n");
@@ -175,7 +226,11 @@ int init_socket(){
 }
 
 int main(){
-    init_socket();
+    int ret;
+    ret = init_socket();
+    if(-1 == ret){
+        return -1;
+    }
     showMenu();
 }
 

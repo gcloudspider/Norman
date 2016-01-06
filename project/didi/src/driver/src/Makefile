@@ -1,16 +1,19 @@
 CXX:=gcc
 #CFLAGS:= -g -o
-CLIBS:= -pthread
+CLIBS:= -pthread -lm -I. -luuid
 
 SRC:=$(wildcard *.c)
 OBJ:=${SRC:%.c=%.o}
-BIN:=driver
+BIN:=client
 
 all:$(BIN)
 	@echo "Output:\"" $(BIN)"\""
 
 $(BIN):$(OBJ)
 	$(CXX) -g -o $@ $(SRC) $(CLIBS)
+
+$(%.c=%.o):
+	$(CXX) -g -c $@
 
 clean:
 	rm -rf $(BIN)
