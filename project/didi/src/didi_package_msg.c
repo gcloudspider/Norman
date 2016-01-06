@@ -56,11 +56,12 @@ int didi_create_respone(cJSON** root,didi_repack_t *pg){
 
     cJSON_AddItemToObject(*root,head,js_head=cJSON_CreateObject());
     cJSON_AddNumberToObject(js_head,"packtype",pg->packtype);
+    cJSON_AddNumberToObject(js_head,"event",pg->event);
     cJSON_AddStringToObject(js_head,"version",pg->version);
     cJSON_AddStringToObject(js_head,"reqId",pg->reqId);
     
     cJSON_AddItemToObject(*root,body,js_body=cJSON_CreateObject());
-    cJSON_AddStringToObject(js_body,"recode",pg->repackbody.reg_spond.recode);
+    cJSON_AddNumberToObject(js_body,"recode",pg->repackbody.reg_spond.recode);
     cJSON_AddStringToObject(js_body,"remsg",pg->repackbody.reg_spond.remsg);
 }
 

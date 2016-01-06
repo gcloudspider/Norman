@@ -37,25 +37,22 @@ char* create_respon_package(int status,didi_repack_t* res_pack){
 
     switch(status){
         case REQUER_SUCCESS:
-            sprintf(buf,"status: %d",REQUER_SUCCESS);
-            strcpy(res_pack->repackbody.reg_spond.recode,buf);
+            res_pack->repackbody.reg_spond.recode = REQUER_SUCCESS;
             sprintf(buf,"register user successfuly!");
             strcpy(res_pack->repackbody.reg_spond.remsg,buf);
-            zlog_info(c,"respond code:%s",res_pack->repackbody.reg_spond.recode);
+            zlog_info(c,"respond code:%d",res_pack->repackbody.reg_spond.recode);
             break;
         case SERVER_REFUSE:
-            sprintf(buf,"status: %d",SERVER_REFUSE);
-            strcpy(res_pack->repackbody.reg_spond.recode,buf);
+            res_pack->repackbody.reg_spond.recode = SERVER_REFUSE;
             sprintf(buf,"register user failed!");
             strcpy(res_pack->repackbody.reg_spond.remsg,buf);
-            zlog_info(c,"respond code:%s",res_pack->repackbody.reg_spond.recode);
+            zlog_info(c,"respond code:%d",res_pack->repackbody.reg_spond.recode);
             break;
         case USER_EXIST:
-            sprintf(buf,"status: %d",USER_EXIST);
-            strcpy(res_pack->repackbody.reg_spond.recode,buf);
+            res_pack->repackbody.reg_spond.recode = USER_EXIST;
             sprintf(buf,"user exist!");
             strcpy(res_pack->repackbody.reg_spond.remsg,buf);
-            zlog_info(c,"respond code:%s",res_pack->repackbody.reg_spond.recode);
+            zlog_info(c,"respond code:%d",res_pack->repackbody.reg_spond.recode);
             break;
         default:
             break;

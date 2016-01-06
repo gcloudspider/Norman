@@ -51,19 +51,48 @@ void showUserMenu(){
     }
 }
 
-void print_message_body(){
-    write(1,"\n",1);
-    sleep(1);
+void print_message_body(cJSON* root){
+    cJSON* headnode,*bodynode;
+    cJSON* headitem,*bodyitem;
+
+    headnode = didi_getjson_node(&root,"head");
+    headitem = didi_getitem_node(&headnode,"packtype");
+    if((headitem->valueint) == PACKTYPE_RESPONE){
+        headitem = didi_getitem_node(&headnode,"event");
+        switch(headitem->valueint){
+            case EVENT_REGISTER:
+                    bodynode = didi_getjson_node(&root,"body");
+                    bodyitem = didi_getitem_node(&bodynode,"recode");
+                    if((bodyitem->valueint) == USER_EXIST ){
+                        printf("此用户已被注册!3秒后返回主界面!\n");
+                    } else if((bodyitem->valueint) == REQUER_SUCCESS){
+                        printf("此用户注册成功!3秒后返回主界面!\n");
+                    } else {
+                        printf("未知错误!3秒后返回主界面!\n");
+                    }
+                break;
+            case EVENT_LOGIN:
+                break;
+            default:
+                break;
+        }
+    }
+    
+    sleep(3);
 }
 
 void* thread_read(void* argv){
     int ret;
     char buf[1024] = {0};
+    cJSON* root;
+
     while(1){
         ret = read(sfd,buf,1024);
-        printf("%s\n",buf);
-        sleep(1);
+        //printf("%s\n",buf);
+        root = didi_convert_string(buf);
+        break;
     }
+    print_message_body(root);
     return argv;
 }
 
@@ -106,7 +135,7 @@ void register_user(){
     didi_create_regmsg(&root,pg);
     s = didi_ufconvert_json(&root);
     write(sfd,s,strlen(s));
-    printf("%s\n",s);
+    //printf("%s\n",s);
     handle_message();
     
 

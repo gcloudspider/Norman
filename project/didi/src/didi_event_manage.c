@@ -35,6 +35,7 @@ void* didi_event_register(void *argv,void* argv2){
     //响应
     headnode = didi_getjson_node(root,"head");
     res_pack.packtype = PACKTYPE_RESPONE; 
+    res_pack.event = EVENT_REGISTER;
     reitem = didi_getitem_node(headnode,"version");
     strcpy(res_pack.version,reitem->valuestring);
     reitem = didi_getitem_node(headnode,"reqId");

@@ -198,7 +198,7 @@ enum responcode{
 };
 //响应数据结构
 struct reg_spond{
-    char recode[20];
+    int recode;
     char remsg[256];
 };
 
@@ -214,6 +214,7 @@ union repackbody{
 
 struct didi_repack_s{
     int packtype;
+    int event;
     char version[8];
     char reqId[37];
     union repackbody repackbody;
