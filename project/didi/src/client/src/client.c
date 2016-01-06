@@ -60,7 +60,7 @@ void* thread_read(void* argv){
     int ret;
     char buf[1024] = {0};
     while(1){
-        ret = read(sfd,buf,strlen(buf));
+        ret = read(sfd,buf,1024);
         printf("%s\n",buf);
         sleep(1);
     }
