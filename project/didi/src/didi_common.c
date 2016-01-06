@@ -54,6 +54,24 @@ char* create_respon_package(int status,didi_repack_t* res_pack){
             strcpy(res_pack->repackbody.reg_spond.remsg,buf);
             zlog_info(c,"respond code:%d",res_pack->repackbody.reg_spond.recode);
             break;
+        case USER_NOTEXIST:
+            res_pack->repackbody.reg_spond.recode = USER_NOTEXIST;
+            sprintf(buf,"user not exist!");
+            strcpy(res_pack->repackbody.reg_spond.remsg,buf);
+            zlog_info(c,"respond code:%d",res_pack->repackbody.reg_spond.recode);
+            break;
+        case PASSWD_ERROR:
+            res_pack->repackbody.reg_spond.recode = PASSWD_ERROR;
+            sprintf(buf,"passwd auth failed!");
+            strcpy(res_pack->repackbody.reg_spond.remsg,buf);
+            zlog_info(c,"respond code:%d",res_pack->repackbody.reg_spond.recode);
+            break;
+        case PASSWD_SUCCESS:
+            res_pack->repackbody.reg_spond.recode = PASSWD_SUCCESS;
+            sprintf(buf,"passwd auth successful!");
+            strcpy(res_pack->repackbody.reg_spond.remsg,buf);
+            zlog_info(c,"respond code:%d",res_pack->repackbody.reg_spond.recode);
+            break;
         default:
             break;
     }

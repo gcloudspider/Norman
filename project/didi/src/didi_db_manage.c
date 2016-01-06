@@ -39,8 +39,6 @@ int didi_db_release(MYSQL *db){
     zlog_info(c,"didi release db success!");
 }
 
-//
-//
 int query_user_exist(MYSQL *db,const char* telphone,int usertype){
     char sql[1024];
     MYSQL_FIELD *field;
@@ -73,6 +71,52 @@ int query_user_exist(MYSQL *db,const char* telphone,int usertype){
     }
     return 0;
 }
+
+int didi_query_passwd(MYSQL *db,const char* telphone,const char* passwd,int usertype){
+    char sql[1024];
+    MYSQL_FIELD *field;
+    MYSQL_RES *ptr;
+    MYSQL_ROW result;
+    int ret,row,column;
+    int i,j;
+    if(usertype == PERSONAL_USER){
+        sprintf(sql,"select passwd from didiuser where telphone=%s",telphone);
+    } else if(usertype == DRIVERS_USERS){
+        sprintf(sql,"select driverpasswd from dididriver where drivertelphone=%s",telphone);
+    }
+    zlog_info(c,"%s",sql);
+    ret = mysql_query(db,sql);
+    if(ret != 0){
+        zlog_error(c,"query failed!,sql:%s",sql);
+        zlog_error(c,"%s",mysql_error(db));
+    } else {
+        zlog_info(c,"query successful.");
+        ptr = mysql_store_result(db);
+        if(ptr != NULL){
+            row = mysql_num_rows(ptr);
+            column = mysql_num_fields(ptr);
+            zlog_info(c,"row=%d column=%d",row,column);
+
+            for(i=0;field=mysql_fetch_field(ptr);i++){
+                zlog_info(c,"%s",field->name);
+            }
+
+            for(i=0;i<row;i++){
+                result = mysql_fetch_row(ptr);
+                for(j=0;j<column;j++){
+                    zlog_info(c,"%s",result[j]);
+                    if(strcmp(result[j],passwd)==0){
+                        return 0;
+                    }
+                }
+            }
+            mysql_free_result(ptr);
+        }
+    }
+    return -1;
+
+}
+
 
 int didi_insert_user(MYSQL* db,didi_user_t user){
     char sql[1024];
