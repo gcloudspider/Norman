@@ -41,6 +41,30 @@ int didi_create_regmsg(cJSON* root,didi_packmsg_t pg){
 
     return 0;
 }
+
+int didi_create_respone(cJSON** root,didi_repack_t *pg){
+    const char* const head = "head";
+    const char* const body = "body";
+    cJSON* js_head;
+    cJSON* js_body;
+
+    *root = cJSON_CreateObject();
+    if(!*root){
+        zlog_error(c,"get root failed!");
+        return -1;
+    }
+
+    cJSON_AddItemToObject(*root,head,js_head=cJSON_CreateObject());
+    cJSON_AddNumberToObject(js_head,"packtype",pg->packtype);
+    cJSON_AddStringToObject(js_head,"version",pg->version);
+    cJSON_AddStringToObject(js_head,"reqId",pg->reqId);
+    
+    cJSON_AddItemToObject(*root,body,js_body=cJSON_CreateObject());
+    cJSON_AddStringToObject(js_body,"recode",pg->repackbody.reg_spond.recode);
+    cJSON_AddStringToObject(js_body,"remsg",pg->repackbody.reg_spond.remsg);
+}
+
+
 //释放json对象
 int didi_release_json(cJSON* root){
     if(!root){
@@ -59,6 +83,17 @@ char* didi_convert_json(cJSON* root){
     }
     result = cJSON_Print(root);
 
+    return result;
+}
+
+char* didi_ufconvert_json(cJSON* root){
+    char *result;
+    if(!root){
+        printf("get root failed!\n");
+        return NULL;
+    }
+    result= cJSON_PrintUnformatted(root); //没有格式
+    //result = cJSON_Print(*root);
     return result;
 }
 

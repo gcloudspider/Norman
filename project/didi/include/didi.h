@@ -177,8 +177,46 @@ struct didi_packmsg_s{
     int packtype;
     int event;
     char version[8];
-    char reqId[16];
+    char reqId[37];
     union packbody packbody;
+};
+/////////////////////////////
+enum responcode{
+    REQUER_SUCCESS = 200,       //服务器已处理请求
+    CREATE_SUCCESS = 201,       //请求成功,并创建新资源
+
+    REQUER_UNDEFINED = 400,     //请求不明确
+    ID_REQUEST = 401,           //请求身份验证
+    SERVER_REFUSE = 403,        //服务器拒绝请求
+    USER_NOTEXIST = 404,        //用户不存在
+    USER_EXIST = 405,           //用户已存在
+
+    INTERAL_ERROR = 500,        //内部错误
+    SGATEWAY_ERROR = 502,       //服务器网关无效响应
+    SERVER_ERROR = 503          //服务器目前宕机
+
+};
+//响应数据结构
+struct reg_spond{
+    char recode[20];
+    char remsg[256];
+};
+
+struct login_spond{
+
+};
+
+
+union repackbody{
+    struct reg_spond reg_spond;
+    struct login_spond login_spond;
+};
+
+struct didi_repack_s{
+    int packtype;
+    char version[8];
+    char reqId[37];
+    union repackbody repackbody;
 };
 
 /* types */
@@ -194,6 +232,7 @@ typedef struct didi_thread_s didi_thread_t;
 
 typedef struct didi_socket_s didi_socket_t;
 typedef struct didi_packmsg_s didi_packmsg_t;
+typedef struct didi_repack_s didi_repack_t;
 
 //Global Var 全局变量 
 didi_thread_t didi_td;
@@ -228,8 +267,10 @@ int didi_cache_release();
 //json数据格式处理
 void didi_parse_msg(int cfd);
 int didi_create_remsg(cJSON* root,didi_packmsg_t pg);
+int didi_create_respone(cJSON** root,didi_repack_t* pg);
 int didi_release_json(cJSON* root);
 char* didi_convert_json(cJSON* root);
+char* didi_ufconvert_json(cJSON* root);
 void didi_conver_string(cJSON** root,char* string);
 cJSON* didi_getjson_node(cJSON* root,const char* node);
 cJSON* didi_getitem_node(cJSON* node,const char* item);
@@ -259,4 +300,5 @@ int init_driver_linklist();
 /////////////////////////////////////////////////////////////////////
 //杂项方法
 int didi_generate_userid();
+char* create_respon_package(int status,didi_repack_t* res_pack);
 #endif
