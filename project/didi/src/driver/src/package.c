@@ -36,11 +36,22 @@ int didi_create_regmsg(cJSON** root,didi_packmsg_t pg){
     cJSON_AddStringToObject(js_head,"reqId",pg.reqId);
 
     cJSON_AddItemToObject(*root,body,js_body=cJSON_CreateObject());
-    cJSON_AddNumberToObject(js_body,"usertype",pg.packbody.signup.usertype);
-    cJSON_AddStringToObject(js_body,"telphone",pg.packbody.signup.telphone);
-    cJSON_AddStringToObject(js_body,"carnum",pg.packbody.signup.carnum);
-    cJSON_AddStringToObject(js_body,"username",pg.packbody.signup.username);
-    cJSON_AddStringToObject(js_body,"passwd",pg.packbody.signup.passwd);
+    switch(pg.event){
+        case EVENT_REGISTER:
+            cJSON_AddNumberToObject(js_body,"usertype",pg.packbody.signup.usertype);
+            cJSON_AddStringToObject(js_body,"telphone",pg.packbody.signup.telphone);
+            cJSON_AddStringToObject(js_body,"carnum",pg.packbody.signup.carnum);
+            cJSON_AddStringToObject(js_body,"username",pg.packbody.signup.username);
+            cJSON_AddStringToObject(js_body,"passwd",pg.packbody.signup.passwd);
+            break;
+        case EVENT_LOGIN:
+            cJSON_AddNumberToObject(js_body,"usertype",pg.packbody.signin.usertype);
+            cJSON_AddStringToObject(js_body,"telphone",pg.packbody.signin.telphone);
+            cJSON_AddStringToObject(js_body,"passwd",pg.packbody.signin.passwd);
+            break;
+        default:
+            break;
+    }
 
     return 0;
 }

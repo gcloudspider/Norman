@@ -72,6 +72,19 @@ void print_message_body(cJSON* root){
                     }
                 break;
             case EVENT_LOGIN:
+                bodynode = didi_getjson_node(&root,"body");
+                bodyitem = didi_getitem_node(&bodynode,"recode");
+                if((bodyitem->valueint) == USER_NOTEXIST ){
+                    printf("输入账号不存在!3秒后返回主界面!\n");
+                } else if((bodyitem->valueint) == PASSWD_SUCCESS){
+                    printf("登录成功!\n");
+                    sleep(3);
+                    showUserMenu();
+                } else if((bodyitem->valueint) == PASSWD_ERROR){
+                    printf("密码验证失败!3秒后返回主界面!\n");
+                } else {
+                    printf("未知错误!3秒后返回主界面!\n");
+                }
                 break;
             default:
                 break;
@@ -142,19 +155,30 @@ void register_user(){
 }
 
 void login(){
-    char username[64];
-    char passwd[128];
+    didi_packmsg_t pg;
+    cJSON* root;
+    char *s;
+    char guid[37];
+    random_uuid(guid);
 
-    printf("请输入登陆用户名:");
-    scanf("%s",username);
-    printf("\n");
+    pg.packbody.signup.usertype = DRIVERS_USERS;
+    printf("请输入手机号:");
+    scanf("%s",pg.packbody.signin.telphone);
     printf("请输入登陆密码:");
-    scanf("%s",passwd);
-    printf("user=%spasswd=%s\n",username,passwd);
+    scanf("%s",pg.packbody.signin.passwd);
+    //printf("user=%spasswd=%s\n",pg.packbody.signin.telphone,pg.packbody.signin.passwd);
     
+    pg.packtype = PACKTYPE_REQUEST;
+    pg.event = EVENT_LOGIN;
+    strcpy(pg.version,"1.0");
+    strcpy(pg.reqId,guid);
+    
+    didi_create_regmsg(&root,pg);
+    s = didi_ufconvert_json(&root);
+    //printf("%s\n",s);
+    write(sfd,s,strlen(s));
 
     handle_message();
-    
 }
 
 void logout(){
