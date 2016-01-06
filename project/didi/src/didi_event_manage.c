@@ -46,13 +46,12 @@ void* didi_event_register(void *argv,void* argv2){
     item = didi_getitem_node(bodynode,"telphone");
     item2 = didi_getitem_node(bodynode,"usertype");
     zlog_info(c,"bodynode telphone=%s",item->valuestring);
-    ret = query_user_exist(&db,item->valuestring);
+    ret = query_user_exist(&db,item->valuestring,item2->valueint);
     //判断用户是否存在
     if(-1 == ret){
         zlog_info(c,"%s user not exist!",item->valuestring);
         userid = didi_generate_userid();
         zlog_info(c,"%s user id=%d!",item->valuestring,userid);
-        //插入用户
         if(item2->valueint == PERSONAL_USER){
             didi_user_t user;
             user.userid = userid;
@@ -65,14 +64,26 @@ void* didi_event_register(void *argv,void* argv2){
             strcpy(user.passwd,item->valuestring);
             ret = didi_insert_user(&db,user);
             if(-1 == ret){
-                //失败
                 res_package = create_respon_package(SERVER_REFUSE,&res_pack);
             } else {
-                //成功
                 res_package = create_respon_package(REQUER_SUCCESS,&res_pack);
             }
         } else {
-            //didi_insert_driveruser(&db);
+            didi_driver_t driver;
+            driver.driverid = userid;
+            strcpy(driver.drivertelphone,item->valuestring);
+            item = didi_getitem_node(bodynode,"username");
+            strcpy(driver.drivername,item->valuestring);
+            item = didi_getitem_node(bodynode,"passwd");
+            strcpy(driver.driverpasswd,item->valuestring);
+            item = didi_getitem_node(bodynode,"carnum");
+            strcpy(driver.drivercarnum,item->valuestring);
+            ret = didi_insert_driveruser(&db,driver);
+            if(-1 == ret){
+                res_package = create_respon_package(SERVER_REFUSE,&res_pack);
+            } else {
+                res_package = create_respon_package(REQUER_SUCCESS,&res_pack);
+            }
         }
 
     } else {

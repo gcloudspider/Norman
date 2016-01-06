@@ -41,14 +41,18 @@ int didi_db_release(MYSQL *db){
 
 //
 //
-int query_user_exist(MYSQL *db,const char* telphone){
+int query_user_exist(MYSQL *db,const char* telphone,int usertype){
     char sql[1024];
     MYSQL_FIELD *field;
     MYSQL_RES *ptr;
     MYSQL_ROW result;
     int ret,row,column;
     int i,j;
-    sprintf(sql,"select telphone from didiuser where telphone=%s",telphone);
+    if(usertype == PERSONAL_USER){
+        sprintf(sql,"select telphone from didiuser where telphone=%s",telphone);
+    } else if(usertype == DRIVERS_USERS){
+        sprintf(sql,"select drivertelphone from dididriver where drivertelphone=%s",telphone);
+    }
     zlog_info(c,"%s",sql);
     ret = mysql_query(db,sql);
     if(ret != 0){
@@ -76,6 +80,23 @@ int didi_insert_user(MYSQL* db,didi_user_t user){
 
     mysql_query(db,"SET NAMES UTF8");
     sprintf(sql,"INSERT INTO didiuser(userid,username,nickname,passwd,telphone)values(%d,'%s','%s','%s','%s')",user.userid,user.username,user.nickname,user.passwd,user.telphone);
+    zlog_info(c,"%s",sql);
+    res = mysql_query(db,sql);
+    if(!res){
+        zlog_info(c,"insert %lu rows",(unsigned long)mysql_affected_rows(db));
+    } else {
+        zlog_info(c,"insert error %d:%s",mysql_errno(db),mysql_error(db));
+        return -1;
+    }
+    return 0;
+}
+
+int didi_insert_driveruser(MYSQL* db,didi_driver_t driver){
+    char sql[1024];
+    int res;
+
+    mysql_query(db,"SET NAMES UTF8");
+    sprintf(sql,"INSERT INTO dididriver(driverid,drivername,driverpasswd,drivertelphone,drivercarnum)values(%d,'%s','%s','%s','%s')",driver.driverid,driver.drivername,driver.driverpasswd,driver.drivertelphone,driver.drivercarnum);
     zlog_info(c,"%s",sql);
     res = mysql_query(db,sql);
     if(!res){

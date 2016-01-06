@@ -108,7 +108,12 @@ struct didi_user_s{
 };
 
 struct didi_driver_s{
-
+    int fd;
+    int driverid;
+    char drivername[64];
+    char driverpasswd[128];
+    char drivertelphone[12];
+    char drivercarnum[20];
 };
 
 typedef void*(*DIDI_FUNC_POINT)(void* argv,void* argv2);
@@ -289,7 +294,7 @@ void* didi_event_query(void* argv,void* argv2);
 
 ///////////////////////////////////////////////////////////////////////
 //数据库
-int query_user_exist(MYSQL *db,const char* telphone);
+int query_user_exist(MYSQL *db,const char* telphone,int usertype);
 int didi_insert_user(MYSQL *db,didi_user_t user);
 void query_online_user();
 void query_online_driver();
