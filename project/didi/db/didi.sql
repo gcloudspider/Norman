@@ -57,7 +57,6 @@ CREATE TABLE `dididriver` (
     `driverpasswd` varchar(255) NOT NULL COMMENT '司机登录密码',
     `drivertelphone` varchar(255) NOT NULL COMMENT '司机电话号码',
     `drivercarnum` varchar(255) NOT NULL COMMENT '车牌号',
-    `driverphoto` varchar(255) NOT NULL COMMENT '照片',
     PRIMARY KEY(`id`),
     UNIQUE KEY `driverid` (`driverid`),
     UNIQUE KEY `drivertelphone` (`drivertelphone`)
