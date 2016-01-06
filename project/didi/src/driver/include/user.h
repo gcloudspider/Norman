@@ -112,7 +112,7 @@ struct didi_packmsg_s{
     char reqId[37];
     union packbody packbody;
 };
-
+int sfd;
 typedef struct didi_packmsg_s didi_packmsg_t;
 
 int didi_create_regmsg(cJSON** root,didi_packmsg_t pg);
@@ -130,5 +130,18 @@ cJSON* didi_getjson_node(cJSON** root,const char* node);
 cJSON* didi_getitem_node(cJSON** node,const char* item);
 
 char *random_uuid(char *buf);
+
+/////////////////////////////////////
+
+void* thread_read(void* argv);
+void* thread_write(void* argv);
+void print_message_body(cJSON* root);
+void handle_message();
+void register_user();
+void login();
+void logout();
+int init_socket();
+
 #endif
+
 

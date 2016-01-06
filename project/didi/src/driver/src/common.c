@@ -26,3 +26,14 @@ char *random_uuid(char* buf) {
               
     return buf;
 }
+
+void handle_message(){
+    pthread_t ttid01,ttid02;
+    void* rret;
+
+    pthread_create(&ttid01,NULL,thread_read,(void*)sfd);
+    //pthread_create(&ttid02,NULL,thread_write,(void*)sfd);
+    pthread_join(ttid01,&rret);
+    //pthread_join(ttid02,&rret);
+}
+
