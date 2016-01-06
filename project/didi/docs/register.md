@@ -14,10 +14,10 @@
 响应:
 
 注册成功:
-{"head":{"packtype":2,"version":"1.0","reqId":""},"body":{"recode":"status 200","remsg":"1234567123 register success!"}}
+{"head":{"packtype":2,"version":"1.0","reqId":""},"body":{"recode":"status 200","remsg":"user register success!"}}
 
 注册失败:
-{"head":{"packtype":2,"version":"1.0","reqId":""},"body":{"recode":"status 403","remsg":"1234567123 register failed!"}}
+{"head":{"packtype":2,"version":"1.0","reqId":""},"body":{"recode":"status 403","remsg":"user register failed!"}}
 
 用户已存在:
-{"head":{"packtype":2,"version":"1.0","reqId":""},"body":{"recode":"status 405","remsg":"1234567123 register is exist"}}
+{"head":{"packtype":2,"version":"1.0","reqId":""},"body":{"recode":"status 405","remsg":"user register is exist"}}
