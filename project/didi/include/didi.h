@@ -99,7 +99,6 @@ struct didi_conf_s{
 };
 
 struct didi_user_s{
-    int fd;
     int userid;
     char username[64];
     char nickname[64];
@@ -108,7 +107,6 @@ struct didi_user_s{
 };
 
 struct didi_driver_s{
-    int fd;
     int driverid;
     char drivername[64];
     char driverpasswd[128];
@@ -201,14 +199,8 @@ struct reg_spond{
     char remsg[256];
 };
 
-struct login_spond{
-
-};
-
-
 union repackbody{
     struct reg_spond reg_spond;
-    struct login_spond login_spond;
 };
 
 struct didi_repack_s{
@@ -217,6 +209,14 @@ struct didi_repack_s{
     char version[8];
     char reqId[37];
     union repackbody repackbody;
+};
+
+//链表
+struct didi_online_s{
+    int fd;
+    char telphone[12];
+    struct didi_online_s *pre;
+    struct didi_online_s *next;
 };
 
 /* types */
@@ -234,12 +234,13 @@ typedef struct didi_socket_s didi_socket_t;
 typedef struct didi_packmsg_s didi_packmsg_t;
 typedef struct didi_repack_s didi_repack_t;
 
+typedef struct didi_online_s didi_online_t;
 //Global Var 全局变量 
 didi_thread_t didi_td;
 zlog_category_t *c;
 MYSQL db;
-didi_user_t *didi_user_head;
-didi_driver_t *didi_driver_head;
+didi_online_t *didi_user_head,*didi_user_tail;
+didi_online_t *didi_driver_head,*didi_driver_tail;
 
 
 //////////////////////////////////////////////////////////////////////
@@ -263,6 +264,7 @@ int didi_run(didi_socket_t sock_t);
 
 int didi_cache_init(MYSQL *db);
 int didi_cache_release();
+void didi_adduser_cache(int cfd,int usertype,const char* telphone);
 /////////////////////////////////////////////////////////////////////////
 //json数据格式处理
 void didi_parse_msg(int cfd);

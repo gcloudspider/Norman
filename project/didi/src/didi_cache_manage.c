@@ -56,3 +56,45 @@ int didi_cache_init(MYSQL *db){
 int didi_cache_release(){
     zlog_info(c,"didi release cache success!\n");
 }
+
+
+
+void didi_adduser_cache(int cfd,int usertype,const char* telphone){
+    didi_online_t *online_user;
+
+    online_user = malloc(sizeof(didi_online_t));
+    online_user->fd = cfd;
+    strcpy(online_user->telphone,telphone);
+    switch(usertype){
+        case PERSONAL_USER: {
+                zlog_info(c,"online user=%p personal user head=%p tail=%p",online_user,didi_user_head,didi_user_tail);
+                if(didi_user_head){
+                    online_user->next = NULL;
+                    online_user->pre = didi_user_tail;
+                    didi_user_tail->next = online_user;
+                } else {
+                    online_user->next = didi_user_head;
+                    online_user->pre = didi_user_head;
+                    didi_user_head = online_user;
+                }
+                didi_user_tail = online_user;
+            break;
+            }
+        case DRIVERS_USERS:{
+                zlog_info(c,"online user=%p driver user head=%p tail=%p",online_user,didi_driver_head,didi_driver_tail);
+                if(didi_driver_head){
+                    online_user->next = NULL;
+                    online_user->pre = didi_driver_tail;
+                    didi_driver_tail->next = online_user;
+                } else {
+                    online_user->next = didi_driver_head;
+                    online_user->pre = didi_driver_head;
+                    didi_driver_head = online_user;
+                }
+                didi_driver_tail = online_user;
+            break;
+            }
+        default:
+            break;
+    }
+}

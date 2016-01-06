@@ -134,6 +134,7 @@ void* didi_event_login(void *argv,void* argv2){
         }else {
             zlog_info(c,"user login successful!");
             res_package = create_respon_package(PASSWD_SUCCESS,&res_pack);
+            didi_adduser_cache(cfd,item3->valueint,item->valuestring);
         }
     }else {
         zlog_warn(c,"user not exist!");
