@@ -61,11 +61,13 @@ enum usertype{
 enum responcode{
     REQUER_SUCCESS = 200,       //服务器已处理请求
     PASSWD_SUCCESS = 201,       //密码验证正确
+    ORDER_SUCCESS = 202,
 
     SERVER_REFUSE = 403,        //
     USER_NOTEXIST = 404,        //用户不存在
     USER_EXIST = 405,           //用户已存在
     PASSWD_ERROR = 406,         //用户密码错误
+    ORDER_ERROR= 407,
 };
 
 enum packtype{

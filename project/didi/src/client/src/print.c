@@ -68,6 +68,18 @@ void print_message_body(cJSON* root){
                     printf("未知错误!3秒后返回主界面!\n");
                 }
                 break;
+            case EVENT_ORDER:
+                bodynode = didi_getjson_node(&root,"body");
+                bodyitem = didi_getitem_node(&bodynode,"recode");
+                if((bodyitem->valueint) == ORDER_ERROR ){
+                    printf("提交订单失败!3秒后返回用户界面!\n");
+                } else if((bodyitem->valueint) == ORDER_SUCCESS){
+                    printf("提交订单成功!3秒后返回用户界面!\n");
+                    printf("请等待司机联系您!\n");
+                } else {
+                    printf("未知错误!3秒后返回主界面!\n");
+                }
+                break;
             default:
                 break;
         }

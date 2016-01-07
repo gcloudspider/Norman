@@ -42,6 +42,7 @@ void showUserMenu(){
                 break;
             case '2':
                 addorder();
+                handle_message();
                 break;
             case '3':
                 modifypasswd();
