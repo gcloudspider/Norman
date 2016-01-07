@@ -35,16 +35,15 @@ CREATE TABLE `didiuser` (
 DROP TABLE IF EXISTS `didiorders`;
 
 CREATE TABLE `didiorders` (
-    `id` int(10) NOT NULL AUTO_INCREMENT,
-    `orderid` int(10) NOT NULL COMMENT '订单号',
+    `orderid` int(10) NOT NULL AUTO_INCREMENT COMMENT '订单号',
     `starting` varchar(255) NOT NULL COMMENT '始发地',
     `destination` varchar(255) NOT NULL COMMENT '目的地',
-    `userid` int(10) NOT NULL COMMENT '订单发起人id',
-    `driverid` int(10) NOT NULL COMMENT '订单接收司机id',
+    `userphone` varchar(255) NOT NULL COMMENT '订单发起人电话',
+    `driverphone` varchar(255) NOT NULL COMMENT '订单接收司机电话',
     `starttime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '上车时间',
     `arrivaltime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '到达时间',
     `payment` varchar(255) NOT NULL COMMENT '付款(元)',
-    PRIMARY KEY(`id`),
+    PRIMARY KEY(`orderid`),
     UNIQUE KEY `orderid` (`orderid`)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
