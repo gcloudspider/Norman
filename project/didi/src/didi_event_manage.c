@@ -64,9 +64,9 @@ void* didi_event_register(void *argv,void* argv2){
             strcpy(user.passwd,item->valuestring);
             ret = didi_insert_user(&db,user);
             if(-1 == ret){
-                res_package = create_respon_package(SERVER_REFUSE,&res_pack);
+                res_package = create_respon_package(SERVER_REFUSE,&res_pack,user.telphone);
             } else {
-                res_package = create_respon_package(REQUER_SUCCESS,&res_pack);
+                res_package = create_respon_package(REQUER_SUCCESS,&res_pack,user.telphone);
             }
         } else {
             didi_driver_t driver;
@@ -80,16 +80,16 @@ void* didi_event_register(void *argv,void* argv2){
             strcpy(driver.drivercarnum,item->valuestring);
             ret = didi_insert_driveruser(&db,driver);
             if(-1 == ret){
-                res_package = create_respon_package(SERVER_REFUSE,&res_pack);
+                res_package = create_respon_package(SERVER_REFUSE,&res_pack,driver.drivertelphone);
             } else {
-                res_package = create_respon_package(REQUER_SUCCESS,&res_pack);
+                res_package = create_respon_package(REQUER_SUCCESS,&res_pack,driver.drivertelphone);
             }
         }
 
     } else {
         zlog_info(c,"%s user exist!",item->valuestring);
         //用户存在
-        res_package = create_respon_package(USER_EXIST,&res_pack);
+        res_package = create_respon_package(USER_EXIST,&res_pack,item->valuestring);
     }
     zlog_info(c,"%s",res_package);
     write(cfd,res_package,strlen(res_package));
@@ -130,21 +130,35 @@ void* didi_event_login(void *argv,void* argv2){
         ret = didi_query_passwd(&db,item->valuestring,item2->valuestring,item3->valueint);
         if(-1 == ret){
             zlog_warn(c,"user login failed!");
-            res_package = create_respon_package(PASSWD_ERROR,&res_pack);
+            res_package = create_respon_package(PASSWD_ERROR,&res_pack,item->valuestring);
         }else {
             zlog_info(c,"user login successful!");
-            res_package = create_respon_package(PASSWD_SUCCESS,&res_pack);
+            res_package = create_respon_package(PASSWD_SUCCESS,&res_pack,item->valuestring);
             didi_adduser_cache(cfd,item3->valueint,item->valuestring);
         }
     }else {
         zlog_warn(c,"user not exist!");
-        res_package = create_respon_package(USER_NOTEXIST,&res_pack);
+        res_package = create_respon_package(USER_NOTEXIST,&res_pack,item->valuestring);
     }
     zlog_info(c,"%s",res_package);
     write(cfd,res_package,strlen(res_package));
 }
 
 void* didi_event_logout(void *argv,void* argv2){
+    int ret,userid;
+    cJSON* root,*bodynode;
+    cJSON* item,*item2,*item3;
+    cJSON *headnode,*reitem;
+    int cfd = (int)argv;
+    char buf[1024];
+    char *res_package;
+    didi_repack_t res_pack;
+
+    strcpy(buf,(char*)argv2);
+    zlog_info(c,"ready to read body cfd=%d buf=%s!",cfd,buf);
+    
+    didi_convert_string(&root,buf);
+    zlog_info(c,"root=%p",root);
 
 }
 

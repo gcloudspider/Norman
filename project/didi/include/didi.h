@@ -197,6 +197,7 @@ enum responcode{
 struct reg_spond{
     int recode;
     char remsg[256];
+    char telphone[12];
 };
 
 union repackbody{
@@ -304,5 +305,5 @@ int init_driver_linklist();
 /////////////////////////////////////////////////////////////////////
 //杂项方法
 int didi_generate_userid();
-char* create_respon_package(int status,didi_repack_t* res_pack);
+char* create_respon_package(int status,didi_repack_t* res_pack,const char* telphone);
 #endif

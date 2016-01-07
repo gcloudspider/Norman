@@ -63,6 +63,7 @@ int didi_create_respone(cJSON** root,didi_repack_t *pg){
     cJSON_AddItemToObject(*root,body,js_body=cJSON_CreateObject());
     cJSON_AddNumberToObject(js_body,"recode",pg->repackbody.reg_spond.recode);
     cJSON_AddStringToObject(js_body,"remsg",pg->repackbody.reg_spond.remsg);
+    cJSON_AddStringToObject(js_body,"telphone",pg->repackbody.reg_spond.telphone);
 }
 
 

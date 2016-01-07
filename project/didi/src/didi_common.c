@@ -30,7 +30,7 @@ int didi_generate_userid(){
 }
 
 
-char* create_respon_package(int status,didi_repack_t* res_pack){
+char* create_respon_package(int status,didi_repack_t* res_pack,const char* telphone){
     char buf[1024];
     cJSON* root;
     char *res;
@@ -40,36 +40,42 @@ char* create_respon_package(int status,didi_repack_t* res_pack){
             res_pack->repackbody.reg_spond.recode = REQUER_SUCCESS;
             sprintf(buf,"register user successfuly!");
             strcpy(res_pack->repackbody.reg_spond.remsg,buf);
+            strcpy(res_pack->repackbody.reg_spond.telphone,telphone);
             zlog_info(c,"respond code:%d",res_pack->repackbody.reg_spond.recode);
             break;
         case SERVER_REFUSE:
             res_pack->repackbody.reg_spond.recode = SERVER_REFUSE;
             sprintf(buf,"register user failed!");
             strcpy(res_pack->repackbody.reg_spond.remsg,buf);
+            strcpy(res_pack->repackbody.reg_spond.telphone,telphone);
             zlog_info(c,"respond code:%d",res_pack->repackbody.reg_spond.recode);
             break;
         case USER_EXIST:
             res_pack->repackbody.reg_spond.recode = USER_EXIST;
             sprintf(buf,"user exist!");
             strcpy(res_pack->repackbody.reg_spond.remsg,buf);
+            strcpy(res_pack->repackbody.reg_spond.telphone,telphone);
             zlog_info(c,"respond code:%d",res_pack->repackbody.reg_spond.recode);
             break;
         case USER_NOTEXIST:
             res_pack->repackbody.reg_spond.recode = USER_NOTEXIST;
             sprintf(buf,"user not exist!");
             strcpy(res_pack->repackbody.reg_spond.remsg,buf);
+            strcpy(res_pack->repackbody.reg_spond.telphone,telphone);
             zlog_info(c,"respond code:%d",res_pack->repackbody.reg_spond.recode);
             break;
         case PASSWD_ERROR:
             res_pack->repackbody.reg_spond.recode = PASSWD_ERROR;
             sprintf(buf,"passwd auth failed!");
             strcpy(res_pack->repackbody.reg_spond.remsg,buf);
+            strcpy(res_pack->repackbody.reg_spond.telphone,telphone);
             zlog_info(c,"respond code:%d",res_pack->repackbody.reg_spond.recode);
             break;
         case PASSWD_SUCCESS:
             res_pack->repackbody.reg_spond.recode = PASSWD_SUCCESS;
             sprintf(buf,"passwd auth successful!");
             strcpy(res_pack->repackbody.reg_spond.remsg,buf);
+            strcpy(res_pack->repackbody.reg_spond.telphone,telphone);
             zlog_info(c,"respond code:%d",res_pack->repackbody.reg_spond.recode);
             break;
         default:
