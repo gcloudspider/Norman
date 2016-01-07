@@ -56,6 +56,17 @@ void print_message_body(cJSON* root){
             case EVENT_LOGOUT:
                 printf("退出成功!3秒后返回主界面!\n");
                 break;
+            case EVENT_MPASSWD:
+                bodynode = didi_getjson_node(&root,"body");
+                bodyitem = didi_getitem_node(&bodynode,"recode");
+                if((bodyitem->valueint) == USER_EXIST ){
+                    printf("此用户密码修改失败!3秒后返回用户界面!\n");
+                } else if((bodyitem->valueint) == REQUER_SUCCESS){
+                    printf("此用户密码修改成功!3秒后返回用户界面!\n");
+                } else {
+                    printf("未知错误!3秒后返回主界面!\n");
+                }
+                break;
             default:
                 break;
         }

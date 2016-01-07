@@ -42,6 +42,7 @@ void showUserMenu(){
             case '2':
                 break;
             case '3':
+                modifypasswd();
                 break;
             case '4':
                 logout();
