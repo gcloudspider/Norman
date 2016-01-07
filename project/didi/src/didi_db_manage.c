@@ -117,6 +117,27 @@ int didi_query_passwd(MYSQL *db,const char* telphone,const char* passwd,int user
 
 }
 
+int didi_update_passwd(MYSQL *db,int usertype,const char* telphone,const char* passwd){
+    char sql[1024];
+    MYSQL_FIELD *field;
+    MYSQL_RES *ptr;
+    MYSQL_ROW result;
+    int ret,row,column;
+    int i,j;
+    if(usertype == PERSONAL_USER){
+        sprintf(sql,"update didiuser set passwd='%s' where telphone='%s'",passwd,telphone);
+    } else if(usertype == DRIVERS_USERS){
+        sprintf(sql,"update dididriver set driverpasswd='%s' where drivertelphone='%s'",passwd,telphone);
+    }
+    zlog_info(c,"%s",sql);
+    ret = mysql_query(db,sql);
+    if(ret != 0){
+        zlog_error(c,"query failed!,sql:%s",sql);
+        zlog_error(c,"%s",mysql_error(db));
+        return -1;
+    }
+    return 0;
+}
 
 int didi_insert_user(MYSQL* db,didi_user_t user){
     char sql[1024];

@@ -188,3 +188,46 @@ void* didi_event_logout(void *argv,void* argv2){
 void* didi_event_query(void *argv,void* argv2){
 
 }
+
+void* didi_event_mpasswd(void *argv,void* argv2){
+    int ret,userid;
+    cJSON* root,*bodynode;
+    cJSON* item,*item2,*item3;
+    cJSON *headnode,*reitem;
+    int cfd = (int)argv;
+    char buf[1024];
+    char *res_package;
+    didi_repack_t res_pack;
+
+    strcpy(buf,(char*)argv2);
+    zlog_info(c,"ready to read body cfd=%d buf=%s!",cfd,buf);
+    
+    didi_convert_string(&root,buf);
+    zlog_info(c,"root=%p",root);
+    
+    headnode = didi_getjson_node(root,"head");
+    res_pack.packtype = PACKTYPE_RESPONE; 
+    res_pack.event = EVENT_MPASSWD;
+    reitem = didi_getitem_node(headnode,"version");
+    strcpy(res_pack.version,reitem->valuestring);
+    reitem = didi_getitem_node(headnode,"reqId");
+    strcpy(res_pack.reqId,reitem->valuestring);
+
+    bodynode = didi_getjson_node(root,"body");
+    zlog_info(c,"body node=%p",bodynode);
+    item = didi_getitem_node(bodynode,"telphone");
+    item2 = didi_getitem_node(bodynode,"usertype");
+    zlog_info(c,"bodynode telphone=%s",item->valuestring);
+    item3 = didi_getitem_node(bodynode,"passwd");
+    
+    ret = didi_update_passwd(&db,item2->valueint,item->valuestring,item3->valuestring);
+    if(-1 == ret){
+        zlog_info(c,"update user passwd failed!");
+        res_package = create_respon_package(SERVER_REFUSE,&res_pack,item->valuestring);
+    } else {
+        zlog_info(c,"update user passwd successful!");
+        res_package = create_respon_package(REQUER_SUCCESS,&res_pack,item->valuestring);
+    }
+    zlog_info(c,"%s",res_package);
+    write(cfd,res_package,strlen(res_package));
+}

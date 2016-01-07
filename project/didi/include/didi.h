@@ -153,7 +153,8 @@ enum event{
     EVENT_REGISTER = 1,             //注册事件
     EVENT_LOGIN = 2,                //登录事件
     EVENT_LOGOUT = 3,               //退出事件
-    EVENT_QUERY = 4                 //查询订单事件
+    EVENT_QUERY = 4,                 //查询订单事件
+    EVENT_MPASSWD = 5
 };
 
 struct signup{
@@ -291,6 +292,7 @@ void* didi_event_register(void* argv,void* argv2);
 void* didi_event_login(void* argv,void* argv2);
 void* didi_event_logout(void* argv,void* argv2);
 void* didi_event_query(void* argv,void* argv2);
+void* didi_event_mpasswd(void* argv,void* argv2);
 
 ///////////////////////////////////////////////////////////////////////
 //数据库
@@ -298,6 +300,7 @@ int query_user_exist(MYSQL *db,const char* telphone,int usertype);
 int didi_insert_user(MYSQL *db,didi_user_t user);
 int didi_insert_driver(MYSQL *db,didi_driver_t driver);
 int didi_query_passwd(MYSQL *db,const char* telphone,const char* passwd,int usertype);
+int didi_update_passwd(MYSQL *db,int usertype,const char* telphone,const char* passwd);
 void query_online_user();
 void query_online_driver();
 //////////////////////////////////////////////////////////////////////
