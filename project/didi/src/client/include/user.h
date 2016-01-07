@@ -77,7 +77,8 @@ enum event{
     EVENT_REGISTER = 1,
     EVENT_LOGIN = 2,
     EVENT_LOGOUT = 3,
-    EVENT_QUERY = 4
+    EVENT_QUERY = 4,
+    EVENT_MPASSWD = 5
 };
 
 struct signup{
@@ -99,10 +100,17 @@ struct signout{
     char telphone[12];
 };
 
+struct mpasswd{
+    int usertype;
+    char telphone[12];
+    char newpasswd[128];
+};
+
 union packbody{
     struct signup signup;
     struct signin signin;
     struct signout signout;
+    struct mpasswd mpasswd;
 };
 
 struct didi_packmsg_s{

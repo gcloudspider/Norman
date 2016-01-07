@@ -43,6 +43,7 @@ void showUserMenu(){
             case '2':
                 break;
             case '3':
+                modifypasswd();
                 break;
             case '4':
                 logout();
@@ -66,6 +67,7 @@ void showMenu(){
         printf("##                                      ##\n");
         printf("##              3.退出程序              ##\n");
         printf("##########################################\n");
+        while((ch=getchar())!='\n');
         printf("请输入选择:");
         ch = getchar();
         switch(ch){

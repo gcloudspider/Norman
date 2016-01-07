@@ -98,3 +98,28 @@ void logout(){
 
     handle_message();
 }
+
+void modifypasswd(){
+    didi_packmsg_t pg;
+    cJSON* root;
+    char *s;
+    char guid[37];
+    random_uuid(guid);
+    printf("请输入新密码:");
+    scanf("%s",pg.packbody.mpasswd.newpasswd);
+
+    pg.packbody.mpasswd.usertype = PERSONAL_USER;
+    strcpy(pg.packbody.mpasswd.telphone,loginuser);
+    
+    pg.packtype = PACKTYPE_REQUEST;
+    pg.event = EVENT_MPASSWD;
+    strcpy(pg.version,"1.0");
+    strcpy(pg.reqId,guid);
+    didi_create_regmsg(&root,pg);
+
+    s= didi_ufconvert_json(&root);
+    printf("%s\n",s);
+    write(sfd,s,strlen(s));
+
+    handle_message();
+}
