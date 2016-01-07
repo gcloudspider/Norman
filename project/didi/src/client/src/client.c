@@ -21,7 +21,7 @@
 
 void showUserMenu(){
     char ch;
-    while(1){
+    while(ch != '4'){
         system("clear");
         printf("##########################################\n");
         printf("##              1.查询订单历史          ##\n");
