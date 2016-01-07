@@ -98,3 +98,67 @@ void didi_adduser_cache(int cfd,int usertype,const char* telphone){
             break;
     }
 }
+
+didi_online_t* didi_find_linklist(didi_online_t *head,const char* telphone){
+    didi_online_t *pn;
+
+    while(head){
+        if(strcmp(head->telphone,telphone)==0){
+            pn = head;
+        }
+        head = head->next;
+    }
+    zlog_info(c,"find node=%p",pn);
+    return pn;
+}
+
+int didi_del_linklist(didi_online_t *pn,didi_online_t *head){
+    if(pn){
+        if(pn == head){
+            zlog_info(c,"is first?");
+            if(pn->next){
+                pn->next->pre = NULL;
+                head = pn->next;
+                zlog_info(c,"pn is first!but have another!");
+            } else {
+                head = NULL;
+                zlog_info(c,"delete linklist head = NULL");
+            }
+        } else {
+            if(pn->next){
+                pn->next->pre = pn->pre;
+                pn->pre->next = pn->next;
+            } else {
+                pn->pre->next = pn->next;
+            }
+        }
+    } else {
+        return -1;
+    }
+    return 0;
+}
+
+int didi_del_cache(int usertype,const char* telphone){
+    zlog_info(c,"didi_user_head=%p didi_driver_head=%p",didi_user_head,didi_driver_head);
+    int ret=0;
+    didi_online_t *pn;
+
+    switch(usertype){
+        case PERSONAL_USER:
+            zlog_info(c,"didi user head=%p",didi_user_head);
+            pn = didi_find_linklist(didi_user_head,telphone);
+            zlog_info(c,"didi pn=%p",pn);
+            ret = didi_del_linklist(pn,didi_user_head);
+            break;
+        case DRIVERS_USERS:
+            zlog_info(c,"didi user head=%p",didi_driver_head);
+            pn = didi_find_linklist(didi_driver_head,telphone);
+            zlog_info(c,"didi pn=%p",pn);
+            ret = didi_del_linklist(pn,didi_driver_head);
+            break;
+        default:
+            break;
+    }
+
+    return ret;
+}

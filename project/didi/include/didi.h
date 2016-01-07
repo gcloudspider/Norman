@@ -266,6 +266,9 @@ int didi_run(didi_socket_t sock_t);
 int didi_cache_init(MYSQL *db);
 int didi_cache_release();
 void didi_adduser_cache(int cfd,int usertype,const char* telphone);
+int didi_del_cache(int usertype,const char* telphone);
+didi_online_t* didi_find_linklist(didi_online_t *head,const char* telphone);
+int didi_del_linklist(didi_online_t *pn,didi_online_t *head);
 /////////////////////////////////////////////////////////////////////////
 //json数据格式处理
 void didi_parse_msg(int cfd);

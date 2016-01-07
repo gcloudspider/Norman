@@ -38,14 +38,14 @@ char* create_respon_package(int status,didi_repack_t* res_pack,const char* telph
     switch(status){
         case REQUER_SUCCESS:
             res_pack->repackbody.reg_spond.recode = REQUER_SUCCESS;
-            sprintf(buf,"register user successfuly!");
+            sprintf(buf,"request successfuly!");
             strcpy(res_pack->repackbody.reg_spond.remsg,buf);
             strcpy(res_pack->repackbody.reg_spond.telphone,telphone);
             zlog_info(c,"respond code:%d",res_pack->repackbody.reg_spond.recode);
             break;
         case SERVER_REFUSE:
             res_pack->repackbody.reg_spond.recode = SERVER_REFUSE;
-            sprintf(buf,"register user failed!");
+            sprintf(buf,"request failed!");
             strcpy(res_pack->repackbody.reg_spond.remsg,buf);
             strcpy(res_pack->repackbody.reg_spond.telphone,telphone);
             zlog_info(c,"respond code:%d",res_pack->repackbody.reg_spond.recode);
