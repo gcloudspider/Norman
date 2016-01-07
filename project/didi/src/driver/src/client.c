@@ -20,7 +20,7 @@
 
 void showUserMenu(){
     char ch;
-    while(1){
+    while(ch != '4'){
         system("clear");
         printf("##########################################\n");
         printf("##              1.我的历史订单          ##\n");
@@ -44,7 +44,7 @@ void showUserMenu(){
             case '3':
                 break;
             case '4':
-                //logout();
+                logout();
                 break;
             default:
                 break;
@@ -65,6 +65,7 @@ void showMenu(){
         printf("##                                      ##\n");
         printf("##              3.退出程序              ##\n");
         printf("##########################################\n");
+        while((ch=getchar())!='\n');
         printf("请输入选择:");
         ch = getchar();
         switch(ch){

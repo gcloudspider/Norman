@@ -44,12 +44,17 @@ void print_message_body(cJSON* root){
                 } else if((bodyitem->valueint) == PASSWD_SUCCESS){
                     printf("登录成功!\n");
                     sleep(3);
+                    bodyitem = didi_getitem_node(&bodynode,"telphone");
+                    strcpy(loginuser,bodyitem->valuestring);
                     showUserMenu();
                 } else if((bodyitem->valueint) == PASSWD_ERROR){
                     printf("密码验证失败!3秒后返回主界面!\n");
                 } else {
                     printf("未知错误!3秒后返回主界面!\n");
                 }
+                break;
+            case EVENT_LOGOUT:
+                printf("退出成功!3秒后返回主界面!\n");
                 break;
             default:
                 break;

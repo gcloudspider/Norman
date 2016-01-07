@@ -96,7 +96,8 @@ struct signin{
 };
 
 struct signout{
-    char username[64];
+    int usertype;
+    char telphone[12];
 };
 
 union packbody{
@@ -113,6 +114,7 @@ struct didi_packmsg_s{
     union packbody packbody;
 };
 int sfd;
+char loginuser[12];
 typedef struct didi_packmsg_s didi_packmsg_t;
 
 int didi_create_regmsg(cJSON** root,didi_packmsg_t pg);
