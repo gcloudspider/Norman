@@ -78,7 +78,8 @@ enum event{
     EVENT_LOGIN = 2,
     EVENT_LOGOUT = 3,
     EVENT_QUERY = 4,
-    EVENT_MPASSWD = 5
+    EVENT_MPASSWD = 5,
+    EVENT_ORDER = 6
 };
 
 struct signup{
@@ -106,11 +107,23 @@ struct mpasswd{
     char newpasswd[128];
 };
 
+struct order{
+    int usertype;
+    char starting[1024];
+    char destination[1024];
+    char userphone[12];
+    char driverphone[12];
+    char starttime[32];
+    char arrivaltime[32];
+    char payment[128];
+};
+
 union packbody{
     struct signup signup;
     struct signin signin;
     struct signout signout;
     struct mpasswd mpasswd;
+    struct order order;
 };
 
 struct didi_packmsg_s{
@@ -143,6 +156,7 @@ char *random_uuid(char *buf);
 void handle_message();
 int init_socket();
 void print_message_body(cJSON* root);
+void generate_curtime(char* s);
 /////////////////////////////////////
 void register_user();
 void login();

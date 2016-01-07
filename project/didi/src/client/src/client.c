@@ -41,6 +41,7 @@ void showUserMenu(){
             case '1':
                 break;
             case '2':
+                addorder();
                 break;
             case '3':
                 modifypasswd();

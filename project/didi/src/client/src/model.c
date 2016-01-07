@@ -123,3 +123,34 @@ void modifypasswd(){
 
     handle_message();
 }
+
+void addorder(){
+    didi_packmsg_t pg;
+    cJSON* root;
+    char s[32];
+    char *req;
+    char guid[37];
+    random_uuid(guid);
+    generate_curtime(s);
+    printf("请输入起始地:");
+    scanf("%s",pg.packbody.order.starting);
+    printf("请输入目的地址:");
+    scanf("%s",pg.packbody.order.destination);
+    
+    pg.packbody.order.usertype = PERSONAL_USER;
+    strcpy(pg.packbody.order.userphone,loginuser);
+    strcpy(pg.packbody.order.starttime,s);
+    
+    pg.packtype = PACKTYPE_REQUEST;
+    pg.event = EVENT_ORDER;
+    strcpy(pg.version,"1.0");
+    strcpy(pg.reqId,guid);
+    didi_create_regmsg(&root,pg);
+
+    req= didi_ufconvert_json(&root);
+    printf("%s\n",req);
+    write(sfd,req,strlen(req));
+
+    handle_message();
+
+}

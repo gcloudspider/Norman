@@ -27,6 +27,21 @@ char *random_uuid(char* buf) {
     return buf;
 }
 
+void generate_curtime(char* buf){
+    srand((int)time(0));   
+  
+    struct tm *p;
+    time_t second;
+    time(&second);
+           
+    p = localtime(&second);
+             
+    //char buf[100] = {0};
+ 
+    sprintf(buf, "%d-%d-%d %d:%d:%d", 1900+p->tm_year, 1+p->tm_mon, p->tm_mday,p->tm_hour, p->tm_min, p->tm_sec);
+  
+}
+
 void handle_message(){
     pthread_t ttid01,ttid02;
     void* rret;
