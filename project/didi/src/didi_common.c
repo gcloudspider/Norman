@@ -89,3 +89,57 @@ char* create_respon_package(int status,didi_repack_t* res_pack,const char* telph
 
     return res;
 }
+
+char* create_ordspond_package(int status,didi_repack_t* res_pack,const char* telphone,int orderid,const char* starting,const char* destination){
+    char buf[1024];
+    cJSON* root;
+    char *res;
+
+    switch(status){
+        case ORDER_SUCCESS:
+            res_pack->repackbody.ord_spond.recode = ORDER_SUCCESS;
+            sprintf(buf,"order successful!");
+            strcpy(res_pack->repackbody.ord_spond.remsg,buf);
+            res_pack->repackbody.ord_spond.orderid = orderid;
+            strcpy(res_pack->repackbody.ord_spond.telphone,telphone);
+            strcpy(res_pack->repackbody.ord_spond.starting,starting);
+            strcpy(res_pack->repackbody.ord_spond.destination,destination);
+            zlog_info(c,"respond code:%d",res_pack->repackbody.ord_spond.recode);
+            break;
+        case ORDER_ERROR:
+            res_pack->repackbody.ord_spond.orderid = orderid;
+            res_pack->repackbody.ord_spond.recode = ORDER_ERROR;
+            sprintf(buf,"order failed!");
+            strcpy(res_pack->repackbody.ord_spond.remsg,buf);
+            strcpy(res_pack->repackbody.ord_spond.telphone,telphone);
+            strcpy(res_pack->repackbody.ord_spond.starting,starting);
+            strcpy(res_pack->repackbody.ord_spond.destination,destination);
+            zlog_info(c,"respond code:%d",res_pack->repackbody.ord_spond.recode);
+            break;
+        default:
+            break;
+    }
+    
+    didi_create_ordspond(&root,res_pack);
+    zlog_info(c,"%p",root);
+
+    res = didi_ufconvert_json(root);
+
+    return res;
+}
+
+void didi_order_broadcast(const char* res_package){
+    if(didi_driver_head == NULL){
+        zlog_warn(c,"no driver online order hangup!");
+        return;
+    }
+    zlog_info(c,"have driver onlline head=%p",didi_driver_head);
+    didi_online_t *pn;
+    pn = didi_driver_head;
+    while(pn){
+        write(pn->fd,res_package,strlen(res_package));
+        zlog_info(c,"write to driver %d",pn->fd);
+        pn= pn->next;
+    }
+    
+}

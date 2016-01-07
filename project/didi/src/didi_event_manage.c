@@ -264,16 +264,19 @@ void* didi_event_order(void* argv,void* argv2){
     item3 = didi_getitem_node(bodynode,"starting");
     item4 = didi_getitem_node(bodynode,"destination");
     item5 = didi_getitem_node(bodynode,"starttime");
-    
-    ret = didi_create_order(item2->valueint,item->valuestring,item3->valuestring,item4->valuestring,item5->valuestring);
+    int orderid=didi_generate_userid();
+
+    ret = didi_create_order(orderid,item2->valueint,item->valuestring,item3->valuestring,item4->valuestring,item5->valuestring);
 
     if(-1 == ret){
         zlog_info(c,"user add order failed!");
-        //res_package = create_respon_package(SERVER_REFUSE,&res_pack,item->valuestring);
+        res_package = create_ordspond_package(ORDER_ERROR,&res_pack,item->valuestring,orderid,item3->valuestring,item4->valuestring);
     } else {
         zlog_info(c,"user add order successful!");
-        //res_package = create_respon_package(REQUER_SUCCESS,&res_pack,item->valuestring);
+        res_package = create_ordspond_package(ORDER_SUCCESS,&res_pack,item->valuestring,orderid,item3->valuestring,item4->valuestring);
     }
-    //zlog_info(c,"%s",res_package);
-    //write(cfd,res_package,strlen(res_package));
+    zlog_info(c,"%s",res_package);
+    write(cfd,res_package,strlen(res_package));
+    //将订单发给每个在线司机
+    didi_order_broadcast(res_package);
 }

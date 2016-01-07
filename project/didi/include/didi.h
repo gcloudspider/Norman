@@ -189,11 +189,13 @@ struct didi_packmsg_s{
 enum responcode{
     REQUER_SUCCESS = 200,       //服务器已处理请求
     PASSWD_SUCCESS = 201,       //密码验证正确
+    ORDER_SUCCESS = 202,
 
     SERVER_REFUSE = 403,        //
     USER_NOTEXIST = 404,        //用户不存在
     USER_EXIST = 405,           //用户已存在
     PASSWD_ERROR = 406,         //用户密码错误
+    ORDER_ERROR = 407,
 };
 //响应数据结构
 struct reg_spond{
@@ -202,8 +204,18 @@ struct reg_spond{
     char telphone[12];
 };
 
+struct ord_spond{
+    int recode;
+    int orderid;
+    char remsg[256];
+    char telphone[12];
+    char starting[1024];
+    char destination[1024];
+};
+
 union repackbody{
     struct reg_spond reg_spond;
+    struct ord_spond ord_spond;
 };
 
 struct didi_repack_s{
@@ -223,6 +235,7 @@ struct didi_online_s{
 };
 
 struct didi_order_s{
+    int orderid;
     char starting[1024];
     char destination[1024];
     char userphone[12];
@@ -285,13 +298,14 @@ void didi_adduser_cache(int cfd,int usertype,const char* telphone);
 int didi_del_cache(int usertype,const char* telphone);
 didi_online_t* didi_find_linklist(didi_online_t *head,const char* telphone);
 int didi_del_linklist(didi_online_t *pn,didi_online_t *head);
-int didi_create_order(int usertype,const char* userphone,const char* starting,const char* destination,const char* starttime);
-int didi_add_queue(const char* userphone,const char* starting,const char* destination,const char* starttime);
+int didi_create_order(int orderid,int usertype,const char* userphone,const char* starting,const char* destination,const char* starttime);
+int didi_add_queue(int orderid,const char* userphone,const char* starting,const char* destination,const char* starttime);
 /////////////////////////////////////////////////////////////////////////
 //json数据格式处理
 void didi_parse_msg(int cfd);
 int didi_create_remsg(cJSON* root,didi_packmsg_t pg);
 int didi_create_respone(cJSON** root,didi_repack_t* pg);
+int didi_create_ordspond(cJSON** root,didi_repack_t *pg);
 int didi_release_json(cJSON* root);
 char* didi_convert_json(cJSON* root);
 char* didi_ufconvert_json(cJSON* root);
@@ -330,4 +344,6 @@ int init_driver_linklist();
 //杂项方法
 int didi_generate_userid();
 char* create_respon_package(int status,didi_repack_t* res_pack,const char* telphone);
+char* create_ordspond_package(int status,didi_repack_t* res_pack,const char* telphone,int orderid,const char* starting,const char* destination);
+void didi_order_broadcast(const char* res_package);
 #endif

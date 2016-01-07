@@ -163,9 +163,10 @@ int didi_del_cache(int usertype,const char* telphone){
     return ret;
 }
 
-int didi_add_queue(const char* userphone,const char* starting,const char* destination,const char* starttime){
+int didi_add_queue(int orderid,const char* userphone,const char* starting,const char* destination,const char* starttime){
     didi_order_t *pn;
     pn = malloc(sizeof(didi_order_t));
+    pn->orderid = orderid;
     strcpy(pn->userphone,userphone);
     strcpy(pn->starting,starting);
     strcpy(pn->destination,destination);
@@ -189,8 +190,8 @@ int didi_add_queue(const char* userphone,const char* starting,const char* destin
     return 0;
 }
 
-int didi_create_order(int usertype,const char* userphone,const char* starting,const char* destination,const char* starttime){
+int didi_create_order(int orderid,int usertype,const char* userphone,const char* starting,const char* destination,const char* starttime){
     int ret;
-    ret = didi_add_queue(userphone,starting,destination,starttime);
+    ret = didi_add_queue(orderid,userphone,starting,destination,starttime);
     return ret;
 }
