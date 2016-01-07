@@ -120,3 +120,8 @@ void modifypasswd(){
 
     handle_message();
 }
+
+void taketoken(){
+    printf("开始抢单!请等待...\n");
+    handle_taketoken();
+}

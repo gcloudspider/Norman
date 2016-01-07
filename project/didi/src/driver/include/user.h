@@ -79,7 +79,8 @@ enum event{
     EVENT_LOGIN = 2,
     EVENT_LOGOUT = 3,
     EVENT_QUERY = 4,
-    EVENT_MPASSWD = 5
+    EVENT_MPASSWD = 5,
+    EVENT_ORDER = 6
 };
 
 struct signup{
@@ -145,12 +146,15 @@ char *random_uuid(char *buf);
 
 void* thread_read(void* argv);
 void* thread_write(void* argv);
+void* take_token(void* argv);
 void print_message_body(cJSON* root);
 void handle_message();
 void register_user();
 void login();
 void logout();
 int init_socket();
+
+void taketoken();
 
 #endif
 

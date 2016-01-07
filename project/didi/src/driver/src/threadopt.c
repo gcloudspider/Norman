@@ -35,3 +35,20 @@ void* thread_write(void* argv){
     return argv;
 }
 
+void* take_token(void* argv){
+    int ret;
+    char buf[1024] = {0};
+    cJSON* root;
+
+    while(1){
+        ret = read(sfd,buf,1024);
+        if(ret != -1){
+            printf("%s\n",buf);
+            root = didi_convert_string(buf);
+            break;
+        }
+    }
+    print_token_body(root);
+    return argv;
+}
+

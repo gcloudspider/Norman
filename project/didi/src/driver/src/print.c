@@ -74,3 +74,31 @@ void print_message_body(cJSON* root){
     
     sleep(3);
 }
+
+
+void print_token_body(cJSON* root){
+    cJSON* headnode,*bodynode;
+    cJSON* headitem,*bodyitem,*bodyitem2,*bodyitem3;
+
+    char* ret;
+    headnode = didi_getjson_node(&root,"head");
+    headitem = didi_getitem_node(&headnode,"packtype");
+    if((headitem->valueint) == PACKTYPE_RESPONE){
+        headitem = didi_getitem_node(&headnode,"event");
+        switch(headitem->valueint){
+            case EVENT_ORDER:
+                bodynode = didi_getjson_node(&root,"body");
+                bodyitem = didi_getitem_node(&bodynode,"starting");
+                bodyitem2 = didi_getitem_node(&bodynode,"destination");
+                bodyitem3 = didi_getitem_node(&bodynode,"telphone");
+                printf("附近有一单!");
+                printf("始发地:%s  目的地:%s\n",bodyitem->valuestring,bodyitem2->valuestring);
+                printf("联系人电话:%s\n",bodyitem3->valuestring);
+                printf("是否抢单(输入yes/no):");
+                scanf("%s",ret);
+                break;
+            default:
+                break;
+        }
+    }
+}
