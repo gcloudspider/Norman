@@ -136,6 +136,10 @@ void didi_parse_msg(int cfd){
                 zlog_warn(c,"event modify passwd !");
                 didi_add_task(didi_event_mpasswd,(void*)cfd,(void*)buf);
                 break;
+            case EVENT_ORDER:
+                zlog_warn(c,"event start order!");
+                didi_add_task(didi_event_order,(void*)cfd,(void*)buf);
+                break;
             default:
                 break;
         }

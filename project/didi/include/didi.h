@@ -154,7 +154,8 @@ enum event{
     EVENT_LOGIN = 2,                //登录事件
     EVENT_LOGOUT = 3,               //退出事件
     EVENT_QUERY = 4,                 //查询订单事件
-    EVENT_MPASSWD = 5
+    EVENT_MPASSWD = 5,
+    EVENT_ORDER = 6
 };
 
 struct signup{
@@ -221,6 +222,18 @@ struct didi_online_s{
     struct didi_online_s *next;
 };
 
+struct didi_order_s{
+    char starting[1024];
+    char destination[1024];
+    char userphone[12];
+    char driverphone[12];
+    char starttime[32];
+    char arrivaltime[32];
+    char payment[128];
+    struct didi_order_s *pre;
+    struct didi_order_s *next;
+};
+
 /* types */
 typedef struct didi_server_s didi_server_t;
 typedef struct didi_mysql_s didi_mysql_t;
@@ -237,12 +250,14 @@ typedef struct didi_packmsg_s didi_packmsg_t;
 typedef struct didi_repack_s didi_repack_t;
 
 typedef struct didi_online_s didi_online_t;
+typedef struct didi_order_s didi_order_t;
 //Global Var 全局变量 
 didi_thread_t didi_td;
 zlog_category_t *c;
 MYSQL db;
 didi_online_t *didi_user_head,*didi_user_tail;
 didi_online_t *didi_driver_head,*didi_driver_tail;
+didi_order_t *didi_order_head,*didi_order_tail;
 
 
 //////////////////////////////////////////////////////////////////////
@@ -270,6 +285,8 @@ void didi_adduser_cache(int cfd,int usertype,const char* telphone);
 int didi_del_cache(int usertype,const char* telphone);
 didi_online_t* didi_find_linklist(didi_online_t *head,const char* telphone);
 int didi_del_linklist(didi_online_t *pn,didi_online_t *head);
+int didi_create_order(int usertype,const char* userphone,const char* starting,const char* destination,const char* starttime);
+int didi_add_queue(const char* userphone,const char* starting,const char* destination,const char* starttime);
 /////////////////////////////////////////////////////////////////////////
 //json数据格式处理
 void didi_parse_msg(int cfd);
@@ -293,6 +310,7 @@ void* didi_event_login(void* argv,void* argv2);
 void* didi_event_logout(void* argv,void* argv2);
 void* didi_event_query(void* argv,void* argv2);
 void* didi_event_mpasswd(void* argv,void* argv2);
+void* didi_event_order(void* argv,void* argv2);
 
 ///////////////////////////////////////////////////////////////////////
 //数据库

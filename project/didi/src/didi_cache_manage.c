@@ -162,3 +162,35 @@ int didi_del_cache(int usertype,const char* telphone){
 
     return ret;
 }
+
+int didi_add_queue(const char* userphone,const char* starting,const char* destination,const char* starttime){
+    didi_order_t *pn;
+    pn = malloc(sizeof(didi_order_t));
+    strcpy(pn->userphone,userphone);
+    strcpy(pn->starting,starting);
+    strcpy(pn->destination,destination);
+    strcpy(pn->starttime,starttime);
+    
+    zlog_info(c,"add order %p",pn);
+    if(didi_order_tail){
+        zlog_info(c,"order has something no handle!");
+        didi_order_tail->next = pn;
+        pn->pre = didi_order_tail;
+        pn->next = NULL;
+        didi_order_tail = pn;
+    } else {
+        zlog_info(c,"order tail NULL!");
+        didi_order_tail = pn;
+        didi_order_head = pn;
+        didi_order_head->next = NULL;
+        didi_order_head->pre = NULL;
+    }
+    zlog_info(c,"didi order head=%p tail=%p",didi_order_head,didi_order_tail);
+    return 0;
+}
+
+int didi_create_order(int usertype,const char* userphone,const char* starting,const char* destination,const char* starttime){
+    int ret;
+    ret = didi_add_queue(userphone,starting,destination,starttime);
+    return ret;
+}
