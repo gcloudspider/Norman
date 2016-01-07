@@ -114,6 +114,7 @@ struct didi_packmsg_s{
 };
 
 int sfd;
+char loginuser[12];
 typedef struct didi_packmsg_s didi_packmsg_t;
 
 int didi_create_regmsg(cJSON** root,didi_packmsg_t pg);

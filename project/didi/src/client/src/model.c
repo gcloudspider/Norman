@@ -77,5 +77,24 @@ void login(){
 
 
 void logout(){
+    didi_packmsg_t pg;
+    cJSON* root;
+    char *s;
+    char guid[37];
+    random_uuid(guid);
+
+    pg.packbody.signout.usertype = PERSONAL_USER;
+    strcpy(pg.packbody.signout.telphone,loginuser);
     
+    pg.packtype = PACKTYPE_REQUEST;
+    pg.event = EVENT_LOGOUT;
+    strcpy(pg.version,"1.0");
+    strcpy(pg.reqId,guid);
+    didi_create_regmsg(&root,pg);
+
+    s= didi_ufconvert_json(&root);
+    printf("%s\n",s);
+    write(sfd,s,strlen(s));
+
+    handle_message();
 }

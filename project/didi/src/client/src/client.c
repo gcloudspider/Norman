@@ -45,7 +45,7 @@ void showUserMenu(){
             case '3':
                 break;
             case '4':
-                //logout();
+                logout();
                 break;
             default:
                 break;

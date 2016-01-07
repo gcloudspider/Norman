@@ -49,6 +49,10 @@ int didi_create_regmsg(cJSON** root,didi_packmsg_t pg){
             cJSON_AddStringToObject(js_body,"telphone",pg.packbody.signin.telphone);
             cJSON_AddStringToObject(js_body,"passwd",pg.packbody.signin.passwd);
             break;
+        case EVENT_LOGOUT:
+            cJSON_AddNumberToObject(js_body,"usertype",pg.packbody.signin.usertype);
+            cJSON_AddStringToObject(js_body,"telphone",pg.packbody.signin.telphone);
+            break;
         default:
             break;
     }

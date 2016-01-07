@@ -45,6 +45,8 @@ void print_message_body(cJSON* root){
                 } else if((bodyitem->valueint) == PASSWD_SUCCESS){
                     printf("登录成功!\n");
                     sleep(3);
+                    bodyitem = didi_getitem_node(&bodynode,"telphone");
+                    strcpy(loginuser,bodyitem->valuestring);
                     showUserMenu();
                 } else if((bodyitem->valueint) == PASSWD_ERROR){
                     printf("密码验证失败!3秒后返回主界面!\n");

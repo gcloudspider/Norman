@@ -24,7 +24,7 @@ void* thread_read(void* argv){
 
     while(1){
         ret = read(sfd,buf,1024);
-        //printf("%s\n",buf);
+        printf("%s\n",buf);
         root = didi_convert_string(buf);
         break;
     }
