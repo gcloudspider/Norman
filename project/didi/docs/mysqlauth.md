@@ -5,7 +5,10 @@
 ===========================
 
 用户密码保存在mysql.user表password列,并且以hash值形式加密保存
-
+###验证过程:
+    1.客户端请求连接
+    2.服务器随机生成一个random string发送给客户端
+    3.客户端收到random string后进行hash加密
 验证过程:<br />
 1.客户端请求连接 <br/>
 2.服务器随机生成一个random string发送给客户端 <br/>
