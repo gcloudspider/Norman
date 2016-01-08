@@ -27,6 +27,7 @@
 		MD5() 计算字符串的MD5校验和(128位)
 		SHA5() 计算字符串的SHA5校验和(160位)
 
-    参考: MySQL密码验证实现原理
+    参考: [MySQL密码验证实现原理](http://www.2cto.com/database/201206/136217.html "悬停显示")
     其他:
           MySQL 密码强度插件 validate_password (要求版本:5.6.6以上版本)
+          [MySQL 密码强度插件](http://www.xuchanggang.cn/archives/1033.html "悬停显示")
