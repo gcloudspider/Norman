@@ -333,6 +333,7 @@ int didi_insert_user(MYSQL *db,didi_user_t user);
 int didi_insert_driver(MYSQL *db,didi_driver_t driver);
 int didi_query_passwd(MYSQL *db,const char* telphone,const char* passwd,int usertype);
 int didi_update_passwd(MYSQL *db,int usertype,const char* telphone,const char* passwd);
+char* didi_query_order(MYSQL *db,int usertype,const char* telphone);
 void query_online_user();
 void query_online_driver();
 //////////////////////////////////////////////////////////////////////

@@ -173,6 +173,54 @@ int didi_insert_driveruser(MYSQL* db,didi_driver_t driver){
     return 0;
 }
 
+char* didi_query_order(MYSQL *db,int usertype,const char* telphone){
+    char *buf;
+    char sql[1024];
+    MYSQL_FIELD *field;
+    MYSQL_RES *ptr;
+    MYSQL_ROW result;
+    int ret,row,column;
+    int i,j;
+
+    switch(usertype){
+        case PERSONAL_USER:
+            sprintf(sql,"select * from didiorders where userphone=%s",telphone);
+            break;
+        case DRIVERS_USERS:
+        sprintf(sql,"select * from didiorders where driverphone=%s",telphone);
+            break;
+        default:
+            break;
+    }
+    zlog_info(c,"%s",sql);
+    ret = mysql_query(db,sql);
+    if(ret != 0){
+        zlog_error(c,"query failed!,sql:%s",sql);
+        zlog_error(c,"%s",mysql_error(db));
+    } else {
+        zlog_info(c,"query successful.");
+        ptr = mysql_store_result(db);
+        if(ptr != NULL){
+            row = mysql_num_rows(ptr);
+            column = mysql_num_fields(ptr);
+            zlog_info(c,"row=%d column=%d",row,column);
+
+            for(i=0;field=mysql_fetch_field(ptr);i++){
+                zlog_info(c,"%s",field->name);
+            }
+
+            for(i=0;i<row;i++){
+                result = mysql_fetch_row(ptr);
+                for(j=0;j<column;j++){
+                    zlog_info(c,"%s",result[j]);
+                }
+            }
+            mysql_free_result(ptr);
+        }
+    }
+    return buf;
+}
+
 void query_online_user(){
 
 }
