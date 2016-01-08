@@ -20,16 +20,18 @@
 
 void showUserMenu(){
     char ch;
-    while(ch != '4'){
+    while(ch != '5'){
         system("clear");
         printf("##########################################\n");
         printf("##              1.我的历史订单          ##\n");
         printf("##                                      ##\n");
         printf("##              2.开始抢单              ##\n");
         printf("##                                      ##\n");
-        printf("##              3.修改密码              ##\n");
+        printf("##              3.停止抢单              ##\n");
         printf("##                                      ##\n");
-        printf("##              4.退出登陆              ##\n");
+        printf("##              4.修改密码              ##\n");
+        printf("##                                      ##\n");
+        printf("##              5.退出登陆              ##\n");
         printf("##########################################\n");
         
         while((ch=getchar())!='\n');
@@ -41,12 +43,17 @@ void showUserMenu(){
                 query_order();
                 break;
             case '2':
+                printf("开始抢单!请等待...\n");
+                sleep(1);
                 taketoken();
                 break;
             case '3':
-                modifypasswd();
+                //stoptoken();
                 break;
             case '4':
+                modifypasswd();
+                break;
+            case '5':
                 logout();
                 break;
             default:

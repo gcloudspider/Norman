@@ -80,7 +80,8 @@ enum event{
     EVENT_LOGOUT = 3,
     EVENT_QUERY = 4,
     EVENT_MPASSWD = 5,
-    EVENT_ORDER = 6
+    EVENT_ORDER = 6,
+    EVENT_TAKETOKEN = 7,
 };
 
 struct signup{
@@ -113,12 +114,19 @@ struct query{
     char telphone[12];
 };
 
+struct taketoken{
+    int usertype;
+    int orderid;
+    char telphone[12];
+};
+
 union packbody{
     struct signup signup;
     struct signin signin;
     struct signout signout;
     struct mpasswd mpasswd;
     struct query query;
+    struct taketoken taketoken;
 };
 
 struct didi_packmsg_s{

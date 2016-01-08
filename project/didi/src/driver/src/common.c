@@ -40,9 +40,8 @@ void handle_message(){
 void handle_taketoken(){
     pthread_t ttid01,ttid02;
     void* rret;
-
     pthread_create(&ttid01,NULL,take_token,(void*)sfd);
-    pthread_join(ttid01,&rret);
+    pthread_detach(ttid01);
 
 }
 

@@ -62,6 +62,11 @@ int didi_create_regmsg(cJSON** root,didi_packmsg_t pg){
             cJSON_AddNumberToObject(js_body,"usertype",pg.packbody.query.usertype);
             cJSON_AddStringToObject(js_body,"telphone",pg.packbody.query.telphone);
             break;
+        case EVENT_TAKETOKEN:
+            cJSON_AddNumberToObject(js_body,"usertype",pg.packbody.taketoken.usertype);
+            cJSON_AddNumberToObject(js_body,"orderid",pg.packbody.taketoken.orderid);
+            cJSON_AddStringToObject(js_body,"telphone",pg.packbody.taketoken.telphone);
+            break;
         default:
             break;
     }
