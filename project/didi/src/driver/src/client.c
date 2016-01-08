@@ -38,6 +38,7 @@ void showUserMenu(){
         ch = getchar();
         switch(ch){
             case '1':
+                query_order();
                 break;
             case '2':
                 taketoken();
