@@ -93,6 +93,32 @@ int didi_create_ordspond(cJSON** root,didi_repack_t *pg){
     cJSON_AddStringToObject(js_body,"starting",pg->repackbody.ord_spond.starting);
     cJSON_AddStringToObject(js_body,"destination",pg->repackbody.ord_spond.destination);
 }
+
+int didi_create_takespond(cJSON** root,didi_repack_t *pg){
+    const char* const head = "head";
+    const char* const body = "body";
+    cJSON* js_head;
+    cJSON* js_body;
+
+    *root = cJSON_CreateObject();
+    if(!*root){
+        zlog_error(c,"get root failed!");
+        return -1;
+    }
+
+    cJSON_AddItemToObject(*root,head,js_head=cJSON_CreateObject());
+    cJSON_AddNumberToObject(js_head,"packtype",pg->packtype);
+    cJSON_AddNumberToObject(js_head,"event",pg->event);
+    cJSON_AddStringToObject(js_head,"version",pg->version);
+    cJSON_AddStringToObject(js_head,"reqId",pg->reqId);
+    
+    cJSON_AddItemToObject(*root,body,js_body=cJSON_CreateObject());
+    cJSON_AddNumberToObject(js_body,"recode",pg->repackbody.ord_spond.recode);
+    cJSON_AddNumberToObject(js_body,"orderid",pg->repackbody.ord_spond.orderid);
+    cJSON_AddStringToObject(js_body,"remsg",pg->repackbody.ord_spond.remsg);
+    cJSON_AddStringToObject(js_body,"telphone",pg->repackbody.ord_spond.telphone);
+}
+
 //释放json对象
 int didi_release_json(cJSON* root){
     if(!root){

@@ -155,7 +155,8 @@ enum event{
     EVENT_LOGOUT = 3,               //退出事件
     EVENT_QUERY = 4,                 //查询订单事件
     EVENT_MPASSWD = 5,
-    EVENT_ORDER = 6
+    EVENT_ORDER = 6,
+    EVENT_TAKETOKEN = 7
 };
 
 struct signup{
@@ -190,12 +191,14 @@ enum responcode{
     REQUER_SUCCESS = 200,       //服务器已处理请求
     PASSWD_SUCCESS = 201,       //密码验证正确
     ORDER_SUCCESS = 202,
+    TAKETOKEN_SUCCESS = 203,
 
     SERVER_REFUSE = 403,        //
     USER_NOTEXIST = 404,        //用户不存在
     USER_EXIST = 405,           //用户已存在
     PASSWD_ERROR = 406,         //用户密码错误
     ORDER_ERROR = 407,
+    TAKETOKEN_ERROR = 408,
 };
 //响应数据结构
 struct reg_spond{
@@ -300,12 +303,14 @@ didi_online_t* didi_find_linklist(didi_online_t *head,const char* telphone);
 int didi_del_linklist(didi_online_t *pn,didi_online_t *head);
 int didi_create_order(int orderid,int usertype,const char* userphone,const char* starting,const char* destination,const char* starttime);
 int didi_add_queue(int orderid,const char* userphone,const char* starting,const char* destination,const char* starttime);
+int didi_getorder_cache(int orderid);
 /////////////////////////////////////////////////////////////////////////
 //json数据格式处理
 void didi_parse_msg(int cfd);
 int didi_create_remsg(cJSON* root,didi_packmsg_t pg);
 int didi_create_respone(cJSON** root,didi_repack_t* pg);
 int didi_create_ordspond(cJSON** root,didi_repack_t *pg);
+int didi_create_takespond(cJSON** root,didi_repack_t *pg);
 int didi_release_json(cJSON* root);
 char* didi_convert_json(cJSON* root);
 char* didi_ufconvert_json(cJSON* root);
@@ -325,6 +330,7 @@ void* didi_event_logout(void* argv,void* argv2);
 void* didi_event_query(void* argv,void* argv2);
 void* didi_event_mpasswd(void* argv,void* argv2);
 void* didi_event_order(void* argv,void* argv2);
+void* didi_event_taketoken(void* argv,void* argv2);
 
 ///////////////////////////////////////////////////////////////////////
 //数据库
@@ -346,5 +352,6 @@ int init_driver_linklist();
 int didi_generate_userid();
 char* create_respon_package(int status,didi_repack_t* res_pack,const char* telphone);
 char* create_ordspond_package(int status,didi_repack_t* res_pack,const char* telphone,int orderid,const char* starting,const char* destination);
+char* create_takespond_package(int status,didi_repack_t* res_pack,const char* telphone,int orderid);
 void didi_order_broadcast(const char* res_package);
 #endif

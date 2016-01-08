@@ -128,6 +128,40 @@ char* create_ordspond_package(int status,didi_repack_t* res_pack,const char* tel
     return res;
 }
 
+char* create_takespond_package(int status,didi_repack_t* res_pack,const char* telphone,int orderid){
+    char buf[1024];
+    cJSON* root;
+    char *res;
+
+    switch(status){
+        case TAKETOKEN_SUCCESS:
+            res_pack->repackbody.ord_spond.recode = TAKETOKEN_SUCCESS;
+            sprintf(buf,"take token successful!");
+            strcpy(res_pack->repackbody.ord_spond.remsg,buf);
+            strcpy(res_pack->repackbody.ord_spond.telphone,telphone);
+            res_pack->repackbody.ord_spond.orderid = orderid;
+            zlog_info(c,"respond code:%d",res_pack->repackbody.ord_spond.recode);
+            break;
+        case TAKETOKEN_ERROR:
+            res_pack->repackbody.ord_spond.recode = TAKETOKEN_ERROR;
+            sprintf(buf,"take token failed!");
+            strcpy(res_pack->repackbody.ord_spond.remsg,buf);
+            strcpy(res_pack->repackbody.ord_spond.telphone,telphone);
+            res_pack->repackbody.ord_spond.orderid = orderid;
+            zlog_info(c,"respond code:%d",res_pack->repackbody.ord_spond.recode);
+            break;
+        default:
+            break;
+    }
+    
+    didi_create_takespond(&root,res_pack);
+    zlog_info(c,"%p",root);
+
+    res = didi_ufconvert_json(root);
+
+    return res;
+}
+
 void didi_order_broadcast(const char* res_package){
     if(didi_driver_head == NULL){
         zlog_warn(c,"no driver online order hangup!");

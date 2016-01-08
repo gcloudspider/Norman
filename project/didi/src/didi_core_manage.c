@@ -140,6 +140,10 @@ void didi_parse_msg(int cfd){
                 zlog_warn(c,"event start order!");
                 didi_add_task(didi_event_order,(void*)cfd,(void*)buf);
                 break;
+            case EVENT_TAKETOKEN:
+                zlog_warn(c,"event take token!");
+                didi_add_task(didi_event_taketoken,(void*)cfd,(void*)buf);
+                break;
             default:
                 break;
         }

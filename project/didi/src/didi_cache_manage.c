@@ -195,3 +195,16 @@ int didi_create_order(int orderid,int usertype,const char* userphone,const char*
     ret = didi_add_queue(orderid,userphone,starting,destination,starttime);
     return ret;
 }
+
+
+int didi_getorder_cache(int orderid){
+    if(didi_order_head == NULL){
+        return -1;
+    }
+    
+    if(didi_order_head->orderid != orderid){
+        return -1;
+    }
+
+    return 0;
+}

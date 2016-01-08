@@ -311,3 +311,49 @@ void* didi_event_order(void* argv,void* argv2){
     //将订单发给每个在线司机
     didi_order_broadcast(res_package);
 }
+
+
+void* didi_event_taketoken(void* argv,void* argv2){
+    int ret,userid;
+    cJSON* root,*bodynode;
+    cJSON* item,*item2,*item3,*item4,*item5;
+    cJSON *headnode,*reitem;
+    int cfd = (int)argv;
+    char buf[1024];
+    char *res_package;
+    didi_repack_t res_pack;
+
+    strcpy(buf,(char*)argv2);
+    zlog_info(c,"ready to read body cfd=%d buf=%s!",cfd,buf);
+    
+    didi_convert_string(&root,buf);
+    zlog_info(c,"root=%p",root);
+    
+    headnode = didi_getjson_node(root,"head");
+    res_pack.packtype = PACKTYPE_RESPONE; 
+    res_pack.event = EVENT_TAKETOKEN;
+    reitem = didi_getitem_node(headnode,"version");
+    strcpy(res_pack.version,reitem->valuestring);
+    reitem = didi_getitem_node(headnode,"reqId");
+    strcpy(res_pack.reqId,reitem->valuestring);
+    
+    bodynode = didi_getjson_node(root,"body");
+    zlog_info(c,"body node=%p",bodynode);
+    item = didi_getitem_node(bodynode,"telphone");
+    item2 = didi_getitem_node(bodynode,"usertype");
+    zlog_info(c,"bodynode user phone=%s",item->valuestring);
+    item3 = didi_getitem_node(bodynode,"orderid");
+
+    ret = didi_getorder_cache(item3->valueint);
+    if(-1 == ret){
+        zlog_info(c,"order been another taketoken!");
+        res_package = create_takespond_package(TAKETOKEN_ERROR,&res_pack,item->valuestring,item3->valueint);
+    } else {
+        zlog_info(c,"taktoken successful!");
+        res_package = create_takespond_package(TAKETOKEN_SUCCESS,&res_pack,item->valuestring,item3->valueint);
+        
+    }
+    zlog_info(c,"%s",res_package);
+    write(cfd,res_package,strlen(res_package));
+
+}
