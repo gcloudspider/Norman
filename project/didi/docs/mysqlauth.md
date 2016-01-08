@@ -9,8 +9,8 @@
 用户密码保存在mysql.user表password列,并且以hash值形式加密保存
 
 验证过程:<br />
-    1.客户端请求连接 <br/>
-    2.服务器随机生成一个random string发送给客户端 <br/>
+####1.客户端请求连接 <br/>
+	2.服务器随机生成一个random string发送给客户端 <br/>
     3.客户端收到random string后进行hash加密 <br />
         3.1:将密码hash 得到hash值 hash_stage1    eg.hash_stage1 = sha1("password");<br />
         3.2:二次hash 得到hash_stage2  eg.hash_stage2=sha1(hash_stage1); <br />
