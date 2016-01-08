@@ -51,3 +51,11 @@ void handle_message(){
     pthread_join(ttid01,&rret);
     //pthread_join(ttid02,&rret);
 }
+
+void waiting_order(){
+    pthread_t ttid01,ttid02;
+    void* rret;
+
+    pthread_create(&ttid01,NULL,thread_read,(void*)sfd);
+    pthread_detach(ttid01);
+}

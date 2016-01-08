@@ -30,61 +30,60 @@ void print_message_body(cJSON* root){
                 bodynode = didi_getjson_node(&root,"body");
                 bodyitem = didi_getitem_node(&bodynode,"recode");
                 if((bodyitem->valueint) == USER_EXIST ){
-                    printf("此用户已被注册!3秒后返回主界面!\n");
+                    printf("此用户已被注册!1秒后返回主界面!\n");
                 } else if((bodyitem->valueint) == REQUER_SUCCESS){
-                    printf("此用户注册成功!3秒后返回主界面!\n");
+                    printf("此用户注册成功!1秒后返回主界面!\n");
                 } else {
-                    printf("未知错误!3秒后返回主界面!\n");
+                    printf("未知错误!1秒后返回主界面!\n");
                 }
                 break;
             case EVENT_LOGIN:
                 bodynode = didi_getjson_node(&root,"body");
                 bodyitem = didi_getitem_node(&bodynode,"recode");
                 if((bodyitem->valueint) == USER_NOTEXIST ){
-                    printf("输入账号不存在!3秒后返回主界面!\n");
+                    printf("输入账号不存在!1秒后返回主界面!\n");
                 } else if((bodyitem->valueint) == PASSWD_SUCCESS){
                     printf("登录成功!\n");
-                    sleep(3);
+                    sleep(1);
                     bodyitem = didi_getitem_node(&bodynode,"telphone");
                     strcpy(loginuser,bodyitem->valuestring);
                     showUserMenu();
                 } else if((bodyitem->valueint) == PASSWD_ERROR){
-                    printf("密码验证失败!3秒后返回主界面!\n");
+                    printf("密码验证失败!1秒后返回主界面!\n");
                 } else {
-                    printf("未知错误!3秒后返回主界面!\n");
+                    printf("未知错误!1秒后返回主界面!\n");
                 }
                 break;
             case EVENT_LOGOUT:
-                printf("退出成功!3秒后返回主界面!\n");
+                printf("退出成功!1秒后返回主界面!\n");
                 break;
             case EVENT_MPASSWD:
                 bodynode = didi_getjson_node(&root,"body");
                 bodyitem = didi_getitem_node(&bodynode,"recode");
                 if((bodyitem->valueint) == USER_EXIST ){
-                    printf("此用户密码修改失败!3秒后返回用户界面!\n");
+                    printf("此用户密码修改失败!1秒后返回用户界面!\n");
                 } else if((bodyitem->valueint) == REQUER_SUCCESS){
-                    printf("此用户密码修改成功!3秒后返回用户界面!\n");
+                    printf("此用户密码修改成功!1秒后返回用户界面!\n");
                 } else {
-                    printf("未知错误!3秒后返回主界面!\n");
+                    printf("未知错误!1秒后返回主界面!\n");
                 }
                 break;
             case EVENT_ORDER:
                 bodynode = didi_getjson_node(&root,"body");
                 bodyitem = didi_getitem_node(&bodynode,"recode");
                 if((bodyitem->valueint) == ORDER_ERROR ){
-                    printf("提交订单失败!3秒后返回用户界面!\n");
+                    printf("提交订单失败!1秒后返回用户界面!\n");
                 } else if((bodyitem->valueint) == ORDER_SUCCESS){
-                    printf("提交订单成功!3秒后返回用户界面!\n");
+                    printf("提交订单成功!1秒后返回用户界面!\n");
                     printf("请等待司机联系您!\n");
                 } else {
-                    printf("未知错误!3秒后返回主界面!\n");
+                    printf("未知错误!1秒后返回主界面!\n");
                 }
                 break;
             default:
                 break;
         }
     }
-    
-    sleep(3);
+    sleep(1);
 }
 
