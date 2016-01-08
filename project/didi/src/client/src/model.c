@@ -154,3 +154,27 @@ void addorder(){
     handle_message();
 
 }
+
+void query_order(){
+    didi_packmsg_t pg;
+    cJSON* root;
+    char s[32];
+    char *req;
+    char guid[37];
+    random_uuid(guid);
+    generate_curtime(s);
+    
+    pg.packbody.query.usertype = PERSONAL_USER;
+    strcpy(pg.packbody.query.telphone,loginuser);
+    pg.packtype = PACKTYPE_REQUEST;
+    pg.event = EVENT_QUERY;
+    strcpy(pg.version,"1.0");
+    strcpy(pg.reqId,guid);
+    didi_create_regmsg(&root,pg);
+
+    req= didi_ufconvert_json(&root);
+    printf("%s\n",req);
+    write(sfd,req,strlen(req));
+
+    handle_message();
+}

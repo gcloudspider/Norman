@@ -65,6 +65,10 @@ int didi_create_regmsg(cJSON** root,didi_packmsg_t pg){
             cJSON_AddStringToObject(js_body,"destination",pg.packbody.order.destination);
             cJSON_AddStringToObject(js_body,"starttime",pg.packbody.order.starttime);
             break;
+        case EVENT_QUERY:
+            cJSON_AddNumberToObject(js_body,"usertype",pg.packbody.query.usertype);
+            cJSON_AddStringToObject(js_body,"telphone",pg.packbody.query.telphone);
+            break;
         default:
             break;
     }

@@ -120,12 +120,19 @@ struct order{
     char payment[128];
 };
 
+struct query{
+    int usertype;
+    char telphone[12];
+};
+
+
 union packbody{
     struct signup signup;
     struct signin signin;
     struct signout signout;
     struct mpasswd mpasswd;
     struct order order;
+    struct query query;
 };
 
 struct didi_packmsg_s{
