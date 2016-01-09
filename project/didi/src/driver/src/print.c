@@ -126,6 +126,16 @@ void print_token_body(cJSON* root){
                     sleep(1);
                 }
                 break;
+            case EVENT_TAKETOKEN:
+                bodynode = didi_getjson_node(&root,"body");
+                bodyitem = didi_getitem_node(&bodynode,"recode");
+                bodyitem1 = didi_getitem_node(&bodynode,"orderid");
+                if(bodyitem->valueint == TAKETOKEN_SUCCESS){
+                    printf("抢单成功!\n");
+                } else {
+                    printf("单已被抢!继续抢单!");
+                }
+                break;
             default:
                 break;
         }

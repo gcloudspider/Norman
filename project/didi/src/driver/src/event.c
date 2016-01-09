@@ -146,18 +146,7 @@ void query_order(){
 }
 
 void taketoken(){
-    char ch;
-    while(1){
-        handle_message();
-        printf("是否继续抢单!请输入y/n:");
-        while((ch=getchar())!= '\n');
-        ch = getchar();
-        if(ch == 'y'|| ch == 'Y'){
-            continue;
-        } else {
-            break;
-        }
-    }
+    handle_taketoken();
 }
 
 void start_take(int orderid){

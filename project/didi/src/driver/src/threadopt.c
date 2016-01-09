@@ -23,7 +23,6 @@ void* thread_read(void* argv){
 
     while(1){
         ret = read(sfd,buf,1024);
-        //printf("%s\n",buf);
         root = didi_convert_string(buf);
         break;
     }
@@ -39,16 +38,15 @@ void* take_token(void* argv){
     int ret;
     char buf[1024] = {0};
     cJSON* root;
+    char ch;
 
     while(1){
         ret = read(sfd,buf,1024);
         if(ret != -1){
-            printf("%s\n",buf);
             root = didi_convert_string(buf);
-            break;
+            print_token_body(root);
         }
     }
-    print_token_body(root);
     return argv;
 }
 
