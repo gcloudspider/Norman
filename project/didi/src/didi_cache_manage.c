@@ -64,9 +64,11 @@ void didi_adduser_cache(int cfd,int usertype,const char* telphone){
 
     online_user = malloc(sizeof(didi_online_t));
     online_user->fd = cfd;
+    //TODO:修改结构体
     strcpy(online_user->telphone,telphone);
     switch(usertype){
         case PERSONAL_USER: {
+                
                 zlog_info(c,"online user=%p personal user head=%p tail=%p",online_user,didi_user_head,didi_user_tail);
                 if(didi_user_head){
                     online_user->next = NULL;
@@ -209,7 +211,6 @@ didi_order_t* find_ordernode_linklist(int orderid){
 }
 
 int didi_delnode_linklist(didi_order_t* pn){
-    didi_order_t* pb;
     if(didi_order_head == NULL){
         return -1;
     }
@@ -287,21 +288,29 @@ int didi_getorder_cache(int orderid){
     if(didi_order_head == NULL){
         return -1;
     }
-    
-    if(didi_order_head->orderid != orderid){
-        return -1;
+    didi_order_t *pn;
+    pn = didi_order_head;
+    //在订单链表中搜索该订单是否存在
+    while(pn){
+        if(pn->orderid == orderid){
+            return 0;
+        }
+        pn = pn->next;
     }
 
-    return 0;
+    return -1;
 }
 
 char* didi_userphone_linklist(int orderid){
-    while(didi_overorder_head){
-        if(didi_overorder_head->orderid == orderid){
-            zlog_info(c,"find user phone=%s",didi_overorder_head->userphone);
-            return didi_overorder_head->userphone;
+    didi_order_t *pn;
+    pn = didi_overorder_head;
+
+    while(pn){
+        if(pn->orderid == orderid){
+            zlog_info(c,"find user phone=%s",pn->userphone);
+            return pn->userphone;
         }
-        didi_overorder_head = didi_overorder_head->next;
+        pn = pn->next;
     }
     return NULL;
 }
@@ -312,12 +321,24 @@ int didi_getcfd_cache(int orderid){
     if(buf == NULL){
         return -1;
     }
-
-    while(didi_user_head){
-        if(strcmp(didi_user_head->telphone,buf)==0){
-            zlog_info(c,"get user fd=%d",didi_user_head->fd);
-            return didi_user_head->fd;
+    didi_online_t *pn;
+    pn = didi_user_head;
+    while(pn){
+        //TODO:此处需修改 结构体
+        if(strcmp(pn->telphone,buf)==0){
+            zlog_info(c,"get user fd=%d",pn->fd);
+            return pn->fd;
         }
-        didi_user_head = didi_user_head->next;
+        pn = pn->next;
+    }
+}
+
+didi_online_t* didi_getdrivephone_cache(const char* driverphone){
+    didi_online_t *pn;
+    pn = didi_driver_head;
+    
+    while(pn){
+        //TODO:修改结构包含在线用户信息  登录后需要添加   
+        pn = pn->next;   
     }
 }

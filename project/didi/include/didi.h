@@ -216,9 +216,16 @@ struct ord_spond{
     char destination[1024];
 };
 
+struct dri_spond{
+    char drivername[64];
+    char driverphone[12];
+    char drivercarnum[20];
+};
+
 union repackbody{
     struct reg_spond reg_spond;
     struct ord_spond ord_spond;
+    struct dri_spond dri_spond;
 };
 
 struct didi_repack_s{
@@ -229,9 +236,15 @@ struct didi_repack_s{
     union repackbody repackbody;
 };
 
+union online_user{
+    struct didi_user_s user;
+    struct didi_driver_s driver;
+};
+
 //链表
 struct didi_online_s{
     int fd;
+    union online_user online_user;
     char telphone[12];
     struct didi_online_s *pre;
     struct didi_online_s *next;
@@ -311,6 +324,7 @@ int didi_delnode_linklist(didi_order_t* pn);
 int didi_addnode_overorder(didi_order_t* pn);
 int didi_getcfd_cache(int orderid);
 char* didi_userphone_linklist(int orderid);
+didi_online_t* didi_getdrivephone_cache(const char* driverphone);
 /////////////////////////////////////////////////////////////////////////
 //json数据格式处理
 void didi_parse_msg(int cfd);
@@ -361,4 +375,5 @@ char* create_respon_package(int status,didi_repack_t* res_pack,const char* telph
 char* create_ordspond_package(int status,didi_repack_t* res_pack,const char* telphone,int orderid,const char* starting,const char* destination);
 char* create_takespond_package(int status,didi_repack_t* res_pack,const char* telphone,int orderid);
 void didi_order_broadcast(const char* res_package);
+char* create_drispond_package(int status,didi_repack_t *res_pack,didi_online_t* pn);
 #endif
