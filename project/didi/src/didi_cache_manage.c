@@ -330,6 +330,7 @@ char* didi_userphone_linklist(int orderid){
 }
 
 int didi_getcfd_cache(int usertype,int orderid){
+    int fd;
     char* buf;
     buf = didi_userphone_linklist(orderid);
     if(buf == NULL){
@@ -341,7 +342,7 @@ int didi_getcfd_cache(int usertype,int orderid){
         while(pn){
             if(strcmp(pn->online_user.comuser.telphone,buf)==0){
                 zlog_info(c,"get user fd=%d",pn->fd);
-                return pn->fd;
+                fd =pn->fd;
             }
             pn = pn->next;
         }
@@ -349,11 +350,12 @@ int didi_getcfd_cache(int usertype,int orderid){
         while(pn){
             if(strcmp(pn->online_user.driver.drivertelphone,buf)==0){
                 zlog_info(c,"get user fd=%d",pn->fd);
-                return pn->fd;
+                fd =pn->fd;
             }
             pn = pn->next;
         }
     }
+    return fd;
 }
 
 didi_online_t* didi_getdriver_cache(const char* driverphone){

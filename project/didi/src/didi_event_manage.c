@@ -360,14 +360,15 @@ void* didi_event_taketoken(void* argv,void* argv2){
         //将节点从链表中脱离放入新链表中
         didi_separate_cache(item->valuestring,item3->valueint);
         //通知用户
-        int userfd = didi_getcfd_cache(item2->valueint,item3->valueint);
+        int userfd = didi_getcfd_cache(PERSONAL_USER,item3->valueint);
+        zlog_info(c,"user fd = %d",userfd);
         //获取司机的信息
         didi_online_t *pn;
         pn = didi_getdriver_cache(item->valuestring);
         zlog_info(c,"didi driver online info=%p",pn);
         res_driver = create_drispond_package(TAKETOKEN_SUCCESS,&res_pack,pn);
         zlog_info(c,"%s",res_driver);
-        //write(userfd,res_driver,strlen(res_driver));
+        write(userfd,res_driver,strlen(res_driver));
     }
     zlog_info(c,"%s",res_package);
     write(cfd,res_package,strlen(res_package));
