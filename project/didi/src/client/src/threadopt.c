@@ -25,7 +25,7 @@ void* thread_read(void* argv){
     while(1){
         ret = read(sfd,buf,1024);
         if(ret != -1){
-            printf("%s\n",buf);
+            //printf("%s\n",buf);
             root = didi_convert_string(buf);
             break;
         }
@@ -38,3 +38,18 @@ void* thread_write(void* argv){
     return argv;
 }
 
+void* take_order(void* argv){
+    int ret;
+    char buf[1024] = {0};
+    cJSON* root;
+
+    while(1){
+        ret = read(sfd,buf,1024);
+        if(ret != -1){
+            //printf("%s\n",buf);
+            root = didi_convert_string(buf);
+            print_message_body(root);
+        }
+    }
+    return argv;
+}

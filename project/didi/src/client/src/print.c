@@ -19,7 +19,7 @@
 
 void print_message_body(cJSON* root){
     cJSON* headnode,*bodynode;
-    cJSON* headitem,*bodyitem;
+    cJSON* headitem,*bodyitem,*bodyitem1,*bodyitem2,*bodyitem3,*bodyitem4;
 
     headnode = didi_getjson_node(&root,"head");
     headitem = didi_getitem_node(&headnode,"packtype");
@@ -74,10 +74,24 @@ void print_message_body(cJSON* root){
                 if((bodyitem->valueint) == ORDER_ERROR ){
                     printf("提交订单失败!1秒后返回用户界面!\n");
                 } else if((bodyitem->valueint) == ORDER_SUCCESS){
-                    printf("提交订单成功!1秒后返回用户界面!\n");
+                    printf("提交订单成功!!\n");
                     printf("请等待司机联系您!\n");
                 } else {
                     printf("未知错误!1秒后返回主界面!\n");
+                }
+                break;
+            case EVENT_TAKETOKEN:
+                bodynode = didi_getjson_node(&root,"body");
+                bodyitem = didi_getitem_node(&bodynode,"recode");
+                bodyitem1 = didi_getitem_node(&bodynode,"driverid");
+                bodyitem2 = didi_getitem_node(&bodynode,"driverphone");
+                bodyitem3 = didi_getitem_node(&bodynode,"drivername");
+                bodyitem4 = didi_getitem_node(&bodynode,"drivercarnum");
+                if(bodyitem->valueint == TAKETOKEN_SUCCESS){
+                    printf("订单被司机:%s 抢到\n",bodyitem3->valuestring);
+                    printf("司机工号:%d\n",bodyitem1->valueint);
+                    printf("司机电话号码:%s\n",bodyitem2->valuestring);
+                    printf("司机车牌号码:%s\n",bodyitem4->valuestring);
                 }
                 break;
             default:

@@ -52,10 +52,12 @@ void handle_message(){
     //pthread_join(ttid02,&rret);
 }
 
-void waiting_order(){
+void handle_order(){
     pthread_t ttid01,ttid02;
     void* rret;
 
-    pthread_create(&ttid01,NULL,thread_read,(void*)sfd);
-    pthread_detach(ttid01);
+    pthread_create(&ttid01,NULL,take_order,(void*)sfd);
+    //pthread_create(&ttid02,NULL,thread_write,(void*)sfd);
+    pthread_join(ttid01,&rret);
+    //pthread_join(ttid02,&rret);
 }
