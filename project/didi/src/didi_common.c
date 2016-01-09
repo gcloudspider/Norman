@@ -180,5 +180,29 @@ void didi_order_broadcast(const char* res_package){
 
 
 char* create_drispond_package(int status,didi_repack_t *res_pack,didi_online_t* pn){
+    char buf[1024];
+    cJSON* root;
+    char *res;
 
+    switch(status){
+        case TAKETOKEN_SUCCESS:
+            res_pack->repackbody.dri_spond.recode = TAKETOKEN_SUCCESS;
+            sprintf(buf,"take token successful!");
+            strcpy(res_pack->repackbody.dri_spond.remsg,buf);
+            strcpy(res_pack->repackbody.dri_spond.drivername,pn->online_user.driver.drivername);
+            strcpy(res_pack->repackbody.dri_spond.driverphone,pn->online_user.driver.drivertelphone);
+            strcpy(res_pack->repackbody.dri_spond.drivercarnum,pn->online_user.driver.drivercarnum);
+            res_pack->repackbody.dri_spond.driverid = pn->online_user.driver.driverid;
+            zlog_info(c,"respond code:%d",res_pack->repackbody.dri_spond.recode);
+            break;
+        default:
+            break;
+    }
+    
+    didi_create_drispond(&root,res_pack);
+    zlog_info(c,"%p",root);
+
+    res = didi_ufconvert_json(root);
+
+    return res;
 }

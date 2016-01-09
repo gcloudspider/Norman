@@ -202,6 +202,9 @@ struct ord_spond{
 };
 
 struct dri_spond{
+    int recode;
+    char remsg[256];
+    int driverid;
     char drivername[64];
     char driverphone[12];
     char drivercarnum[20];
@@ -325,7 +328,7 @@ int didi_delnode_linklist(didi_order_t* pn);
 int didi_addnode_overorder(didi_order_t* pn);
 int didi_getcfd_cache(int usertype,int orderid);
 char* didi_userphone_linklist(int orderid);
-didi_online_t* didi_getdrivephone_cache(const char* driverphone);
+didi_online_t* didi_getdriver_cache(const char* driverphone);
 /////////////////////////////////////////////////////////////////////////
 //json数据格式处理
 void didi_parse_msg(int cfd);
@@ -333,6 +336,7 @@ int didi_create_remsg(cJSON* root,didi_packmsg_t pg);
 int didi_create_respone(cJSON** root,didi_repack_t* pg);
 int didi_create_ordspond(cJSON** root,didi_repack_t *pg);
 int didi_create_takespond(cJSON** root,didi_repack_t *pg);
+int didi_create_drispond(cJSON** root,didi_repack_t *pg);
 int didi_release_json(cJSON* root);
 char* didi_convert_json(cJSON* root);
 char* didi_ufconvert_json(cJSON* root);

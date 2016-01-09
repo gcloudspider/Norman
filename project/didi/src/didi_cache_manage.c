@@ -356,12 +356,14 @@ int didi_getcfd_cache(int usertype,int orderid){
     }
 }
 
-didi_online_t* didi_getdrivephone_cache(const char* driverphone){
+didi_online_t* didi_getdriver_cache(const char* driverphone){
     didi_online_t *pn;
     pn = didi_driver_head;
     
     while(pn){
-        //TODO:修改结构包含在线用户信息  登录后需要添加   
+        if(strcmp(pn->online_user.driver.drivertelphone,driverphone)==0){
+            return pn;
+        } 
         pn = pn->next;   
     }
 }
