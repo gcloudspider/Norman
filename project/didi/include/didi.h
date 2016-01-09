@@ -274,6 +274,7 @@ MYSQL db;
 didi_online_t *didi_user_head,*didi_user_tail;
 didi_online_t *didi_driver_head,*didi_driver_tail;
 didi_order_t *didi_order_head,*didi_order_tail;
+didi_order_t *didi_overorder_head,*didi_overorder_tail;
 
 
 //////////////////////////////////////////////////////////////////////
@@ -304,6 +305,12 @@ int didi_del_linklist(didi_online_t *pn,didi_online_t *head);
 int didi_create_order(int orderid,int usertype,const char* userphone,const char* starting,const char* destination,const char* starttime);
 int didi_add_queue(int orderid,const char* userphone,const char* starting,const char* destination,const char* starttime);
 int didi_getorder_cache(int orderid);
+int didi_separate_cache(const char* telphone,int orderid);
+didi_order_t* find_ordernode_linklist(int orderid);
+int didi_delnode_linklist(didi_order_t* pn);
+int didi_addnode_overorder(didi_order_t* pn);
+int didi_getcfd_cache(int orderid);
+char* didi_userphone_linklist(int orderid);
 /////////////////////////////////////////////////////////////////////////
 //json数据格式处理
 void didi_parse_msg(int cfd);

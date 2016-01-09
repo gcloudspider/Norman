@@ -196,6 +196,92 @@ int didi_create_order(int orderid,int usertype,const char* userphone,const char*
     return ret;
 }
 
+didi_order_t* find_ordernode_linklist(int orderid){
+    didi_order_t *pn;
+    pn = didi_order_head;
+    while(pn){
+        if(pn->orderid==orderid){
+            return pn;
+        }
+        pn = pn->next;
+    }
+    return NULL;
+}
+
+int didi_delnode_linklist(didi_order_t* pn){
+    didi_order_t* pb;
+    if(didi_order_head == NULL){
+        return -1;
+    }
+
+    if(didi_order_head == pn){
+        if(didi_order_head->next != NULL){
+            didi_order_head->next->pre = NULL;
+            didi_order_head = didi_order_head->next; 
+        }
+    } else if(didi_order_tail == pn){
+        if(didi_order_tail->pre !=NULL){
+            didi_order_tail->pre->next = NULL;
+            didi_order_tail = didi_order_tail->pre;
+            didi_order_tail->pre = NULL;
+        }
+    } else {
+        pn->pre->next = pn->next;
+        pn->next->pre = pn->pre;
+        pn->next = NULL;
+        pn->pre = NULL;
+    }
+    return 0;
+}
+
+int didi_addnode_overorder(didi_order_t* pn){
+    zlog_info(c,"add over order %p",pn);
+    if(didi_overorder_tail){
+        zlog_info(c,"order has something no handle!");
+        didi_overorder_tail->next = pn;
+        pn->pre = didi_overorder_tail;
+        pn->next = NULL;
+        didi_overorder_tail = pn;
+    } else {
+        zlog_info(c,"order tail NULL!");
+        didi_overorder_tail = pn;
+        didi_overorder_head = pn;
+        didi_overorder_head->next = NULL;
+        didi_overorder_head->pre = NULL;
+    }
+    zlog_info(c,"didi over order head=%p tail=%p",didi_overorder_head,didi_overorder_tail);
+    return 0;
+}
+
+int didi_separate_cache(const char* telphone,int orderid){
+    didi_order_t *pn;
+    int ret;
+    //找到order节点
+    pn = find_ordernode_linklist(orderid);
+    if(pn == NULL){
+        zlog_warn(c,"pn=%p finded order node",pn);
+        return -1;
+    }
+    //填充节点字段
+    strcpy(pn->driverphone,telphone);
+    //将节点脱离
+    ret = didi_delnode_linklist(pn);
+    if(-1 == ret){
+        zlog_warn(c,"pn=%p delnode linklist failed!",pn);
+        return -1;
+    }
+    zlog_info(c,"pn=%p delnode linklist successful!",pn);
+    //添加到达目的地的链表
+    ret = didi_addnode_overorder(pn);
+    if(-1 == ret){
+        zlog_warn(c,"pn=%p add node linklist failed!",pn);
+        return -1;
+    }
+    zlog_info(c,"pn=%p add node linklist successful!",pn);
+    zlog_info(c,"pn->userphone=%s pn->driverphone=%s overorder=%p order=%p add node linklist successful!",didi_overorder_head->userphone,didi_overorder_head->driverphone,didi_overorder_head,didi_order_head);
+
+    return 0;
+}
 
 int didi_getorder_cache(int orderid){
     if(didi_order_head == NULL){
@@ -207,4 +293,31 @@ int didi_getorder_cache(int orderid){
     }
 
     return 0;
+}
+
+char* didi_userphone_linklist(int orderid){
+    while(didi_overorder_head){
+        if(didi_overorder_head->orderid == orderid){
+            zlog_info(c,"find user phone=%s",didi_overorder_head->userphone);
+            return didi_overorder_head->userphone;
+        }
+        didi_overorder_head = didi_overorder_head->next;
+    }
+    return NULL;
+}
+
+int didi_getcfd_cache(int orderid){
+    char* buf;
+    buf = didi_userphone_linklist(orderid);
+    if(buf == NULL){
+        return -1;
+    }
+
+    while(didi_user_head){
+        if(strcmp(didi_user_head->telphone,buf)==0){
+            zlog_info(c,"get user fd=%d",didi_user_head->fd);
+            return didi_user_head->fd;
+        }
+        didi_user_head = didi_user_head->next;
+    }
 }

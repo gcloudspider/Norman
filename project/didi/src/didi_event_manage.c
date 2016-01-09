@@ -349,9 +349,15 @@ void* didi_event_taketoken(void* argv,void* argv2){
         zlog_info(c,"order been another taketoken!");
         res_package = create_takespond_package(TAKETOKEN_ERROR,&res_pack,item->valuestring,item3->valueint);
     } else {
+        //抢单成功
         zlog_info(c,"taktoken successful!");
         res_package = create_takespond_package(TAKETOKEN_SUCCESS,&res_pack,item->valuestring,item3->valueint);
-        
+        //将节点从链表中脱离放入新链表中
+        didi_separate_cache(item->valuestring,item3->valueint);
+        //通知用户
+        //TODO:
+        int userfd = didi_getcfd_cache(item3->valueint);
+        //write(userfd,)
     }
     zlog_info(c,"%s",res_package);
     write(cfd,res_package,strlen(res_package));
