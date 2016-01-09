@@ -133,7 +133,7 @@ void print_token_body(cJSON* root){
                 if(bodyitem->valueint == TAKETOKEN_SUCCESS){
                     printf("抢单成功!\n");
                 } else {
-                    printf("单已被抢!继续抢单!");
+                    printf("单已被抢!继续抢单!\n");
                 }
                 break;
             default:

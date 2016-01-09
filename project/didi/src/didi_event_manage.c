@@ -302,7 +302,7 @@ void* didi_event_order(void* argv,void* argv2){
     item5 = didi_getitem_node(bodynode,"starttime");
     int orderid=didi_generate_userid();
 
-    ret = didi_create_order(orderid,item2->valueint,item->valuestring,item3->valuestring,item4->valuestring,item5->valuestring);
+    ret = didi_create_order(orderid,item->valuestring,item3->valuestring,item4->valuestring,item5->valuestring);
 
     if(-1 == ret){
         zlog_info(c,"user add order failed!");

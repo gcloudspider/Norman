@@ -206,7 +206,7 @@ int didi_add_queue(int orderid,const char* userphone,const char* starting,const 
     return 0;
 }
 
-int didi_create_order(int orderid,int usertype,const char* userphone,const char* starting,const char* destination,const char* starttime){
+int didi_create_order(int orderid,const char* userphone,const char* starting,const char* destination,const char* starttime){
     int ret;
     ret = didi_add_queue(orderid,userphone,starting,destination,starttime);
     return ret;
@@ -233,12 +233,16 @@ int didi_delnode_linklist(didi_order_t* pn){
         if(didi_order_head->next != NULL){
             didi_order_head->next->pre = NULL;
             didi_order_head = didi_order_head->next; 
+        } else {
+            didi_order_head = NULL;
         }
     } else if(didi_order_tail == pn){
         if(didi_order_tail->pre !=NULL){
             didi_order_tail->pre->next = NULL;
             didi_order_tail = didi_order_tail->pre;
             didi_order_tail->pre = NULL;
+        } else {
+            didi_order_tail = NULL;
         }
     } else {
         pn->pre->next = pn->next;

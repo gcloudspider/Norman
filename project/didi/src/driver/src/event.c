@@ -89,7 +89,7 @@ void logout(){
     didi_create_regmsg(&root,pg);
 
     s= didi_ufconvert_json(&root);
-    printf("%s\n",s);
+    //printf("%s\n",s);
     write(sfd,s,strlen(s));
 
     handle_message();
@@ -115,7 +115,7 @@ void modifypasswd(){
     didi_create_regmsg(&root,pg);
 
     s= didi_ufconvert_json(&root);
-    printf("%s\n",s);
+    //printf("%s\n",s);
     write(sfd,s,strlen(s));
 
     handle_message();
@@ -139,7 +139,7 @@ void query_order(){
     didi_create_regmsg(&root,pg);
 
     req= didi_ufconvert_json(&root);
-    printf("%s\n",req);
+    //printf("%s\n",req);
     write(sfd,req,strlen(req));
 
     handle_message();
@@ -168,7 +168,7 @@ void start_take(int orderid){
     didi_create_regmsg(&root,pg);
 
     req= didi_ufconvert_json(&root);
-    printf("%s\n",req);
+    //printf("%s\n",req);
     write(sfd,req,strlen(req));
     
 

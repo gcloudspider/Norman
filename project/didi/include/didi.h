@@ -319,7 +319,7 @@ void didi_adduser_cache(int cfd,int usertype,union online_user* user);
 int didi_del_cache(int usertype,const char* telphone);
 didi_online_t* didi_find_linklist(didi_online_t *head,const char* telphone,int usertype);
 int didi_del_linklist(didi_online_t *pn,didi_online_t *head);
-int didi_create_order(int orderid,int usertype,const char* userphone,const char* starting,const char* destination,const char* starttime);
+int didi_create_order(int orderid,const char* userphone,const char* starting,const char* destination,const char* starttime);
 int didi_add_queue(int orderid,const char* userphone,const char* starting,const char* destination,const char* starttime);
 int didi_getorder_cache(int orderid);
 int didi_separate_cache(const char* telphone,int orderid);
