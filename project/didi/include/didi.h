@@ -98,21 +98,6 @@ struct didi_conf_s{
     struct didi_log_s log;
 };
 
-struct didi_user_s{
-    int userid;
-    char username[64];
-    char nickname[64];
-    char passwd[128];
-    char telphone[12];
-};
-
-struct didi_driver_s{
-    int driverid;
-    char drivername[64];
-    char driverpasswd[128];
-    char drivertelphone[12];
-    char drivercarnum[20];
-};
 
 typedef void*(*DIDI_FUNC_POINT)(void* argv,void* argv2);
 struct didi_tasklist_s{
@@ -236,8 +221,24 @@ struct didi_repack_s{
     union repackbody repackbody;
 };
 
+struct didi_user_s{
+    int userid;
+    char username[64];
+    char nickname[64];
+    char passwd[128];
+    char telphone[12];
+};
+
+struct didi_driver_s{
+    int driverid;
+    char drivername[64];
+    char driverpasswd[128];
+    char drivertelphone[12];
+    char drivercarnum[20];
+};
+
 union online_user{
-    struct didi_user_s user;
+    struct didi_user_s comuser;
     struct didi_driver_s driver;
 };
 
@@ -245,7 +246,7 @@ union online_user{
 struct didi_online_s{
     int fd;
     union online_user online_user;
-    char telphone[12];
+    //char telphone[12];
     struct didi_online_s *pre;
     struct didi_online_s *next;
 };
@@ -311,9 +312,9 @@ int didi_run(didi_socket_t sock_t);
 
 int didi_cache_init(MYSQL *db);
 int didi_cache_release();
-void didi_adduser_cache(int cfd,int usertype,const char* telphone);
+void didi_adduser_cache(int cfd,int usertype,union online_user* user);
 int didi_del_cache(int usertype,const char* telphone);
-didi_online_t* didi_find_linklist(didi_online_t *head,const char* telphone);
+didi_online_t* didi_find_linklist(didi_online_t *head,const char* telphone,int usertype);
 int didi_del_linklist(didi_online_t *pn,didi_online_t *head);
 int didi_create_order(int orderid,int usertype,const char* userphone,const char* starting,const char* destination,const char* starttime);
 int didi_add_queue(int orderid,const char* userphone,const char* starting,const char* destination,const char* starttime);
@@ -322,7 +323,7 @@ int didi_separate_cache(const char* telphone,int orderid);
 didi_order_t* find_ordernode_linklist(int orderid);
 int didi_delnode_linklist(didi_order_t* pn);
 int didi_addnode_overorder(didi_order_t* pn);
-int didi_getcfd_cache(int orderid);
+int didi_getcfd_cache(int usertype,int orderid);
 char* didi_userphone_linklist(int orderid);
 didi_online_t* didi_getdrivephone_cache(const char* driverphone);
 /////////////////////////////////////////////////////////////////////////
@@ -363,6 +364,8 @@ int didi_update_passwd(MYSQL *db,int usertype,const char* telphone,const char* p
 char* didi_query_order(MYSQL *db,int usertype,const char* telphone);
 void query_online_user();
 void query_online_driver();
+int query_user_info(MYSQL* db,union online_user* user,int usertype,const char* telphone);
+void* query_field_fetch(MYSQL* db,const char* fieldname,const char* tablename,const char* telphone,int usertype);
 //////////////////////////////////////////////////////////////////////
 //缓存区
 int init_user_linklist();

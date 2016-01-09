@@ -136,7 +136,10 @@ void* didi_event_login(void *argv,void* argv2){
             zlog_info(c,"user login successful!");
             res_package = create_respon_package(PASSWD_SUCCESS,&res_pack,item->valuestring);
             //添加用户到在线链表
-            didi_adduser_cache(cfd,item3->valueint,item->valuestring);
+            union online_user user;
+            query_user_info(&db,&user,item3->valueint,item->valuestring);
+            zlog_info(c,"add user=%d to linklist",user.comuser.userid);
+            didi_adduser_cache(cfd,item3->valueint,&user);
         }
     }else {
         zlog_warn(c,"user not exist!");
@@ -358,10 +361,11 @@ void* didi_event_taketoken(void* argv,void* argv2){
         didi_separate_cache(item->valuestring,item3->valueint);
         //通知用户
         //TODO:
-        int userfd = didi_getcfd_cache(item3->valueint);
+        int userfd = didi_getcfd_cache(item2->valueint,item3->valueint);
         //获取司机的信息
         didi_online_t *pn;
         pn = didi_getdrivephone_cache(item->valuestring);
+        zlog_info(c,"didi driver online info=%p",pn);
         res_driver = create_drispond_package(TAKETOKEN_SUCCESS,&res_pack,pn);
         //write(userfd,res_driver,strlen(res_driver));
     }

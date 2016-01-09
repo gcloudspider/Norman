@@ -59,41 +59,46 @@ int didi_cache_release(){
 
 
 
-void didi_adduser_cache(int cfd,int usertype,const char* telphone){
-    didi_online_t *online_user;
+void didi_adduser_cache(int cfd,int usertype,union online_user* user){
+    didi_online_t *online_u;
 
-    online_user = malloc(sizeof(didi_online_t));
-    online_user->fd = cfd;
-    //TODO:修改结构体
-    strcpy(online_user->telphone,telphone);
+    online_u = malloc(sizeof(didi_online_t));
+    online_u->fd = cfd;
     switch(usertype){
         case PERSONAL_USER: {
-                
-                zlog_info(c,"online user=%p personal user head=%p tail=%p",online_user,didi_user_head,didi_user_tail);
+                online_u->online_user.comuser.userid = user->comuser.userid;
+                strcpy(online_u->online_user.comuser.username,user->comuser.username);          
+                strcpy(online_u->online_user.comuser.nickname,user->comuser.nickname);          
+                strcpy(online_u->online_user.comuser.telphone,user->comuser.telphone);          
+                zlog_info(c,"online user=%p personal user head=%p tail=%p",online_u,didi_user_head,didi_user_tail);
                 if(didi_user_head){
-                    online_user->next = NULL;
-                    online_user->pre = didi_user_tail;
-                    didi_user_tail->next = online_user;
+                    online_u->next = NULL;
+                    online_u->pre = didi_user_tail;
+                    didi_user_tail->next = online_u;
                 } else {
-                    online_user->next = didi_user_head;
-                    online_user->pre = didi_user_head;
-                    didi_user_head = online_user;
+                    online_u->next = didi_user_head;
+                    online_u->pre = didi_user_head;
+                    didi_user_head = online_u;
                 }
-                didi_user_tail = online_user;
+                didi_user_tail = online_u;
             break;
             }
         case DRIVERS_USERS:{
-                zlog_info(c,"online user=%p driver user head=%p tail=%p",online_user,didi_driver_head,didi_driver_tail);
+                online_u->online_user.driver.driverid = user->driver.driverid;
+                strcpy(online_u->online_user.driver.drivername,user->driver.drivername);          
+                strcpy(online_u->online_user.driver.drivercarnum,user->driver.drivercarnum);          
+                strcpy(online_u->online_user.driver.drivertelphone,user->driver.drivertelphone);          
+                zlog_info(c,"online user=%p driver user head=%p tail=%p",online_u,didi_driver_head,didi_driver_tail);
                 if(didi_driver_head){
-                    online_user->next = NULL;
-                    online_user->pre = didi_driver_tail;
-                    didi_driver_tail->next = online_user;
+                    online_u->next = NULL;
+                    online_u->pre = didi_driver_tail;
+                    didi_driver_tail->next = online_u;
                 } else {
-                    online_user->next = didi_driver_head;
-                    online_user->pre = didi_driver_head;
-                    didi_driver_head = online_user;
+                    online_u->next = didi_driver_head;
+                    online_u->pre = didi_driver_head;
+                    didi_driver_head = online_u;
                 }
-                didi_driver_tail = online_user;
+                didi_driver_tail = online_u;
             break;
             }
         default:
@@ -101,14 +106,23 @@ void didi_adduser_cache(int cfd,int usertype,const char* telphone){
     }
 }
 
-didi_online_t* didi_find_linklist(didi_online_t *head,const char* telphone){
+didi_online_t* didi_find_linklist(didi_online_t *head,const char* telphone,int usertype){
     didi_online_t *pn;
-
-    while(head){
-        if(strcmp(head->telphone,telphone)==0){
-            pn = head;
+    
+    if(usertype == PERSONAL_USER){
+        while(head){
+            if(strcmp(head->online_user.comuser.telphone,telphone)==0){
+                pn = head;
+            }
+            head = head->next;
         }
-        head = head->next;
+    } else if(usertype == DRIVERS_USERS){
+        while(head){
+            if(strcmp(head->online_user.driver.drivertelphone,telphone)==0){
+                pn = head;
+            }
+            head = head->next;
+        }
     }
     zlog_info(c,"find node=%p",pn);
     return pn;
@@ -148,13 +162,13 @@ int didi_del_cache(int usertype,const char* telphone){
     switch(usertype){
         case PERSONAL_USER:
             zlog_info(c,"didi user head=%p",didi_user_head);
-            pn = didi_find_linklist(didi_user_head,telphone);
+            pn = didi_find_linklist(didi_user_head,telphone,PERSONAL_USER);
             zlog_info(c,"didi pn=%p",pn);
             ret = didi_del_linklist(pn,didi_user_head);
             break;
         case DRIVERS_USERS:
             zlog_info(c,"didi user head=%p",didi_driver_head);
-            pn = didi_find_linklist(didi_driver_head,telphone);
+            pn = didi_find_linklist(didi_driver_head,telphone,DRIVERS_USERS);
             zlog_info(c,"didi pn=%p",pn);
             ret = didi_del_linklist(pn,didi_driver_head);
             break;
@@ -315,7 +329,7 @@ char* didi_userphone_linklist(int orderid){
     return NULL;
 }
 
-int didi_getcfd_cache(int orderid){
+int didi_getcfd_cache(int usertype,int orderid){
     char* buf;
     buf = didi_userphone_linklist(orderid);
     if(buf == NULL){
@@ -323,13 +337,22 @@ int didi_getcfd_cache(int orderid){
     }
     didi_online_t *pn;
     pn = didi_user_head;
-    while(pn){
-        //TODO:此处需修改 结构体
-        if(strcmp(pn->telphone,buf)==0){
-            zlog_info(c,"get user fd=%d",pn->fd);
-            return pn->fd;
+    if(usertype == PERSONAL_USER){
+        while(pn){
+            if(strcmp(pn->online_user.comuser.telphone,buf)==0){
+                zlog_info(c,"get user fd=%d",pn->fd);
+                return pn->fd;
+            }
+            pn = pn->next;
         }
-        pn = pn->next;
+    } else if(usertype == DRIVERS_USERS){
+        while(pn){
+            if(strcmp(pn->online_user.driver.drivertelphone,buf)==0){
+                zlog_info(c,"get user fd=%d",pn->fd);
+                return pn->fd;
+            }
+            pn = pn->next;
+        }
     }
 }
 

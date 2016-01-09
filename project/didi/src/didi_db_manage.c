@@ -221,6 +221,63 @@ char* didi_query_order(MYSQL *db,int usertype,const char* telphone){
     return buf;
 }
 
+void* query_field_fetch(MYSQL* db,const char* fieldname,const char* tablename,const char* telphone,int usertype){
+    void* rret;
+    char sql[1024];
+    MYSQL_FIELD *field;
+    MYSQL_RES *ptr;
+    MYSQL_ROW result;
+    int ret,row,column;
+    int i,j;
+    
+    if(usertype == PERSONAL_USER){
+    sprintf(sql,"select %s from %s where telphone=%s",fieldname,tablename,telphone);
+    } else if(usertype == DRIVERS_USERS){
+    sprintf(sql,"select %s from %s where drivertelphone=%s",fieldname,tablename,telphone);
+    }
+    zlog_info(c,"%s",sql);
+    ret = mysql_query(db,sql);
+    if(ret != 0){
+        zlog_error(c,"query failed!,sql:%s",sql);
+        zlog_error(c,"%s",mysql_error(db));
+    } else {
+        zlog_info(c,"query successful.");
+        ptr = mysql_store_result(db);
+        if(ptr != NULL){
+            row = mysql_num_rows(ptr);
+            column = mysql_num_fields(ptr);
+            for(i=0;i<row;i++){
+                result = mysql_fetch_row(ptr);
+                for(j=0;j<column;j++){ 
+                    rret = result[j];
+                    zlog_info(c,"%s",result[j]);
+                }
+            }
+            zlog_info(c,"query user info row=%d column=%d",row,column);
+            mysql_free_result(ptr);
+        }
+    }
+    return rret;
+}
+
+int query_user_info(MYSQL* db,union online_user* user,int usertype,const char* telphone){
+    int id;
+    if(usertype == PERSONAL_USER){
+        id = atoi((char*)query_field_fetch(db,"userid","didiuser",telphone,PERSONAL_USER));
+        user->comuser.userid = id;
+        strcpy(user->comuser.username,(char*)query_field_fetch(db,"username","didiuser",telphone,PERSONAL_USER));
+        strcpy(user->comuser.nickname,(char*)query_field_fetch(db,"nickname","didiuser",telphone,PERSONAL_USER));
+        strcpy(user->comuser.telphone,telphone);
+    } else if(usertype == DRIVERS_USERS){
+        id = atoi((char*)query_field_fetch(db,"driverid","dididriver",telphone,DRIVERS_USERS));
+        user->driver.driverid = id;
+        strcpy(user->driver.drivername,(char*)query_field_fetch(db,"drivername","dididriver",telphone,DRIVERS_USERS));
+        strcpy(user->driver.drivertelphone,telphone);
+        strcpy(user->driver.drivercarnum,(char*)query_field_fetch(db,"drivercarnum","dididriver",telphone,DRIVERS_USERS));
+    }
+    return 0;
+}
+
 void query_online_user(){
 
 }
