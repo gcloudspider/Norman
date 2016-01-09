@@ -42,7 +42,6 @@ void handle_taketoken(){
     void* rret;
     pthread_create(&ttid01,NULL,take_token,(void*)sfd);
     pthread_detach(ttid01);
-
 }
 
 void generate_curtime(char* buf){

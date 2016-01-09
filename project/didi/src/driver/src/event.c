@@ -146,7 +146,18 @@ void query_order(){
 }
 
 void taketoken(){
-    handle_message();
+    char ch;
+    while(1){
+        handle_message();
+        printf("是否继续抢单!请输入y/n:");
+        while((ch=getchar())!= '\n');
+        ch = getchar();
+        if(ch == 'y'|| ch == 'Y'){
+            continue;
+        } else {
+            break;
+        }
+    }
 }
 
 void start_take(int orderid){
@@ -170,6 +181,6 @@ void start_take(int orderid){
     req= didi_ufconvert_json(&root);
     printf("%s\n",req);
     write(sfd,req,strlen(req));
-
+    
 
 }
