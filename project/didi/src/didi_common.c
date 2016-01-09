@@ -177,3 +177,8 @@ void didi_order_broadcast(const char* res_package){
     }
     
 }
+
+
+char* create_drispond_package(int status,didi_repack_t *res_pack,didi_online_t* pn){
+
+}

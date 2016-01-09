@@ -46,8 +46,8 @@ void* didi_event_register(void *argv,void* argv2){
     item = didi_getitem_node(bodynode,"telphone");
     item2 = didi_getitem_node(bodynode,"usertype");
     zlog_info(c,"bodynode telphone=%s",item->valuestring);
-    ret = query_user_exist(&db,item->valuestring,item2->valueint);
     //判断用户是否存在
+    ret = query_user_exist(&db,item->valuestring,item2->valueint);
     if(-1 == ret){
         zlog_info(c,"%s user not exist!",item->valuestring);
         userid = didi_generate_userid();
@@ -125,6 +125,7 @@ void* didi_event_login(void *argv,void* argv2){
     item2 = didi_getitem_node(bodynode,"passwd");
     item3 = didi_getitem_node(bodynode,"usertype");
     zlog_info(c,"bodynode telphone=%s",item->valuestring);
+    //查询用户是否存在
     ret = query_user_exist(&db,item->valuestring,item3->valueint);
     if(ret != -1){
         ret = didi_query_passwd(&db,item->valuestring,item2->valuestring,item3->valueint);
@@ -134,6 +135,7 @@ void* didi_event_login(void *argv,void* argv2){
         }else {
             zlog_info(c,"user login successful!");
             res_package = create_respon_package(PASSWD_SUCCESS,&res_pack,item->valuestring);
+            //添加用户到在线链表
             didi_adduser_cache(cfd,item3->valueint,item->valuestring);
         }
     }else {
@@ -320,7 +322,7 @@ void* didi_event_taketoken(void* argv,void* argv2){
     cJSON *headnode,*reitem;
     int cfd = (int)argv;
     char buf[1024];
-    char *res_package;
+    char *res_package,*res_driver;
     didi_repack_t res_pack;
 
     strcpy(buf,(char*)argv2);
@@ -357,7 +359,11 @@ void* didi_event_taketoken(void* argv,void* argv2){
         //通知用户
         //TODO:
         int userfd = didi_getcfd_cache(item3->valueint);
-        //write(userfd,)
+        //获取司机的信息
+        didi_online_t *pn;
+        pn = didi_getdrivephone_cache(item->valuestring);
+        res_driver = create_drispond_package(TAKETOKEN_SUCCESS,&res_pack,pn);
+        //write(userfd,res_driver,strlen(res_driver));
     }
     zlog_info(c,"%s",res_package);
     write(cfd,res_package,strlen(res_package));
