@@ -63,6 +63,7 @@ enum responcode{
     PASSWD_SUCCESS = 201,       //密码验证正确
     ORDER_SUCCESS = 202,
     TAKETOKEN_SUCCESS = 203,
+    ORDHISTORY_SUCCESS = 210,
 
     SERVER_REFUSE = 403,        //
     USER_NOTEXIST = 404,        //用户不存在
@@ -70,6 +71,7 @@ enum responcode{
     PASSWD_ERROR = 406,         //用户密码错误
     ORDER_ERROR= 407,
     TAKETOKEN_ERROR= 408,
+    ORDHISTORY_ERROR= 410,
 };
 
 enum packtype{
