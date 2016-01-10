@@ -87,6 +87,17 @@ void print_message_body(cJSON* root){
                     sleep(1);
                 }
                 break;
+            case EVENT_QUERY:
+                bodynode = didi_getjson_node(&root,"body");
+                bodyitem = didi_getitem_node(&bodynode,"recode");
+                if(bodyitem->valueint == ORDHISTORY_ERROR ){
+                    printf("抱歉,您没有历史订单!\n");
+                    sleep(1);
+                } else if(bodyitem->valueint == ORDHISTORY_SUCCESS){
+                    printf("你有历史订单!\n");
+                    sleep(1);
+                }
+                break;
             default:
                 break;
         }
