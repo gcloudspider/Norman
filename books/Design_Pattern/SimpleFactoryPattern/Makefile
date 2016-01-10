@@ -1,5 +1,3 @@
-
-
 CXX=g++
 
 CFALGS=-g -o
@@ -7,7 +5,7 @@ CFALGS=-g -o
 SRC=$(wildcard *.cpp)
 OBJ=$(SRC:%.cpp=%.o)
 
-BIN=factorymode
+BIN=SimplefactorypatternDemo
 
 .PHONY:all clean
 
