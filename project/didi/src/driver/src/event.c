@@ -170,6 +170,29 @@ void start_take(int orderid){
     req= didi_ufconvert_json(&root);
     //printf("%s\n",req);
     write(sfd,req,strlen(req));
-    
-
 }
+
+void order_finished(int orderid,const char* payment){
+    didi_packmsg_t pg;
+    cJSON* root;
+    char s[32];
+    char *req;
+    char guid[37];
+    random_uuid(guid);
+    generate_curtime(s);
+    
+    pg.packbody.ordfin.usertype = DRIVERS_USERS;
+    pg.packbody.ordfin.orderid = orderid;
+    strcpy(pg.packbody.ordfin.payment,payment);
+    strcpy(pg.packbody.ordfin.arrivaltime,s);
+    pg.packtype = PACKTYPE_REQUEST;
+    pg.event = EVENT_ORDFIN;
+    strcpy(pg.version,"1.0");
+    strcpy(pg.reqId,guid);
+    didi_create_regmsg(&root,pg);
+
+    req= didi_ufconvert_json(&root);
+    printf("%s\n",req);
+    write(sfd,req,strlen(req));
+}
+

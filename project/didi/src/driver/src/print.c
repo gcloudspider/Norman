@@ -101,6 +101,7 @@ void print_token_body(cJSON* root){
     cJSON* headitem,*bodyitem,*bodyitem1,*bodyitem2,*bodyitem3;
     char ch;
     char* ret;
+    char* payment;
 
     headnode = didi_getjson_node(&root,"head");
     headitem = didi_getitem_node(&headnode,"packtype");
@@ -132,6 +133,11 @@ void print_token_body(cJSON* root){
                 bodyitem1 = didi_getitem_node(&bodynode,"orderid");
                 if(bodyitem->valueint == TAKETOKEN_SUCCESS){
                     printf("抢单成功!\n");
+                    sleep(3);
+                    printf("到达目的地址!请付款(元):");
+                    scanf("%s",payment);
+                    order_finished(bodyitem1->valueint,payment);
+                    printf("交易完成!继续抢单!\n");
                 } else {
                     printf("单已被抢!继续抢单!\n");
                 }

@@ -63,12 +63,14 @@ enum responcode{
     REQUER_SUCCESS = 200,       //服务器已处理请求
     PASSWD_SUCCESS = 201,       //密码验证正确
     TAKETOKEN_SUCCESS = 203,       //密码验证正确
+    ORDFIN_SUCCESS = 204,       //密码验证正确
 
     SERVER_REFUSE = 403,        //
     USER_NOTEXIST = 404,        //用户不存在
     USER_EXIST = 405,           //用户已存在
     PASSWD_ERROR = 406,         //用户密码错误
     TAKETOKEN_ERROR = 207,       //密码验证正确
+    ORDFIN_ERROR = 208,       //密码验证正确
 };
 
 enum packtype{
@@ -84,6 +86,7 @@ enum event{
     EVENT_MPASSWD = 5,
     EVENT_ORDER = 6,
     EVENT_TAKETOKEN = 7,
+    EVENT_ORDFIN = 8,
 };
 
 struct signup{
@@ -122,6 +125,13 @@ struct taketoken{
     char telphone[12];
 };
 
+struct ordfin{
+    int usertype;
+    int orderid;
+    char payment[10];
+    char arrivaltime[32];
+};
+
 union packbody{
     struct signup signup;
     struct signin signin;
@@ -129,6 +139,7 @@ union packbody{
     struct mpasswd mpasswd;
     struct query query;
     struct taketoken taketoken;
+    struct ordfin   ordfin;
 };
 
 struct didi_packmsg_s{
