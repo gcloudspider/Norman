@@ -18,7 +18,7 @@
 #include "../include/user.h"
 void print_message_body(cJSON* root){
     cJSON* headnode,*bodynode;
-    cJSON* headitem,*bodyitem,*bodyitem1,*bodyitem2,*bodyitem3;
+    cJSON* headitem,*bodyitem,*bodyitem1,*bodyitem2,*bodyitem3,*bodyitem4,*bodyitem5,*bodyitem6,*bodyitem7;
     char ch;
 
     headnode = didi_getjson_node(&root,"head");
@@ -95,6 +95,19 @@ void print_message_body(cJSON* root){
                     sleep(1);
                 } else if(bodyitem->valueint == ORDHISTORY_SUCCESS){
                     printf("你有历史订单!\n");
+                    bodyitem1 = didi_getitem_node(&bodynode,"orderid");
+                    bodyitem2 = didi_getitem_node(&bodynode,"starting");
+                    bodyitem3 = didi_getitem_node(&bodynode,"destination");
+                    bodyitem4 = didi_getitem_node(&bodynode,"userphone");
+                    bodyitem5 = didi_getitem_node(&bodynode,"payment");
+                    bodyitem6 = didi_getitem_node(&bodynode,"starttime");
+                    bodyitem7 = didi_getitem_node(&bodynode,"arrivaltime");
+                    printf("订单号:%d\n",bodyitem1->valueint);
+                    printf("起始地:%s\t目的地:%s\n",bodyitem2->valuestring,bodyitem3->valuestring);
+                    
+                    printf("乘客电话:%s\n",bodyitem4->valuestring);
+                    printf("下单时间:%s\t到达目的地时间:%s\n",bodyitem6->valuestring,bodyitem7->valuestring);
+                    printf("费用:%s\n",bodyitem5->valuestring);
                     sleep(1);
                 }
                 break;
