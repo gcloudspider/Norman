@@ -278,6 +278,23 @@ int query_user_info(MYSQL* db,union online_user* user,int usertype,const char* t
     return 0;
 }
 
+int didi_insert_historyorder(MYSQL*db,didi_order_t* pn){
+    char sql[1024];
+    int res;
+
+    mysql_query(db,"SET NAMES UTF8");
+    sprintf(sql,"INSERT INTO didiorders(`orderid`,`starting`,`destination`,`userphone`,`driverphone`,`starttime`,`arrivaltime`,`payment`)values(%d,'%s','%s','%s','%s','%s','%s','%s')",pn->orderid,pn->starting,pn->destination,pn->userphone,pn->driverphone,pn->starttime,pn->arrivaltime,pn->payment);
+    zlog_info(c,"%s",sql);
+    res = mysql_query(db,sql);
+    if(!res){
+        zlog_info(c,"insert %lu rows",(unsigned long)mysql_affected_rows(db));
+    } else {
+        zlog_info(c,"insert error %d:%s",mysql_errno(db),mysql_error(db));
+        return -1;
+    }
+    return 0; 
+}
+
 void query_online_user(){
 
 }

@@ -141,7 +141,8 @@ enum event{
     EVENT_QUERY = 4,                 //查询订单事件
     EVENT_MPASSWD = 5,
     EVENT_ORDER = 6,
-    EVENT_TAKETOKEN = 7
+    EVENT_TAKETOKEN = 7,
+    EVENT_ORDFIN = 8
 };
 
 struct signup{
@@ -329,6 +330,8 @@ int didi_addnode_overorder(didi_order_t* pn);
 int didi_getcfd_cache(int usertype,int orderid);
 char* didi_userphone_linklist(int orderid);
 didi_online_t* didi_getdriver_cache(const char* driverphone);
+didi_order_t* didi_find_ordernode(int orderid);
+didi_order_t* didi_fillorder_node(int orderid,const char* payment,const char* arrivaltime);
 /////////////////////////////////////////////////////////////////////////
 //json数据格式处理
 void didi_parse_msg(int cfd);
@@ -357,6 +360,7 @@ void* didi_event_query(void* argv,void* argv2);
 void* didi_event_mpasswd(void* argv,void* argv2);
 void* didi_event_order(void* argv,void* argv2);
 void* didi_event_taketoken(void* argv,void* argv2);
+void* didi_event_ordfin(void* argv,void* argv2);
 
 ///////////////////////////////////////////////////////////////////////
 //数据库
@@ -370,6 +374,7 @@ void query_online_user();
 void query_online_driver();
 int query_user_info(MYSQL* db,union online_user* user,int usertype,const char* telphone);
 void* query_field_fetch(MYSQL* db,const char* fieldname,const char* tablename,const char* telphone,int usertype);
+int didi_insert_historyorder(MYSQL*db,didi_order_t *pn);
 //////////////////////////////////////////////////////////////////////
 //缓存区
 int init_user_linklist();
@@ -383,4 +388,5 @@ char* create_ordspond_package(int status,didi_repack_t* res_pack,const char* tel
 char* create_takespond_package(int status,didi_repack_t* res_pack,const char* telphone,int orderid);
 void didi_order_broadcast(const char* res_package);
 char* create_drispond_package(int status,didi_repack_t *res_pack,didi_online_t* pn);
+int didi_create_orderhistory(int orderid,const char* payment,const char* arrivaltime);
 #endif

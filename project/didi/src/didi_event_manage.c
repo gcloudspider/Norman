@@ -302,6 +302,7 @@ void* didi_event_order(void* argv,void* argv2){
     item5 = didi_getitem_node(bodynode,"starttime");
     int orderid=didi_generate_userid();
 
+    //创建订单
     ret = didi_create_order(orderid,item->valuestring,item3->valuestring,item4->valuestring,item5->valuestring);
 
     if(-1 == ret){
@@ -373,4 +374,43 @@ void* didi_event_taketoken(void* argv,void* argv2){
     zlog_info(c,"%s",res_package);
     write(cfd,res_package,strlen(res_package));
 
+}
+
+void* didi_event_ordfin(void* argv,void* argv2){
+    int ret,userid;
+    cJSON* root,*bodynode;
+    cJSON* item,*item1,*item2;
+    cJSON *headnode,*reitem;
+    int cfd = (int)argv;
+    char buf[1024];
+    char *res_package,*res_driver;
+    didi_repack_t res_pack;
+
+    strcpy(buf,(char*)argv2);
+    zlog_info(c,"ready to read body cfd=%d buf=%s!",cfd,buf);
+    
+    didi_convert_string(&root,buf);
+    zlog_info(c,"root=%p",root);
+    
+    headnode = didi_getjson_node(root,"head");
+    res_pack.packtype = PACKTYPE_RESPONE; 
+    res_pack.event = EVENT_ORDFIN;
+    reitem = didi_getitem_node(headnode,"version");
+    strcpy(res_pack.version,reitem->valuestring);
+    reitem = didi_getitem_node(headnode,"reqId");
+    strcpy(res_pack.reqId,reitem->valuestring);
+    
+    bodynode = didi_getjson_node(root,"body");
+    zlog_info(c,"body node=%p",bodynode);
+    item = didi_getitem_node(bodynode,"orderid");
+    item1 = didi_getitem_node(bodynode,"payment");
+    item2 = didi_getitem_node(bodynode,"arrivaltime");
+    
+    ret = didi_create_orderhistory(item->valueint,item1->valuestring,item2->valuestring);
+
+    if(-1 == ret){
+    
+    } else {
+    
+    }
 }

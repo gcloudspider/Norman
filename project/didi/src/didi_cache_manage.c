@@ -373,3 +373,51 @@ didi_online_t* didi_getdriver_cache(const char* driverphone){
         pn = pn->next;   
     }
 }
+
+didi_order_t * didi_find_ordernode(int orderid){
+    didi_order_t *pn;
+    pn = didi_overorder_head;
+    
+    while(pn){
+        if(pn->orderid == orderid){
+            return pn;
+        }
+        pn = pn->next;
+    }
+    return NULL;
+}
+
+didi_order_t* didi_fillorder_node(int orderid,const char* payment,const char* arrivaltime){
+    didi_order_t *pn;
+    //查找order
+    pn = didi_find_ordernode(orderid);
+    if(pn != NULL){
+        strcpy(pn->payment,payment);
+        strcpy(pn->arrivaltime,arrivaltime);
+        //脱离链表
+        if(pn == didi_overorder_head){
+            if(didi_overorder_head->next != NULL){
+                pn->next->pre = NULL;
+                didi_overorder_head = pn->next;
+                pn->next = NULL;
+            } else {
+                didi_overorder_head = NULL;
+            }
+        } else if(pn == didi_overorder_tail) {
+            if(didi_overorder_tail->pre != NULL){
+                pn->pre->next = NULL;
+                didi_overorder_tail = pn->pre;
+                pn->pre = NULL;
+            } else {
+                didi_overorder_tail = NULL;
+            }
+        } else {
+            pn->next->pre = pn->pre;
+            pn->pre->next = pn->next;
+            pn->next = NULL;
+            pn->pre = NULL;
+        }
+        return pn;
+    }
+    return NULL;
+}

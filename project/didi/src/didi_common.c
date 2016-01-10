@@ -206,3 +206,21 @@ char* create_drispond_package(int status,didi_repack_t *res_pack,didi_online_t* 
 
     return res;
 }
+
+int didi_create_orderhistory(int orderid,const char* payment,const char* arrivaltime){
+    int ret;
+    didi_order_t *historyorder;
+    //将字段填入链表节点中
+    historyorder = didi_fillorder_node(orderid,payment,arrivaltime);
+    if(historyorder == NULL){
+        return -1;   
+    }else {
+        //将节点字段写入数据库
+        ret = didi_insert_historyorder(&db,historyorder);
+        if(ret == -1){
+            return -1;
+        }
+        historyorder = NULL;
+    }
+    return 0;
+}
