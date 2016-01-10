@@ -178,6 +178,7 @@ enum responcode{
     PASSWD_SUCCESS = 201,       //密码验证正确
     ORDER_SUCCESS = 202,
     TAKETOKEN_SUCCESS = 203,
+    ORDHISTORY_SUCCESS = 210,
 
     SERVER_REFUSE = 403,        //
     USER_NOTEXIST = 404,        //用户不存在
@@ -185,6 +186,7 @@ enum responcode{
     PASSWD_ERROR = 406,         //用户密码错误
     ORDER_ERROR = 407,
     TAKETOKEN_ERROR = 408,
+    ORDHISTORY_ERROR = 410,
 };
 //响应数据结构
 struct reg_spond{
@@ -211,10 +213,24 @@ struct dri_spond{
     char drivercarnum[20];
 };
 
+struct ordhistory{
+    int recode;
+    char remsg[256];
+    int orderid;
+    char starting[1024];
+    char destination[1024];
+    char userphone[12];
+    char driverphone[12];
+    char starttime[32];
+    char arrivaltime[32];
+    char payment[10];
+};
+
 union repackbody{
     struct reg_spond reg_spond;
     struct ord_spond ord_spond;
     struct dri_spond dri_spond;
+    struct ordhistory ordhistory;
 };
 
 struct didi_repack_s{
@@ -340,6 +356,9 @@ int didi_create_respone(cJSON** root,didi_repack_t* pg);
 int didi_create_ordspond(cJSON** root,didi_repack_t *pg);
 int didi_create_takespond(cJSON** root,didi_repack_t *pg);
 int didi_create_drispond(cJSON** root,didi_repack_t *pg);
+int didi_create_noordhistory(cJSON** root,didi_repack_t *pg);
+int didi_create_uordhistory(cJSON** root,didi_repack_t *pg);
+int didi_create_dordhistory(cJSON** root,didi_repack_t *pg);
 int didi_release_json(cJSON* root);
 char* didi_convert_json(cJSON* root);
 char* didi_ufconvert_json(cJSON* root);
@@ -369,12 +388,13 @@ int didi_insert_user(MYSQL *db,didi_user_t user);
 int didi_insert_driver(MYSQL *db,didi_driver_t driver);
 int didi_query_passwd(MYSQL *db,const char* telphone,const char* passwd,int usertype);
 int didi_update_passwd(MYSQL *db,int usertype,const char* telphone,const char* passwd);
-char* didi_query_order(MYSQL *db,int usertype,const char* telphone);
+int didi_query_order(MYSQL *db,int usertype,const char* telphone);
 void query_online_user();
 void query_online_driver();
 int query_user_info(MYSQL* db,union online_user* user,int usertype,const char* telphone);
 void* query_field_fetch(MYSQL* db,const char* fieldname,const char* tablename,const char* telphone,int usertype);
 int didi_insert_historyorder(MYSQL*db,didi_order_t *pn);
+void* didi_fetch_ordhistory(MYSQL* db,const char* fieldname,const char* telphone,int usertype);
 //////////////////////////////////////////////////////////////////////
 //缓存区
 int init_user_linklist();
@@ -389,4 +409,5 @@ char* create_takespond_package(int status,didi_repack_t* res_pack,const char* te
 void didi_order_broadcast(const char* res_package);
 char* create_drispond_package(int status,didi_repack_t *res_pack,didi_online_t* pn);
 int didi_create_orderhistory(int orderid,const char* payment,const char* arrivaltime);
+char* didi_respond_history(didi_repack_t *res_pack,int usertype,const char* telphone);
 #endif

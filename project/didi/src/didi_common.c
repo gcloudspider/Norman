@@ -224,3 +224,46 @@ int didi_create_orderhistory(int orderid,const char* payment,const char* arrival
     }
     return 0;
 }
+
+char* didi_respond_history(didi_repack_t *res_pack,int usertype,const char* telphone){
+    char buf[1024];
+    cJSON* root;
+    char *res;
+    int ret;
+    
+    //查询数据库填充字段
+    ret = didi_query_order(&db,usertype,telphone);
+    if(-1 == ret){
+        zlog_info(c,"haven't this user history!");
+        res_pack->repackbody.ordhistory.recode = ORDHISTORY_ERROR;
+        sprintf(buf,"query order history failed!");
+        strcpy(res_pack->repackbody.ordhistory.remsg,buf);
+        didi_create_noordhistory(&root,res_pack);
+    } else {
+        res_pack->repackbody.ordhistory.recode = ORDHISTORY_SUCCESS;
+        sprintf(buf,"query order history successful!");
+        strcpy(res_pack->repackbody.ordhistory.remsg,buf);
+        if(usertype == PERSONAL_USER){
+            res_pack->repackbody.ordhistory.orderid = atoi((char*)didi_fetch_ordhistory(&db,"orderid",telphone,usertype));
+            strcpy(res_pack->repackbody.ordhistory.starting,(char*)didi_fetch_ordhistory(&db,"starting",telphone,usertype));
+            strcpy(res_pack->repackbody.ordhistory.destination,(char*)didi_fetch_ordhistory(&db,"destination",telphone,usertype));
+            strcpy(res_pack->repackbody.ordhistory.driverphone,(char*)didi_fetch_ordhistory(&db,"driverphone",telphone,usertype));
+            strcpy(res_pack->repackbody.ordhistory.payment,(char*)didi_fetch_ordhistory(&db,"payment",telphone,usertype));
+            strcpy(res_pack->repackbody.ordhistory.starttime,(char*)didi_fetch_ordhistory(&db,"starttime",telphone,usertype));
+            strcpy(res_pack->repackbody.ordhistory.arrivaltime,(char*)didi_fetch_ordhistory(&db,"arrivaltime",telphone,usertype));
+            didi_create_uordhistory(&root,res_pack);
+        } else if(usertype == DRIVERS_USERS){
+            res_pack->repackbody.ordhistory.orderid = atoi((char*)didi_fetch_ordhistory(&db,"orderid",telphone,usertype));
+            strcpy(res_pack->repackbody.ordhistory.starting,(char*)didi_fetch_ordhistory(&db,"starting",telphone,usertype));
+            strcpy(res_pack->repackbody.ordhistory.destination,(char*)didi_fetch_ordhistory(&db,"destination",telphone,usertype));
+            strcpy(res_pack->repackbody.ordhistory.driverphone,(char*)didi_fetch_ordhistory(&db,"userphone",telphone,usertype));
+            strcpy(res_pack->repackbody.ordhistory.payment,(char*)didi_fetch_ordhistory(&db,"payment",telphone,usertype));
+            strcpy(res_pack->repackbody.ordhistory.starttime,(char*)didi_fetch_ordhistory(&db,"starttime",telphone,usertype));
+            strcpy(res_pack->repackbody.ordhistory.arrivaltime,(char*)didi_fetch_ordhistory(&db,"arrivaltime",telphone,usertype));
+            didi_create_dordhistory(&root,res_pack);
+        }
+        zlog_info(c,"respond code:%d",res_pack->repackbody.ordhistory.recode);
+    }
+    res = didi_ufconvert_json(root);
+    return res;
+}

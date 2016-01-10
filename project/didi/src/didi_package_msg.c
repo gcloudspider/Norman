@@ -147,6 +147,92 @@ int didi_create_drispond(cJSON** root,didi_repack_t *pg){
 
 }
 
+int didi_create_noordhistory(cJSON** root,didi_repack_t *pg){
+    const char* const head = "head";
+    const char* const body = "body";
+    cJSON* js_head;
+    cJSON* js_body;
+
+    *root = cJSON_CreateObject();
+    if(!*root){
+        zlog_error(c,"get root failed!");
+        return -1;
+    }
+
+    cJSON_AddItemToObject(*root,head,js_head=cJSON_CreateObject());
+    cJSON_AddNumberToObject(js_head,"packtype",pg->packtype);
+    cJSON_AddNumberToObject(js_head,"event",pg->event);
+    cJSON_AddStringToObject(js_head,"version",pg->version);
+    cJSON_AddStringToObject(js_head,"reqId",pg->reqId);
+    
+    cJSON_AddItemToObject(*root,body,js_body=cJSON_CreateObject());
+    cJSON_AddNumberToObject(js_body,"recode",pg->repackbody.ordhistory.recode);
+    cJSON_AddStringToObject(js_body,"remsg",pg->repackbody.ordhistory.remsg);
+
+}
+
+int didi_create_uordhistory(cJSON** root,didi_repack_t *pg){
+    const char* const head = "head";
+    const char* const body = "body";
+    cJSON* js_head;
+    cJSON* js_body;
+
+    *root = cJSON_CreateObject();
+    if(!*root){
+        zlog_error(c,"get root failed!");
+        return -1;
+    }
+
+    cJSON_AddItemToObject(*root,head,js_head=cJSON_CreateObject());
+    cJSON_AddNumberToObject(js_head,"packtype",pg->packtype);
+    cJSON_AddNumberToObject(js_head,"event",pg->event);
+    cJSON_AddStringToObject(js_head,"version",pg->version);
+    cJSON_AddStringToObject(js_head,"reqId",pg->reqId);
+    
+    cJSON_AddItemToObject(*root,body,js_body=cJSON_CreateObject());
+    cJSON_AddNumberToObject(js_body,"recode",pg->repackbody.ordhistory.recode);
+    cJSON_AddStringToObject(js_body,"remsg",pg->repackbody.ordhistory.remsg);
+    cJSON_AddNumberToObject(js_body,"orderid",pg->repackbody.ordhistory.orderid);
+    cJSON_AddStringToObject(js_body,"starting",pg->repackbody.ordhistory.starting);
+    cJSON_AddStringToObject(js_body,"destination",pg->repackbody.ordhistory.destination);
+    cJSON_AddStringToObject(js_body,"driverphone",pg->repackbody.ordhistory.driverphone);
+    cJSON_AddStringToObject(js_body,"payment",pg->repackbody.ordhistory.payment);
+    cJSON_AddStringToObject(js_body,"starttime",pg->repackbody.ordhistory.starttime);
+    cJSON_AddStringToObject(js_body,"arrivaltime",pg->repackbody.ordhistory.arrivaltime);
+
+}
+
+int didi_create_dordhistory(cJSON** root,didi_repack_t *pg){
+    const char* const head = "head";
+    const char* const body = "body";
+    cJSON* js_head;
+    cJSON* js_body;
+
+    *root = cJSON_CreateObject();
+    if(!*root){
+        zlog_error(c,"get root failed!");
+        return -1;
+    }
+
+    cJSON_AddItemToObject(*root,head,js_head=cJSON_CreateObject());
+    cJSON_AddNumberToObject(js_head,"packtype",pg->packtype);
+    cJSON_AddNumberToObject(js_head,"event",pg->event);
+    cJSON_AddStringToObject(js_head,"version",pg->version);
+    cJSON_AddStringToObject(js_head,"reqId",pg->reqId);
+    
+    cJSON_AddItemToObject(*root,body,js_body=cJSON_CreateObject());
+    cJSON_AddNumberToObject(js_body,"recode",pg->repackbody.ordhistory.recode);
+    cJSON_AddStringToObject(js_body,"remsg",pg->repackbody.ordhistory.remsg);
+    cJSON_AddNumberToObject(js_body,"orderid",pg->repackbody.ordhistory.orderid);
+    cJSON_AddStringToObject(js_body,"starting",pg->repackbody.ordhistory.starting);
+    cJSON_AddStringToObject(js_body,"destination",pg->repackbody.ordhistory.destination);
+    cJSON_AddStringToObject(js_body,"userphone",pg->repackbody.ordhistory.userphone);
+    cJSON_AddStringToObject(js_body,"payment",pg->repackbody.ordhistory.payment);
+    cJSON_AddStringToObject(js_body,"starttime",pg->repackbody.ordhistory.starttime);
+    cJSON_AddStringToObject(js_body,"arrivaltime",pg->repackbody.ordhistory.arrivaltime);
+
+}
+
 //释放json对象
 int didi_release_json(cJSON* root){
     if(!root){

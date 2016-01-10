@@ -220,9 +220,10 @@ void* didi_event_query(void *argv,void* argv2){
     item2 = didi_getitem_node(bodynode,"usertype");
     zlog_info(c,"bodynode telphone=%s",item->valuestring);
 
-    res_package = didi_query_order(&db,item2->valueint,item->valuestring);
+    res_package = didi_respond_history(&res_pack,item2->valueint,item->valuestring);
+    zlog_info(c,"%s",res_package);
 
-
+    write(cfd,res_package,strlen(res_package));
 }
 
 void* didi_event_mpasswd(void *argv,void* argv2){
@@ -409,8 +410,8 @@ void* didi_event_ordfin(void* argv,void* argv2){
     ret = didi_create_orderhistory(item->valueint,item1->valuestring,item2->valuestring);
 
     if(-1 == ret){
-    
+        zlog_info(c,"create order history failed!");   
     } else {
-    
+        zlog_info(c,"create order history successfuly!");
     }
 }

@@ -173,7 +173,7 @@ int didi_insert_driveruser(MYSQL* db,didi_driver_t driver){
     return 0;
 }
 
-char* didi_query_order(MYSQL *db,int usertype,const char* telphone){
+int didi_query_order(MYSQL *db,int usertype,const char* telphone){
     char *buf;
     char sql[1024];
     MYSQL_FIELD *field;
@@ -204,21 +204,13 @@ char* didi_query_order(MYSQL *db,int usertype,const char* telphone){
             row = mysql_num_rows(ptr);
             column = mysql_num_fields(ptr);
             zlog_info(c,"row=%d column=%d",row,column);
-
-            for(i=0;field=mysql_fetch_field(ptr);i++){
-                zlog_info(c,"%s",field->name);
-            }
-
-            for(i=0;i<row;i++){
-                result = mysql_fetch_row(ptr);
-                for(j=0;j<column;j++){
-                    zlog_info(c,"%s",result[j]);
-                }
+            if(row == 0){
+                return -1;
             }
             mysql_free_result(ptr);
         }
     }
-    return buf;
+    return 0;
 }
 
 void* query_field_fetch(MYSQL* db,const char* fieldname,const char* tablename,const char* telphone,int usertype){
@@ -231,9 +223,9 @@ void* query_field_fetch(MYSQL* db,const char* fieldname,const char* tablename,co
     int i,j;
     
     if(usertype == PERSONAL_USER){
-    sprintf(sql,"select %s from %s where telphone=%s",fieldname,tablename,telphone);
+    sprintf(sql,"select `%s` from %s where telphone='%s'",fieldname,tablename,telphone);
     } else if(usertype == DRIVERS_USERS){
-    sprintf(sql,"select %s from %s where drivertelphone=%s",fieldname,tablename,telphone);
+    sprintf(sql,"select `%s` from %s where drivertelphone='%s'",fieldname,tablename,telphone);
     }
     zlog_info(c,"%s",sql);
     ret = mysql_query(db,sql);
@@ -295,6 +287,43 @@ int didi_insert_historyorder(MYSQL*db,didi_order_t* pn){
     return 0; 
 }
 
+void* didi_fetch_ordhistory(MYSQL* db,const char* fieldname,const char* telphone,int usertype){
+    void* rret;
+    char sql[1024];
+    MYSQL_FIELD *field;
+    MYSQL_RES *ptr;
+    MYSQL_ROW result;
+    int ret,row,column;
+    int i,j;
+    if(usertype == PERSONAL_USER){ 
+    sprintf(sql,"select `%s` from didiorders where userphone='%s'",fieldname,telphone);
+    } else if(usertype == DRIVERS_USERS){
+    sprintf(sql,"select `%s` from didiorders where driverphone='%s'",fieldname,telphone);
+    }
+    zlog_info(c,"%s",sql);
+    ret = mysql_query(db,sql);
+    if(ret != 0){
+        zlog_error(c,"query failed!,sql:%s",sql);
+        zlog_error(c,"%s",mysql_error(db));
+    } else {
+        zlog_info(c,"query successful.");
+        ptr = mysql_store_result(db);
+        if(ptr != NULL){
+            row = mysql_num_rows(ptr);
+            column = mysql_num_fields(ptr);
+            for(i=0;i<row;i++){
+                result = mysql_fetch_row(ptr);
+                for(j=0;j<column;j++){ 
+                    rret = result[j];
+                    zlog_info(c,"%s",result[j]);
+                }
+            }
+            zlog_info(c,"query user info row=%d column=%d",row,column);
+            mysql_free_result(ptr);
+        }
+    }
+    return rret;
+}
 void query_online_user(){
 
 }
