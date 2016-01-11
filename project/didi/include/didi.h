@@ -329,7 +329,7 @@ int didi_init_cond(pthread_cond_t* cond);
 int didi_init_mutex(pthread_mutex_t* mutex);
 int didi_init_loop(didi_socket_t *sock_t,didi_server_t server);
 int didi_run(didi_socket_t sock_t);
-
+//linklist
 int didi_cache_init(MYSQL *db);
 int didi_cache_release();
 void didi_adduser_cache(int cfd,int usertype,union online_user* user);
