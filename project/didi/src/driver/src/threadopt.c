@@ -46,6 +46,18 @@ void* take_token(void* argv){
             root = didi_convert_string(buf);
             print_token_body(root);
         }
+        /*
+        while((ch=getchar())!='\n');
+        printf("是否继续接单!请输入yes/no:");
+clear_enter:
+        ch = getchar();
+        if(ch == 'y'|| ch=='Y'||ch=='\n'){
+            continue;
+        } else if(ch == 'n'||ch == 'N'){
+                break;
+        } else {
+            goto clear_enter;
+        }*/
     }
     return argv;
 }

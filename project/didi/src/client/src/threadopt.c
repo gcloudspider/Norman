@@ -42,6 +42,7 @@ void* take_order(void* argv){
     int ret;
     char buf[1024] = {0};
     cJSON* root;
+    char ch;
 
     while(1){
         ret = read(sfd,buf,1024);

@@ -192,7 +192,7 @@ void order_finished(int orderid,const char* payment){
     didi_create_regmsg(&root,pg);
 
     req= didi_ufconvert_json(&root);
-    printf("%s\n",req);
+   // printf("%s\n",req);
     write(sfd,req,strlen(req));
 }
 
