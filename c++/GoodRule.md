@@ -22,7 +22,7 @@
         ....
     }
 
-    2.用++iter替代iter++
+    2.用++iter替代iter++ (使用前自增运算符会更高效)
     void FSlateNotificationManager::GetWindows(TArray<TSharedRef<SWindow>>&OutWindows) const{
         for(auto Iter(NotificationLists.CreateConstItearator());iter;++iter){
         TSharedPtr<SNotificationList>NotificationList = *iter;
