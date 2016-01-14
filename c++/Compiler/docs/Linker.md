@@ -55,4 +55,39 @@
         链接器在将各符号链接到一起时所需要的导出符号信息,并不包含在DLL文件中,而是包含在与之相对应的.LIB文件中
         与某个DLL库关联的.LIB文件列出了该DLL库中(导出符号)以及符号地址，甩有使用这个DLL库的程序都必须同时访问它的.LIB文件才能保证所有符号正常链接
 
-        
+    3.链接输出文件:
+        libary.DLL:库的实现代码,可实时导入每个使用该库的可执行程序
+        libary.LIB:导入库文件,给定了DLL文件中的符号及地址表,只有当DLL导出某些符号时才会产生这个文件。如果没有符号导出.LIB文件没有存在必要,所有使用该库程序在链接阶段都必须用到该文件
+        libary.EXP:动态库在链接期时的一个"导出文件" 当链接中二进制文件出现循环依赖,该文件就泒上用场了
+        libary.ILK:链接时指定/INCREMENTAL 选项---开启增量链接功能(该文件保存增量链接时相关状态,供动态为下次增量链接时使用)
+        libary.PDB:如果链接时指定了DEBUG选项。将生成程序数据库.包含所有调试信息
+        libary.MAP:如果链接时指定了/MAP选项,将生成描述整个库内部布局信息文件
+    4.链接时输入文件:
+        libary.LIB:导入库文件，给定链接时所需DLL文件中符号及地址列表
+        libary.LIB:静态库文件，包含链接时所需的系统目标文件集，使用.LIB文件时需区分静态库还是"导入库"
+        libary.DEF:模块定义文件，包含链接库各种细节给予控制权,包括符号导出
+        libary.EXP:动态库处于链接期的一个导出文件。
+        libary.ILK 增量链接状态文件
+        libary.RES:资源文件,包含执行过程中所需的各种GUI部件信息,这些信息包含在最终二进制文件中
+    5.导入符号:
+        在源代码加上__declspec(dllimport) 但由于C语言所有函数以及全局变量都在肯仅在头文件中声明一次。
+        DLL中包含函数和变量的定义的代码需要进行符号导出,但DLL以及的代码需要进行符号导入
+
+        解决方法:
+            在头文件中加预处理宏
+            \#ifdef EXPORTING_XYZ_DLL_SYMS
+            \#define XYZ_LINKAGE __declspec(dllexport)
+            \#else
+            \#define XYZ_LINKAGE __declspec(dllimport)
+            \#endif
+            XYZ_LINKAGE int xyz_exported_function(int x);
+            XYZ_LINKAGE extern int xyz_exported_variable;
+
+    6.循环依赖:
+        windows 要求在链接期必须是已解决符号
+        Unix 链接一个包含链接器不认识的未解决符号动态库是可行的.
+
+        Windows提供绕过相互依赖问题方法:
+            1.生成一个库X假链接。运行LIB.EXE 生成X.LIB 不会生成X.DLL 取而代之是X.EXP文件
+            2.以正常方式进行库Y的链接：使用上一步中生成的X.LIB 导出Y.DLL 和Y.LIB
+            3.以合适方式链接X 
