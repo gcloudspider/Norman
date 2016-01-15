@@ -6,23 +6,7 @@
 ##Description: 每日一点
 ###################################################
 
-####c++代码习惯:
-    1.尽可能使用枚举类
-    enum class PhysGunDrop_t{
-        DROPPED_BY_PLAYER,
-        THROWN_BY_PLAYER,
-        DROPPED_BY_CANNON,
-        LAUNCHED_BY_CANNON,
-    };
-    void CBreakableProp::OnPhysGunDrop(...,PhysGunDrop_t Reason){
-        ....
-        if(Reason == PhysGunDrop_t::LAUNCHED_BY_CANNON){
-            PlayPuntSound();
-        }
-        ....
-    }
-
-    2.用++iter替代iter++ (使用前自增运算符会更高效)
+####用++iter替代iter++ (使用前自增运算符会更高效)
     void FSlateNotificationManager::GetWindows(TArray<TSharedRef<SWindow>>&OutWindows) const{
         for(auto Iter(NotificationLists.CreateConstItearator());iter;++iter){
         TSharedPtr<SNotificationList>NotificationList = *iter;
