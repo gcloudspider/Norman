@@ -9,3 +9,5 @@
 ####[Debuger 工作原理:](./worker.md)
 
 ####[Ptrace API](./ptraceApi.md)
+
+####[Ptrace工作原理](./ptrace.md)
