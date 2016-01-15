@@ -5,5 +5,7 @@
 ####Descript:调试器工作原理
 #############################################
 
-####Debuger工作原理:
-	
+
+####[Debuger 工作原理:](./worker.md)
+
+####[Ptrace API](./ptraceApi.md)
