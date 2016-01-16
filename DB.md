@@ -35,6 +35,7 @@
     3.Key-value NoSql型数据库:
         3.1:常见NoSQL
             [Redis](http://redis.io/)
+            [Redis 中文文档](http://redisdoc.com/)
             [MonogoDB](https://www.mongodb.org/)
             [Tokyo Cabinet](http://fallabs.com/tokyocabinet/)
         3.2:开源分布式NoSQL数据库
