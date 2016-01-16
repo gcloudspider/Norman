@@ -1,4 +1,5 @@
-SUBDIRS=Nokia
+SUBDIRS=Singleton\
+		Singleton1
 
 .PHONY:all clean $(SUBDIRS)
 
