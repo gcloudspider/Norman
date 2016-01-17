@@ -10,7 +10,6 @@
 */
 #include "Singleton.h"
 #include <iostream>
-
 using namespace std;
 
 Singleton* Singleton::pInstance = NULL;
@@ -20,14 +19,21 @@ Singleton::Singleton(){
 }
 
 Singleton* Singleton::Instance(){
-    if(NULL == pInstance){
-        pInstance = new Singleton();
+    //boost::mutex mutex;
+    if(NULL == pInstance){  //多线程时，双重锁
+       // mutex.lock();     //C++没有直接的Lock操作,使用其它库Lock 如Boost
+       // if( NULL == pInstance){
+            pInstance = new Singleton();
+       // }
+       // mutex.unlock();
     }
     return pInstance;
 }
 
 void Singleton::Destroy(){
-    delete pInstance;
-    pInstance = NULL;
-    cout<<"Destroy..."<<endl;
+    if(pInstance != NULL){      //销毁前判断实例化是否空
+        delete pInstance;
+        pInstance = NULL;
+        cout<<"Destroy..."<<endl;
+    }
 }
