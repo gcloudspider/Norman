@@ -1,6 +1,5 @@
-SUBDIRS=Singleton\
-		Singleton1\
-		Singleton2
+SUBDIRS=Prototype1\
+		Prototype2
 
 .PHONY:all clean $(SUBDIRS)
 
