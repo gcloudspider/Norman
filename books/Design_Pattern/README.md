@@ -12,3 +12,4 @@
 ####[3.抽象工厂模式](./AbstractFactory)
 
 ####[4.单例模式](./Singleton)
+####[5.原型模式](./PrototypePattern)
