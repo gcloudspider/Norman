@@ -8,3 +8,5 @@
 
 ####[asm汇编指令](./asm)
     1.asm汇编案例
+
+####[gnu asm汇编](./gnuasm)
