@@ -11,3 +11,4 @@
 ####[4.Inside_The_C++_Object_Model C++对象模型](./Inside_The_C++_Object_Model)
 ####[5.STL_Source_Code_Analysis STL源码剖析](./STL_Source_Code_Analysis)
 ####[6.Linux_kernel_Analysis Linux内核源码分析](./Linux_kernel_Analysis)
+####[7.Refactoring重构](./Refactoring)
