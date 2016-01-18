@@ -129,47 +129,42 @@ func SetTitle()
         call append(line("."),"# encoding: utf-8")
 	    call append(line(".")+1, "")
     elseif &filetype == 'readme'
-        call setline(1,"###################################################")
-        call append(line("."),"## Create Date:".strftime("%c"))
-        call append(line(".")+1,"##")
-        call append(line(".")+2,"##Author:Norman")
-        call append(line(".")+3,"##")
-        call append(line(".")+4,"##Description: ")
-        call append(line(".")+5,"###################################################")
+        call setline(1,"/**")
+        call append(line("."),"* ####Create Date:".strftime("%c"))
+        call append(line(".")+1,"* ")
+        call append(line(".")+2,"* ####Author:Norman")
+        call append(line(".")+3,"* ")
+        call append(line(".")+4,"* ####Description: ")
+        call append(line(".")+5,"*/")
 "    elseif &filetype == 'mkd'
 "       call setline(1,"<head><meta charset=\"UTF-8\"></head>")
-	else 
-		call setline(1, "/*########################################################") 
-		call append(line("."), "##File Name: ".expand("%")) 
-        call append(line(".")+1, "##Created Time:".strftime("%c")) 
-		call append(line(".")+2, "##Author: Norman ") 
-		call append(line(".")+3, "##Description: ") 
-		call append(line(".")+4, "##")
-        call append(line(".")+5, "##Issue: ")
-		call append(line(".")+6, "##")
-        call append(line(".")+7, "##Analyze: ")
-		call append(line(".")+8, "##")
-        call append(line(".")+9, "##Induction:")
-		call append(line(".")+10, "##")
-        call append(line(".")+11, "##Summary:")
-		call append(line(".")+12, "##")
-        call append(line(".")+13, "##########################################################*/") 
-		call append(line(".")+14, "")
+    else
+		call setline(1,"/**") 
+        call append(line("."),"*  - version 1.0")
+        call append(line(".")+1,"* -------------------------------")
+        call append(line(".")+2,"* Copyright (C) 2016-2016 by Norman (none_lih@163.com) ")
+        call append(line(".")+3,"* Report bugs and download new versions at https//github.com/evely211")
+        call append(line(".")+4,"* ")
+        call append(line(".")+5,"* This library is distributed under the MIT License. See notice at the end of this file.")
+        call append(line(".")+6,"* This work is based on POSIX，which is:")
+        call append(line(".")+7,"* Copyright (C) 2016,by Norman")
+        call append(line(".")+8,"*/")
+		call append(line(".")+9,"")
 	endif
-	if expand("%:e") == 'cpp'
+    if expand("%:e") == 'cpp'
 		call append(line(".")+15, "#include<iostream>")
 		call append(line(".")+16, "using namespace std;")
 		call append(line(".")+17, "")
-	endif
-	if &filetype == 'c'
+    endif
+    if &filetype == 'c'
 		call append(line(".")+15, "#include<stdio.h>")
 		call append(line(".")+16, "")
-	endif
-	if expand("%:e") == 'h'
+    endif
+    if expand("%:e") == 'h'
 		call append(line(".")+15, "#ifndef _".toupper(expand("%:r"))."_H")
 		call append(line(".")+16, "#define _".toupper(expand("%:r"))."_H")
 		call append(line(".")+17, "#endif")
-	endif
+    endif
 	if &filetype == 'java'
 		call append(line(".")+15,"public class ".expand("%:r"))
 		call append(line(".")+16,"")

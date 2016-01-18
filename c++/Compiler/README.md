@@ -34,3 +34,5 @@
 
       *动态载入与C++特性交互
 8.参考资料<br>
+
+9.[extern "C"](./docs/extern.md)
