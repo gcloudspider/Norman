@@ -23,12 +23,16 @@
 void init_key(){
     rGPGCON &= GPG0_IN&GPG3_IN&GPG5_IN
         &GPG6_IN&GPG7_IN&GPG11_IN;
-    //0000 0000 0000 0000
+    //初始化为输入模式
+    //1100 0000 1111 1100 1100 0011
 }
 
 int isKey(int num){
+    //默认不按按钮是高电平rGPGDAT值为1
+    //按下按钮为0
     switch(num){
         case 1:
+            //0与1为0 否返回1
             return rGPGDAT&(1<<0)?0:1;
         case 2:
             return rGPGDAT&(1<<3)?0:1;
@@ -48,5 +52,6 @@ int isKey(int num){
 int key_press(){
     int i;
     for(i=1;i<=6;i++)
+        //判断按钮是否按下
         if(isKey(i)) return i;
 }

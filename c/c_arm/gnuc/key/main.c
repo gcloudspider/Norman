@@ -15,6 +15,7 @@ int main()
 	int i;
 	while(1)
 	{
+        //while 循环轮循方式 (另一种方法中断方式)
         i=key_press();
         if(i>=1 && i<=4){
             led_on(i);
