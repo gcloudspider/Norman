@@ -2,6 +2,7 @@
 .text
 .global _start
 _start:
+    @设置CPU到管理模式
     /** set the cpu to SVC32 mode*/
     mrs r0,cpsr 
     bic r0,r0,#0x1f

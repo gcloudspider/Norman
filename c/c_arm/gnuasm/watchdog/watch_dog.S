@@ -2,9 +2,9 @@
 .text
 .global _start
 _start:
-    b watchclose
+    bl watchclose
 
-    b watchopen
+    bl watchopen
 
 loop:
     b loop                          @死循环
@@ -32,7 +32,7 @@ watchopen:
 
     str r3,[r2]                     @将r3里的值存入r2指向的地址
 
-    b led_on                        @调用led_on代码
+    bl led_on                        @调用led_on代码
 
 led_on:
     ldr r0,=0x56000010
