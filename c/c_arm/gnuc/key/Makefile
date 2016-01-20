@@ -12,7 +12,7 @@ OBJ_SRCS=$(patsubst %.c,%.o,$(ARM_SRCS))
 ARM_SAMS=$(wildcard *.s)
 OBJ_SAMS=$(patsubst %.s,%.o,$(ARM_SAMS))
 
-ARM_BIN=key
+ARM_BIN=$(shell pwd|xargs basename)
 ARM_ELF=$(ARM_BIN).elf
 BIN=$(ARM_BIN).bin
 
