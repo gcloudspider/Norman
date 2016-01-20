@@ -1,4 +1,4 @@
-SUBDIRS=Cache
+SUBDIRS=Cache CacheRA CacheTemplate sleeve
 
 .PHONY:all clean $(SUBDIRS)
 
