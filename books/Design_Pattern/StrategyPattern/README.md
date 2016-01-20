@@ -14,4 +14,11 @@
     当发生cache缺失时,Cache控制器必须选择Cache中的一行,并用欲获得的数据来替换它。
 
 
-    
+####[1.Cache 暴露了算法](./Cache/)
+
+####[2.CacheRA 传标签](./CacheRA/)
+    简单工厂模式和策略模式
+
+####[3.CacheTemplate 模板](./CacheTemplate/)
+
+####[4.sleeve 锦囊妙计](./sleeve/)
