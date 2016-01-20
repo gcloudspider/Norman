@@ -10,14 +10,14 @@
 */
 #include "Cache.h"
 
-Cache::Cache(){
+template<class T> Cache<T>::Cache(){
 
 }
 
-Cache::~Cache(){
+template<class T> Cache<T>::~Cache(){
 
 }
 
-void Cache::Replace(){
+template<class T> void Cache<T>::Replace(){
     m_ra.Replace();
 }

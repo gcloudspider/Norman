@@ -9,7 +9,9 @@
 * Copyright (C) 2016,by Norman
 */
 #include "Random_ReplaceAlgorithm.h"
-#include "Cache.h"
+
+//详见:Norman/C++/Code/Template/TemplateDemo1/README.md
+#include "Cache.cpp"
 
 int main(){
     Cache<Random_ReplaceAlgorithm> cache; //模板实参

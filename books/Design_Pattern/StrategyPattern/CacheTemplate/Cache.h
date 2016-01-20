@@ -11,10 +11,9 @@
 #ifndef _CACHE_H_
 #define _CACHE_H_
 #include "ReplaceAlgorithm.h"
-template<class RA>
-class Cache{
+template<class T> class Cache{
 private:
-    RA m_ra;
+    T m_ra;
 public:
     Cache();
     ~Cache();
