@@ -17,8 +17,6 @@ using namespace std;
 
 int main(int argc,char* argv[]){
     CContext *pContext;
-
-    cout<<"\14\n\n\n\n\17"<<endl;
     cout<<"--------------"<<endl;
     pContext = new CContext(new CBackDoor());
     pContext->Operate();
