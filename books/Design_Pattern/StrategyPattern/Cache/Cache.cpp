@@ -8,14 +8,18 @@
 * This work is based on POSIX，which is:
 * Copyright (C) 2016,by Norman
 */
-#ifndef _LRU_REPLACEALGORITHM_H_
-#define _LRU_REPLACEALGORITHM_H_
-#include "ReplaceAlgorithm.h"
-class LRU_ReplaceAlgorithm:public ReplaceAlgorithm{
-public:
-    LRU_ReplaceAlgorithm();
-    ~LRU_ReplaceAlgorithm();
-public:
-    void Replace();
-};
-#endif
+#include "Cache.h"
+//直接通过参数指定,传入一个特定算法的指针:
+//此方法将算法暴露在外
+//
+Cache::Cache(ReplaceAlgorithm *ra){
+    m_ra = ra;
+}
+
+Cache::~Cache(){
+    delete m_ra;
+}
+
+void Cache::Replace(){
+    m_ra->Replace();
+}

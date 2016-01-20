@@ -8,14 +8,17 @@
 * This work is based on POSIX，which is:
 * Copyright (C) 2016,by Norman
 */
-#ifndef _LRU_REPLACEALGORITHM_H_
-#define _LRU_REPLACEALGORITHM_H_
+#ifndef _RANDOM_REPLACEALGORITHM_H_
+#define _RANDOM_REPLACEALGORITHM_H_
 #include "ReplaceAlgorithm.h"
-class LRU_ReplaceAlgorithm:public ReplaceAlgorithm{
+
+class Random_ReplaceAlgorithm:public ReplaceAlgorithm{
 public:
-    LRU_ReplaceAlgorithm();
-    ~LRU_ReplaceAlgorithm();
-public:
+    Random_ReplaceAlgorithm();
+    ~Random_ReplaceAlgorithm();
+
     void Replace();
+
 };
+
 #endif
