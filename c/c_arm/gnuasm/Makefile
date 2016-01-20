@@ -1,4 +1,4 @@
-SUBDIRS=led cpumode watchdog
+SUBDIRS=led cpumode watchdog led led1_spark ledall_spark
 
 .PHONY:all clean $(SUBDIRS)
 
