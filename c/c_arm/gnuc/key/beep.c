@@ -8,19 +8,19 @@
 * This work is based on POSIX，which is:
 * Copyright (C) 2016,by Norman
 */
-#define	rGPBCON	\
-	*(volatile unsigned long*)0x56000010
-#define rGPBDAT	\
-	*(volatile unsigned long*)0x56000014
-#define GPB0_OUT	1<<2*0
+#include "include/gpio.h"
+//& 二进制只要有一个为0则为0
+//| 二进制只要有一个为1则为1
 
 void init_beep(){
 	rGPBCON |= GPB0_OUT;
 }
 
 void beep_on(){
+    //蜂鸣器需要将置1为蜂鸣器响
     rGPBDAT |= (1<<0);
 }
 void beep_off(){
+    //置0为蜂鸣器不响
     rGPBDAT &= ~(1<<0);
 }

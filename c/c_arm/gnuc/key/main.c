@@ -1,6 +1,4 @@
-#include "include/led.h"
-#include "include/beep.h"
-#include "include/key.h"
+#include "include/gpio.h"
 
 void delay(int n)
 {

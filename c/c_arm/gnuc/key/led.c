@@ -1,12 +1,4 @@
-#define	rGPBCON	\
-	*(volatile unsigned long*)0x56000010
-#define rGPBDAT	\
-	*(volatile unsigned long*)0x56000014
-#define GPB5_OUT	1<<2*5
-#define GPB6_OUT	1<<2*6
-#define GPB7_OUT	1<<2*7
-#define GPB8_OUT	1<<2*8
-
+#include "include/gpio.h"
 void init_led()
 {
 	rGPBCON |= GPB5_OUT|GPB6_OUT|GPB7_OUT|GPB8_OUT;

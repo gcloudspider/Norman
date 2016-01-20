@@ -8,17 +8,7 @@
 * This work is based on POSIX，which is:
 * Copyright (C) 2016,by Norman
 */
-#define rGPGCON \
-        *(volatile unsigned*) 0x56000060
-#define rGPGDAT \
-        *(volatile unsigned*) 0x56000064
-
-#define GPG0_IN         ~(3<<0*2)
-#define GPG3_IN         ~(3<<3*2)
-#define GPG5_IN         ~(3<<5*2)
-#define GPG6_IN         ~(3<<6*2)
-#define GPG7_IN         ~(3<<7*2)
-#define GPG11_IN        ~(3<<11*2)
+#include "include/gpio.h"
 
 void init_key(){
     rGPGCON &= GPG0_IN&GPG3_IN&GPG5_IN
