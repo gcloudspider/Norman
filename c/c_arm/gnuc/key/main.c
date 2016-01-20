@@ -26,5 +26,5 @@ int main()
             beep_off();
         }
 	}
-	 return 0;
+	return 0;
 }

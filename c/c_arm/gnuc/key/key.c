@@ -41,7 +41,8 @@ int isKey(int num){
 
 int key_press(){
     int i;
-    for(i=1;i<=6;i++)
+    for(i=1;i<=6;i++){
         //判断按钮是否按下
         if(isKey(i)) return i;
+    }   
 }
