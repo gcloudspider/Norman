@@ -10,6 +10,10 @@ int main()
 	init_led();
     init_beep();
     //init_key();  轮循初始化
+    init_interrupt_for_key();   //中断的方式
+
+    //led_on_all();
+    led_off_all();
 	int i;
 	while(1){
         //while 循环轮循方式 (另一种方法中断方式)

@@ -46,3 +46,26 @@ int key_press(){
         if(isKey(i)) return i;
     }   
 }
+
+static int press_keynum(){
+    if(rEINTPEND &(1<<8)) return 1;
+    if(rEINTPEND &(1<<11)) return 2;
+    if(rEINTPEND &(1<<13)) return 3;
+    if(rEINTPEND &(1<<14)) return 4;
+    if(rEINTPEND &(1<<15)) return 5;
+    if(rEINTPEND &(1<<19)) return 6;
+}
+
+void int_key(){
+    int i=0xfffa;
+    int num = press_keynum();
+    if(num == 6){
+        led_on(1);   
+    } else {
+        led_on(num);
+    }
+    beep_on();
+    delay(0xfff);
+    led_off_all();
+    beep_off();
+}
