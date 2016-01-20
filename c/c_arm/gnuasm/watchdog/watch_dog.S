@@ -2,9 +2,7 @@
 .text
 .global _start
 _start:
-    bl watchclose
-
-    bl watchopen
+    b led_on
 
 loop:
     b loop                          @死循环
@@ -21,6 +19,7 @@ watchopen:
     @0x4a21=[15:8]=74,[5]=1,[0]=1
 
     ldr r1,=0x4a21                  @将0x4a21保存到r1里
+    @0100 1010 0010 0001
 
     str r1,[r0]                     @将r1里的值存入r0指向的地址
 
@@ -29,6 +28,7 @@ watchopen:
     ldr r2,=0x53000008              @加载WTCNT寄存器地址
 
     ldr r3,=0x2710                  @将0x2710保存到r1里
+    @0010 0111 0001 0000
 
     str r3,[r2]                     @将r3里的值存入r2指向的地址
 
@@ -36,10 +36,13 @@ watchopen:
 
 led_on:
     ldr r0,=0x56000010
+    @将led1 led2 led3 led4 输出模式
+    @0001 0101 0100 0000 0000
     mov r1,#0x15400
     str r1,[r0]
 
     ldr r0,=0x56000014
+    @0001 0000 0000
     mov r1,#0x100
     str r1,[r0]
     mov pc,lr
