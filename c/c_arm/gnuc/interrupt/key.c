@@ -57,10 +57,13 @@ static int press_keynum(){
 }
 
 void int_key(){
+    int k;
     int i=0xfffa;
     int num = press_keynum();
     if(num == 6){
-        led_on(1);   
+        led_on(1);
+    } else if(num == 5){
+        led_on_all();  
     } else {
         led_on(num);
     }
@@ -68,4 +71,5 @@ void int_key(){
     delay(0xfff);
     led_off_all();
     beep_off();
+
 }
