@@ -57,19 +57,22 @@ static int press_keynum(){
 }
 
 void long_press(int key_num,int num){
-    if((rEXTINT1 &(7<<num))==0){
+    if((rEXTINT1 &(num))==0){
+        //低电平触发了中断
         if(key_num == 5 || key_num == 6){
             led_on_all();
         }else{
             led_on(key_num);
         }
         beep_on();
-        rEXTINT1 &= ~(7<<num);
+        //改变中断的触发方式为上升沿
+        rEXTINT1 &= ~(num);
         rEXTINT1 |= 0x4;
-    } else if((rEXTINT1 &(7<<num)) == 0x4){
+    } else if((rEXTINT1 &(num)) == 0x4){
+        //上升沿触发中断
         led_off_all();
         beep_off();
-        rEXTINT1 &= ~(7<<num);
+        rEXTINT1 &= ~(num);
     }
 }
 
@@ -79,32 +82,27 @@ void int_key(){
     int num = press_keynum();
     switch(num){
         case KEY_1:{
-            long_press(KEY_1,0);
+            long_press(KEY_1,7);
             break;
         }
         case KEY_2:{
-            //led_on(KEY_2);
-            long_press(KEY_2,11);
+            long_press(KEY_2,7);
             break;
         }
         case KEY_3:{
-            //led_on(KEY_3);
-            long_press(KEY_3,13);
+            long_press(KEY_3,7);
             break;
         }
         case KEY_4:{
-            //led_on(KEY_4);
-            long_press(KEY_4,14);
+            long_press(KEY_4,7);
             break;
         }
         case KEY_5:{
-            //led_on_all();
-            long_press(KEY_5,15);
+            long_press(KEY_5,7);
             break;
         }
         case KEY_6:{
-            //led_on_all();
-            long_press(KEY_6,19);
+            long_press(KEY_6,7);
             break;
         }   
     }

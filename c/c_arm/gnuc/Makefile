@@ -2,7 +2,10 @@ SUBDIRS = beep \
 		  c_ledall_spark\
 		  c_led_spark\
 		  encapsulation\
-		  key
+		  key\
+		  interrupt\
+		  globalvar\
+		  clock
 
 .PHONY:all clean dist $(SUBDIRS)
 
