@@ -29,4 +29,9 @@ void init_timer4(){
     //开启自动重置数
 }
 
-
+int write_TCNTB4(int c){
+    rTCNTB4 = c;
+}
+int read_TCNTB4(){
+    return rTCNTB4;
+}

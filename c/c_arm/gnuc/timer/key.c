@@ -82,11 +82,13 @@ void int_key(){
     int num = press_keynum();
     switch(num){
         case KEY_1:{
-            long_press(KEY_1,7);
+            //long_press(KEY_1,7);
+            write_TCNTB4(31250/2);
             break;
         }
         case KEY_2:{
-            long_press(KEY_2,7);
+            //long_press(KEY_2,7);
+            write_TCNTB4(31250*2);
             break;
         }
         case KEY_3:{
