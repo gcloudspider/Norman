@@ -113,6 +113,13 @@
 #define GPG7_EINT         2<<7*2
 #define GPG11_EINT        2<<11*2
 
+#define KEY_1             1
+#define KEY_2             2
+#define KEY_3             3
+#define KEY_4             4
+#define KEY_5             5
+#define KEY_6             6
+
 //蜂鸣器函数
 void init_beep();
 void beep_on();
@@ -124,6 +131,7 @@ void init_key();
 int key_press();
 */
 void int_key();
+static int press_keynum();
 
 /*
 *中断模式不设GPGDATA寄存器使用中断

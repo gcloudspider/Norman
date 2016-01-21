@@ -56,20 +56,56 @@ static int press_keynum(){
     if(rEINTPEND &(1<<19)) return 6;
 }
 
+void long_press(int key_num,int num){
+    if((rEXTINT1 &(7<<num))==0){
+        if(key_num == 5 || key_num == 6){
+            led_on_all();
+        }else{
+            led_on(key_num);
+        }
+        beep_on();
+        rEXTINT1 &= ~(7<<num);
+        rEXTINT1 |= 0x4;
+    } else if((rEXTINT1 &(7<<num)) == 0x4){
+        led_off_all();
+        beep_off();
+        rEXTINT1 &= ~(7<<num);
+    }
+}
+
 void int_key(){
     int k;
     int i=0xfffa;
     int num = press_keynum();
-    if(num == 6){
-        led_on(1);
-    } else if(num == 5){
-        led_on_all();  
-    } else {
-        led_on(num);
+    switch(num){
+        case KEY_1:{
+            long_press(KEY_1,0);
+            break;
+        }
+        case KEY_2:{
+            //led_on(KEY_2);
+            long_press(KEY_2,11);
+            break;
+        }
+        case KEY_3:{
+            //led_on(KEY_3);
+            long_press(KEY_3,13);
+            break;
+        }
+        case KEY_4:{
+            //led_on(KEY_4);
+            long_press(KEY_4,14);
+            break;
+        }
+        case KEY_5:{
+            //led_on_all();
+            long_press(KEY_5,15);
+            break;
+        }
+        case KEY_6:{
+            //led_on_all();
+            long_press(KEY_6,19);
+            break;
+        }   
     }
-    beep_on();
-    delay(0xfff);
-    led_off_all();
-    beep_off();
-
 }
