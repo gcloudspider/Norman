@@ -22,6 +22,6 @@ class CSteamedFish:public CFoodProduct{
 public:
     CSteamedFish(void);
     ~CSteamedFish(void);
-    virtual void Delicious();
+    virtual void Delicious()=0;
 };
 #endif

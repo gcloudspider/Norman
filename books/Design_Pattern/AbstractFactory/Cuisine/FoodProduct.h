@@ -24,6 +24,6 @@ public:
     ~CFoodProduct(void);
 
 public:
-    virtual void Delicious();
+    virtual void Delicious()=0;
 };
 #endif
