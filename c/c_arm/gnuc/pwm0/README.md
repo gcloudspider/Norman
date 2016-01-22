@@ -18,3 +18,30 @@
 ####使能:
     负责控制信号的输入和输出叫使能-----"允许信号"
 
+
+
+1.初始化GPB0管脚为TOUT0模式工作;
+2.打开timer0定时器的中断屏蔽;
+3.初始化timer0：
+a.分频为31250;
+b.设定TCNTB0,TCMPB0，;
+c.手动更新TCNTB0,TCMPB0;
+d.启动定时器并选择是否自动加载和初始化电平;
+
+脉<= TCON[0] = 1
+|
+v
+TCNT0<=TCNTB0(31250)TCON[1]=1
+| --
+V
+TCMP0<=TCMPB0(15625) TCON[1]=1
+|  == TCMP0  TOUT0/GPB0电平反转
+|  --
+V== 0 电平再反转,(回到起始状态)
+    如果TCON[3]=1,重启加载TCNTB0TCMPB0到TCNT0,TCMP0;
+    如果TCON[3]=0,只加载一次;
+          
+          
+注意：
+    TCMPB0 默认值 是0！
+    TCNTO0 可以读取 TCNT0 当前值！和冲
