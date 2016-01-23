@@ -78,7 +78,7 @@
         5.物理页由页结构struct page描述,系统所有页都存储在数组mem_map[]中 通过该数据找到系统中每一页
         6.空闲页由伙伴关系组织的空闲页链表(free_area[MAX_ORDER])来索引
 
-![](./mmu.gif)
+![](./image/mmu.gif)
 
 
 ####内核内存使用:
