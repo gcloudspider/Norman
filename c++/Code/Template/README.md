@@ -24,4 +24,4 @@
 ####模板形参:
 ####[1.类型形参](./docs/typeparameter.md)
 ####[2.非类型形参](./docs/Notypeparameter.md)
-####[3.模板形参](./docs/templateparameter.md)
+####[3.类模板形参](./docs/templateparameter.md)
