@@ -1,4 +1,4 @@
-SUBDIRS=Deque
+SUBDIRS=Deque DiffSystem ThirdCompent
 
 .PHONY:all clean $(SUBDIRS)
 

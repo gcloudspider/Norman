@@ -7,4 +7,8 @@
 */
 
 ####不同系统间处理:
+                    OuterUserBaseInfo     OuterUserHomeInfo    OuterUserOfficeInfo
+
     
+    IUserInfo                      IOuterUser
+
