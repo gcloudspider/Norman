@@ -15,4 +15,4 @@
 ####[5.原型模式](./PrototypePattern)
 ####[6.模板方法模式](./TemplateMethod)
 ####[7.策略模式](./StrategyPattern)
-####[8.适配器模式](./AdapterPattern)
+####[8.适配器模式](./Adapter)
