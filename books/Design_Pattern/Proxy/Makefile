@@ -1,4 +1,4 @@
-SUBDIRS=Image
+SUBDIRS=Image Subject
 
 .PHONY:all clean $(SUBDIRS)
 
