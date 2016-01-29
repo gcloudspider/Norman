@@ -28,14 +28,17 @@
 ####[3.抽象工厂模式](./AbstractFactory)
 ####[4.单例模式](./Singleton)
 ####[5.原型模式](./PrototypePattern)
-####[6.模板方法模式](./TemplateMethod)
-####[7.策略模式](./StrategyPattern)
-####[8.适配器模式](./Adapter)
-####[9.建造者模式](./Builder)
+####[6.建造者模式](./Builder)
 
-####[10.外观(门面)模式](./Facade)
-####[11.组合模式](./Composite/)
-####[12.代理模式](./Proxy/)
-####[13.享元模式](./Flyweight/)
-####[14.桥梁(桥接)模式](./Bridge/)
-####[15.装饰模式](./Decorator/)
+####结构型模式
+####[7.适配器模式](./Adapter)
+####[8.外观(门面)模式](./Facade)
+####[9.组合模式](./Composite/)
+####[10.代理模式](./Proxy/)
+####[11.享元模式](./Flyweight/)
+####[12.桥梁(桥接)模式](./Bridge/)
+####[13.装饰模式](./Decorator/)
+
+####行为型模式
+####[14.模板方法模式](./TemplateMethod)
+####[15.策略模式](./StrategyPattern)
