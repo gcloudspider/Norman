@@ -48,3 +48,4 @@
 ####[14.模板方法模式](./TemplateMethod)
 ####[15.策略模式](./StrategyPattern)
 ####[16.备忘录模式](./Memento)
+####[17.模式](./Memento)
