@@ -17,6 +17,6 @@ class Colleague;
 
 class Mediator{
 public:
-    virtual void Send(wchar_t *message,Colleague *pColleague)=0;
+    virtual void Sent(wchar_t *message,Colleague *pColleague)=0;
 };
 #endif

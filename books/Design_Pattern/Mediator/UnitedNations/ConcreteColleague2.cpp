@@ -19,3 +19,7 @@ void ConcreteColleague2::Notify(wchar_t *message){
     cout<<"ConcreteColleague2 is handling the message."<<endl;
     cout<<message<<endl;
 }
+
+void ConcreteColleague2::Send(wchar_t *message){
+    m_pMediator->Sent(message,this);
+}

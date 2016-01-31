@@ -24,7 +24,7 @@ int main(){
     pConcreteMediator->SetColleague1(pColleague1);
     pConcreteMediator->SetColleague2(pColleague2);
 
-    wchar_t message[260] = "where are you from?";
+    wchar_t message[260] = L"where are you from?";
     pColleague1->Send(message);
 
     return 0;

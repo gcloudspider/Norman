@@ -16,7 +16,7 @@
 
 class ConcreteMediator:public Mediator{
 public:
-    void Send(wchar_t *message,Colleague *pColleague);
+    void Sent(wchar_t *message,Colleague *pColleague);
 
     void SetColleague1(Colleague *pColleague);
     

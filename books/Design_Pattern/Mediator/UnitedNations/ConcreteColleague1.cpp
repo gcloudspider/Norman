@@ -10,8 +10,7 @@
 */
 #include "ConcreteColleague1.h"
 
-ConcreteColleague1::ConcreteColleague1(Mediator *pMediator)
-:Colleague(pMediator){
+ConcreteColleague1::ConcreteColleague1(Mediator *pMediator):Colleague(pMediator){
 
 }
 
@@ -23,6 +22,4 @@ void ConcreteColleague1::Send(wchar_t *message){
     m_pMediator->Sent(message,this);
 }
 
-void ConcreteColleague2::Send(wchar_t *message){
-    m_pMediator->Sent(message,this);
-}
+
