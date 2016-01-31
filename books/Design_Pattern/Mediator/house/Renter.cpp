@@ -8,17 +8,16 @@
 * This work is based on POSIX，which is:
 * Copyright (C) 2016,by Norman
 */
+#include "Renter.h"
 
-#ifndef _MEDIATOR_H_
-#define _MEDIATOR_H_
-#include <iostream>
-#include "Person.h"
-using namespace std;
-class Person;
-class Mediator{
-public:
-    virtual void Send(string message,Person *person);
-    virtual void SetA(Person *A);
-    virtual void SetB(Person *B);
-};
-#endif
+void Renter::SetMediator(Mediator *mediator){
+    m_mediator = mediator;
+}
+
+void Renter::SendMessage(string message){
+    m_mediator->Send(message,this);
+}
+
+void Renter::GetMessage(string message){
+    cout<<"租房者收到信息"<<message;
+}

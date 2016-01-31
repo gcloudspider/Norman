@@ -8,17 +8,17 @@
 * This work is based on POSIX，which is:
 * Copyright (C) 2016,by Norman
 */
-
-#ifndef _MEDIATOR_H_
-#define _MEDIATOR_H_
-#include <iostream>
-#include "Person.h"
-using namespace std;
-class Person;
-class Mediator{
+#ifndef _HOUSEMEDIATOR_H_
+#define _HOUSEMEDIATOR_H_
+#include "Mediator.h"
+class HouseMediator:public Mediator{
+private:
+    Person *m_A;        //租房者
+    Person *m_B;        //房东
 public:
-    virtual void Send(string message,Person *person);
-    virtual void SetA(Person *A);
-    virtual void SetB(Person *B);
+    HouseMediator();
+    void SetA(Person *A);
+    void SetB(Person *B);
+    void Send(string message,Person *person);
 };
 #endif

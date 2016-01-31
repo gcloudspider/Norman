@@ -9,16 +9,14 @@
 * Copyright (C) 2016,by Norman
 */
 
-#ifndef _MEDIATOR_H_
-#define _MEDIATOR_H_
-#include <iostream>
+#ifndef _RENTER_H_
+#define _RENTER_H_
 #include "Person.h"
-using namespace std;
-class Person;
-class Mediator{
+
+class Renter:public Person{
 public:
-    virtual void Send(string message,Person *person);
-    virtual void SetA(Person *A);
-    virtual void SetB(Person *B);
+    void SetMediator(Mediator *mediator);
+    void SendMessage(string message);
+    void GetMessage(string message);
 };
 #endif
