@@ -1,4 +1,4 @@
-SUBDIRS=HanFei blog
+SUBDIRS=war Lift
 
 .PHONY:all clean $(SUBDIRS)
 
