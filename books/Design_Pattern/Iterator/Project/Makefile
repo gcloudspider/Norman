@@ -1,6 +1,6 @@
 CXX=g++
 
-CLFAGS=-g -o 
+CLFAGS=-g -std=c++11 -o 
 
 SRC=$(wildcard *.cpp)
 OBJ=${SRC:%.cpp=%.o}

@@ -11,9 +11,10 @@
 #ifndef _IPROJECT_H_
 #define _IPROJECT_H_
 #pragma once
-#inlcude "IProjectIterator.h"
+#include "IProjectIterator.h"
 #include <iostream>
 using namespace std;
+#include <vector>
 class IProject{
 public:
     IProject();

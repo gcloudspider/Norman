@@ -11,6 +11,7 @@
 #include "IProject.h"
 #include "Project.h"
 #include "ProjectIterator.h"
+#include "Convert.h"
 #include <vector>
 
 
@@ -25,7 +26,7 @@ void DoIt(){
     for(int i=4;i<6;i++){
         string name = "";
         name.append("第");
-        name.append(CConvert::ToString(i));
+        //name.append(CConvert::ToString(i));
         name.append("个项目");
         projectList.push_back(new CProject(name,i*5,i*10000000));
     }
@@ -53,7 +54,7 @@ void DoNew(){
     for(int i=4;i<6;i++){
         string name = "";
         name.append("第");
-        name.append(CConvert::ToString(i));
+ //       name.append(CConvert::ToString(i));
         name.append("个项目");
         pproject->Add(name,i*5,i*1000000);
     }

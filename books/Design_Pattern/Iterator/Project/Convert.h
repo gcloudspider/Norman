@@ -8,22 +8,16 @@
 * This work is based on POSIX，which is:
 * Copyright (C) 2016,by Norman
 */
-#ifndef _PROJECTITERATOR_H_
-#define _PROJECTITERATOR_H_
-#pragma once
-#include "IProjectIterator.h"
-#include "IProject.h"
-
-class CProjectIterator:public IProjectIterator{
+#ifndef _CONVERT_H_
+#define _CONVERT_H_
+#include <iostream>
+using namespace std;
+class CConvert{
 public:
-    CProjectIterator(vector<IProject*> pl);
-    ~CProjectIterator();
+    CConvert();
+    ~CConvert();
 
-    bool HasNext();
-    IProject *Next();
-private:
-    vector<IProject *> m_projectList;
-    size_t m_currentItem;
+    string ToString(int num);
 };
 
 #endif

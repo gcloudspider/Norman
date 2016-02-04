@@ -10,7 +10,7 @@
 */
 #include "ProjectIterator.h"
 
-CProjectIterator::CProjectIterator(vector<IProject *>)
+CProjectIterator::CProjectIterator(vector<IProject *> pl)
     :m_projectList(pl){
     m_currentItem = 0;
         
