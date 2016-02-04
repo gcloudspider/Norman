@@ -1,6 +1,6 @@
 CXX=g++
 
-CLFAGS=-g -std=c++11 -o 
+CLFAGS=-g -o 
 
 SRC=$(wildcard *.cpp)
 OBJ=${SRC:%.cpp=%.o}
@@ -13,6 +13,9 @@ all:$(BIN)
 
 $(BIN):$(OBJ)
 	$(CXX) $(CLFAGS) $@ $(OBJ)
+
+%.o:%.cpp
+	$(CXX) -c $(CLFAGS) $@ $<
 
 clean:
 	rm -rf *.o $(BIN)

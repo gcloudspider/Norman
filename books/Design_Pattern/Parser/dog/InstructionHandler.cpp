@@ -68,7 +68,7 @@ void InstructionHandler::Handle(){
 }
 
 void InstructionHandler::Output(){
-    char *pResult = m_pTree->Interpret();
+    const char *pResult = m_pTree->Interpret();
 
     setlocale(LC_ALL,"");
     sprintf("%s\n",pResult);
