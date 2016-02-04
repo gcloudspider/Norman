@@ -1,4 +1,4 @@
-SUBDIRS=Project
+SUBDIRS=Project Linklist
 
 .PHONY:all clean $(SUBDIRS)
 
