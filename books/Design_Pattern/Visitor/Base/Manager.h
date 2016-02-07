@@ -8,28 +8,25 @@
 * This work is based on POSIX，which is:
 * Copyright (C) 2016,by Norman
 */
-#ifndef _EMPLOYEE_H_
-#define _EMPLOYEE_H_
+#ifndef _MANAGER_H_
+#define _MANAGER_H_
 #pragma once
+#include "Employee.h"
 #include "IVisitor.h"
 
-class CEmployee{
+class CManager:public CEmployee{
 public:
-    static int MALE;
-    static int FEMALE;
-    CEmployee();
-    virtual ~CEmployee();
-    string GetName();
-    void SetName(string name);
-    int GetSalary();
-    void SetSalary(int v);
-    int GetSex();
-    void SetSex(int v);
-    virtual void Accept(IVisitor *pVisitor) =0;
+    CManager();
+    ~CManager();
+    string GetPerformance();
+    void SetPerformance(string per);
+    void Accept(IVisitor *pVisitor);
+
+protected:
+    string GetOtherInfo();
+
 private:
-    string m_name;
-    int m_salary;
-    int m_sex;
+    string m_performance;
 };
 
 #endif
