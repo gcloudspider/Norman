@@ -10,6 +10,7 @@
 */
 #include<stdio.h>
 #include <iostream>
+#include <exception>
 using namespace std;
 
 //异常
