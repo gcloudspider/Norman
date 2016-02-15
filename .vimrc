@@ -95,6 +95,7 @@ set iskeyword+=_,$,@,%,#,-
 "markdown配置
 au BufRead,BufNewFile *.{mdown,mkd,mkdn,markdown,mdwn}   set filetype=mkd
 au BufRead,BufNewFile *.{md}   set filetype=readme
+au BufRead,BufNewFile *.{lua}  set filetype=lua
 au BufRead,BufNewFile *.{go}   set filetype=go
 au BufRead,BufNewFile *.{js}   set filetype=javascript
 "rkdown to HTML  
@@ -112,7 +113,7 @@ nmap tt :%s/\t/    /g<CR>
 """""新文件标题
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "新建.c,.h,.sh,.java,.md 文件，自动插入文件头 
-autocmd BufNewFile *.cpp,*.[ch],*.sh,*.rb,*.java,*.py,*.md exec ":call SetTitle()" 
+autocmd BufNewFile *.cpp,*.[ch],*.sh,*.rb,*.java,*.py,*.md,*.lua exec ":call SetTitle()" 
 ""定义函数SetTitle，自动插入文件头 
 func SetTitle() 
 	"如果文件类型为.sh文件 
@@ -138,6 +139,18 @@ func SetTitle()
         call append(line(".")+5,"*/")
 "    elseif &filetype == 'mkd'
 "       call setline(1,"<head><meta charset=\"UTF-8\"></head>")
+    elseif &filetype == 'lua'
+        call setline(1,"--Lua")
+        call append(line("."),"--  - version 1.0")
+        call append(line(".")+1,"-- -------------------------------")
+        call append(line(".")+2,"-- Copyright (C) 2016-2016 by Norman (none_lih@163.com) ")
+        call append(line(".")+3,"-- Report bugs and download new versions at https//github.com/evely211")
+        call append(line(".")+4,"-- ")
+        call append(line(".")+5,"-- This library is distributed under the MIT License. See notice at the end of this file.")
+        call append(line(".")+6,"-- This work is based on POSIX，which is:")
+        call append(line(".")+7,"-- Copyright (C) 2016,by Norman")
+        call append(line(".")+8,"--")
+		call append(line(".")+9,"")
     else
 		call setline(1,"/**") 
         call append(line("."),"*  - version 1.0")
