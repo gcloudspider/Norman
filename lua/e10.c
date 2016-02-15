@@ -3,13 +3,13 @@
 //通过lua的C库
 #include <stdio.h>
 #include <stdlib.h>
-#include <lua5.2/lua.h>
-#include <lua5.2/lualib.h>
+#include <lua.h>
+#include <lualib.h>
 
 int main(){
     int Buffer = 256;
     char line[Buffer];
-    lua_State *L = lua_open(0);
+    lua_State *L = lua_open();
     while(fgets(line,sizeof(line),stdin)!=0){
         lua_dostring(L,line);
         lua_close(L);
