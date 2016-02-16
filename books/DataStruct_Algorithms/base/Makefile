@@ -1,4 +1,4 @@
-SUBDIRS:=currency currency_new
+SUBDIRS:=currency currency_overload exceptionclass
 
 CC:=g++
 
