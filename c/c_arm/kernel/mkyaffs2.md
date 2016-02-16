@@ -24,4 +24,4 @@
     nand write.yaffs2 0x32000000  0x560000   0x182fa00
 
     6.设置启动yaffs2文件系统
-    setenv bootargs "console=ttySAC0,115200  mem=64m   root=/dev/mtdblock3  rw rootfstype=yaffs2  init=/linuxrc
+    setenv bootargs "console=ttySAC0,115200  mem=64m   root=/dev/mtdblock3  rw rootfstype=yaffs2  init=/linuxrc"
