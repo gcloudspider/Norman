@@ -18,6 +18,10 @@
     9.tftp 0x31000000 uImage                      (从tftp服务端下载内核镜像烧写到内存0x31000000处)
     10.nand erase 0x60000   0x500000               (将nandflash格式化从环境变量后5M放置内核)
     11.nand write 0x31000000  0x60000   0x500000   (将内核从内存0x31000000处写到nandflash 0x60000后大小为5M)
+    12.下载文件系统并烧写
+    tftp 0x31000000 rootfs.ext2.img
+    nand erase 0x560000   0x500000
+    nand write 0x31000000  0x560000   0x500000
 
 
 注意:
