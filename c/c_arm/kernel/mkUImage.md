@@ -23,6 +23,9 @@
     nand erase 0x560000   0x500000
     nand write 0x31000000  0x560000   0x500000
 
+    使用ext2文件系统
+    setenv bootargs "console=ttySAC0,115200  mem=64m   root=/dev/mtdblock3  rw rootfstype=ext2  init=/linuxrc"
+
 
 注意:
     在make uImage的最后一个步骤可能会出现如下错误：
