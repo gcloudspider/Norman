@@ -7,5 +7,7 @@
 */
 
 ####文件系统:
-    yaffs2   ---- nand
+    yaffs2  ubifs ---- nand
     ext2  ext3 ext4  ----硬盘
+
+####网络文件系统NFS
