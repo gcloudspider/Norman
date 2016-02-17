@@ -10,3 +10,9 @@
     1.asm汇编案例
 
 ####[gnu asm汇编](./gnuasm)
+
+####[kernel内核编译](./kernel)
+
+####[u-boot 引导程序编译](./u-boot/)
+
+####[rootfs 文件系统](./rootfs/)
