@@ -47,7 +47,7 @@
         1.在任意目录下创建we2000.c源文件
         2.编写Makefile 
         3.编译make 生成we2000.ko
-        4.将we2000.ko拷贝NFS文件服务器的rootfs目录中(例如:/root/rootfs/)
+        4.将we2000.ko拷贝NFS文件服务器的rootfs目录中(本例使用NFS文件系统所以拷贝到/root/rootfs/)
         5.到开发板上进行insmod we2000.ko
         6.查看lsmod
         7.卸载rmmod we2000
