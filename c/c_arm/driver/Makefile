@@ -1,0 +1,10 @@
+SUBDIRS=WE2000 WE2000_PAR
+
+.PHONY:all clean $(SUBDIRS)
+
+
+all clean:$(SUBDIRS)
+
+$(SUBDIRS):
+	$(MAKE) -j2 -C $@ $(MAKECMDGOALS)
+
