@@ -7,9 +7,9 @@
 */
 
 ####制作rootfs:
-    1.创建存放目录:
+    1.创建存放目录:(以下都是root权限下进行,如普通用户可能需要权限加sudo)
         mkdir /root/rootfs
-    2.进入目录:
+    2.进入目录:(目录自定义)
         cd /root/rootfs
     3.创建文件系统目录:
         mkdir dev home mnt proc root sys tmp var sbin bin usr
@@ -19,12 +19,12 @@
         cd /root/rootfs/dev/
         mknod console c 5 1
     6.安装busybox依赖文件:
-        拷贝所有动态库文件
-        cp -r /root/usr/local/arm/4.3.2/arm-none-linux-gnueabi/libc/armv4t/lib /root/rootfs/lib/
-        清理调试信息
-        arm-linux-strip -g -s ./*
-        删除静态库文件
-        rm *.a
+        6.1:拷贝所有动态库文件(拷贝的文件是ARM命令目录下的)
+            cp -r /root/usr/local/arm/4.3.2/arm-none-linux-gnueabi/libc/armv4t/lib /root/rootfs/lib/
+            6.2:清理调试信息(用strip处理过后,将去掉其中的调试信息,执行文件大小也将小很多)
+            arm-linux-strip -g -s ./*
+        6.3:删除静态库文件
+            rm *.a
 
 ####编译busyBox:
     1.解压busybox
