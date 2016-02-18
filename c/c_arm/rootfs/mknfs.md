@@ -33,7 +33,7 @@
     1.测试服务器:
         ping 192.168.7.20
     2.设置环境变量从nfs服务器加载文件系统
-        set bootcmd "ping 192.168.7.20;nand read 0x31000000 0x500000;bootm 0x31000000"
+        set bootcmd "ping 192.168.7.20;nand read 0x31000000 0x60000 0x500000;bootm 0x31000000"
         set bootargs "noinitrd root=/dev/nfs nfsroot=192.168.7.20:/root/rootfs,timeo=300,rsize=8192,wsize=8192,retrans=10 ip=192.168.7.226:192.168.7.20::::eth0:off init=/linuxrc console=ttySAC0,115200 mem=64M"
     3.保存
         save
