@@ -41,7 +41,7 @@
     5.nand erase 0x60000   0x500000    //擦除
     6.nand write 0x31000000  0x60000   0x500000 //写入
 
-    7.fatload usb 0:1 rootfs.ext2.img  //烧写ext2文件系统
+    7.fatload usb 0:1 0x31000000 rootfs.ext2.img  //烧写ext2文件系统
     8.nand erase 0x560000   0x500000
     9.nand write 0x31000000  0x560000   0x500000
 
