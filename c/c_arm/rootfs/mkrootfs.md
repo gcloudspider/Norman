@@ -14,7 +14,8 @@
     3.创建文件系统目录:
         mkdir dev home mnt proc root sys tmp var sbin bin usr
     4.解压etc目录:
-        tar -zxvf rootfs_etc.tar.gz /root/rootfs/ 
+        tar -zxvf rootfs_etc.tar.gz /root/rootfs/
+        mv /root/rootfs/rootfs_etc /root/rootfs/etc
     5.创建控制台设备文件:
         cd /root/rootfs/dev/
         mknod console c 5 1
