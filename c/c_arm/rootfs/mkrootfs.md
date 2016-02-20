@@ -28,7 +28,7 @@
             rm *.a
 
 ####编译busyBox:
-    1.解压busybox
+    1.解压busybox(此处以mini2440为例)
         tar -zxvf busybox-1.19.0.mini2440.tar.gz
     2.进入busybox目录后执行:
         make menuconfig
