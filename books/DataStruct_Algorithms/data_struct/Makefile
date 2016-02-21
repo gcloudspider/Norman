@@ -1,7 +1,7 @@
-SUBDIRS=vectorList \
-		arrayList \
+SUBDIRS=Vector\
 		List \
-		2DArray
+		Matrix \
+		Stack 
 
 .PHONY:all clean $(SUBDIRS)
 
