@@ -1,4 +1,7 @@
-SUBDIRS=Vector List
+SUBDIRS=vectorList \
+		arrayList \
+		List \
+		2DArray
 
 .PHONY:all clean $(SUBDIRS)
 
