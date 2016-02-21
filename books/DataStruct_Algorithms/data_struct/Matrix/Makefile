@@ -1,6 +1,10 @@
 SUBDIRS=2DArray \
 		matrix \
-		diagonalMatrix
+		diagonalMatrix \
+		lowerTriangularMatrix \
+		linkedMatrix \
+		sparseMatrix \
+		tridiagonalMatrix
 
 .PHONY:all clean $(SUBDIRS)
 

@@ -11,3 +11,11 @@
 ####[矩阵](./matrix/)
 
 ####[对角矩阵](./diagonalMatrix/)
+
+####[三对角矩阵](./tridiagonalMatrix/)
+
+####[三角矩阵](./lowerTriangularMatrix/)
+
+####[稀疏矩阵的转置矩阵](./sparseMatrix/)
+
+####[线性表描述--稀疏矩阵的转置](./linkedMatrix/)
