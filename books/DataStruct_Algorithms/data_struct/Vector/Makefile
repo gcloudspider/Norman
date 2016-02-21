@@ -1,18 +1,11 @@
-CXX=g++
+SUBDIRS=vectorList \
+		arrayList \
 
-CLFAGS=-g -o 
+.PHONY:all clean $(SUBDIRS)
 
-SRC=$(wildcard *.cpp)
-OBJ=${SRC:%.cpp=%.o}
 
-BIN=$(shell pwd|xargs basename)
+all clean:$(SUBDIRS)
 
-.PHONY:all clean
+$(SUBDIRS):
+	$(MAKE) -j2 -C $@ $(MAKECMDGOALS)
 
-all:$(BIN)
-
-$(BIN):$(OBJ)
-	$(CXX) $(CLFAGS) $@ $(OBJ)
-
-clean:
-	rm -rf *.o $(BIN)
