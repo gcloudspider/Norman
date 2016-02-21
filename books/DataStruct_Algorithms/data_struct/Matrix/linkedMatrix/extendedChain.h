@@ -9,6 +9,7 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+#include "chain.h"
 #include "extendedLinearList.h"
 #include "chainWithIterator.h"
 #include "myExceptions.h"
@@ -61,7 +62,7 @@ template<class T>
 void extendedChain<T>::erase(int theIndex)
 {// Delete the element whose index is theIndex.
  // Throw illegalIndex exception if no such element.
-   checkIndex(theIndex);
+   chain<T>::checkIndex(theIndex);
 
    // valid index, locate node with element to delete
    chainNode<T>* deleteNode;

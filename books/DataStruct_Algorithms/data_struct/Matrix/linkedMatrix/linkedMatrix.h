@@ -4,6 +4,7 @@
 #define linkedMatrix_
 
 #include <iostream>
+#include <iterator>
 #include "extendedChain.h"
 #include "matrixElements.h"
 
@@ -178,9 +179,7 @@ void linkedMatrix<T>::transpose(linkedMatrix<T> &b)
    bin = new extendedChain<rowElement<T> > [cols + 1];
 
    // head node iterator
-   extendedChain<headerElement<T> >::iterator
-      ih = headerChain.begin(),
-      ihEnd = headerChain.end();
+   extendedChain<headerElement<T> >::iterator ih = headerChain.begin(),ihEnd = headerChain.end();
 
 
    // copy terms of *this into bins
@@ -189,9 +188,7 @@ void linkedMatrix<T>::transpose(linkedMatrix<T> &b)
       int r = ih->row; // row number for row chain
 
       // row chain iterator
-      extendedChain<rowElement<T> >::iterator
-         ir = ih->rowChain.begin(),
-         irEnd = ih->rowChain.end();
+      extendedChain<rowElement<T> >::iterator ir = ih->rowChain.begin(),irEnd = ih->rowChain.end();
 
 
       rowElement<T> x;
