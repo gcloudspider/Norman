@@ -35,8 +35,9 @@
         2.11:重新制作rootfs.ext2.img(详见mkrootfs)
         2.12:烧录rootfs.ext2.img到开发板
         2.13:在开发板上生成server key
-            dropbearkey -t rsa -f dropbear_rsa_host_key
-            dropbearkey -t dss -f dropbear_dss_host_key
+            mkdir /etc/dropbear
+            dropbearkey -t rsa -f /etc/dropbear/dropbear_rsa_host_key
+            dropbearkey -t dss -f /etc/dropbear/dropbear_dss_host_key
         2.14:在开发板上执行/usr/sbin/dropbear软件监听22端口
         2.15:在开发板上passwd root 设置root密码
         2.16:在PC机上使用scp -P 22 /root/aa.c root@192.168.7.226:/root/ 将PC机上的aa.c文件推送到192.168.7.226的/root/目录下
