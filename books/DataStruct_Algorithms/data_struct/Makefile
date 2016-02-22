@@ -1,7 +1,8 @@
 SUBDIRS=Vector\
 		List \
 		Matrix \
-		Stack 
+		Stack \
+		Queue
 
 .PHONY:all clean $(SUBDIRS)
 
