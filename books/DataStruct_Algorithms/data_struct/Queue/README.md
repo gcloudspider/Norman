@@ -18,3 +18,5 @@
 ####[3.寻找电路布线的路径](./wireRouter/)
 
 ####[4.图元识别](./componentLabeling/)
+
+####[5.工厂仿真](./machineShopSimulator/)
