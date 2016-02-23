@@ -1,4 +1,11 @@
-SUBDIRS=dictionary 
+SUBDIRS=sortedChain\
+		skipList \
+		threeToLong \
+		stringToInt \
+		hashTable \
+		hashChains \
+		compress \
+		decompress
 
 .PHONY:all clean $(SUBDIRS)
 
