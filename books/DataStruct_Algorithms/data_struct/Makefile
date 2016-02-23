@@ -2,7 +2,8 @@ SUBDIRS=Vector\
 		List \
 		Matrix \
 		Stack \
-		Queue
+		Queue \
+		Skiplist_Hash
 
 .PHONY:all clean $(SUBDIRS)
 
