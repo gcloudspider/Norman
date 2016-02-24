@@ -26,6 +26,6 @@
         4.事件处理程序:(libevent event结构体)
             提供一组接口,每个接口对应一种类型事件,供Reactor相应事件发生时调用,执行相应事件处理
 
-####[Reactor事件处理流程图](./Reactor.JPG)
+####![Reactor事件处理流程图](./Reactor.JPG)
 
 ####[Python Twisted框架](./Twisted/)
