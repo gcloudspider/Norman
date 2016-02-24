@@ -22,5 +22,43 @@
         4.阻塞和非阻塞套接字
         5.拥塞窗口
         6.滑动窗口
-        7.Nagle算法
+        7.Nagle算法:
+            sk_stream_wait_memory 若内核缓存不足按超时时间指示等待
+                  |
+                  V
+            tcp_sendmsg 拷贝用户态数据到内核态发送数据缓存中
+                  |
+                  V
+            tcp_push 
+                  |
+                  V
+            tcp_cwnd_test  检查飞行中的的报文个数是否超过拥塞窗口  
+                  |
+                  V
+            tcp_snd_wnd_test 检查待发的序号是否超出了发送窗口
+                  |
+                  V
+            tcp_nagle_test 根据nagle算法检查是否该发送
+                  |
+                  V
+            tcp_window_allows 检查待发送的报文长度是否超出拥塞容器和发送窗口最小值
+                  |
+                  V
+            tcp_transmit_skb 调用IP层方法发送报文
+
+####![send发送数据内核流程图](./tcp_kernel.jpeg)
+
+####Send发送数据步骤:
+    1.App 应用程序调用send发送较大的数据
+    2.内核通过tcp_sendmsg方法
+    3.Send方法不是同步,send方法返回成功,也不一定IP报文都发送成功:
+        3.1:将数据按MSS划分多个报文段
+        3.2:复制到内核中sk_buff结构来存放.同时把这些分片组成队列
+        3.3:把分片放到TCP对应的tcp_write_queue发送队列中
+    4.TCP连接内核缓存由(/proc/sys/net/core/wmem_default定义)
+        4.1:当没有多余内核态缓存来复制用户态待发送数据时,调用sk_stream_wait_memory来等待滑动窗口移动,释放一些缓存出来
+    5.收到ACK后就不需要缓存原来已经发出报文,释放掉缓存
+    6.将剩余用户态数据组成MSS报文拷贝到内核态sk_buff中
+    7.调用tcp_push方法,调用IP层方法发送tcp_write_queue队列中报文 
+    8.发送方法返回
 
