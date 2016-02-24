@@ -28,4 +28,18 @@
 
 ####![Reactor事件处理流程图](./Reactor.JPG)
 
+####场景:
+    设置定时器步骤:
+        1.初始化libevent库,保存返回指针
+          struct event_base *base = event_init();
+        2.初始化事件event 设置回调函数和关注事件
+          evtimer_set(&ev,timer_cb,NULL);
+        3.设置event从属event_base
+          event_base_set(base,&ev);
+        4.添加事件
+          event_add(&ev,timeout);
+        5.进入无限循环,等待就绪事件并执行事件处理
+          event_base_dispatch(base);
+
+
 ####[Python Twisted框架](./Twisted/)
