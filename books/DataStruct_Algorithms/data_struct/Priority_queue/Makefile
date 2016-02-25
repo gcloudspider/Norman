@@ -1,11 +1,4 @@
-SUBDIRS=Vector\
-		List \
-		Matrix \
-		Stack \
-		Queue \
-		Skiplist_Hash \
-		Tree \
-		Priority_queue
+SUBDIRS=
 
 .PHONY:all clean $(SUBDIRS)
 
