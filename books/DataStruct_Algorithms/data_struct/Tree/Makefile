@@ -1,4 +1,7 @@
-SUBDIRS=binaryTree
+SUBDIRS=binaryTree\
+		infix \
+		linkedBinaryTree \
+		booster
 
 .PHONY:all clean $(SUBDIRS)
 
