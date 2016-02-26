@@ -72,7 +72,8 @@ int main(){
     int& r = swap4(x,y);
     cout << "x= " << x << " y=" << y << " r=" << r << endl;
     
-    //右值
+    //右值引用(避免无谓复制,提高程序性能)
+    //
     swap4(x,y) = 9;
     cout << "x= " << x << " y=" << y << endl;
 }

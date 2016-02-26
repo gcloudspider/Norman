@@ -20,3 +20,5 @@
 ####[auto新特性](./auto/)
 ####[decltype关键字](./decltype)
 ####[模板改进](./template)
+####[列表初始化](./var_Init.cpp)
+####[for循环](./for/)
