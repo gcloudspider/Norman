@@ -21,42 +21,28 @@
 #include<string>
 #include <stdio.h>
 #include <string.h>
-#include <locale>
-#include <codecvt>
 using namespace std;
 
 
-bool isChines(string &inStr){
-    unsigned char *str = (unsigned char *)inStr.c_str();
-    size_t length = inStr.length();
-
-    for (size_t i=0; i< length; ++i){
-        if (str[i] > 160){
-            return true;
-        }     
-    }
-    return false;
-}
-
-string Reverse(string str) {
-    string newstring;  
-    for(auto it = str.cend()-1; it != str.cbegin()-1; --it){
-        newstring += *it;
-    }  
-    return newstring;  
-}  
-
 int main(){
-    cout<<"please input string:";
-    string temp;
-    cin>>temp;
-    cout<<"逆序前:";
-    cout<<temp<<endl;
-    cout<<"逆序后:";
-    temp=Reverse(temp);
-    isChines(temp);
-    covert(temp);
-    //cout<<temp<<endl;
-    
+    string s1;
+    string s2;
+    getline(cin,s1);
+    s2.resize(s1.size());
+
+    int n = s1.size();
+    for (int i = 0; i<n; i++) {
+        if (s1[i] > 0 && s1[i] < 127) {
+            s2[n-i-1] = s1[i];
+        } else {
+            s2[n-i-3] = s1[i];
+            s2[n-i-2] = s1[i+1];
+            s2[n-i-1] = s1[i+2];
+            i += 2;
+        }
+    }
+
+    cout << "s1=" << s1 << endl;
+    cout << "s2=" << s2 << endl;
     return 0;
 }

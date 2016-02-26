@@ -9,6 +9,7 @@
 * Copyright (C) 2016,by Norman
 */
 #include<iostream>
+using namespace std;
 #include <vector>
 /*
  *C++98中
@@ -65,6 +66,20 @@ void print_vec(const std::vector<int>& v){
 
 
 int main(){
+    int w = 1;
+    int& z = w;
+    auto g = z;
+    g = 10;
+    //1.auto不能推导出引用
+    cout << "z= " << z << endl;
+    cout << "g= " << g << endl;
+
+    //2.auto不能推导顶层引用
+    const int a = 10;
+    auto b = a;
+    b = 6;
+    cout << "-----------------------" << endl;
+
     std::vector<int> my_vector{-1,2,3,5};
     multiply_by_two(add_one(my_vector));
     print_vec(my_vector);

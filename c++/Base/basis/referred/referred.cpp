@@ -8,6 +8,19 @@
 * This work is based on POSIX，which is:
 * Copyright (C) 2016,by Norman
 */
+
+//C++ 右值引用:
+//  1.C++增加无序容器unorder_map unordered_multimap (解决标准库map在插入元素时自动排序,影响性能)
+//  
+//C++左值与右值区别:
+//  1.左值:表达式结束后依然存在持久对象
+//  2.右值:表达式结束时就不再存在临时对象
+//
+//C++11所有值:
+//  1.左值
+//  2.将亡值
+//  3.纯右值
+
 #include<iostream>
 using namespace std;
 

@@ -9,6 +9,7 @@
 * Copyright (C) 2016,by Norman
 */
 #include <iostream>
+using namespace std;
 /*
 * C++11 之前不支持auto
 */
@@ -29,6 +30,19 @@ auto add(int a,int b){
 
 
 int main(int argc,char **argv){
+    int a = 0;
+    const int b = 1;
+    int& c = a;
+
+    decltype(a) k = a*2;
+    decltype(b) y = b+1; //能处理顶层const
+    //y = 9; 编译错误
+    decltype(c) x = c;  //能处理引用
+
+    x = 80;
+    cout << "C=" << c << endl;
+    cout << "a=" << a << endl;
+
     try{
         std::cout<<add(1,2)<<std::endl;
     }catch(std::exception const &e){

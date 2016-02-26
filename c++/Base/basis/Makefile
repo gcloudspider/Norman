@@ -1,20 +1,21 @@
-CC:=g++
+SUBDIRS=auto \
+		const \
+		decltype \
+		for \
+		namespace \
+		nullptr \
+		referred \
+		regular \
+		string \
+		template \
+		varInit \
+	
 
-CFLAGS:=-g -o
+.PHONY:all clean $(SUBDIRS)
 
-CINCS=-std=c++1y
 
-C_SRC:=$(wildcard *.cpp) 			#搜索所有的.c文件
+all clean:$(SUBDIRS)
 
-C_OBJ:=${C_SRC:%.cpp=%.o}
+$(SUBDIRS):
+	$(MAKE) -j2 -C $@ $(MAKECMDGOALS)
 
-C_BIN:=${C_SRC:%.cpp=%} 			#把所有.c文件转换成文件名目标文件
-
-all:$(C_BIN)
-
-%:%.cpp
-	$(CC) $(CFLAGS) $@ $< $(CLIBS) $(CINCS)
-
-.PHONY:clean
-clean:
-	rm -rf *.o $(C_BIN)

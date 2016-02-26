@@ -22,6 +22,9 @@ int main(){
     *p2 = 6;
     //p = &b;  错误
     
+    //底层const  顶层const
+    //  |        |
+    //  V        V
     const int* const p3 = &a;    //p指向地址和p指向空间内容都不可变
     //*p = 6;  错误
     //p = &b;  错误
@@ -50,6 +53,6 @@ int main(){
     //int& rval3 = &ival; //&ival为int* 指针不能给引用
     //const int& rvalp = &ival;  
 
-    const int*& prval3 = &ival;
+    //const int*& prval3 = &ival;
     int* const& prval2 = &ival;
 }
