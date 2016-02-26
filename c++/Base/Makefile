@@ -1,5 +1,4 @@
-SUBDIRS=namespace \
-		auto
+SUBDIRS=basis
 
 .PHONY:all clean $(SUBDIRS)
 

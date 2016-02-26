@@ -13,3 +13,10 @@
 ####[解密C++宽字符](./string_reverse.cpp)
 
 ####[变量初始化](./var_Init.cpp)
+
+
+
+####C++11 及C++14新特性:
+####[auto新特性](./auto/)
+####[decltype关键字](./decltype)
+####[模板改进](./template)
