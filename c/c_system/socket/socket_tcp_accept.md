@@ -14,7 +14,7 @@
     4.客户端再次发来SYN包的ACK 内核会把连接从SYN队列中取出,再把连接放到ACCEPT队列中。
     5.调用accept时,其实就是直接从ACCEPT队列中取出已经建立成功的连接套接字
 
-####![socket内核队列图](./accept_kernel.jpeg)
+####![socket内核队列图](./image/accept_kernel.jpeg)
 
 ####accept阻塞和非阻塞模式:
     1.阻塞模式:accept判断ACCEPT队列是否为空，为空阻塞(默认阻塞) 若单独线程调用accept建议设为阻塞模式

@@ -54,7 +54,7 @@
                   V
             tcp_transmit_skb 调用IP层方法发送报文
 
-####![send发送数据内核流程图](./tcp_sendmsg.jpeg)
+####![send发送数据内核流程图](./image/tcp_sendmsg.jpeg)
 
 ####Send发送数据步骤:
     1.App 应用程序调用send发送较大的数据
