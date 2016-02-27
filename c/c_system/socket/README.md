@@ -6,9 +6,9 @@
 * Description: 
 */
 
-####[1.socket套接字 accept分析](./accept.md)
+####[1.socket套接字 accept分析](./socket_tcp_accept.md)
 
-####[2.TCP消息的发送](./socket_tcp.md)
+####[2.TCP消息的发送](./socket_tcp_send.md)
 
 ####[3.TCP消息的接收](./socket_msg_receive.md)
 
