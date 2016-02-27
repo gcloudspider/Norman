@@ -47,21 +47,11 @@ auto freeDLinkList(Node*& head) {
     head = nullptr;
 }
 
-auto findMaxNode(Node*& head,Node*& max) {
-    auto pn = head;
-    max = pn;
-    while (pn) {
-        if (pn->data > max->data) {
-            max = pn;
-        }
-        pn = pn->next;
-    }
-}
-
 auto getNode(Node*& head,Node*& pn) {
     Node* t = head;
     if (t->pre == nullptr && t->next == nullptr) {
         pn = t;
+        head = nullptr;
     } else {
         head = t->next;
         head->pre = NULL;
@@ -77,16 +67,18 @@ auto insertSort(Node*& head,Node*& newhead) {
         if (newhead == nullptr) {
             newhead = pn;
         } else {
-            Node* max = nullptr;
-            findMaxNode(newhead,max);
-            if (pn->data > max->data) {
-                max->next = pn;
-                pn->pre = max;
-            } else if(pn->data < max->data){
-                pn->pre = max->pre;
-                pn->next = max;
-                max->pre->next = pn;
-                max->pre = pn;
+            Node* t = newhead;
+            while (t) {
+                if ((pn->data > t->data) && (t->next == nullptr)) {
+                    t->next = pn;
+                    pn->pre = t;
+                } else if ((pn->data > t->data) && (pn->data < t->next->data )) {
+                    pn->next = t->next;
+                    pn->pre = t;
+                    t->next->pre = pn;
+                    t->next = pn;
+                }
+                t = t->next;
             }
         }
     }
@@ -113,6 +105,7 @@ int main() {
     insertNode(head,7);
     showDLinkList(head);
     insertSort(head,newhead);
+    cout<<"----插入排序后----"<<endl;
     showDLinkList(newhead);
     freeDLinkList(newhead);
 }
