@@ -77,6 +77,11 @@ auto insertSort(Node*& head,Node*& newhead) {
                     pn->pre = t;
                     t->next->pre = pn;
                     t->next = pn;
+                } else if(pn->data < t->data){
+                    t->pre = pn;
+                    pn->next = t;
+                    newhead = pn;
+                    break;
                 }
                 t = t->next;
             }
@@ -95,14 +100,11 @@ auto showDLinkList(Node*& head) {
 int main() {
     Node* head = nullptr;
     Node* newhead = nullptr;
-    insertNode(head,0);
+    insertNode(head,4);
+    insertNode(head,3);
     insertNode(head,9);
     insertNode(head,2);
-    insertNode(head,3);
-    insertNode(head,5);
-    insertNode(head,4);
-    insertNode(head,6);
-    insertNode(head,7);
+    insertNode(head,1);
     showDLinkList(head);
     insertSort(head,newhead);
     cout<<"----插入排序后----"<<endl;
