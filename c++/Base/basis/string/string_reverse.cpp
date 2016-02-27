@@ -34,7 +34,7 @@ int main(){
     for (int i = 0; i<n; i++) {
         if (s1[i] > 0 && s1[i] < 127) {
             s2[n-i-1] = s1[i];
-        } else {
+        } else if ((unsigned char)s1[i] >= 224 && (unsigned char)s1[i] <= 239) {
             s2[n-i-3] = s1[i];
             s2[n-i-2] = s1[i+1];
             s2[n-i-1] = s1[i+2];
