@@ -21,10 +21,14 @@ void time_cb(int fd,short event,void *argc){
 }
 
 int main(){
+    //1.初始化libevent库
     struct event_base *base = event_init();
     tv.tv_sec = 10;
     tv.tv_usec = 0;
+    //初始化事件event
     evtimer_set(&ev,time_cb,NULL);
+    //添加事件
     event_add(&ev,&tv);
+    //进入无限循环,等待就绪事件并执行事件处理
     event_base_dispatch(base);
 }
