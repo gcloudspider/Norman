@@ -50,5 +50,7 @@
 ####[libevent echo服务器与客户端实例](./libevent_echo/)
 ####[libevent源码结构](./libevent_source.md)
 ####[libevent框架核心](./libevent_kernel.md)
+####[libevent事件处理框架](./libevent_handle.md)
+####[libevent事件主循环](./libevent_loop.md)
 
 ####[Python Twisted框架](./Twisted/)
