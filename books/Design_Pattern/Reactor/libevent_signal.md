@@ -10,7 +10,7 @@
     1.使用socket pair ---消息机制
         Socket pair是一个socket对,包含两个socket 一个读socket 一个写socket
     2.libevent 提供evutil_socketpair()创建一个socket pair
-####![Socket pair工作方式](./image/sock_air.JPG)
+####![Socket pair工作方式](./image/sock_pair.JPG)
 
 ####![创建socket pair流程](./image/sock_pair_flow.JPG)
 
