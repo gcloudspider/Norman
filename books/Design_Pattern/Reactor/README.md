@@ -26,7 +26,7 @@
         4.事件处理程序:(libevent event结构体)
             提供一组接口,每个接口对应一种类型事件,供Reactor相应事件发生时调用,执行相应事件处理
 
-####![Reactor事件处理流程图](./Reactor.JPG)
+####![Reactor事件处理流程图](./image/Reactor.JPG)
 
 ####场景:
     设置定时器步骤:
@@ -41,5 +41,9 @@
         5.进入无限循环,等待就绪事件并执行事件处理
           event_base_dispatch(base);
 
+
+
+####[Reactor原理](./Reactor.md)
+####[Proactor原理](./Proactor.md)
 
 ####[Python Twisted框架](./Twisted/)
