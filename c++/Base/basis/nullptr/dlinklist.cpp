@@ -62,7 +62,7 @@ auto getNode(Node*& head,Node*& pn) {
 
 auto insertSort(Node*& head,Node*& newhead) {
     Node* pn = nullptr;
-    while(head){
+    while (head) {
         getNode(head,pn);
         if (newhead == nullptr) {
             newhead = pn;
@@ -77,7 +77,7 @@ auto insertSort(Node*& head,Node*& newhead) {
                     pn->pre = t;
                     t->next->pre = pn;
                     t->next = pn;
-                } else if(pn->data < t->data){
+                } else if (pn->data < t->data) {
                     t->pre = pn;
                     pn->next = t;
                     newhead = pn;

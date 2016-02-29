@@ -31,8 +31,16 @@ for_each(arr.begin(), arr.end(),do_cout);
 int main(){
     vector<int>arr = {1,2,3,4};
 
+    string s = "this is a pig";
+
     for (auto n: arr) {
         cout << n << endl;
     }
+
+    for(auto& c:s){
+        c = 'b';    //使用引用改变s的值
+        //cout << c << endl;
+    }
+    cout << "s=" << s << endl;
     return 0;
 }
