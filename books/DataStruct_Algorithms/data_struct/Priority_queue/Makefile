@@ -1,4 +1,8 @@
-SUBDIRS=
+SUBDIRS= huffmanTree \
+		heapSort \
+		lptSchedule \
+		maxHblt \
+		maxHeap
 
 .PHONY:all clean $(SUBDIRS)
 
