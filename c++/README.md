@@ -6,12 +6,10 @@
 ####Description: 
 ###################################################
 
-####[1.Compiler 编译器原理](./Compiler)
+####1.[Compiler 编译器原理](./Compiler)
 
-####[2.Rule C++ Bug注意点](./Rule)
+####2.[Rule C++ Bug注意点](./Rule)
 
-####[3.C Debuger 工作原理](./CDebuger)
+####3.[C Debuger 工作原理](./CDebuger)
 
-####[4.C 与C++ 内存区分原理](./Memory)
-
-####[5.C++基础及C++11 C++14新特性改进](./Base/)
+####4.[C 与C++ 内存区分原理](./Memory)
