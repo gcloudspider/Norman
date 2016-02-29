@@ -21,3 +21,5 @@
 ####[树](./Tree)
 
 ####[优先级队列](./Priority_queue/)
+
+####[竞赛树](./tournamentTree/)
