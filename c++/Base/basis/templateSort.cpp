@@ -21,16 +21,18 @@ void insertSort(T src[],int len) {
         k = i;
         for (auto j = i-1;j>=0;--j) {
             if (src[j] < temp) {
+                //k = j +1;
                 break;
             }
-            src[j+1] = temp;
+            src[j+1] = src[j];
             k = j;
         }
+        src[k] = temp;
     }
 }
 
 int main() {
-    int src[] = {13,21,29,19,20};
+    int src[] = {238,7,29,6,2};
     string str[] = {"helo","you","world","welcome","nihao"};
 
     insertSort(src,5);

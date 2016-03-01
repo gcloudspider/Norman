@@ -10,10 +10,13 @@
 */
 //判断字母还是数字
 
+#include <iostream>
+using namespace std;
+
 int main() {
 
-    string a;
-    int c[20]={0}
+    string a = "jie348h2cd91e7";
+    int c[20]={0};
     string  b[20]={""};
     int j=0,m=0;
     bool b_str=false;
@@ -44,4 +47,13 @@ int main() {
             }
         }
     }
+
+    for(auto i = 0; i<4; ++i) {
+        cout << c[i] << endl;
+    }
+
+    for(auto j=0; j<4; ++j) {
+        cout << b[j] << endl;
+    }
+
 }
