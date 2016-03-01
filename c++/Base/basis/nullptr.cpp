@@ -10,6 +10,8 @@
 */
 #include <iostream>
 #include <stdlib.h>
+//nullptr:
+//    1.代表空指针关键字
 
 using namespace std;
 

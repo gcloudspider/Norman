@@ -1,10 +1,11 @@
 /**
-* Create Date:2016年02月25日 星期四 12时21分32秒
+* Create Date:2016年03月01日 星期二 10时10分10秒
 * 
 * Author:Norman
 * 
 * Description: 
 */
+
 
 ####C++11 auto新特性:
     1.auto作用:编译器自动推断出这个变量类型,而不需要显式指定类型
