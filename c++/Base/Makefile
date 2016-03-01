@@ -1,4 +1,5 @@
-SUBDIRS=basis
+SUBDIRS=basis \
+		class
 
 .PHONY:all clean $(SUBDIRS)
 
