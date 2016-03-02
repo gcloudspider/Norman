@@ -12,3 +12,5 @@
 ####[人类结构体](./personStruct.cpp)
 ####[人类类](./personClass.cpp)
 ####[闰年](./dataClass.cpp)
+####[文件存储仓库](./Store.cpp)
+####[封装String](./String.cpp)
