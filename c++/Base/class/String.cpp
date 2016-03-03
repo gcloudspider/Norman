@@ -28,6 +28,11 @@ public:
         strcpy(str_,s);
     }
 
+    String(const String& s) : len_(s.len_) {
+        str_ = new char[len_+1];
+        strcpy(str_,s.str_);
+    }
+
     void resize(int n) {
         if (n < 0) return ;
         char* p = new char[n+1];
@@ -102,13 +107,18 @@ public:
         }
     }
 
-    String& substr(int pos,int n) {
-        if(pos ==0 || pos > len_) return;
+    String substr(int pos,int n) {
+        if(pos ==0 || pos > len_) return nullptr;
 
-        if(n<=1) return;
-
-        char* p = new char[n-pos];
-        
+        if(n<=1) return nullptr;
+        char buf[n+1];
+        strncpy(buf,str_+pos,n);
+        buf[n] = '\0';
+        return buf;
+        //return 
+        //1.产生一个临时变量 String tmp = const char *buf ;
+        //2.隐式类型转换------调用String(const char* s) 拷贝构造函数
+        //3.再调用拷贝构造函数 String s5 = tmp;
     }
 
     void insert(int pos,const char* str) {
@@ -178,4 +188,9 @@ int main() {
     s4.show();
     s4.replace(2,4,"haha");
     s4.show();
+
+    cout << "------------" << endl;
+    String s6 = s4;
+    String s7 = s6.substr(1,2);
+    s7.show();
 }
