@@ -77,6 +77,7 @@ auto insertSort(Node*& head,Node*& newhead) {
                     pn->pre = t;
                     t->next->pre = pn;
                     t->next = pn;
+                    break;
                 } else if (pn->data < t->data) {
                     t->pre = pn;
                     pn->next = t;
