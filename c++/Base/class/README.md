@@ -14,3 +14,4 @@
 ####[闰年](./dataClass.cpp)
 ####[文件存储仓库](./Store.cpp)
 ####[封装String](./String.cpp)
+####[类构造函数与析构函数](./Integer.cpp)
