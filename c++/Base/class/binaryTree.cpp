@@ -23,22 +23,21 @@ public:
     Tree() : root(nullptr) {}
     void Add(int data) {
         Node* p = new Node{data,nullptr,nullptr};
-        Node*& pn = root;
-        while(1) {
-            if (pn == nullptr) {
-                pn = p;
-                break;
-            } else {
+        Node* pn = root;
+        if (root == nullptr) {
+            root = p;
+        } else {
+            while(pn){
                 if (pn->data < data) {
-                    //if (pn->right == nullptr) {
-                    //    pn->right = p;
-                    //    break;
-                    //}
+                    if (pn->right == nullptr) {
+                        pn->right = p;
+                        break;
+                    }
                     pn = pn->right;
                 } else if (pn->data > data) {
-                    //if (pn->left == nullptr) {
-                    //    pn->left = p;
-                    //}
+                    if (pn->left == nullptr) {
+                        pn->left = p;
+                    }
                     pn = pn->left;
                 } else {
                     break;
