@@ -16,3 +16,8 @@
 ####[set容器](./set)
 ####[关联容器常用pair结构体](./set/pair.md)
 ####[map容器](./map)
+####[multiset容器](./multiset)
+####[multimap容器](./multimap)
+####[hash_set容器](./hashset)
+####[hash_multiset容器](./hashmultiset)
+####[hash_map容器](./hashmap)
