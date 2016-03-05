@@ -5,3 +5,6 @@
 * 
 * Description: 
 */
+
+####数值算法:
+    1.数值算法源码SGI STL<stl_numeric.h>
