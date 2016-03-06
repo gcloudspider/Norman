@@ -16,4 +16,10 @@
 ####[数值算法](./numeric/)
 ####[基本算法](./copy/)
 ####[set集合算法](./set/)
+####分类:
+####[sort算法](./sort)
+####[find算法](./find)
+####[megre算法](./megre)
+####[remove算法](./remove)
+####[permutation算法](./permutation)
 ####[其他算法](./other)
