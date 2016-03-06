@@ -41,6 +41,7 @@
 ####[6.配置器(Allocators)](./Allocators)
     负责空间配置与管理(实现动态空间配置,空间管理,空间释放的class template)
 
-####[Traits萃取技术](./Traits/)
+####[7.Traits萃取技术](./Traits/)
+####[8.函数对象](./funObject)
 
 ![](./stl.png)
