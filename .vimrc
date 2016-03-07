@@ -165,22 +165,22 @@ func SetTitle()
 		call append(line(".")+9,"")
 	endif
     if expand("%:e") == 'cpp'
-		call append(line(".")+15, "#include<iostream>")
-		call append(line(".")+16, "using namespace std;")
-		call append(line(".")+17, "")
+		call append(line(".")+10, "#include<iostream>")
+		call append(line(".")+11, "using namespace std;")
+		call append(line(".")+12, "")
     endif
     if &filetype == 'c'
-		call append(line(".")+15, "#include<stdio.h>")
-		call append(line(".")+16, "")
+		call append(line(".")+10, "#include<stdio.h>")
+		call append(line(".")+11, "")
     endif
     if expand("%:e") == 'h'
-		call append(line(".")+15, "#ifndef _".toupper(expand("%:r"))."_H")
-		call append(line(".")+16, "#define _".toupper(expand("%:r"))."_H")
-		call append(line(".")+17, "#endif")
+		call append(line(".")+10, "#ifndef _".toupper(expand("%:r"))."_H")
+		call append(line(".")+11, "#define _".toupper(expand("%:r"))."_H")
+		call append(line(".")+12, "#endif")
     endif
 	if &filetype == 'java'
-		call append(line(".")+15,"public class ".expand("%:r"))
-		call append(line(".")+16,"")
+		call append(line(".")+10,"public class ".expand("%:r"))
+		call append(line(".")+11,"")
 	endif
 	"新建文件后，自动定位到文件末尾
 endfunc 
