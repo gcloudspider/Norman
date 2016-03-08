@@ -3,6 +3,7 @@
 #include <iostream>
 #include "completeWinnerTree.h"
 #include "binType.h"
+#include <stdlib.h>
 
 using namespace std;
    
@@ -56,7 +57,7 @@ void firstFitPack(int *objectSize, int numberOfObjects,
 
 
 // test program
-void main(void)
+int main(void)
 {
    int n, binCapacity; // number of objects and bin capacity
    cout << "Enter number of objects and bin capacity"
