@@ -16,7 +16,7 @@ class String {
 
     friend ostream& operator<<(ostream& out,const String& s);
 public:
-    String(const char* s):len_(0) {
+    explicit String(const char* s):len_(0) {
         len_ = Strlen(s);
         str_ = new char[len_+1];
         Strcpy(str_,s);
@@ -92,14 +92,14 @@ public:
     }
 
     String substr(int pos,int n) {
-        if (pos == 0 || pos > len_) return nullptr;
+        if (pos == 0 || pos > len_) return String(str_);
 
-        if(n <= 1) return nullptr;
+        if(n <= 1) return String(str_);
 
         char buf[n+1];
         Strncpy(buf,str_+pos,n);
         buf[n] = '\0';
-        return buf;
+        return String(buf);
     }
 
     int find_last_of(const char* s) {
@@ -110,22 +110,44 @@ public:
         }
         return -1;
     }
+    
+    int find(const char* s) {
+        int len = Strlen(s);
+        for (auto i=0;i<len;++i) {
+            if (Strncmp(str_+i,s,Strlen(s))==0) {
+                return i;
+            }   
+        }
+        return -1;
+    }
 
     String operator+(const String& s) {
         char* p = new char[len_+s.len_+1];
-        Strcat(p,str_);
+        Strcpy(p,str_);
         Strcat(p,s.str_);
+        String t(p);
         len_ = Strlen(p);
-        return p;
+        delete[] p;
+        return t;
     }
 
     String operator-(const char* s) {
-        
+        int ret = find(s);
+        if (ret < 0) {
+            return String(str_); //显式调用 
+        } else {
+            String t(str_);
+            t.erase(ret,Strlen(s));
+            return t;
+        }
     }
 
     String& operator=(const String& s) {
+        delete[] str_;
+        int len = Strlen(s.str_);
         str_ = s.str_;
         len_ = s.len_;
+        return *this;
     }
 
     bool operator==(const String& s) {
@@ -147,7 +169,7 @@ public:
     }
 
     char& operator[](int i) {
-    
+        return str_[i];
     }
 
 private:
@@ -246,4 +268,6 @@ int main() {
     cout << "am is: " << g.find_last_of("am") << endl;
 
     cout << a+c << endl;
+
+    cout << d-"China" << endl;
 }
