@@ -72,13 +72,9 @@ public:
         Node* p = FindParentNode(root,data);
         if (p != nullptr) {
             //二叉树左边不为空
-            if (p->left != nullptr) {
-                if (p->left->data == data) {
-                    Destory(p->left);
-                    p->left = nullptr;
-                } else {
-                    
-                }
+            if (p->left != nullptr && p->left->data == data) {
+                Destory(p->left);
+                p->left = nullptr;
             } else {
                 Destory(p->right);
                 p->right = nullptr;
@@ -269,7 +265,7 @@ int main() {
     t.Show();
     cout << "GetMin= " << t.Max() << endl;
     cout << "GetMin= " << t.Min() << endl;
-    t.RemoveNode(8);
+    t.RemoveNodeAndChilder(10);
     t.Show();
     return 0;
 }
