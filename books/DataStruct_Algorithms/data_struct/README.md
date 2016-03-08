@@ -20,6 +20,10 @@
 
 ####[树](./Tree)
 
+####[竞赛树](./tournamentTree)
+
+####[搜索树](./)
+
 ####[优先级队列](./Priority_queue/)
 
 ####[竞赛树](./tournamentTree/)
