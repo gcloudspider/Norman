@@ -12,3 +12,4 @@
 ####[for范围循环](./n_for.cpp)
 ####[tupe元组](./n_tupe.cpp)
 ####[列表初始化](./n_listinit.cpp)
+####[function和bind绑定器](./n_function.cpp)
