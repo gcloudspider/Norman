@@ -5,6 +5,8 @@ head:head.s
 	arm-linux-ld -Ttext 0x0 head.o led.o main.o -o head.elf
 	arm-linux-objcopy -O binary -S head.elf led.bin
 
-#.PHONY:head clean
+
+.PHONY:head clean
+
 clean:
 	rm -rf *.o *.elf *.bin
