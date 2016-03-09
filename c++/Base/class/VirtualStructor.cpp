@@ -33,7 +33,7 @@ public:
     void draw();
 };
 
-class Shapewarp{
+class Shapewrap{
 protected:
     Shape* object;
 public:
@@ -41,7 +41,7 @@ public:
         if(type == "circle") {
             object = new Circle;
         } else if (type == "rectangle") {
-            object = new rectangle;
+            object = new Rectangle;
         } else {
         
         }
@@ -55,3 +55,8 @@ public:
         object->draw();
     }
 };
+
+int main() {
+
+    return 0;
+}

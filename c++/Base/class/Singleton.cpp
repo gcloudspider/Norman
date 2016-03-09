@@ -27,7 +27,7 @@ private:
     }
     
     virtual ~Singleton() {
-        if (pInstance != nullptr) {
+        if (instance != nullptr) {
             delete instance;
             instance = nullptr;
         }

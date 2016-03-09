@@ -13,6 +13,7 @@
 
 
 #include<iostream>
+#include <string.h>
 using namespace std;
 
 class Vehicle {
@@ -75,7 +76,7 @@ private:
 };
 
 int main() {
-    Vehicle* p = new Car(4,500,6);
+    Vehicle* p = new Car(4,500,6,"宝马");
     p->show();
 }
 

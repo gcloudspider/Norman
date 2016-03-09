@@ -29,7 +29,7 @@ private:
 
 int main() {
     Base a;
-    Base b(a);  //Base b = a;
+    //Base b(a);  //Base b = a;
     Base c;
-    c = b;
+    //c = b;
 }
