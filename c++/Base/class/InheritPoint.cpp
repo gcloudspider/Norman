@@ -53,26 +53,30 @@ public:
         return s;
     }
 
-    double getLength() {
+    double getCircunm() {
         double c = 2*PI;
         c *= r_;
         return c;
     }
 
     void printAllPoint() {
+        int count = 0;
         int startX = x_ - r_;
         int endX = x_ + r_;
 
         int startY = y_ - r_;
         int endY = y_ + r_;
-
+        //求x y值 
+        //(x-x原点)平方+(y-原点)平方 = 周长平方
         for (int x=startX; x<=endX; x++) {
             for (int y=startY; y<=endY; y++) {
                 if(pow(x-x_,2)+pow(y-y_,2) == pow(r_,2)){
                     cout <<"(" << x << "," << y << ")" << endl;
+                    count++;
                 }
             }
         }
+        cout << "count=" << count << endl;
     }
 
 private:
@@ -80,8 +84,8 @@ private:
 };
 
 int main() {
-    Circle c(0,0,1);
-    cout << "周长= " <<c.getLength() << endl;
+    Circle c(2,3,10);
+    cout << "周长= " <<c.getCircunm() << endl;
     cout << "面积= " <<c.getArea() << endl;
     c.printAllPoint();
     return 0;
