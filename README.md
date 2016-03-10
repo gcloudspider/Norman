@@ -19,10 +19,11 @@
 ##############################################################
 ####
 ####[Git 工具忽略文件](https://github.com/github/gitignore)
-####[代码简洁之道](./RTFC.md)
-####[代码优化之道](./OptimizationOfCode.md)
-####[代码审查之道](./CodeReview.md)
-####[数据库选择](./DB.md)
+####[代码简洁之道](./Advanced/RTFC.md)
+####[代码优化之道](./Advanced/OptimizationOfCode.md)
+####[代码审查之道](./Advanced/CodeReview.md)
+####[项目设计原则](./Advanced/DesignThinking.md)
+####[数据库选择](./Advanced/DB.md)
 ####代码规范:
 
 	1.局部变量: (小写开头)
