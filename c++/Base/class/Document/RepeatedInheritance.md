@@ -11,6 +11,6 @@
 
 ####![](../image/ObjectMemory3.jpg)
 ####[源代码](../RepeatedInheritance.cpp)
-####![](./image/OMemory3.jpg)
+####![](../image/OMemory3.jpg)
     1.孙子类中包含重复的基类数据成员.叫重复继承
     2.C++引入虚基类的概念解决

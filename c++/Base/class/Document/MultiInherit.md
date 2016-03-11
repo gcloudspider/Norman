@@ -13,7 +13,7 @@
 ####![](./image/ObjectMemory2.jpg)
 
 ####[源码](../MultiInherit.cpp)
-####![](./OMemory2.jpg)
+####![](../image/OMemory2.jpg)
     1.每个父类都有自己的虚表
     2.子类的成员函数被放到第一个父类的表中
     3.内存布局中,其父类布局依次按声明顺序排列
