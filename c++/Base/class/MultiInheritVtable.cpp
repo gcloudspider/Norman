@@ -71,9 +71,10 @@ int main() {
     pFun();
 
     //Derive's vtable
+    //违反C++语义访问未覆盖父类的成员函数g1()
     //pFun = (Fun)*((int*)*(int*)((int*)&d+0)+3);
     pFun = (Fun)pVtab[0][3];
-
+    pFun();
     //虚表的最后一个节点是否为1或是为0
     //为1表示还有下一个虚表
     //The tail of the vtable
@@ -112,8 +113,7 @@ int main() {
     pFun = (Fun)pVtab[2][3];
     cout << pFun << endl;
 
-    //违反C++语义访问未覆盖父类的成员函数g1()
-
+    
 
     return 0;
 }
