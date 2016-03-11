@@ -49,6 +49,8 @@
 ####[纯虚函数也可以有函数体](./PureVirtualFunction.cpp)
 ####[virtual实现原理](./VirtualWorked.md)
 ####[虚函数和非虚函数调用方式](./VirtualAndNonVirtual.md)
+####[多态实现机制](./Polymorphic.md)
+####[有无虚函数对比](./VirtualCompare.md)
 ####[多继承虚函数调用步骤]()
 ####[虚继承原理]()
 ####[RTTI机制]()
