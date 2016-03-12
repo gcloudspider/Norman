@@ -12,22 +12,30 @@
 #include<iostream>
 using namespace std;
 #include "../include/Employee.h"
+CEmployee::CEmployee():
+    m_level(1){
+    m_id ++;
+}
 
-CEmployee::CEmployee(int id,string name,int age,string sex,int type,string post,int level,float basePay,int status):
-    m_id(id),
+CEmployee::CEmployee(string name,int age,string sex,int type,string post,int status):
     m_name(name),
     m_age(age),
     m_sex(sex),
     m_type(type),
     m_post(post),
-    m_level(level),
-    m_basePay(basePay),
+    m_level(1),
     m_status(status){
-
+    m_id ++;
 }
 
 CEmployee::~CEmployee(){
 
 }
 
+int CEmployee::getId() {
+    return m_id;
+}
 
+int CEmployee::getLevel() {
+    return m_level;
+}

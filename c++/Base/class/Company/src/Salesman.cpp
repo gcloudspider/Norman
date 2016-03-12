@@ -14,12 +14,21 @@ using namespace std;
 #include "../include/Salesman.h"
 #include "../include/Employee.h"
 
-CSalesman::CSalesman(int id,string name,int age,string sex,int type,string post,int level,float basePay,int status) :
-    CEmployee(id,name,age,sex,type,post,level,basePay,status){
+CSalesman::CSalesman(string name,int age,string sex,int type,string post,int status) :
+    CEmployee(name,age,sex,type,post,status),
+    m_basePay(0),
+    m_percent(0.04){
 
 }
 
 CSalesman::~CSalesman() {
 
+}
+float CSalesman::getBasePay(){
+    return m_basePay;
+}
+
+float CSalesman::getPercent() {
+    return m_percent;
 }
 

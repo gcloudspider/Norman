@@ -14,13 +14,18 @@ using namespace std;
 #include "../include/Manager.h"
 #include "../include/Employee.h"
 
-CManager::CManager(int id,string name,int age,string sex,int type,string post,int level,float basePay,int status) :
-    CEmployee(id,name,age,sex,type,post,level,basePay,status){
+CManager::CManager(string name,int age,string sex,int type,string post,int status) :
+    CEmployee(name,age,sex,type,post,status),
+    m_basePay(8000){
 
 }
     
 
 CManager::~CManager() {
 
+}
+
+float CManager::getBasePay() {
+    return m_basePay;
 }
 

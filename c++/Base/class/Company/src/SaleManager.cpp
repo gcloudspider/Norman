@@ -14,13 +14,23 @@ using namespace std;
 #include "../include/SaleManager.h"
 #include "../include/Employee.h"
 
-CSaleManager::CSaleManager(int id,string name,int age,string sex,int type,string post,int level,float basePay,int status) :
-    CEmployee(id,name,age,sex,type,post,level,basePay,status),
-    CManager(id,name,age,sex,type,post,level,basePay,status),
-    CSalesman(id,name,age,sex,type,post,level,basePay,status){
+CSaleManager::CSaleManager(string name,int age,string sex,int type,string post,int status) :
+    CEmployee(name,age,sex,type,post,status),
+    CManager(name,age,sex,type,post,status),
+    CSalesman(name,age,sex,type,post,status),
+    m_basePay(5000),
+    m_percent(0.05){
 
 }
 
 CSaleManager::~CSaleManager() {
 
+}
+
+float CSaleManager::getBasePay() {
+    return m_basePay;
+}
+
+float CSaleManager::getPercent() {
+    return m_percent;
 }

@@ -10,6 +10,7 @@
 */
 
 #include<iostream>
+#include<string.h>
 using namespace std;
 #include "../include/DBManage.h"
 #include "../include/Common.h"
@@ -126,4 +127,28 @@ void DBManage::show() {
         cout << endl;
         pn = pn->next;
     }
+}
+
+bool DBManage::queryUserInfo(EmployeeInfo_t& userInfo) {
+    EmployeeInfo_s userInfo_s;
+    auto pn = head;
+    if(pn == nullptr) return false;
+    while(pn) {
+        userInfo_s.id = pn->id;
+        strcpy(userInfo_s.name,pn->name);
+        userInfo_s.age = pn->age;
+        strcpy(userInfo_s.sex,pn->sex);
+        strcpy(userInfo_s.post,pn->post);
+        userInfo.push_back(userInfo_s);
+        pn = pn->next;
+    }
+    return true;   
+}
+
+Node* DBManage::getHead() {
+    return head;
+}
+
+Node* DBManage::getTail() {
+    return tail;
 }

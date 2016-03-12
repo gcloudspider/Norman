@@ -14,13 +14,18 @@ using namespace std;
 #include "../include/Technician.h"
 #include "../include/Employee.h"
 
-CTechnician::CTechnician(int id,string name,int age,string sex,int type,string post,int level,float basePay,int status):
-    CEmployee(id,name,age,sex,type,post,level,basePay,status){
+CTechnician::CTechnician(string name,int age,string sex,int type,string post,int status):
+    CEmployee(name,age,sex,type,post,status),
+    m_basePay(100){
 
 }
 
 
 CTechnician::~CTechnician() {
 
+}
+
+float CTechnician::getBasePay() {
+    return m_basePay;
 }
 
