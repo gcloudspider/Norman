@@ -29,3 +29,7 @@ float CTechnician::getBasePay() {
     return m_basePay;
 }
 
+float CTechnician::getPercent() {
+    return m_percent;
+}
+

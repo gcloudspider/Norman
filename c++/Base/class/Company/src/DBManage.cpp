@@ -12,6 +12,7 @@
 #include<iostream>
 #include<string.h>
 using namespace std;
+#include "../include/Employee.h"
 #include "../include/DBManage.h"
 #include "../include/Common.h"
 
@@ -80,6 +81,8 @@ bool DBManage::readDatabase(const string& fileName) {
         }
         tail = pn;
         size++;
+        CEmployee e;
+        e.m_id++;
     }
     fclose(fp);
     return true;
@@ -144,6 +147,49 @@ bool DBManage::queryUserInfo(EmployeeInfo_t& userInfo) {
     }
     return true;   
 }
+
+bool DBManage::queryUserInfo(EmployeeInfo_s& userInfo,unsigned int jobNum) {
+    auto pn = head;
+    if(pn == nullptr) return false;
+    while(pn) {
+        if (pn->id == jobNum) {
+            userInfo.id = pn->id;
+            strcpy(userInfo.name,pn->name);
+            userInfo.age = pn->age;
+            strcpy(userInfo.sex,pn->sex);
+            strcpy(userInfo.post,pn->post);
+        }
+        pn = pn->next;
+    }
+    return true;   
+}
+
+bool DBManage::checkUserExist(unsigned int id) {
+    auto pn = head;
+    while(pn) {
+        if(pn->id == id) {
+            return true;
+        }
+        pn = pn->next;
+    }
+    return false;
+}
+
+bool DBManage::addUserInfo(Node*& userNode) {
+    auto pn = userNode;
+    if(head != nullptr) {
+        pn->next = nullptr;
+        pn->pre = tail;
+        tail->next = pn;
+    } else {
+        pn->next = head;
+        pn->pre = head;
+        head = pn;
+    }
+    tail = pn;
+    return true;
+}
+
 
 Node* DBManage::getHead() {
     return head;

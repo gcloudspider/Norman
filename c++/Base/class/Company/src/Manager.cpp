@@ -29,3 +29,6 @@ float CManager::getBasePay() {
     return m_basePay;
 }
 
+float CManager::getPercent() {
+    return m_percent;
+}

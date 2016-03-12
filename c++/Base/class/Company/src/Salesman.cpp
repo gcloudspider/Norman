@@ -14,6 +14,12 @@ using namespace std;
 #include "../include/Salesman.h"
 #include "../include/Employee.h"
 
+CSalesman::CSalesman():
+    m_basePay(0),m_percent(0.04){
+    
+}
+
+
 CSalesman::CSalesman(string name,int age,string sex,int type,string post,int status) :
     CEmployee(name,age,sex,type,post,status),
     m_basePay(0),

@@ -14,7 +14,6 @@ using namespace std;
 #include "../include/Employee.h"
 CEmployee::CEmployee():
     m_level(1){
-    m_id ++;
 }
 
 CEmployee::CEmployee(string name,int age,string sex,int type,string post,int status):
@@ -34,6 +33,10 @@ CEmployee::~CEmployee(){
 
 int CEmployee::getId() {
     return m_id;
+}
+
+void CEmployee::setId(int n) {
+    m_id += n;
 }
 
 int CEmployee::getLevel() {
