@@ -14,8 +14,12 @@
 #include "Employee.h"
 class CTechnician : public CEmployee {
 public:
-    CTechnician(int id,string name,int age,string sex,int type,string post,int level,float basePay,int status);
+    CTechnician(string name,int age,string sex,int type,string post,int status);
     ~CTechnician();
+    
+    float getBasePay();
+private:
+    float m_basePay;
 };
 
 #endif

@@ -11,7 +11,9 @@
 
 #ifndef _STRUCT_H
 #define _STRUCT_H
-
+#include <iostream>
+#include <list>
+using namespace std;
 #define FILE_STORAGE_PATH "../db/employee.txt"
 
 enum pType {
@@ -22,6 +24,21 @@ enum pType {
 enum jobStatus {
     ONJOB,
     RESIGN
+};
+
+enum POST {
+    SALEMANAGER,
+    TECHNICIAN,
+    SALESMAN,
+    MANAGER
+};
+
+struct EmployeeInfo_s {
+    unsigned long id;
+    char name[20];
+    int age;
+    char sex[4];
+    char post[20];
 };
 
 struct Node {
@@ -38,4 +55,5 @@ struct Node {
     Node* pre;
 };
 
+using EmployeeInfo_t = list<EmployeeInfo_s>;
 #endif

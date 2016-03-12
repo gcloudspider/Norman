@@ -23,7 +23,14 @@ public:
 
     bool readDatabase(const string& fileName);
     bool writeDatabase(const string& fileName);
+    bool addUserInfo();
+    bool modifyUserInfo();
+    bool queryUserInfo(EmployeeInfo_t& userInfo);
     void show();
+
+    Node* getHead();
+    Node* getTail();
+
 private:
     Node* head;
     Node* tail;

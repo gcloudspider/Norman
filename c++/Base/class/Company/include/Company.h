@@ -11,6 +11,7 @@
 
 #ifndef _COMPANY_H
 #define _COMPANY_H
+#include "CompanyUI.h"
 #include "DBManage.h"
 #include "Employee.h"
 #include "Manager.h"

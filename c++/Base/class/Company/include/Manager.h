@@ -14,10 +14,13 @@
 #include "Employee.h"
 class CManager : virtual public CEmployee {
 public:
-    CManager(int id,string name,int age,string sex,int type,string post,int level,float basePay,int status);
+    CManager(string name,int age,string sex,int type,string post,int status);
     
     ~CManager();
-private:
 
+    float getBasePay();
+
+private:
+    float m_basePay;
 };
 #endif

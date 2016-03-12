@@ -15,12 +15,15 @@
 #include "Salesman.h"
 class CSaleManager : public CManager,public CSalesman {
 public:
-    CSaleManager(int id,string name,int age,string sex,int type,string post,int level,float basePay,int status);
+    CSaleManager(string name,int age,string sex,int type,string post,int status);
     ~CSaleManager();
 
+    float getBasePay();
+    float getPercent();
 
 private:
-    float m_sales;
+    float m_basePay;
+    float m_percent;
     string m_depart;
 
 };

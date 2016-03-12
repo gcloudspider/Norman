@@ -13,18 +13,24 @@
 #define _EMPLOYEE_H
 class CEmployee {
 public:
-    CEmployee(int id,string name,int age, string sex,int type,string post,int level,float basePay,int status);
+    CEmployee();
+    CEmployee(string name,int age, string sex,int type,string post,int status);
     virtual ~CEmployee();
 
+    static int getId();
+    int getLevel();
+    
+    virtual float getBasePay() = 0;
+    virtual float getPercent() = 0;
+
 private:
-    int m_id;
+    static int m_id;
     string m_name;
     int m_age;
     string m_sex;
     int m_type;
     string m_post;
     int m_level;
-    float m_basePay;
     int m_status;
 };
 #endif
