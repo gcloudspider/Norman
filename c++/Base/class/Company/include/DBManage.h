@@ -23,9 +23,11 @@ public:
 
     bool readDatabase(const string& fileName);
     bool writeDatabase(const string& fileName);
-    bool addUserInfo();
+    bool addUserInfo(Node*& userNode);
     bool modifyUserInfo();
     bool queryUserInfo(EmployeeInfo_t& userInfo);
+    bool queryUserInfo(EmployeeInfo_s& userInfo,unsigned int jobNum);
+    bool checkUserExist(unsigned int id);
     void show();
 
     Node* getHead();

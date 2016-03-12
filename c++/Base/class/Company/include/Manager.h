@@ -19,8 +19,10 @@ public:
     ~CManager();
 
     float getBasePay();
+    float getPercent();
 
 private:
     float m_basePay;
+    float m_percent;
 };
 #endif

@@ -20,6 +20,10 @@ public:
 
     void welcomInfo();
     void showEmployeeInfo(EmployeeInfo_t& userInfo);
+    void showEmployeeInfo(EmployeeInfo_s& userInfo);
+    void addUserInfo();
+    void addEmployee(EmployeeInfo_s& saleInfo,int ch);
+    void modifyEmployee();
 
 };
 

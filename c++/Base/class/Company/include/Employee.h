@@ -19,10 +19,11 @@ public:
 
     static int getId();
     int getLevel();
-    
-    virtual float getBasePay() = 0;
-    virtual float getPercent() = 0;
+    void setId(int n);
 
+    //virtual float getBasePay();
+    //virtual float getPercent();
+    friend class DBManage;
 private:
     static int m_id;
     string m_name;

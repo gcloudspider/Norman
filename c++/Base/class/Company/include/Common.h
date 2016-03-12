@@ -14,7 +14,12 @@
 #include <iostream>
 #include <list>
 using namespace std;
-#define FILE_STORAGE_PATH "../db/employee.txt"
+
+#define FILE_STORAGE_PATH               "../db/employee.txt"
+#define EMPLOYEE_TITLE_SALESMAN         "销售人员"
+#define EMPLOYEE_TITLE_SALEMANAGER      "销售经理"
+#define EMPLOYEE_TITLE_TECHNICIAN       "技术人员"
+#define EMPLOYEE_TITLE_MANAGER          "经理"
 
 enum pType {
     FULLTIME,
@@ -26,11 +31,19 @@ enum jobStatus {
     RESIGN
 };
 
-enum POST {
-    SALEMANAGER,
-    TECHNICIAN,
-    SALESMAN,
-    MANAGER
+enum class FEATURE {
+    EMPLOYEEINFO = 1,
+    ADDEMPLOYEE  = 2,
+    MODEMPLOYEE  = 3,
+    COUNTSALARY = 4,
+    QUIT          = 5,
+};
+
+enum class POST {
+    SALESMAN  = 1,
+    SALEMANAGER = 2,
+    TECHNICIAN = 3,
+    MANAGER  = 4,
 };
 
 struct EmployeeInfo_s {

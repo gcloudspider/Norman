@@ -14,6 +14,7 @@
 #include "Employee.h"
 class CSalesman : virtual public CEmployee {
 public:
+    CSalesman();
     CSalesman(string name,int age,string sex,int type,string post,int status);
     ~CSalesman();
 
