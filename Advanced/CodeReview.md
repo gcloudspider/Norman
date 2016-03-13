@@ -13,12 +13,25 @@
     4.覆盖测试
 
 ####SOLID原则:
-    SRP  --The Single Responsibility Principle  单一责任原则(一个类只做一种类型责任)
-    OCP  --The Open Closed Principle  开放封闭原则(可扩展,不可修改)
-    LSP  --The Liskov Substitution Principle 里氏替换原则 (子类能替换其超类实例 is-A)
-    DIP  --The Dependency Inversion Principle 依赖倒置原则 (高层模块不应该依赖低层模块,二者都应该依赖于抽象，抽象不依赖细节--细节依赖于抽象)
-    ISP  --The Interface Segregation Principle 接口分离原则(多个专门接口比单一总接口要好)
+    SRP  --The Single Responsibility Principle  单一责任原则(对象职责明确原则)
+        一个对象只做好一件事件,必须专注,职责过多容易引起变化的原因就多,程序就不稳定
+        (高内聚,低耦合的延伸)
+    
+    OCP  --The Open Closed Principle  开放封闭原则(核心原则)
+        需求变化时尽量少的修改类的设计,而是通过扩展类来完成
+        (即封闭修改,开放扩展)
+    
+    DIP  --The Dependency Inversion Principle 依赖倒置原则(OOP精髓)
+        (基于接口编程,高层模块调用接口,底层模块实现接口,防止底层变化直接影响高层)
+    
+    ISP  --The Interface Segregation Principle 接口分离原则
+        (尽可能多的使用专用的小接口,而不是总接口,避免接口过于复杂)
  
+    
+    LSP  --The Liskov Substitution Principle 里氏替换原则
+        (在继承关系中子类可以替换父类,虚拟机可以根据父类变量动态的找到具体的子类对象,从而实现)
+    
+
  
 ####1.设计
     1.1:与整体架构匹配
