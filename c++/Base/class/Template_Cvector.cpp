@@ -19,94 +19,99 @@ public:
         friend void Cvector<T>::erase(const Iterator& it);
         friend void Cvector<T>::insert(const Iterator& it,const T& data);
     public:
-        Iterator(T*& ptr):p(ptr){ }
-        Iterator(const Iterator& it):p(it.p) { }
+        Iterator(T*& ptr_):p_(ptr_){ }
+        Iterator(const Iterator& it):p_(it.p_) { }
 
         T& operator*() {
-            return *p;
+            return *p_;
         }
 
         void operator++(int) {
-            p = p+1;
+            p_ = p_+1;
         }
 
         Iterator& operator++() {
-            p++;
+            p_++;
             return *this;
         }
 
         bool operator != (const Iterator& it) {
-            return p != it.p;
+            return p_ != it.p_;
         }
 
     private:
-        T* p;
+        T* p_;
     };
 public:
-    Cvector():
-        i(0),
-        m_size(2),
-        oldptr(nullptr),
-        ptr(nullptr){ 
-            ptr = new T[2*m_size];
-            m_size = 2*m_size;
+    Cvector(int n=4):
+        size_(0),
+        cap_(n),
+        ptr_(ptr_ = new T[n]){ 
     } 
 
     ~Cvector(){ 
-        delete[] ptr;
+        delete[] ptr_;
     }
 
     void push_back(const T& data){
-        if(i >= m_size - 1){
-            oldptr = ptr;
-            ptr[i] = data;
-            T* p = new T[2*m_size];
-            m_size = 2*m_size;
-            for(auto j=0;j<m_size;j++) {
-                p[j] = ptr[j];
-            }
-            ptr = p;
-            i++;
-            delete oldptr;
-            oldptr = nullptr;
-        } else {
-            ptr[i++]  = data;
+        if(size_ == cap_){
+            ptr_[size_] = data;
         }
+        ptr_[size_]  = data;
+        size_++;
+    }
+
+    void resize(int n) {
+        T* p = new T[n];
+        unsigned min = n < cap_ ? n : cap_;
+        for(auto j=0;j<min;j++) {
+            p[j] = ptr_[j];
+        }
+        delete ptr_;
+        ptr_ = p;
+        size_ = n < cap_ ? n : size_;
+        cap_ = n;
     }
 
     Iterator begin() {
-        Iterator it(ptr);
+        Iterator it(ptr_);
         return it;
     }
 
     Iterator end() {
-        T* tmp = ptr+i;
+        T* tmp = ptr_+size_;
         Iterator it(tmp);
         return it;
     }
 
     void erase(const Iterator& it) {
+        for(T* p = it.p_;p<ptr_+size_;p++) {
+            *p = *(p+1);
+        }
+        size_ --;
     }
 
     void insert(const Iterator& it,const T& data) {
-        for (T* p = ptr + m_size; p!= it.p;p--) {
+        if(size_ == cap_) {
+            resize(cap_ * 2);
+        }
+        for (T* p = ptr_ + size_; p!= it.p_;p--) {
             *p = *(p-1);
         }
-        *it.p = data;
-        m_size ++;
+        *it.p_ = data;
+        size_ ++;
     }
     
-    int size() {return i;}
+    int size() {return size_;}
 
     T& operator[](const int& i) {
-        return ptr[i];
+        return ptr_[i];
     }
 
 private:
-    T* oldptr;
-    T* ptr;
-    int m_size;
-    int i;
+    T* ptr_;
+    int cap_;
+    int size_;
 };
 
 
@@ -114,12 +119,8 @@ int main() {
     Cvector<int> v;
     v.push_back(10);
     v.push_back(15);
-    v.push_back(20);
-    v.push_back(30);
-    v.push_back(90);
-    v.push_back(80);
-    v.push_back(60);
     v.push_back(50);
+    v.push_back(70);
 
     cout << "-----for 循环遍历-----" << endl;
     for(Cvector<int>::Iterator it = v.begin();it != v.end();++it) {
@@ -136,6 +137,8 @@ int main() {
 
     for(auto it = v.begin();it != v.end();++it) {
         if(*it == 50) {
+            v.insert(it,35);
+            break;
         }
     }
     cout << "-----下标方式遍历-----" << endl;
