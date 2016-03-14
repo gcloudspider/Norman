@@ -54,7 +54,7 @@ public:
         delete[] ptr;
     }
 
-    void push_back(T data){
+    void push_back(const T& data){
         if(i >= m_size - 1){
             oldptr = ptr;
             ptr[i] = data;
@@ -93,10 +93,8 @@ public:
     
     int size() {return i;}
 
-    T& operator[](int i) {
-        T* tmp = ptr +i;
-        Iterator it(tmp);
-        return *it;
+    T& operator[](const int& i) {
+        return ptr[i];
     }
 
 private:
@@ -133,7 +131,6 @@ int main() {
 
     for(auto it = v.begin();it != v.end();++it) {
         if(*it == 50) {
-//           v.erase(it);
         }
     }
     cout << "-----下标方式遍历-----" << endl;
