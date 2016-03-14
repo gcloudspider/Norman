@@ -100,13 +100,9 @@ public:
         while (pn) {
             if (pn->data == data) {
                 if (pn == head) {
-                    pn->next->pre = nullptr;
-                    head = pn->next;
-                    pn->next = nullptr;
+                    pop_front();
                 } else if (pn == tail) {
-                    pn->pre->next = nullptr;
-                    tail = pn->pre;
-                    pn->pre = nullptr;
+                    pop_back();
                 } else {
                     pn->next->pre = pn->pre;
                     pn->pre->next = pn->next;
@@ -126,6 +122,24 @@ public:
 
     int  size() {
         return m_size;
+    }
+
+    void pop_front() {
+        auto pn = head;
+        head->next->pre = nullptr;
+        head = head->next;
+        delete pn;
+    }
+
+    void pop_back() {
+        auto pn = tail;
+        tail->pre->next = nullptr;
+        tail = tail->pre;
+        delete pn;
+    }
+
+    void sort() {
+    
     }
 
     Iterator begin() {

@@ -16,6 +16,8 @@ template<typename T>
 class Cvector {
 public:
     class Iterator {
+        friend void Cvector<T>::erase(const Iterator& it);
+        friend void Cvector<T>::insert(const Iterator& it,const T& data);
     public:
         Iterator(T*& ptr):p(ptr){ }
         Iterator(const Iterator& it):p(it.p) { }
@@ -83,12 +85,15 @@ public:
         return it;
     }
 
-    bool erase(Iterator& it) {
-        
+    void erase(const Iterator& it) {
     }
 
-    bool insert(Iterator& it,int n) {
-    
+    void insert(const Iterator& it,const T& data) {
+        for (T* p = ptr + m_size; p!= it.p;p--) {
+            *p = *(p-1);
+        }
+        *it.p = data;
+        m_size ++;
     }
     
     int size() {return i;}
