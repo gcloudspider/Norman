@@ -23,8 +23,17 @@ public:
     int mData;
 };
 //XX没有任何构造函数,但其基类X存在一个默认构造函数
+//类有多个构造函数,提供构造函数并不显式调用基类构造函数
+//编译器会扩张派生类的每一个现在自定义的构造函数.将要调用必要默认构造函数代码插进去 ----- 确保类的基类子对象得到初始化
+//由于已经存在用户自定义的构造函数,所以编译器不再合成新的构造函数
 class XX : public X {
     public:
+        XX() {
+            mN = 1;
+        }
+        XX(int n){
+            mN = n;
+        }
         int mN;
 };
 
@@ -33,10 +42,7 @@ class XXX: public XX {
 };
 
 int main() {
-    XX xx;
-    cout << xx.mData << endl;
-    cout << xx.mN << endl;
-
-    XXX xxx;
+    XX xx1;
+    XX xx2(2);
     return 0;
 }
