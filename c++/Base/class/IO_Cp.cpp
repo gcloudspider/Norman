@@ -22,10 +22,21 @@ int main(int argc,char* argv[]) {
     }
     
     fstream ofs(argv[2],ios::out);
-    char c;
-    while(!ifs.eof()){
-        ifs.read(&c,1);
-        ofs.write(&c,1);
+    ifs.seekg(0,ios::end);              //去到文件末尾
+    unsigned long total = ifs.tellg();  //获取文件当前位置
+    ifs.seekg(0,ios::beg);              //回到文件开头
+
+    
+    char buf[4];
+    int readNum = 0;                    //读取总数
+    int size = 0;                       //当前读取多少个字符
+
+    while(readNum < total){
+        ifs.read(buf,4);
+        size = ifs.gcount();
+        readNum += size;
+
+        ofs.write(buf,size);
     }
     return 0;
 }
