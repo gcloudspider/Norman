@@ -52,22 +52,12 @@ int main() {
         cout << "find : " << it->first << " : " << it->second << endl;
     }
     
-    string tmpString;
-    int i=1;
-    map<char,int> num;
-    cin >> tmpString;
-    for (auto& tmp : tmpString) {
-        auto it = num.find(tmp);
-        if(it != num.end()) {
-            int j = it->second;
-            num[tmp] = ++j;
-            cout << j << endl;
-            cout << num[tmp] << endl;
-        }
-        num[tmp] = i;
+    string word;
+    map<string,int> numWord;
+    while(cin >> word) {
+        numWord[word]++;
     }
-
-    for (auto it = num.begin();it != num.end();++it) {
+    for (auto it = numWord.begin();it != numWord.end();++it) {
         cout << it->first << ":" << it->second << endl;
     }
 }
