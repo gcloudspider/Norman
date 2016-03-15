@@ -8,7 +8,7 @@
 * This work is based on POSIX，which is:
 * Copyright (C) 2016,by Norman
 */
-
+//重复继承
 #include<iostream>
 using namespace std;
 

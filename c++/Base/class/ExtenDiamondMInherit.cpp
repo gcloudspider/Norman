@@ -8,7 +8,9 @@
 * This work is based on POSIX，which is:
 * Copyright (C) 2016,by Norman
 */
-
+//钻石型多重继承
+//
+//
 #include<iostream>
 using namespace std;
 

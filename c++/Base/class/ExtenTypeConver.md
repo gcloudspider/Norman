@@ -13,7 +13,7 @@
     3.dynamic_cast:运行时转换符,可完成类族中向下类型转换---将父类指针变为子类的指针 dynamic_cast<type>(object)
     4.reinterpret_cast:将一种数据从根本上变为另一种完全不兼容的类型 reinterpret_cast<type>(object)
 
-####[const_cast例子](./Const_cast.cpp)
+####[const_cast例子](./ExtenConst_cast.cpp)
 ####Const_cast<type>(object):
     1.该运算符用来修改类型的const或volatile属性 除了const或volatile修饰之外,type_id和expression类型是一样的
     2.常量指针被转化成非常量指针,并且仍然指向原来对象
@@ -21,7 +21,7 @@
 
     使用const_cast可以返回一个指向非常量的指针(或引用) 指向原const常量对象,可以通过转换后的指针(引用)对它的成员进行改变
 
-####[static_cast例子](./Static_cast.cpp)
+####[static_cast例子](./ExtenStatic_cast.cpp)
 ####Static_cast<type>(object):
     该运算符把expression转换为type-id类型,但没有运行时类型检查来保证转换的安全性
     
@@ -35,7 +35,7 @@
         static_cast不能转换掉expression的const volatile 或者__unaligned属性
         编译器隐式执行任何类型转换都可以由static_cast显式完成
 
-####[dynamic_cast例子](./Dynamic_cast.cpp)
+####[dynamic_cast例子](./ExtenDynamic_cast.cpp)
 ####Dynamic_cast<type>(object):
     特性:
     1.该运算符把object转换成type类型对象,type必须是类的指针 类的引用或void*
