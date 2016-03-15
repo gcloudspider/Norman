@@ -18,13 +18,22 @@ public:
     CFileManage();
     ~CFileManage();
     
-    void readFileToMap(const char* filename,Map_t& map_file);
+    void readFileToTree(const char* filename);
+    
+    void toLower(string& s);
+    string intToString(int i);
 
-    void readFileToMap(const char* filename,Tuple_t& tuple_file);
-
-    void printMap(Map_t& map_file);
+    Node& Add(string word,string line);
+    
+    Node* Push(Node* p,string word,string line);
+    
+    int getCount();
+    void Destory(Node* p);
+    void show();
+    void Print(Node* p);
 private:
-
+    Node* root_;
+    int count_;
 
 };
 

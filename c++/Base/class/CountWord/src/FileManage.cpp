@@ -16,65 +16,98 @@ using namespace std;
 #include <sstream>
 #include <stdexcept>
 #include <string>
+#include <algorithm>
 
-CFileManage::CFileManage() {
-
+CFileManage::CFileManage():
+    root_(nullptr),count_(0){
 }
 
 CFileManage::~CFileManage() {
-
+    Destory(root_);
+    root_ = nullptr;
 }
 
-void CFileManage::readFileToMap(const char* filename,Map_t& map_file) {
+void CFileManage::toLower(string& s) {
+    transform(s.begin(),s.end(),s.begin(),::tolower);
+}
+
+string CFileManage::intToString(int i) {
+    stringstream ss;
+    string lines;
+    ss << i;
+    ss >> lines;
+    return lines;
+}
+
+Node& CFileManage::Add(string word,string line) {
+    root_ = Push(root_,word,line);
+    return *this->root_;
+}
+
+Node* CFileManage::Push(Node* p,string word,string line) {
+    if(p == nullptr) {
+        p = new Node{word,1,line,nullptr,nullptr};
+        count_++;
+    } else {
+        if((p->word.compare(word))>0){
+            p->left = Push(p->left,word,line);             
+        } else if ((p->word.compare(word))<0) {
+            p->right = Push(p->right,word,line);
+        } else {
+            p->cout++;
+            p->line.append(",");
+            p->line.append(line);
+            count_++;
+        }
+    }
+    return p;
+}
+
+void CFileManage::readFileToTree(const char* filename) {
     ifstream FileStream;
-    string Line, Word;
-    FileStream.open(filename);
     int i = 1;
+    string Line,Word;
+    FileStream.open(filename);
 
     if (!FileStream)
         cout << "Open File Stream Failed!" << endl;
 
     while (getline(FileStream, Line)) {
+        //cout << "Line: "<< i << endl;
         istringstream instream(Line);
         while(instream >> Word) {
-            auto it = map_file.find(Word);
-            if(it != map_file.end()) {
-                map_file[Word] = i++;                                   
-            }
-            map_file[Word] = i;
-         //   cout << Word << endl;
+            toLower(Word);
+            Add(Word,intToString(i));
         }
+        i++;
     }
     
     FileStream.close();
 }
 
-void CFileManage::readFileToMap(const char* filename,Tuple_t& tuple_file) {
-    ifstream FileStream;
-    string Line, Word;
-    FileStream.open(filename);
-    int i = 1;
-
-    if (!FileStream)
-        cout << "Open File Stream Failed!" << endl;
-
-    while (getline(FileStream, Line)) {
-        istringstream instream(Line);
-        while(instream >> Word) {
-            cout << Word << endl;
-        }
+void CFileManage::Destory(Node* p) {
+    if (p != nullptr) {
+        Destory(p->left);
+        Destory(p->right);
+        delete p;
     }
-    
-    FileStream.close();
 }
 
-void CFileManage::printMap(Map_t& map_file) {
+int CFileManage::getCount() {
+    return count_;
+}
 
+void CFileManage::show() {
     cout << "Word\t" << "Count\t" << "Lines" << endl;
-    cout << "------------------------------" << endl;
-    for ( auto it = map_file.begin(); it != map_file.end(); ++it) {
-        cout << it->first << "\t" << it->second << endl;
-    }
+    cout << "----------------------" << endl;
+    Print(root_);
+    cout << "Total\t" << getCount() << endl;
+}
 
-    cout << "Total\t" << endl;
+void CFileManage::Print(Node* p) {
+    if(p != nullptr) {
+        Print(p->left);
+        cout << p->word <<"\t" << p->cout << "\t" << p->line << endl;
+        Print(p->right);
+    }
 }

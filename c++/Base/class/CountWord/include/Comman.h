@@ -19,13 +19,14 @@ using namespace std;
 #define FILE_STORAGE_PATH  "../db/file.txt"
 
 struct Node {
-    map<string,int> word_map;
-    vector<int> word_vector;
+    string word;
+    int cout;
+    string line;
     Node* left;
     Node* right;
 };
 
-using Tuple_t = tuple<map<string,int>,vector<int>>;
-using Map_t = map<string,int>;
+using Node_t  = Node;
+using Vector_t = vector<int>;
 
 #endif

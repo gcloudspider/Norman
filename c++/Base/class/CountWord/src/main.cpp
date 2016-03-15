@@ -14,13 +14,8 @@ using namespace std;
 #include "../include/Comman.h"
 #include "../include/FileManage.h"
 int main() {
-    Map_t map_file;
-    Tuple_t tuple_file;
-
     CFileManage* file = new CFileManage();
-    //file->readFileToMap(FILE_STORAGE_PATH,tuple_file);
-    file->readFileToMap(FILE_STORAGE_PATH,map_file);
-    file->printMap(map_file);
-
+    file->readFileToTree(FILE_STORAGE_PATH);
+    file->show();
     return 0;
 }

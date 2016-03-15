@@ -1,5 +1,4 @@
-SUBDIRS = src \
-		  test
+SUBDIRS = src 
 
 .PHONY:all clean dist $(SUBDIRS)
 
