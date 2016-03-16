@@ -57,4 +57,6 @@
 ####[23.命令模式](./Command)
 ####[24.访问者模式](./Visitor)
 
+####高并发服务器模式
 ####[Reactor模式](./Reactor)
+####[领导者/追随者](./Leader_Follower)
