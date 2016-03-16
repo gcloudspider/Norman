@@ -64,6 +64,11 @@
 ####[IO文件拷贝](./IO_Cp.cpp)
 ####[IO多文件拷贝](./IO_CpMultifile.cpp)
 
+####[新特性]
+####[lambda使用](./NLambda.cpp)
+####[function]
+
+
 ####扩展
 ####[纯虚函数也可以有函数体](./ExtenPureVFun.cpp)
 ####[virtual实现原理](./ExtenVFunWorked.md)
@@ -81,4 +86,4 @@
 
 ####对象模型
 ####[对象切片](./ObjectSlicing.cpp)
-####[对象内存模型](./ObjectMemory.md)
+####[对象内存模型](./ExtenObjectMemory.md)
