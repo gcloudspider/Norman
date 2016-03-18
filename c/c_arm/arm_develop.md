@@ -6,7 +6,7 @@
 * Description: 
 */
 
-####ARM开发流程:
+####ARM开发环境设置:
     1.布署环境:
         ubuntu 安装ckermit
     2.安装烧录软件:
