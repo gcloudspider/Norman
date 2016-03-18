@@ -14,6 +14,7 @@
         sudo cp dnw2 /bin
     3.启动kermit
         ls /dev/ttyUSB*
+        vi ~/.mykermrc 确保配置文件与/dev/ttyUSB* 一样
         sudo kermit
         按a 开始烧录
 
