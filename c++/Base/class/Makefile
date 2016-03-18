@@ -2,6 +2,8 @@ CC:=g++
 
 CFLAGS:=-g -o
 
+DEBUG= -fno-elide-constructors 		#禁止编译器优化
+
 CINCS=-std=c++1y
 
 C_SRC:=$(wildcard *.cpp) 			#搜索所有的.c文件
