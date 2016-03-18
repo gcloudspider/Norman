@@ -79,6 +79,9 @@
 ####[线程条件变量](./NThreadCond.cpp)
 ####[子线程打10个父线程打100循环50次](./NThreadCond1.cpp)
 ####[类型转换](./NTypeConver.cpp)
+####[forward完美转发](./NTemplate_Forward.cpp)
+####[右值引用](./NTRvalue.cpp)
+####[move使用](./NMove.cpp)
 
 
 ####扩展
