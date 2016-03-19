@@ -24,21 +24,27 @@ public:
     SyncQueue(int size):size_(size),stop_(false) {}
 
     void put(const T& x) {
-        unique_lock<mutex> locker(mutex_);  //unique_lock代替lock_guard 
-        while (isFull()) {
-            notFull_.wait(locker);          //满时等待
-        } 
+        //unique_lock<mutex> locker(mutex_);  //unique_lock代替lock_guard 
+        //while (isFull()) {
+        //    notFull_.wait(locker);          //满时等待
+        //} 
 
-        if (stop_) return;
-        queue_.push_back(x);
-        notEmpty_.notify_one();
+        //if (stop_) return;
+        //queue_.push_back(x);
+        //notEmpty_.notify_one();
+        Add(x);
+    }
+
+    void put(T&& x) {
+        Add(forward<T>(x));
     }
 
     void take(T& x) {
         unique_lock<mutex> locker(mutex_);
-        while (isEmpty()) {
-            notEmpty_.wait(locker);         //为空阻塞
-        }
+        //while (isEmpty()) {
+            //notEmpty_.wait(locker);         //为空阻塞
+        notEmpty_.wait(locker,[this]{return !queue_.empty();});   //通过lambda表达式判断更简洁
+        //}
 
         if (stop_) return;
         x = queue_.front();
@@ -77,6 +83,17 @@ private:
 
     bool isEmpty() const {
         return queue_.empty();
+    }
+
+    template<typename F>
+    void Add(F&& x) {
+        unique_lock<mutex> locker(mutex_);
+        notFull_.wait(locker,[this]{return stop_|| (!isFull());});
+        if (stop_) {
+            return ;
+        }
+        queue_.push_back(forward<F>(x));
+        notEmpty_.notify_one();
     }
 
     mutex mutex_;
