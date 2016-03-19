@@ -97,7 +97,7 @@
 ####[C++类型转换](./ExtenTypeConver.md)
 ####[RTTI机制](./ExtenRTTI.md)
 ####[page fault]()
-####[通过函数指针调用函数]()
+####[通过函数指针调用函数](./)
 
 ####对象模型
 ####[对象切片](./ObjectSlicing.cpp)
