@@ -27,5 +27,8 @@ int main() {
 
 	printf("B After >> 8 Bin=");
 	decToBin(b,2);
+    printf("\n");
+    char buf = 'a';
+    printf("%c\n",buf+1);
 	printf("\n");
 }

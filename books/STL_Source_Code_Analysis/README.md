@@ -24,7 +24,7 @@
     实现角度:
         STL算法是一种function template
 
-####[3.迭代器(Iterators)](./Iterators)
+####[3.迭代器(Iterators)](./Iterator)
     容器与算法之间胶合剂是所谓"泛型指针"
     实现角度:
         迭代器是一种将operator* operator-> operator++ operator--等指针相关操作予以重载的class template
@@ -41,5 +41,7 @@
 ####[6.配置器(Allocators)](./Allocators)
     负责空间配置与管理(实现动态空间配置,空间管理,空间释放的class template)
 
+####[7.Traits萃取技术](./Traits/)
+####[8.函数对象](./funObject)
 
 ![](./stl.png)

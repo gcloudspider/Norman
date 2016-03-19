@@ -12,17 +12,18 @@
         2.2:分析 
         2.3:归纳 
         2.4:总结
-####3.高效率(程序能申请少内存则少申请,能不用申请就不用申请)
-####4.养成自己code review 将代码优化(重构)
+####3.高效率
+####4.code review 将代码优化(重构)
 ####5.流程图
 ####6.任务表
 ##############################################################
 ####
 ####[Git 工具忽略文件](https://github.com/github/gitignore)
-####[代码简洁之道](./RTFC.md)
-####[代码优化之道](./OptimizationOfCode.md)
-####[代码审查之道](./CodeReview.md)
-####[数据库选择](./DB.md)
+####[代码简洁之道](./Advanced/RTFC.md)
+####[代码优化之道](./Advanced/OptimizationOfCode.md)
+####[代码审查之道](./Advanced/CodeReview.md)
+####[项目设计原则](./Advanced/DesignThinking.md)
+####[数据库选择](./Advanced/DB.md)
 ####代码规范:
 
 	1.局部变量: (小写开头)
