@@ -11,4 +11,8 @@
 
 #ifndef _QUERYBASE_H
 #define _QUERYBASE_H
+class QueryBase {
+
+
+};
 #endif

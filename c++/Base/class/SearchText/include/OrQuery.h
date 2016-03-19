@@ -11,4 +11,7 @@
 
 #ifndef _ORQUERY_H
 #define _ORQUERY_H
+class OrQuery {
+
+};
 #endif
