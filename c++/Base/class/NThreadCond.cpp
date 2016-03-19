@@ -24,7 +24,7 @@ public:
     SyncQueue(int size):size_(size),stop_(false) {}
 
     void put(const T& x) {
-        unique_lock<mutex> locker(mutex_);
+        unique_lock<mutex> locker(mutex_);  //unique_lock代替lock_guard 
         while (isFull()) {
             notFull_.wait(locker);          //满时等待
         } 
