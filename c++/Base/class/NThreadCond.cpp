@@ -35,8 +35,21 @@ public:
         Add(x);
     }
 
-    void put(T&& x) {
-        Add(forward<T>(x));
+    void put(T&& x) {                       //右值引用
+        Add(forward<T>(x));                 //完美转发
+    }
+
+
+    void take(list<T>& list) {
+        unique_lock<mutex> locker(mutex_);
+        notEmpty_.wait(locker,[this]{return stop_ || !isEmpty();});
+
+        if (stop_) {
+            return ;
+        }
+
+        list = move(queue_);                //将所有任务一次从同步队列中移出    减少了加锁次数,避免数据的复制,提高性能
+        notFull_.notify_one();
     }
 
     void take(T& x) {
@@ -72,7 +85,7 @@ public:
             unique_lock<mutex> locker(mutex_);
             stop_ = true;
         }
-        notEmpty_.notify_all();
+        notEmpty_.notify_all();                 //优化
         notFull_.notify_all();
     }
 
@@ -112,43 +125,83 @@ public:
     using Task = function<void(void)>;
     //默认线程数为当前cpu核数
     ThreadPool(unsigned int numThreads = thread::hardware_concurrency()):queue_(maxTaskCount){
+        start(numThreads);
+        /*
         runing_ = true;
         for (auto i = 0; i< numThreads; i++) {
             //thread t(&ThreadPool::runInThread,this);
             auto p = make_shared<thread>(&ThreadPool::runInThread,this);
 
             threadGroup_.push_back(p);
-        }
+        }*/
     }
 
     ~ThreadPool() { 
+        //如果没有停止时则主动停止线程池
+        stop();
+        /*
         queue_.stop();
         runing_ = false;
         for (auto m : threadGroup_) {
             if (m) m->join();
         }
         threadGroup_.clear();
+        */
+    }
+
+    void stop() {
+        //保证多线程情况下只调用一次stopThreadGroup()
+        call_once(flag_,[this]{stopThreadGroup();});
     }
     
     void put(const Task& task) {
         queue_.put(task);
     }
+    
+    void put(Task&& task) {
+        queue_.put(forward<Task>(task));
+    }
 
 private:
+    void start(int numThreads) {
+        runing_ = true;
+        //创建线程
+        for (int i=0; i<numThreads; ++i) {
+            threadGroup_.push_back(make_shared<thread>(&ThreadPool::runInThread,this));
+        }
+    }
+
     void runInThread() {
         while (runing_) {
-            Task task;
-            queue_.take(task);
-            if (task) {
+            list<Task> list;
+            queue_.take(list);
+            //Task task;
+            //queue_.take(task);
+            for (auto& task : list) {
+                if (!runing_) {
+                    return ;
+                }
                 task();
             }
         }
+    }
+
+    void stopThreadGroup() {
+        queue_.stop();
+        runing_ = false;
+
+        for (auto thread : threadGroup_) {
+            if (thread)
+                thread->join();
+        }
+        threadGroup_.clear();
     }
 
     bool runing_;
     SyncQueue<Task> queue_;
     //线程组
     list<shared_ptr<thread>> threadGroup_;
+    once_flag flag_;
 };
 
 mutex m;
