@@ -1,5 +1,5 @@
 /**
-* Create Date:2016年03月18日星期五 13:16:52
+* Create Date:2016年03月20日  8:13:10
 * -------------------------------
 * Copyright (C) 2016-2016 by Norman (none_lih@163.com) 
 * Report bugs and download new versions at https//github.com/evely211
@@ -9,14 +9,9 @@
 * Copyright (C) 2016,by Norman
 */
 
-#ifndef _TEXTQUERY_H
-#define _TEXTQUERY_H
-class CTextQuery {
-public:
-    CTextQuery(string fileName);
-    ~CTextQuery();
+#ifndef _COMMON_H
+#define _COMMON_H
 
-private:
-    string m_fileName;
-};
+#define FILE_STOARG_PATH "../db/searchText.txt"
+
 #endif
