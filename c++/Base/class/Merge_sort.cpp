@@ -16,6 +16,22 @@ void Merge_sort(int* arr,int* srr,int low,int high) {
         arr[m] = srr[m];
 }
 
+void Merge(int* arr,int* srr,int i,int m,int n) {
+    int k,j;
+    k=i;
+    j=m+1;
+    while(i <= m&& j<=n) {
+        if(arr[i] <= arr[j])
+            srr[k++] = arr[i++];
+        else 
+            srr[k++] = arr[j++];
+    }
+    while(i <=m)
+        srr[k++] = arr[i++];
+    while(j <=n)
+        srr[k++] = arr[j++];
+}
+
 //归并排序:
 //归并排序把两个或两个以上有序表合成一个新的有序表,
 //1.把待排序记录分成若干个有序子序列
