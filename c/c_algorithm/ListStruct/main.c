@@ -10,4 +10,15 @@
 */
 
 #include<stdio.h>
+#include "ListStruct.h"
 
+int main() {
+    int len,val;
+    Node* head = NULL;
+
+    createList(head);
+    printf("the empty of list is created\n");
+
+
+    return 0;
+}

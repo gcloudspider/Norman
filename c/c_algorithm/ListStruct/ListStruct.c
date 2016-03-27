@@ -10,4 +10,7 @@
 */
 
 #include<stdio.h>
+#include "ListStruct.h"
+void createList(Node* p) {
 
+}

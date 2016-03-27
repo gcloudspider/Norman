@@ -11,28 +11,13 @@
 
 #ifndef _LISTSTRUCT_H
 #define _LISTSTRUCT_H
-typedef struct Node *pNode;
-typedef int Item;
+struct Node {
+    int data;
+    Node* next;
+};
 
-typedef struct Node {
-    Item data;
-    pNode next;
-}node;
+void createList(Node* p);
 
-typedef pNode Pos;
-typedef pNode List;
+int isEmpty(Node* head);
 
-List createList(List);
-
-int isEmpty(List);
-
-List makeList();
-
-List invert(List);
-
-int islast(int pos);
-
-int length(List);
-
-void traverseList(List);
 #endif
