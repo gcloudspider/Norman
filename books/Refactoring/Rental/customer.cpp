@@ -19,30 +19,15 @@ string Customer::getName(){
 string Customer::statement() {
 	double totalAmount = 0;
 	int frequentRenterPoints = 0;
-	Enumeration rentals = _rentals.elements();
+	
+    Enumeration rentals = _rentals.elements();
 	string result = "Rental Record for "+ getName() + "\n";
 	while(rentals.hasMoreElements()) {
 		double thisAmount = 0;
 		Rental each = (Rental)rentals.nextElement();
+        
+        thisAmount = amountFor(each);
 
-		//determin amounts for each line
-		switch(each.getMovie().getPriceCode()) {
-			case Movice.REGULAR:
-				thisAmount += 2;
-				if(each.getDaysRented() > 2) {
-					thisAmount += (each.getDaysRented() - 2) * 1.5;
-				}
-				break;
-			case Movice.NEW_RELEASE:
-				thisAmount += each.getDaysRented() * 3;
-				break;
-			case Movice.CHILDRENS:
-				thisAmount += 1.5;
-				if (each.getDaysRented() > 3) {
-					thisAmount += (each.getDaysRented() - 3) * 1.5;
-				}
-				break;
-		}
 		//add frequent renter points
 		frequentRenterPoints ++;
 		//add bonus for a two day new release rental
@@ -55,4 +40,29 @@ string Customer::statement() {
 	result += "Amount owed is "+ string.valueof(totalAmount)+"\n";
 	result += "You earned "+ string.valueof(frequentRenterPoints)+" frequent renter points";
 	return result;
+}
+
+//拆分函数(提炼到独立函数)
+//独立函数名称修改
+double amountFor(Rental aRental) {
+    double result = 0;
+    //determin amounts for each line
+    switch(aRental.getMovie().getPriceCode()) {
+        case Movice.REGULAR:
+            result += 2;
+            if(aRental.getDaysRented() > 2) {
+                result += (aRental.getDaysRented() - 2) * 1.5;
+            }
+            break;
+        case Movice.NEW_RELEASE:
+            result += aRental.getDaysRented() * 3;
+            break;
+        case Movice.CHILDRENS:
+            result += 1.5;
+            if (aRental.getDaysRented() > 3) {
+                result += (aRental.getDaysRented() - 3) * 1.5;
+            }
+            break;
+    }
+    return result;
 }

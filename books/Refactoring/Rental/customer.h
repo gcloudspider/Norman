@@ -10,6 +10,7 @@ public:
 	~Customer();
 	void addRental(Rental arg);
 	String getName();
+    string statement();
 private:
 	String _name;
 	Vector _rentals = new Vector();
