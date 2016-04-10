@@ -11,6 +11,7 @@ public:
 	void addRental(Rental arg);
 	String getName();
     string statement();
+    double amountFor(Rental aRental);
 private:
 	String _name;
 	Vector _rentals = new Vector();
