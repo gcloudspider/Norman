@@ -1,7 +1,6 @@
-
 #include "movie.h"
 
-Movie::Movie(String title,int priceCode){
+Movie::Movie(string title,int priceCode){
 	CHILDRENS = 2;
 	REGULAR = 0;
 	NEW_RELEASE = 1;
@@ -21,7 +20,7 @@ void Movie::setPriceCode(int arg){
 	_priceCode = arg;
 }
 
-String Movie::getTitle(){
+string Movie::getTitle(){
 	return _title;
 }
 
