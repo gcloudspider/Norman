@@ -1,6 +1,6 @@
 CC:=g++
 CFLAGS:=-g -o
-CLIBS:=-lboost_regex
+CLIBS:=-lboost_regex -lboost_system -lboost_thread
 
 C_SRC:=$(wildcard *.cpp) 			#搜索所有的.c文件
 
