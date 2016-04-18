@@ -1,13 +1,6 @@
 CC:=g++
-<<<<<<< HEAD
-
 CFLAGS:=-g -o
-
-CINCS=
-=======
-CFLAGS:=-g -o
-CLIBS:=-lboost_regex
->>>>>>> 7938f1633a881d6d1dfe5a5c4a7d47f67475d9ec
+CLIBS:=-lboost_regex -lboost_system -lboost_thread
 
 C_SRC:=$(wildcard *.cpp) 			#搜索所有的.c文件
 
