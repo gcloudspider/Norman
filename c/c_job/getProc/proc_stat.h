@@ -1,3 +1,13 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <iostream>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <assert.h>
+using namespace std;
+#define NUM_ELEMENTS(arr) (sizeof(arr) / sizeof(arr[0]))
 struct sys_cpu_time
 {
     unsigned long long user,old_user;

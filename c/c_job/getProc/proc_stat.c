@@ -178,9 +178,9 @@ bool get_process_usage(pid_t id,float& cpu,float& mem,unsigned long long& uptime
     unsigned long long pct = ps.utime+ps.stime;
     uptime = (unsigned long long)ss.ut.uptime - ps.starttime/HZ;
     cpu = uptime ? (100.0*pct/HZ)/uptime : 0.0;
-	std::cout <<"CPU Used:" <<cpu << std::endl;
+
     long page_size = sysconf(_SC_PAGESIZE) >> 10;
     mem = 100.0*ps.rss*page_size/ss.mi.main_total;
-	std::cout << "Mem Used:" << mem << std::endl;
+
     return true;
 }
